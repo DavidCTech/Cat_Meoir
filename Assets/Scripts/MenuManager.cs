@@ -5,31 +5,51 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering;
 public class GameManager : MonoBehaviour
 {
+    public RenderPipelineAsset[] qualityLevels;
+    public TMP_Dropdown dropdown;
+
     public AudioMixer audioMixer;
 
-    Resolution[] resolutions;
+    private Resolution[] resolutions;
 
-    public TMPro.TMP_Dropdown resolutionDropdown;
+    private List<Resolution> filteredResolutions;
 
+   [SerializeField] private TMP_Dropdown resolutionDropdown;
+
+    private int currentResolutionIndex = 0;
+    private float currentRefreshRate;
 
     void Start()
     {
+        dropdown.value = QualitySettings.GetQualityLevel();
+
+        filteredResolutions = new List<Resolution>();
+
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
 
-        List<string> options = new List<string>();
-
-        int currentResolutionIndex = 0;
+       currentRefreshRate = Screen.currentResolution.refreshRate;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + "x" + resolutions[i].height;
-            options.Add(option);
+            if (resolutions[i].refreshRate == currentRefreshRate)
+            {
+                filteredResolutions.Add(resolutions[i]);
+            }
+        }
 
-            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
+        List<string> options = new List<string>();
+
+        for (int i = 0; i < filteredResolutions.Count; i++)
+        {
+            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + filteredResolutions[i].refreshRate + "Hz";
+            options.Add(resolutionOption);
+
+            if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
@@ -42,8 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void SetResolution (int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Resolution resolution = filteredResolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, true);
     }
 
 
@@ -53,9 +73,10 @@ public class GameManager : MonoBehaviour
         Debug.Log(volume);
     }
 
-    public void SetQuality (int qualityIndex)
+    public void ChangeLevel (int value)
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+        QualitySettings.SetQualityLevel(value);
+        QualitySettings.renderPipeline = qualityLevels[value];
     }
 
 
