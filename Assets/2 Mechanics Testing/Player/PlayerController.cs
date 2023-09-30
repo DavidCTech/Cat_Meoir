@@ -35,6 +35,69 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2a9ea02-4d41-4fbd-97ff-e46afc58d6ad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Stealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b6aa205-711e-4edd-b70b-984173fbba5a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""cbe177ee-00b5-466e-881c-90f190ac4690"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f2eb260-e62b-4233-a114-80dbd071b338"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CatVision"",
+                    ""type"": ""Button"",
+                    ""id"": ""9dba77fd-ee65-4233-8d3f-522a8468dc3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CatMemoryZoom"",
+                    ""type"": ""Button"",
+                    ""id"": ""2bb28750-4374-4c22-a03d-9203b82c660c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CatMemorySnap"",
+                    ""type"": ""Button"",
+                    ""id"": ""75f4d3ae-2050-4b74-926c-1296ecc4aa78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -147,6 +210,160 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""96064e36-b342-4710-b1f0-f8d04f387f7a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatVision"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb24dc6a-afda-49a1-a5f7-c13db0846749"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatVision"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24b70f3b-3716-47d7-a7c1-314e6ad6bed0"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatMemoryZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""774e45bb-47fb-4a1d-8cc6-8a37d8ce51a9"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatMemoryZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71bc890e-ca53-472b-972c-28a96859257e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatMemorySnap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89bf2390-e7ad-404b-9c18-a78659066e9c"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatMemorySnap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da5215e2-eda7-41fc-8cea-a5f2d2c09e5a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e82c5094-7dca-46ce-932c-3985eaed5f8a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7fcf4af-7223-4b8e-ba2b-bd3d5197d0af"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""309997a1-f961-4edc-a1f8-3c18fa9b1f4a"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f61f623b-bdb8-410d-bd02-baaee419efb2"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f702262-8cd4-42d1-9379-5f42d7ae7dc0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3639189-03be-401b-8621-935727dca319"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d216aeee-7ccb-4943-8c72-98f65bbb24d0"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -156,6 +373,13 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
+        m_Player_Stealth = m_Player.FindAction("Stealth", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_CatVision = m_Player.FindAction("CatVision", throwIfNotFound: true);
+        m_Player_CatMemoryZoom = m_Player.FindAction("CatMemoryZoom", throwIfNotFound: true);
+        m_Player_CatMemorySnap = m_Player.FindAction("CatMemorySnap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,11 +442,25 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Interaction;
+    private readonly InputAction m_Player_Stealth;
+    private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_CatVision;
+    private readonly InputAction m_Player_CatMemoryZoom;
+    private readonly InputAction m_Player_CatMemorySnap;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
         public PlayerActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
+        public InputAction @Stealth => m_Wrapper.m_Player_Stealth;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @CatVision => m_Wrapper.m_Player_CatVision;
+        public InputAction @CatMemoryZoom => m_Wrapper.m_Player_CatMemoryZoom;
+        public InputAction @CatMemorySnap => m_Wrapper.m_Player_CatMemorySnap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -235,6 +473,27 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Interaction.started += instance.OnInteraction;
+            @Interaction.performed += instance.OnInteraction;
+            @Interaction.canceled += instance.OnInteraction;
+            @Stealth.started += instance.OnStealth;
+            @Stealth.performed += instance.OnStealth;
+            @Stealth.canceled += instance.OnStealth;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
+            @CatVision.started += instance.OnCatVision;
+            @CatVision.performed += instance.OnCatVision;
+            @CatVision.canceled += instance.OnCatVision;
+            @CatMemoryZoom.started += instance.OnCatMemoryZoom;
+            @CatMemoryZoom.performed += instance.OnCatMemoryZoom;
+            @CatMemoryZoom.canceled += instance.OnCatMemoryZoom;
+            @CatMemorySnap.started += instance.OnCatMemorySnap;
+            @CatMemorySnap.performed += instance.OnCatMemorySnap;
+            @CatMemorySnap.canceled += instance.OnCatMemorySnap;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -242,6 +501,27 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Interaction.started -= instance.OnInteraction;
+            @Interaction.performed -= instance.OnInteraction;
+            @Interaction.canceled -= instance.OnInteraction;
+            @Stealth.started -= instance.OnStealth;
+            @Stealth.performed -= instance.OnStealth;
+            @Stealth.canceled -= instance.OnStealth;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
+            @CatVision.started -= instance.OnCatVision;
+            @CatVision.performed -= instance.OnCatVision;
+            @CatVision.canceled -= instance.OnCatVision;
+            @CatMemoryZoom.started -= instance.OnCatMemoryZoom;
+            @CatMemoryZoom.performed -= instance.OnCatMemoryZoom;
+            @CatMemoryZoom.canceled -= instance.OnCatMemoryZoom;
+            @CatMemorySnap.started -= instance.OnCatMemorySnap;
+            @CatMemorySnap.performed -= instance.OnCatMemorySnap;
+            @CatMemorySnap.canceled -= instance.OnCatMemorySnap;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -262,5 +542,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
+        void OnStealth(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
+        void OnCatVision(InputAction.CallbackContext context);
+        void OnCatMemoryZoom(InputAction.CallbackContext context);
+        void OnCatMemorySnap(InputAction.CallbackContext context);
     }
 }
