@@ -6,7 +6,7 @@ public class CameraTakePicture : MonoBehaviour
 {
     //this script goes on the camera 
     [Header("Reference to a RenderTexture- any not in use in asset folder.")]
-    public RenderTexture renderTexture; // Reference to the Render Texture.
+    public RenderTexture renderTexture; 
 
     [Header("Reference to the PhotoManager Script(look on a Photo manager GameObj)")]
     public PhotoManager photoManager; 
@@ -21,7 +21,8 @@ public class CameraTakePicture : MonoBehaviour
     private bool passBool;
     private Sprite passSprite;
     private string passString;
-    private Camera captureCamera; // Reference to the camera you want to capture.
+    private Camera captureCamera; 
+   
 
 
     private void Start()
@@ -29,35 +30,38 @@ public class CameraTakePicture : MonoBehaviour
         captureCamera = this.gameObject.GetComponent<Camera>();
     }
 
-    //checks if the object is a clue 
+    //checks if the object is a clue ( Chat GPT Helped fix scripting issues here )
     private bool checkObject()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(this.gameObject.transform.position, fovRadius, clueMask);
+
         if (rangeChecks.Length != 0)
         {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - this.gameObject.transform.position).normalized;
+            bool anyObjectInFOV = false;  // Variable to track if any object within FOV meets conditions
 
-            if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2)
+            for (int i = 0; i < rangeChecks.Length; i++)
             {
-                float distanceToTarget = Vector3.Distance(this.gameObject.transform.position, target.position);
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                Transform target = rangeChecks[i].transform;
+                Vector3 directionToTarget = (target.position - this.gameObject.transform.position).normalized;
+
+                if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2)
                 {
-                    passString = target.gameObject.name;
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    float distanceToTarget = Vector3.Distance(this.gameObject.transform.position, target.position);
+                    if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                    {
+
+                        passString = target.gameObject.name;
+                        anyObjectInFOV = true;  // Set the flag to true if any object meets conditions
+                                                // You might want to perform additional logic here if needed
+                    }
                 }
             }
-            else
-            {
-                return false;
-            }
+
+            return anyObjectInFOV;  // Return outside the loop
         }
         else
         {
+            Debug.LogError("CameraTakePicture: Hey buddy you need to assign the clue layer in this script + have some object in that layer too in the scene.");
             return false;
         }
     }

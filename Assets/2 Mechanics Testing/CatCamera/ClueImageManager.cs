@@ -10,21 +10,32 @@ public class ClueImageManager : MonoBehaviour
 
 
 
-
-    public bool newImageClue (Sprite slotSprite)
+    //ChatGpt helped with the logic writing in this method for the foreach loops 
+    public void newImageClue(Sprite slotSprite, string slotName)
     {
         foreach (Image clueSpace in clueSpaces)
         {
-            
+            if (clueSpace.name == slotName)
+            {
+                // Case 1: The name matches, update the sprite
+                Debug.Log("EEEE");
+                clueSpace.sprite = slotSprite;
+                return;
+            }
+        }
+
+        foreach (Image clueSpace in clueSpaces)
+        {
             if (clueSpace.sprite == null)
             {
+                // Case 2: No match found, assign to the nearest null sprite
+                clueSpace.name = slotName;
                 clueSpace.sprite = slotSprite;
-                return true; 
+                return;
             }
-            
         }
-        return false; 
     }
+
     public bool newImageFail(Sprite slotSprite)
     {
         foreach (Image failSpace in failSpaces)
