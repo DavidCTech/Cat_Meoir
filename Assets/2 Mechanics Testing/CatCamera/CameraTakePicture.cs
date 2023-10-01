@@ -21,7 +21,8 @@ public class CameraTakePicture : MonoBehaviour
     private bool passBool;
     private Sprite passSprite;
     private string passString;
-    private Camera captureCamera; 
+    private Camera captureCamera;
+    private int locationName = 0; //int that will be the name string for the non clue images in order to organize them 
    
 
 
@@ -33,6 +34,8 @@ public class CameraTakePicture : MonoBehaviour
     //checks if the object is a clue ( Chat GPT Helped fix scripting issues here )
     private bool checkObject()
     {
+        passString = locationName.ToString();
+        locationName++; 
         Collider[] rangeChecks = Physics.OverlapSphere(this.gameObject.transform.position, fovRadius, clueMask);
 
         if (rangeChecks.Length != 0)
@@ -49,7 +52,7 @@ public class CameraTakePicture : MonoBehaviour
                     float distanceToTarget = Vector3.Distance(this.gameObject.transform.position, target.position);
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
-
+                        locationName--; 
                         passString = target.gameObject.name;
                         anyObjectInFOV = true;  // Set the flag to true if any object meets conditions
                                                 // You might want to perform additional logic here if needed

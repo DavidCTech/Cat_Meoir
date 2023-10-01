@@ -12,11 +12,7 @@ public class PhotoManager : MonoBehaviour
 
 
     private int clueCount = 0;
-    /*
-    private bool isClue;
-    private string clueName;
-    private Sprite pictureSprite;
-    */
+
     private bool canContinue; 
     private ClueImageManager clueImageManager;
 
@@ -32,7 +28,6 @@ public class PhotoManager : MonoBehaviour
         snapshot.sprite = pictureSprite;
         snapshot.isClue = isClue;
         snapshot.clueName = clueName;
-        Debug.Log("snapshot info- sprite: " + snapshot.sprite + " isclue: " + snapshot.isClue + "clue name: " + snapshot.clueName);
         // Update in clue image manager here if needed
         canContinue = checkClueImages(clueName, snapshot);
         if (canContinue)
@@ -41,11 +36,7 @@ public class PhotoManager : MonoBehaviour
             checkPictureClue(snapshot);
 
         }
-        else
-        {
-            //this is where we can tell it to go look through the clue manager stuff for a duplicate ? 
-
-        }
+        
         
        
 
@@ -62,9 +53,8 @@ public class PhotoManager : MonoBehaviour
                 if (photoObj.clueName == clueName)
                 {
                     snapshots[i] = snapshot;
-                    Debug.Log("this Happened, the clue name:" + snapshots[i].clueName + " and then the other clue name: " + snapshot.clueName);
-                    // Update in clue image manager here if needed
 
+                    addPictureClue(snapshot);
                     return false;
                 }
             }
@@ -87,7 +77,7 @@ public class PhotoManager : MonoBehaviour
 
         else if (!snapshot.isClue)
         {
-            addPictureFail();
+            addPictureFail(snapshot);
         }
        
     }
@@ -97,9 +87,14 @@ public class PhotoManager : MonoBehaviour
         clueImageManager.newImageClue(snapshot.sprite, snapshot.clueName);
        // clueCount++;
     }
-    public void addPictureFail()
+    public void addPictureFail(PhotoScriptable snapshot)
     {
-        bool didImage = clueImageManager.newImageFail(snapshots[clueCount].sprite);
-        clueCount++;
+        bool didImage = clueImageManager.newImageFail(snapshot.sprite, snapshot.clueName);
+        //if you didnt do the image, then it must be because its full, you need to delete - should be good to have some mechanic or words to the player here
+        if (!didImage)
+        {
+            Debug.Log("The Images are all Filled up! Deleting your newest Image taken from Memory!");
+            deletePicture(snapshot);
+        }
     }
 }

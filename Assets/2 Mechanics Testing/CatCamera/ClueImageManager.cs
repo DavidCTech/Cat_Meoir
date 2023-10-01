@@ -18,7 +18,7 @@ public class ClueImageManager : MonoBehaviour
             if (clueSpace.name == slotName)
             {
                 // Case 1: The name matches, update the sprite
-                Debug.Log("EEEE");
+                
                 clueSpace.sprite = slotSprite;
                 return;
             }
@@ -36,18 +36,32 @@ public class ClueImageManager : MonoBehaviour
         }
     }
 
-    public bool newImageFail(Sprite slotSprite)
+    public bool newImageFail(Sprite slotSprite, string slotName)
     {
         foreach (Image failSpace in failSpaces)
         {
             if (failSpace.sprite == null)
             {
+                failSpace.name = slotName;
                 failSpace.sprite = slotSprite;
                 return true;
             }
 
         }
         return false;
+    }
+    public void turnToNull(Image imageToNull)
+    {
+        foreach (Image failSpace in failSpaces)
+        {
+            if (failSpace.name == imageToNull.name)
+            {
+                failSpace.sprite = null;
+                failSpace.name = null; 
+            }
+
+        }
+        
     }
 }
   
