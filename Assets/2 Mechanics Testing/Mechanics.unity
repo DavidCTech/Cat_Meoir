@@ -193,7 +193,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178007107}
-  m_LocalRotation: {x: 0.2360114, y: 0.000000008360153, z: -0.000000002030451, w: 0.9717503}
+  m_LocalRotation: {x: 0.2360114, y: -0.000000008360153, z: 0.000000002030451, w: 0.9717503}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -229,7 +229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211305291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: 1.14, z: 6.2}
+  m_LocalPosition: {x: 2.92, y: 1.14, z: 7.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -704,7 +704,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749115187}
-  m_LocalRotation: {x: 0.21330906, y: -0.000000014953558, z: 0.0000000032648717, w: 0.9769848}
+  m_LocalRotation: {x: 0.21330905, y: 0.000000020869843, z: -0.0000000045565973, w: 0.9769848}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1474,7 +1474,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442871732}
-  m_LocalRotation: {x: 0.21330908, y: -0.00000003273186, z: 0.00000000714648, w: 0.9769848}
+  m_LocalRotation: {x: 0.21330906, y: 0.000000025445862, z: -0.000000005555698, w: 0.9769848}
   m_LocalPosition: {x: 7.96, y: 3.6095529, z: 1.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1599,6 +1599,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469287014}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1506639714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4087429607615583397, guid: ca020900e8702f140b2aa3683381f28a, type: 3}
+  m_PrefabInstance: {fileID: 1595896808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1553411222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6137218472788390924, guid: ca020900e8702f140b2aa3683381f28a, type: 3}
@@ -1617,8 +1622,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4087429607615583397, guid: ca020900e8702f140b2aa3683381f28a, type: 3}
-      propertyPath: m_TagString
-      value: Player
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6137218472788390924, guid: ca020900e8702f140b2aa3683381f28a, type: 3}
       propertyPath: m_RootOrder
@@ -2110,7 +2115,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2134,6 +2139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a28058467704a4c96c18c1097c84da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 1506639714}
   targetMask:
     serializedVersion: 2
     m_Bits: 64
