@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraSnap : MonoBehaviour
 {
-    //This Script goes on the camera. 
+    //This Script goes on the camera. It is meant to control.
 
     //Attach the first person transform and the camera turn script 
     public Transform firstPersonTransform;
