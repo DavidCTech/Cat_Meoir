@@ -14,6 +14,9 @@ public class Human_AI : MonoBehaviour
     }
     private AIState _AIState;
 
+    public GameObject Player;
+    private PlayerInteraction playerInteraction;
+
     public LayerMask targetMask;
     public LayerMask obstructionMask;
 
@@ -71,6 +74,7 @@ public class Human_AI : MonoBehaviour
         _enemyColor = GetComponent<Renderer>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = GameObject.Find("Player");
+        playerInteraction = Player.GetComponent<PlayerInteraction>();
     }
 
 
@@ -274,6 +278,15 @@ public class Human_AI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        if (playerInteraction._isHidden == true)
+        {
+            _canSeePlayer = false;
+            _isChasingPlayer = false;
+            _AIState = AIState.Passive;
+            _timeSinceSeenPlayer = 0;
+        }
+
         switch (_AIState)
         {
             case AIState.Passive:
@@ -327,7 +340,7 @@ public class Human_AI : MonoBehaviour
         FieldOfViewCheck();
         ProximityCheck();
 
-
+        
 
     }
 }
