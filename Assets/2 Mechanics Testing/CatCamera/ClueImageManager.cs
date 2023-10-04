@@ -8,7 +8,17 @@ public class ClueImageManager : MonoBehaviour
     public List<Image> clueSpaces = new List<Image>();
     public List<Image> failSpaces = new List<Image>();
 
+    [Header("You need to reference the parent game object of the Image UI to turn on.")]
+    public GameObject imageUI; 
 
+    public void TurnUIOn()
+    {
+        imageUI.SetActive(true);
+    }
+    public void TurnUIOff()
+    {
+        imageUI.SetActive(false);
+    }
 
     //ChatGpt helped with the logic writing in this method for the foreach loops 
     public void newImageClue(Sprite slotSprite, string slotName)

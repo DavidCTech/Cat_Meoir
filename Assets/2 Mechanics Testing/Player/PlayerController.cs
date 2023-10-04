@@ -80,24 +80,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CatMemoryZoom"",
-                    ""type"": ""Button"",
-                    ""id"": ""2bb28750-4374-4c22-a03d-9203b82c660c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CatMemorySnap"",
-                    ""type"": ""Button"",
-                    ""id"": ""75f4d3ae-2050-4b74-926c-1296ecc4aa78"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -235,50 +217,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""24b70f3b-3716-47d7-a7c1-314e6ad6bed0"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CatMemoryZoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""774e45bb-47fb-4a1d-8cc6-8a37d8ce51a9"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CatMemoryZoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""71bc890e-ca53-472b-972c-28a96859257e"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CatMemorySnap"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""89bf2390-e7ad-404b-9c18-a78659066e9c"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CatMemorySnap"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""da5215e2-eda7-41fc-8cea-a5f2d2c09e5a"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -378,8 +316,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_CatVision = m_Player.FindAction("CatVision", throwIfNotFound: true);
-        m_Player_CatMemoryZoom = m_Player.FindAction("CatMemoryZoom", throwIfNotFound: true);
-        m_Player_CatMemorySnap = m_Player.FindAction("CatMemorySnap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -447,8 +383,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_CatVision;
-    private readonly InputAction m_Player_CatMemoryZoom;
-    private readonly InputAction m_Player_CatMemorySnap;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -459,8 +393,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @CatVision => m_Wrapper.m_Player_CatVision;
-        public InputAction @CatMemoryZoom => m_Wrapper.m_Player_CatMemoryZoom;
-        public InputAction @CatMemorySnap => m_Wrapper.m_Player_CatMemorySnap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -488,12 +420,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @CatVision.started += instance.OnCatVision;
             @CatVision.performed += instance.OnCatVision;
             @CatVision.canceled += instance.OnCatVision;
-            @CatMemoryZoom.started += instance.OnCatMemoryZoom;
-            @CatMemoryZoom.performed += instance.OnCatMemoryZoom;
-            @CatMemoryZoom.canceled += instance.OnCatMemoryZoom;
-            @CatMemorySnap.started += instance.OnCatMemorySnap;
-            @CatMemorySnap.performed += instance.OnCatMemorySnap;
-            @CatMemorySnap.canceled += instance.OnCatMemorySnap;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -516,12 +442,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @CatVision.started -= instance.OnCatVision;
             @CatVision.performed -= instance.OnCatVision;
             @CatVision.canceled -= instance.OnCatVision;
-            @CatMemoryZoom.started -= instance.OnCatMemoryZoom;
-            @CatMemoryZoom.performed -= instance.OnCatMemoryZoom;
-            @CatMemoryZoom.canceled -= instance.OnCatMemoryZoom;
-            @CatMemorySnap.started -= instance.OnCatMemorySnap;
-            @CatMemorySnap.performed -= instance.OnCatMemorySnap;
-            @CatMemorySnap.canceled -= instance.OnCatMemorySnap;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -547,7 +467,5 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnMenu(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCatVision(InputAction.CallbackContext context);
-        void OnCatMemoryZoom(InputAction.CallbackContext context);
-        void OnCatMemorySnap(InputAction.CallbackContext context);
     }
 }

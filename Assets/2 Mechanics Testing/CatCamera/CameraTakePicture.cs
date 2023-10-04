@@ -23,12 +23,15 @@ public class CameraTakePicture : MonoBehaviour
     private string passString;
     private Camera captureCamera;
     private int locationName = 0; //int that will be the name string for the non clue images in order to organize them 
-   
+    private CameraSwitch cameraSwitch; 
+
+
 
 
     private void Start()
     {
         captureCamera = this.gameObject.GetComponent<Camera>();
+        cameraSwitch = this.gameObject.GetComponent<CameraSwitch>();
     }
 
     //checks if the object is a clue ( Chat GPT Helped fix scripting issues here )
@@ -72,18 +75,23 @@ public class CameraTakePicture : MonoBehaviour
     //update eeeee
     private void Update()
     {
-
+        //change this to the new input system 
         if (Input.GetKeyDown(KeyCode.R))
         {
            
             if (captureCamera != null && renderTexture != null)
             {
                 // Set the camera's target texture to the Render Texture.
-                captureCamera.targetTexture = renderTexture;
-                captureCamera.Render();
-                StartCoroutine(TakeSnapshot(renderTexture));
+                //check if the camera is in first person 
+                if (cameraSwitch.isFirst)
+                {
+                    captureCamera.targetTexture = renderTexture;
+                    captureCamera.Render();
+                    StartCoroutine(TakeSnapshot(renderTexture));
 
-                captureCamera.targetTexture = null;
+                    captureCamera.targetTexture = null;
+                }
+                
             }
             else
             {

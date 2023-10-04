@@ -11,7 +11,7 @@ public class PhotoManager : MonoBehaviour
     public List<PhotoScriptable> snapshots = new List<PhotoScriptable>();
 
 
-    private int clueCount = 0;
+  
 
     private bool canContinue; 
     private ClueImageManager clueImageManager;
