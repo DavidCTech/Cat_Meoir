@@ -55,7 +55,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Menu"",
+                    ""name"": ""MenuOpenClose"",
                     ""type"": ""Button"",
                     ""id"": ""cbe177ee-00b5-466e-881c-90f190ac4690"",
                     ""expectedControlType"": ""Button"",
@@ -287,8 +287,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MenuOpenClose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -298,22 +298,45 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MenuOpenClose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
         m_Player_Stealth = m_Player.FindAction("Stealth", throwIfNotFound: true);
-        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_MenuOpenClose = m_Player.FindAction("MenuOpenClose", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_CatVision = m_Player.FindAction("CatVision", throwIfNotFound: true);
     }
@@ -380,7 +403,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Interaction;
     private readonly InputAction m_Player_Stealth;
-    private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_MenuOpenClose;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_CatVision;
     public struct PlayerActions
@@ -390,7 +413,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
         public InputAction @Stealth => m_Wrapper.m_Player_Stealth;
-        public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @MenuOpenClose => m_Wrapper.m_Player_MenuOpenClose;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @CatVision => m_Wrapper.m_Player_CatVision;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -411,9 +434,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Stealth.started += instance.OnStealth;
             @Stealth.performed += instance.OnStealth;
             @Stealth.canceled += instance.OnStealth;
-            @Menu.started += instance.OnMenu;
-            @Menu.performed += instance.OnMenu;
-            @Menu.canceled += instance.OnMenu;
+            @MenuOpenClose.started += instance.OnMenuOpenClose;
+            @MenuOpenClose.performed += instance.OnMenuOpenClose;
+            @MenuOpenClose.canceled += instance.OnMenuOpenClose;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -433,9 +456,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Stealth.started -= instance.OnStealth;
             @Stealth.performed -= instance.OnStealth;
             @Stealth.canceled -= instance.OnStealth;
-            @Menu.started -= instance.OnMenu;
-            @Menu.performed -= instance.OnMenu;
-            @Menu.canceled -= instance.OnMenu;
+            @MenuOpenClose.started -= instance.OnMenuOpenClose;
+            @MenuOpenClose.performed -= instance.OnMenuOpenClose;
+            @MenuOpenClose.canceled -= instance.OnMenuOpenClose;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -459,12 +482,30 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnStealth(InputAction.CallbackContext context);
-        void OnMenu(InputAction.CallbackContext context);
+        void OnMenuOpenClose(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCatVision(InputAction.CallbackContext context);
     }

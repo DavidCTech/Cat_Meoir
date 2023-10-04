@@ -6,12 +6,20 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering;
-public class GameManager : MonoBehaviour
+using UnityEngine.EventSystems;
+public class GameManager : MonoBehaviour, ISelectHandler
 {
     public RenderPipelineAsset[] qualityLevels;
     public TMP_Dropdown dropdown;
+    private ScrollRect scrollRect;
+    private float scrollPosition = 1;
 
     public AudioMixer audioMixer;
+
+    public GameObject mainMenuPanel;
+
+    public GameObject optionsPanel;
+  
 
     private Resolution[] resolutions;
 
@@ -59,6 +67,36 @@ public class GameManager : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
     }
+
+
+    public void DeactivateMenu()
+    {
+        mainMenuPanel.SetActive(false);
+    }
+
+    public void ActivateOptionsMenu()
+    {
+        optionsPanel.SetActive(true);
+    }
+
+    public void DeactivateOptionsMenu()
+    {
+        optionsPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
+    }
+
+    public void ActivateMenu()
+    {
+        mainMenuPanel.SetActive(true);
+        optionsPanel.SetActive(false);
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (scrollRect)
+            scrollRect.verticalScrollbar.value = scrollPosition;
+    }
+
 
     public void SetResolution (int resolutionIndex)
     {
