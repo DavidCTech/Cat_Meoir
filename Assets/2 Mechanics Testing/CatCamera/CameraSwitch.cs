@@ -13,20 +13,41 @@ public class CameraSwitch : MonoBehaviour
     public ClueImageManager clueImageManager; 
     [HideInInspector]
     public bool isFirst;
+    private CameraController cameraControls;
+
+    private void Awake()
+    {
+        cameraControls = new CameraController();
+    }
+    private void OnEnable()
+    {
+        if (cameraControls == null)
+        {
+            cameraControls = new CameraController();
+
+        }
+
+        // makes a subscription to the catmemory zoom 
+        cameraControls.Camera.CatMemoryZoom.performed += OnCatMemoryZoom;
+        cameraControls.Camera.CatMemoryZoom.Enable();
+
+    }
+    private void OnDisable()
+    {
+        //takes off the subscription to prevent memory leaks 
+        cameraControls.Camera.CatMemoryZoom.performed -= OnCatMemoryZoom;
+        cameraControls.Camera.CatMemoryZoom.Disable();
+    }
 
     void Start()
     {
         EnableThirdPersonCamera();
     }
-
-    void Update()
+    private void OnCatMemoryZoom(InputAction.CallbackContext context)
     {
-        //Need to switch to new input system 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ToggleCamera();
-        }
+        ToggleCamera();
     }
+
 
     void ToggleCamera()
     {

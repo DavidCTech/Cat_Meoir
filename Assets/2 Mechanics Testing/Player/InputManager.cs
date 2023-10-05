@@ -25,6 +25,8 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
+        //- Im adding the following line to your code to take off the subscription in order to prevent memory leaks as general good practice 
+        playerControls.Player.Movement.performed -= i => movementInput = i.ReadValue<Vector2>();
     }
 
     public void HandleAllInputs()
