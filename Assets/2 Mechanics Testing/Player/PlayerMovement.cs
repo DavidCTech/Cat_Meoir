@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float moveSpeed = 5;
     public float rotationSpeed = 15;
+    public bool isFrozen = false; 
 
     private void Awake()
     {
@@ -28,31 +29,42 @@ public class PlayerMovement : MonoBehaviour
 
     private void ManageMovement()
     {
-        moveDirection = cameraObject.forward * inputManager.vInput;
-        moveDirection = moveDirection + cameraObject.right * inputManager.hInput;
-        moveDirection.Normalize();
-        moveDirection.y = 0;
-        moveDirection = moveDirection * moveSpeed;
+        if (!isFrozen)
+        {
+            moveDirection = cameraObject.forward * inputManager.vInput;
+            moveDirection = moveDirection + cameraObject.right * inputManager.hInput;
+            moveDirection.Normalize();
+            moveDirection.y = 0;
+            moveDirection = moveDirection * moveSpeed;
 
-        Vector3 movementVelocity = moveDirection;
-        rb.velocity = movementVelocity;
+            Vector3 movementVelocity = moveDirection;
+            rb.velocity = movementVelocity;
+        }
+      
+        
     }
 
     private void ManageRotation()
     {
-        Vector3 targetDirection = Vector3.zero;
+        if (!isFrozen)
+        {
+            Vector3 targetDirection = Vector3.zero;
 
-        targetDirection = cameraObject.forward * inputManager.vInput;
-        targetDirection = moveDirection + cameraObject.right * inputManager.hInput;
-        targetDirection.Normalize();
-        targetDirection.y = 0;
+            targetDirection = cameraObject.forward * inputManager.vInput;
+            targetDirection = moveDirection + cameraObject.right * inputManager.hInput;
+            targetDirection.Normalize();
+            targetDirection.y = 0;
 
-        if (targetDirection == Vector3.zero)
-            targetDirection = transform.forward;
+            if (targetDirection == Vector3.zero)
+                targetDirection = transform.forward;
 
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        transform.rotation = playerRotation;
+            transform.rotation = playerRotation;
+        }
+        
     }
+
+   
 }

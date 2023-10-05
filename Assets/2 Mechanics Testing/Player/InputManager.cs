@@ -39,4 +39,8 @@ public class InputManager : MonoBehaviour
         vInput = movementInput.y;
         hInput = movementInput.x;
     }
+    public Vector2 GetMouseDelta()
+    {
+        return playerControls.Player.Look.ReadValue<Vector2>();
+    }
 }

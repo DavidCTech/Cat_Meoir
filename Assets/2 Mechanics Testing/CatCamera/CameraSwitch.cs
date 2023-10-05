@@ -10,10 +10,13 @@ public class CameraSwitch : MonoBehaviour
     public CinemachineFreeLook thirdPersonCamera;
     public CinemachineFreeLook firstPersonCamera;
     [Header("Clue Image Manager should be on your GameManager object-will toggle on UI.")]
-    public ClueImageManager clueImageManager; 
+    public ClueImageManager clueImageManager;
+    [Header("Need a reference to the playermovement to freeze during switch.")]
+    public PlayerMovement playerMovement; 
     [HideInInspector]
     public bool isFirst;
     private CameraController cameraControls;
+
 
     private void Awake()
     {
@@ -63,6 +66,14 @@ public class CameraSwitch : MonoBehaviour
 
     void EnableThirdPersonCamera()
     {
+        if (playerMovement != null)
+        {
+            playerMovement.isFrozen = false;
+        }
+        else
+        {
+            Debug.Log("You need to attach the playermovement script into the camera switch script. - camera and player objects respectively. ");
+        }
         isFirst = false;
         clueImageManager.TurnUIOff();
         //enable player rotation
@@ -72,6 +83,14 @@ public class CameraSwitch : MonoBehaviour
 
     void EnableFirstPersonCamera()
     {
+        if(playerMovement != null)
+        {
+            playerMovement.isFrozen = true;
+        }
+        else
+        {
+            Debug.Log("You need to attach the playermovement script into the camera switch script. - camera and player objects respectively. ");
+        }
         isFirst = true;
         clueImageManager.TurnUIOn();
         //lock player rotation
