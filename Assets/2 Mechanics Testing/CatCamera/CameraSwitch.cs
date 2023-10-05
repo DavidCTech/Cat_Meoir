@@ -8,7 +8,7 @@ public class CameraSwitch : MonoBehaviour
 {
     [Header("The two cameras for first and third person need references")]
     public CinemachineFreeLook thirdPersonCamera;
-    public CinemachineFreeLook firstPersonCamera;
+    public CinemachineVirtualCameraBase firstPersonCamera;
     [Header("Clue Image Manager should be on your GameManager object-will toggle on UI.")]
     public ClueImageManager clueImageManager;
     [Header("Need a reference to the playermovement to freeze during switch.")]

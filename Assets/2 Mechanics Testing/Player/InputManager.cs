@@ -6,9 +6,31 @@ public class InputManager : MonoBehaviour
 {
     PlayerController playerControls;
 
+
+    private static InputManager instance; 
     public Vector2 movementInput;
     public float vInput;
     public float hInput;
+
+
+    public static InputManager Instance
+    {
+        get
+        {
+            return instance; 
+        }
+    }
+    private void Awake()
+    {
+        if(instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this; 
+        }
+    }
 
     private void OnEnable()
     {
