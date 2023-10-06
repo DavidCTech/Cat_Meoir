@@ -112,7 +112,7 @@ public class CameraTakePicture : MonoBehaviour
         }
         else
         {
-            Debug.LogError("CameraTakePicture: Hey buddy you need to assign the clue layer in this script + have some object in that layer too in the scene.");
+            Debug.Log("CameraTakePicture: Hey buddy you need to assign the clue layer in this script + have some object in that layer too in the scene.");
             return false;
         }
     }
