@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
-{    
+{
+
+    public GameObject player;
+
+    //Hiding Start
     public bool _isHidden;
     private bool _isHiding = false;
     private bool isHidinginProgress = false;
@@ -11,14 +15,31 @@ public class PlayerInteraction : MonoBehaviour
     public Vector3 playerOriginalPosition;
     private Vector3 lastHidingSpotPosition;
 
+    PlayerMovement playerMovement;
+    private bool isStealth = false;
+    public bool isStealthed = false;
+    //Hiding End
+
+    private void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
+
+
     void OnInteraction()
     {
+
+
+
+
+
+
+        //Hiding Start
         if (isHidinginProgress)
         {
             // If a hiding/unhiding process is already in progress, do nothing
             return;
         }
-
         if (_isHiding)
         {
             // Unhide the player
@@ -30,34 +51,30 @@ public class PlayerInteraction : MonoBehaviour
             lastHidingSpotPosition = hidingSpot.transform.position;
             Hide();
         }
+        //Hiding End
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Hiding Start
         if (collision.gameObject.CompareTag("Hide"))
         {
             hidingSpot = collision.gameObject;
         }
-        /*Checks for Hiding Spot
-        if (collision.gameObject.CompareTag("Hide"))
-        {
-            _canHide = true;
-        }
-        else
-        {
-            _canHide = false;
-        }*/
+        //Hiding End
     }
 
     private void OnCollisionExit(Collision collision)
     {
+        //Hiding Start
         if (collision.gameObject.CompareTag("Hide"))
         {
             hidingSpot = null;
         }
+        //Hiding End
     }
 
-
+    //Hiding Start
     void Hide()
     {
         isHidinginProgress = true;
@@ -81,4 +98,25 @@ public class PlayerInteraction : MonoBehaviour
         _isHidden = false;
         isHidinginProgress = false;
     }
+
+    void OnStealth()
+    {
+        //ToggleStealth();
+        isStealth = !isStealth; // Toggle the stealth state
+
+        // Activate or deactivate the player's stealth-related components here
+        if (isStealth)
+        {
+            // Code to activate stealth mode
+            //player.SetActive(false);
+            isStealthed = true;
+        }
+        else
+        {
+            // Code to deactivate stealth mode
+            //player.SetActive(true);
+            isStealthed = false;
+        }
+    }
+    //Hiding End
 }

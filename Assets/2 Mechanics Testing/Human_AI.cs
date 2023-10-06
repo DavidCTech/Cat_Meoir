@@ -203,7 +203,7 @@ public class Human_AI : MonoBehaviour
                 //calculate distance between player and the ai 
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
                 //if the raycast isnt obstructued, you can see the player !
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask) && playerInteraction.isStealthed == false)
                 {
                     _canSeePlayer = true;
                 }
