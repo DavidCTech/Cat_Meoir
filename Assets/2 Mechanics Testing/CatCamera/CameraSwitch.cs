@@ -12,10 +12,12 @@ public class CameraSwitch : MonoBehaviour
     [Header("Clue Image Manager should be on your GameManager object-will toggle on UI.")]
     public ClueImageManager clueImageManager;
     [Header("Need a reference to the playermovement to freeze during switch.")]
-    public PlayerMovement playerMovement; 
+    public PlayerMovement playerMovement;
+    [Header("Need a reference to the CinemachinePOVExtension on cam first person.")]
+    public CinemachinePOVExtension cinemachinePOXExtension;
     [HideInInspector]
     public bool isFirst;
-    private CameraController cameraControls;
+    public CameraController cameraControls;
 
 
     private void Awake()
@@ -74,6 +76,9 @@ public class CameraSwitch : MonoBehaviour
         {
             Debug.Log("You need to attach the playermovement script into the camera switch script. - camera and player objects respectively. ");
         }
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         isFirst = false;
         clueImageManager.TurnUIOff();
         //enable player rotation
@@ -83,6 +88,12 @@ public class CameraSwitch : MonoBehaviour
 
     void EnableFirstPersonCamera()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        if (cinemachinePOXExtension != null)
+        {
+            cinemachinePOXExtension.ResetStart(firstPersonCamera.Follow.rotation); 
+        }
         if(playerMovement != null)
         {
             playerMovement.isFrozen = true;
@@ -91,6 +102,7 @@ public class CameraSwitch : MonoBehaviour
         {
             Debug.Log("You need to attach the playermovement script into the camera switch script. - camera and player objects respectively. ");
         }
+
         isFirst = true;
         clueImageManager.TurnUIOn();
         //lock player rotation

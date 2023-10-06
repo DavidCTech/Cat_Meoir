@@ -506,6 +506,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &521809374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 521809375}
+  m_Layer: 6
+  m_Name: cameraTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &521809375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521809374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.58, z: 0.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2118075307}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &529821694
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,12 +704,8 @@ MonoBehaviour:
   firstPersonCamera: {fileID: 1954745638}
   clueImageManager: {fileID: 895682353}
   playerMovement: {fileID: 2118075310}
+  cinemachinePOXExtension: {fileID: 1954745637}
   isFirst: 0
---- !u!4 &534376831 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6461866119365759740, guid: ca020900e8702f140b2aa3683381f28a, type: 3}
-  m_PrefabInstance: {fileID: 715372536}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &591459706
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1090,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6137218472788390924, guid: ca020900e8702f140b2aa3683381f28a, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1954745636}
+    - targetCorrespondingSourceObject: {fileID: 6137218472788390924, guid: ca020900e8702f140b2aa3683381f28a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 521809375}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca020900e8702f140b2aa3683381f28a, type: 3}
 --- !u!1 &722481167
@@ -1544,11 +1574,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1197521337550333133, guid: 355afe869c4eb0949a7e5a0c5a2d5216, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000018722702
+      value: -0.000000018722702
       objectReference: {fileID: 0}
     - target: {fileID: 1197521337550333133, guid: 355afe869c4eb0949a7e5a0c5a2d5216, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000000441983
+      value: 0.00000000441983
       objectReference: {fileID: 0}
     - target: {fileID: 1979253585563076752, guid: 355afe869c4eb0949a7e5a0c5a2d5216, type: 3}
       propertyPath: m_Name
@@ -1740,7 +1770,6 @@ GameObject:
   - component: {fileID: 1214771064}
   - component: {fileID: 1214771067}
   - component: {fileID: 1214771066}
-  - component: {fileID: 1214771065}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1763,19 +1792,6 @@ Transform:
   m_Father: {fileID: 1954745636}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1214771065
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214771063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Damping: 0
 --- !u!114 &1214771066
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -2638,7 +2654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1954745636
 Transform:
   m_ObjectHideFlags: 0
@@ -2647,7 +2663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954745635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.073, y: 0.61899996, z: 0.476}
+  m_LocalPosition: {x: 0, y: 0.5799999, z: 0.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2690,7 +2706,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 534376831}
+  m_Follow: {fileID: 521809375}
   m_Lens:
     FieldOfView: 60.000004
     OrthographicSize: 10
