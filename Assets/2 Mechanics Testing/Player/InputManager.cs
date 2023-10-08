@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    PlayerController playerControls;
+    public PlayerController playerControls;
 
 
     private static InputManager instance; 
@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour
 
             playerControls.Player.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
         }
-
+     
         playerControls.Enable();
     }
 
@@ -48,6 +48,7 @@ public class InputManager : MonoBehaviour
     {
         playerControls.Disable();
         //- Im adding the following line to your code to take off the subscription in order to prevent memory leaks as general good practice 
+
         playerControls.Player.Movement.performed -= i => movementInput = i.ReadValue<Vector2>();
     }
 
