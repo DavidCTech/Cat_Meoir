@@ -11,14 +11,17 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
 
     public float moveSpeed = 5;
+    public float visionMoveSpeed = 1; // Speed during Vision state
     public float rotationSpeed = 15;
-    public bool isFrozen = false; 
+    public bool isFrozen = false;
+    private PlayerVisionStates visionStates;
 
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
+        visionStates = GetComponent<PlayerVisionStates>();
     }
 
     public void ManageAllMovement()
@@ -31,17 +34,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isFrozen)
         {
+            float currentMoveSpeed = visionStates.currentState == PlayerState.Vision ? visionMoveSpeed : moveSpeed;
+
             moveDirection = cameraObject.forward * inputManager.vInput;
             moveDirection = moveDirection + cameraObject.right * inputManager.hInput;
             moveDirection.Normalize();
             moveDirection.y = 0;
-            moveDirection = moveDirection * moveSpeed;
+            moveDirection = moveDirection * currentMoveSpeed;
 
             Vector3 movementVelocity = moveDirection;
             rb.velocity = movementVelocity;
         }
-      
-        
     }
 
     private void ManageRotation()
@@ -63,8 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
             transform.rotation = playerRotation;
         }
-        
     }
 
-   
+
 }
