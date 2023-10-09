@@ -8,6 +8,10 @@ public class BlackAndWhiteToggle : MonoBehaviour
     public PostProcessVolume postProcessVolume;
     private ColorGrading colorGrading;
 
+    public GameObject player; // Assign the player GameObject in the Inspector
+
+    private PlayerVisionStates playerVisionStates; // Reference to the PlayerVisionStates script
+
     private void Start()
     {
         // Get the ColorGrading effect from the Post-Processing Volume
@@ -20,56 +24,36 @@ public class BlackAndWhiteToggle : MonoBehaviour
             Debug.LogError("ColorGrading component not found in the Post-Processing Volume.");
         }
 
-        // Find the player GameObject by tag (replace "Player" with your player's tag)
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        // Get the PlayerVisionStates script from the player GameObject
+        playerVisionStates = player.GetComponent<PlayerVisionStates>();
 
-        if (player != null)
+        if (playerVisionStates == null)
         {
-            // Now that we have a reference to the player GameObject, we can check its vision state.
-            PlayerVisionStates playerVisionStates = player.GetComponent<PlayerVisionStates>();
-            if (playerVisionStates != null)
-            {
-                // Set the initial state based on the player's vision state.
-                UpdateBlackAndWhiteState(playerVisionStates.currentState);
-                Debug.Log("Player Vision State: " + playerVisionStates.currentState); // Add this line
-            }
-            else
-            {
-                Debug.LogError("PlayerVisionStates component not found on the player GameObject.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Player GameObject not found. Make sure it has the 'Player' tag.");
+            Debug.LogError("PlayerVisionStates component not found on the player GameObject.");
         }
     }
 
     private void Update()
     {
-        // Check the player's vision state using the PlayerVisionStates script
-        PlayerVisionStates playerVisionStates = GetComponent<PlayerVisionStates>();
-        if (playerVisionStates != null && playerVisionStates.currentState == PlayerState.Vision)
+        if (player != null && playerVisionStates != null)
         {
-            // Set the saturation of the ColorGrading effect for black and white
-            colorGrading.saturation.value = -100; // -100 for full black & white
-        }
-        else
-        {
-            // Set the saturation back to 0 for full color
-            colorGrading.saturation.value = 0;
-        }
-    }
+            // Check if the player is in the Vision state using the PlayerVisionStates script
+            PlayerState playerState = playerVisionStates.currentState;
 
-    private void UpdateBlackAndWhiteState(PlayerState playerState)
-    {
-        // Set the saturation of the ColorGrading effect based on the player's vision state.
-        if (playerState == PlayerState.Vision)
-        {
-            colorGrading.saturation.value = -100; // -100 for full black & white
-        }
-        else
-        {
-            colorGrading.saturation.value = 0; // 0 for full color
+            // Check if the current object is in the "nopostprocessing" layer.
+            bool isInNoPostProcessingLayer = gameObject.layer == LayerMask.NameToLayer("NoPostProcessing");
+
+            // Determine whether to apply the black and white effect based on the player's state and object's layer.
+            if (playerState == PlayerState.Vision && !isInNoPostProcessingLayer)
+            {
+                // Set the saturation of the ColorGrading effect for black and white
+                colorGrading.saturation.value = -100; // -100 for full black & white
+            }
+            else
+            {
+                // Set the saturation back to 0 for full color
+                colorGrading.saturation.value = 0;
+            }
         }
     }
 }
