@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 4973055433327700478}
   - component: {fileID: 5048656819983782961}
   - component: {fileID: 5573088188625903204}
+  - component: {fileID: 7232274981438848809}
   - component: {fileID: -8590962783916332216}
   m_Layer: 6
   m_Name: Player
@@ -73,7 +74,7 @@ Transform:
   - {fileID: 67743285880045893}
   - {fileID: 3291577528967147671}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -146.11, z: 0}
 --- !u!54 &7374544374103738546
 Rigidbody:
@@ -195,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  visionMoveSpeed: 1
   rotationSpeed: 12
   isFrozen: 0
 --- !u!114 &5048656819983782961
@@ -209,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0364def0f5dd50a4e9f2d62597bf948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4087429607615583397}
   _isHidden: 0
   playerOriginalPosition: {x: 0, y: 0, z: 0}
   isStealthed: 0
@@ -226,6 +228,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+--- !u!114 &7232274981438848809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4087429607615583397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10758ca05a4e30846abc5c139f8c86bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fovRadius: 4.1
+  fovAngle: 134.8
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!95 &-8590962783916332216
 Animator:
   serializedVersion: 5
@@ -391,7 +413,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cfc94d7920b27894697751cc6d3ae739, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
