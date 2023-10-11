@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
         visionStates = GetComponent<PlayerVisionStates>();
     }
 
+
     public void ManageAllMovement()
     {
         ManageMovement();

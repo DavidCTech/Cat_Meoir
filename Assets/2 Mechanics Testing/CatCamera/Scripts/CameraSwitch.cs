@@ -9,8 +9,6 @@ public class CameraSwitch : MonoBehaviour
     [Header("The two cameras for first and third person need references")]
     public CinemachineFreeLook thirdPersonCamera;
     public CinemachineVirtualCameraBase firstPersonCamera;
-    [Header("Clue Image Manager should be on your GameManager object-will toggle on UI.")]
-    public ClueImageManager clueImageManager;
     [Header("Need a reference to the playermovement to freeze during switch.")]
     public PlayerMovement playerMovement;
     [Header("Need a reference to the CinemachinePOVExtension on cam first person.")]
@@ -77,19 +75,15 @@ public class CameraSwitch : MonoBehaviour
             Debug.Log("You need to attach the playermovement script into the camera switch script. - camera and player objects respectively. ");
         }
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        
         isFirst = false;
-        clueImageManager.TurnUIOff();
-        //enable player rotation
         thirdPersonCamera.gameObject.SetActive(true);
         firstPersonCamera.gameObject.SetActive(false);
     }
 
     void EnableFirstPersonCamera()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        
         if (cinemachinePOXExtension != null)
         {
             cinemachinePOXExtension.ResetStart(firstPersonCamera.Follow.rotation); 
@@ -104,7 +98,6 @@ public class CameraSwitch : MonoBehaviour
         }
 
         isFirst = true;
-        clueImageManager.TurnUIOn();
         //lock player rotation
         firstPersonCamera.gameObject.SetActive(true);
         thirdPersonCamera.gameObject.SetActive(false);

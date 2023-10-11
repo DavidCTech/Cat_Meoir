@@ -5,15 +5,27 @@ using UnityEngine.UI;
 
 public class NPCInteraction : MonoBehaviour
 {
+    //This script can be attached to NPCs OR any UI that might have turning off and on canvases to display information. If it is an npc, toggle isNPC
+    public bool isNPC;
+    public bool isLockingPlayer;
+    [Header("You only need dialogue if this object is an NPC")]
     public Canvas dialogue;
     private GameObject player; 
     
     public void Interact(GameObject playerObject)
     {
-        //lock the player
-        player = playerObject;
-        player.GetComponent<PlayerMovement>().isFrozen = true; 
-        dialogue.gameObject.SetActive(true);
+       
+        if (isNPC)
+        {
+            dialogue.gameObject.SetActive(true);
+            //lock the player
+            if (isLockingPlayer)
+            {
+                player = playerObject;
+                player.GetComponent<PlayerMovement>().isFrozen = true;
+            }
+        }
+
     }
     public void TurnCanvasOff(Canvas previousCanvas)
     {

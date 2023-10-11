@@ -66,4 +66,5 @@ public class InputManager : MonoBehaviour
     {
         return playerControls.Player.Look.ReadValue<Vector2>();
     }
+  
 }

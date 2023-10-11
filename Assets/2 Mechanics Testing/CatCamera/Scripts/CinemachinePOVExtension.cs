@@ -7,12 +7,14 @@ public class CinemachinePOVExtension : CinemachineExtension
     
     public float clampAngleUp = 45f;
     public float clampAngleSide = 90f; 
-    public float horizontalSpeed = 30f;
-    public float verticalSpeed = 30f; 
+   
+    [Header("The Following value should be toggleable to the player, it's the sensitivity.")]
+    public float controlSensitivity; 
 
     private InputManager inputManager;
     private Vector3 startingRotation;
     private Vector3 updatingRotation; 
+    
 
  
 
@@ -38,8 +40,8 @@ public class CinemachinePOVExtension : CinemachineExtension
                     
                     Vector2 deltaInput = inputManager.GetMouseDelta();
 
-                    updatingRotation.x += deltaInput.x * verticalSpeed * Time.deltaTime;
-                    updatingRotation.y += deltaInput.y * horizontalSpeed * Time.deltaTime;
+                    updatingRotation.x += deltaInput.x * controlSensitivity * Time.deltaTime;
+                    updatingRotation.y += deltaInput.y * controlSensitivity * Time.deltaTime;
 
                     //Debug.Log("Updating rotationX: " + updatingRotation.x + "Updating RotationY: " + updatingRotation.y);
                     updatingRotation.y = Mathf.Clamp(updatingRotation.y, startingRotation.x-clampAngleUp, startingRotation.x + clampAngleUp);
