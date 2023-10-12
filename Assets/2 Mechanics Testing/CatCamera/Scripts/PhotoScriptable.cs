@@ -6,4 +6,5 @@ public class PhotoScriptable : ScriptableObject
     public bool isClue;
     public Sprite sprite;
     public string clueName; 
+
 }

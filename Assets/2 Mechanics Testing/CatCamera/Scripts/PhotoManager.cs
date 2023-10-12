@@ -11,8 +11,6 @@ public class PhotoManager : MonoBehaviour
     public List<PhotoScriptable> snapshots = new List<PhotoScriptable>();
 
 
-  
-
     private bool canContinue; 
     private ClueImageManager clueImageManager;
 
@@ -28,7 +26,7 @@ public class PhotoManager : MonoBehaviour
         snapshot.sprite = pictureSprite;
         snapshot.isClue = isClue;
         snapshot.clueName = clueName;
-        // Update in clue image manager here if needed
+        // Update in clue image manager here if needed 
         canContinue = checkClueImages(clueName, snapshot);
         if (canContinue)
         {
@@ -36,11 +34,13 @@ public class PhotoManager : MonoBehaviour
             checkPictureClue(snapshot);
 
         }
-        
-        
-       
-
     }
+
+
+
+
+
+
     //this script will loop through all the scriptable objects in the list and look for 1. if it is a bool of clue and 2. if it has the same name as another. If so, it wll replace
     public bool checkClueImages(string clueName, PhotoScriptable snapshot)
     {
