@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerInteractionCheck : MonoBehaviour
 {
@@ -13,7 +15,15 @@ public class PlayerInteractionCheck : MonoBehaviour
     public LayerMask obstructionMask;
     private GameObject targetObject;
     private string passString;
-  
+
+    public GameObject Player;
+    private PlayerStealth playerStealth;
+
+
+    void Start()
+    {
+        playerStealth = Player.GetComponent<PlayerStealth>();
+    }
 
     /*
     private InputManager inputManager;
@@ -92,6 +102,7 @@ public class PlayerInteractionCheck : MonoBehaviour
             }
             if(objectName == "Hide")
             {
+                playerStealth.GetComponent<PlayerStealth>().HideCheck();
                 //reference the Hide code
             }
             if(objectName == "Jump")
@@ -111,6 +122,4 @@ public class PlayerInteractionCheck : MonoBehaviour
         }
        
     }
-
-
 }

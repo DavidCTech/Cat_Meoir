@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerStealth : MonoBehaviour
 {
-
     public GameObject player;
 
     //Hiding Start
@@ -26,14 +26,8 @@ public class PlayerInteraction : MonoBehaviour
     }
 
 
-    void OnInteraction()
+    public void HideCheck()
     {
-
-
-
-
-
-
         //Hiding Start
         if (isHidinginProgress)
         {
@@ -43,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
         if (_isHiding)
         {
             // Unhide the player
-            unHide();
+            UnHide();
         }
         else if (hidingSpot != null)
         {
@@ -54,7 +48,7 @@ public class PlayerInteraction : MonoBehaviour
         //Hiding End
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         //Hiding Start
         if (collision.gameObject.CompareTag("Hide"))
@@ -64,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
         //Hiding End
     }
 
-    private void OnCollisionExit(Collision collision)
+    public void OnCollisionExit(Collision collision)
     {
         //Hiding Start
         if (collision.gameObject.CompareTag("Hide"))
@@ -75,7 +69,7 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     //Hiding Start
-    void Hide()
+    public void Hide()
     {
         isHidinginProgress = true;
         // Set the player position inside the hiding spot
@@ -87,19 +81,19 @@ public class PlayerInteraction : MonoBehaviour
         _isHidden = true;
         isHidinginProgress = false;
     }
-    void unHide()
+    public void UnHide()
     {
         isHidinginProgress = true;
         // Reset the player position to exit the hiding spot
         // You may also need to reset player controls and camera view here
         //GetComponent<Collider>().enabled = true;
         transform.position = lastHidingSpotPosition;
-        _isHiding = false; 
+        _isHiding = false;
         _isHidden = false;
         isHidinginProgress = false;
     }
 
-    void OnStealth()
+    public void OnStealth()
     {
         //ToggleStealth();
         isStealth = !isStealth; // Toggle the stealth state

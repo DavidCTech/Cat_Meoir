@@ -15,7 +15,7 @@ public class Human_AI : MonoBehaviour
     private AIState _AIState;
 
     public GameObject Player;
-    private PlayerInteraction playerInteraction;
+    private PlayerStealth playerStealth;
 
     public LayerMask targetMask;
     public LayerMask obstructionMask;
@@ -74,7 +74,7 @@ public class Human_AI : MonoBehaviour
         _enemyColor = GetComponent<Renderer>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = GameObject.Find("Player");
-        playerInteraction = Player.GetComponent<PlayerInteraction>();
+        playerStealth = Player.GetComponent<PlayerStealth>();
     }
 
 
@@ -203,7 +203,7 @@ public class Human_AI : MonoBehaviour
                 //calculate distance between player and the ai 
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
                 //if the raycast isnt obstructued, you can see the player !
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask) && playerInteraction.isStealthed == false)
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask) && playerStealth.isStealthed == false)
                 {
                     _canSeePlayer = true;
                 }
@@ -279,7 +279,7 @@ public class Human_AI : MonoBehaviour
     private void Update()
     {
 
-        if (playerInteraction._isHidden == true)
+        if (playerStealth._isHidden == true)
         {
             _canSeePlayer = false;
             _isChasingPlayer = false;
