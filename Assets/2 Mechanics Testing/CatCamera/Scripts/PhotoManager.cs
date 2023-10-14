@@ -7,6 +7,8 @@ using UnityEngine;
 public class PhotoManager : MonoBehaviour
 {
     //put this script on your game Manager
+    [Header("This is the text for when the images are full.")]
+    public GameObject imagesFullText; 
     [Header("You do not need to ref anything, this is just nice info.")]
     public List<PhotoScriptable> snapshots = new List<PhotoScriptable>();
 
@@ -67,6 +69,11 @@ public class PhotoManager : MonoBehaviour
     public void deletePicture(PhotoScriptable snapshot)
     {
         snapshots.Remove(snapshot);
+        if(imagesFullText != null)
+        {
+            imagesFullText.SetActive(false);
+
+        }
     }
     private void checkPictureClue(PhotoScriptable snapshot)
     {
@@ -95,6 +102,12 @@ public class PhotoManager : MonoBehaviour
         {
             Debug.Log("The Images are all Filled up! Deleting your newest Image taken from Memory!");
             deletePicture(snapshot);
+            if(imagesFullText != null)
+            {
+                Debug.Log("set active should be true");
+                imagesFullText.SetActive(true);
+
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using UnityEngine.UI; 
 
 public class CameraTakePicture : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class CameraTakePicture : MonoBehaviour
     public float fovAngle;
     public LayerMask clueMask;
     public LayerMask obstructionMask;
+    [Header("Need a reference to the UI image that shows the last picture taken.")]
+    public Image lastPhotoImage;
 
     private bool passBool;
     private Sprite passSprite;
@@ -65,6 +68,8 @@ public class CameraTakePicture : MonoBehaviour
                 captureCamera.targetTexture = renderTexture;
                 captureCamera.Render();
                 StartCoroutine(TakeSnapshot(renderTexture));
+                //do assignpicture
+               
 
                 captureCamera.targetTexture = null;
             }
@@ -77,7 +82,13 @@ public class CameraTakePicture : MonoBehaviour
 
     }
 
-    
+    private void AssignPicture(Sprite passedImage) 
+    { 
+        //You need to get the image eference from the canvas
+        lastPhotoImage.sprite = passedImage;
+        // then you need to get the spirte from the render texture from the other thing
+        // then you need to assign the sprite to the image reference from the camera
+    }
 
     //checks if the object is a clue ( Chat GPT Helped fix scripting issues here )
     private bool checkObject()
@@ -133,6 +144,7 @@ public class CameraTakePicture : MonoBehaviour
         passSprite = Sprite.Create(texture2D, rect, new Vector2(0.5f, 0.5f));
         passString = null; 
         passBool = checkObject();
+        AssignPicture(passSprite);
         photoManager.addPictureToList(passSprite, passBool, passString);
 
 
