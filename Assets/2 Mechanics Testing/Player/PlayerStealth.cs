@@ -15,15 +15,9 @@ public class PlayerStealth : MonoBehaviour
     public Vector3 playerOriginalPosition;
     private Vector3 lastHidingSpotPosition;
 
-    PlayerMovement playerMovement;
     private bool isStealth = false;
     public bool isStealthed = false;
     //Hiding End
-
-    private void Awake()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
-    }
 
 
     public void HideCheck()
