@@ -71,6 +71,18 @@ public class ClueImageManager : MonoBehaviour
             }
         }
     }
+    /*
+    private void failSpacesNameCount()
+    {
+        for(int i = 0; i < failSpaces.Count, i++)
+        {
+            if(failSpaces[i].name != null)
+            {
+
+            }
+        }
+    }
+    */
 
     public void TurnUIOn()
     {
@@ -131,7 +143,6 @@ public class ClueImageManager : MonoBehaviour
         }
     }
     */
-
 
     public void turnToNull(Image imageToNull)
     {
