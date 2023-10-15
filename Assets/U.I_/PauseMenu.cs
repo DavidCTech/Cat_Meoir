@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour, ISelectHandler
 {
@@ -28,7 +29,38 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
+    public PlayerController playerControls;
 
+
+    private void Awake()
+    {
+        playerControls = new PlayerController();
+    }
+    public void OnEnable()
+    {
+        playerControls.Player.MenuOpenClose.performed += OnMenuOpenClose;
+        playerControls.Player.MenuOpenClose.Enable();
+    }
+    public void OnDisable()
+    {
+        playerControls.Player.MenuOpenClose.performed -= OnMenuOpenClose;
+        playerControls.Player.MenuOpenClose.Disable();
+
+    }
+
+    public void OnMenuOpenClose(InputAction.CallbackContext context)
+    {
+        Debug.Log("Pause");
+        if (!isPaused)
+        {
+            Pause();
+        }
+
+        else
+        {
+            Resume();
+        }
+    }
     private void Start()
     {
         pauseMenuUI.SetActive(false);
@@ -70,29 +102,12 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     }
 
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (InputManagerMenu.instance.MenuOpenCloseInput)
-        {
-            if (!isPaused)
-            {
-                Pause();
-            }
-
-            else
-            {
-                Resume();
-            }
-        }
-
-    }
 
     public void Resume()
     {
        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
+       Time.timeScale = 1f;
+       isPaused = false;
     }
 
     void Pause()

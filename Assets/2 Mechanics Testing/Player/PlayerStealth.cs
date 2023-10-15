@@ -75,6 +75,8 @@ public class PlayerStealth : MonoBehaviour
         _isHidden = true;
         isHidinginProgress = false;
     }
+
+
     public void UnHide()
     {
         isHidinginProgress = true;

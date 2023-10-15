@@ -35,6 +35,11 @@ public class NPCInteraction : MonoBehaviour
     {
         nextCanvas.gameObject.SetActive(true);
     }
+
+    public void TurnMenuOff(GameObject pauseMenu)
+    {
+        pauseMenu.gameObject.SetActive(false);
+    }
     public void End(Canvas current)
     {
         //unlock the player
