@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CameraTakePicture : MonoBehaviour
 {
@@ -65,13 +66,15 @@ public class CameraTakePicture : MonoBehaviour
         {
             if (cameraSwitch.isFirst)
             {
-                captureCamera.targetTexture = renderTexture;
-                captureCamera.Render();
-                StartCoroutine(TakeSnapshot(renderTexture));
-                //do assignpicture
-               
+               if(!EventSystem.current.IsPointerOverGameObject())
+               {
+                    captureCamera.targetTexture = renderTexture;
+                    captureCamera.Render();
+                    StartCoroutine(TakeSnapshot(renderTexture));
+                    captureCamera.targetTexture = null;
 
-                captureCamera.targetTexture = null;
+               }
+
             }
 
         }
@@ -81,13 +84,12 @@ public class CameraTakePicture : MonoBehaviour
         }
 
     }
-
+    //this method assigns a picture to the last photo taken placeholder
     private void AssignPicture(Sprite passedImage) 
     { 
-        //You need to get the image eference from the canvas
+ 
         lastPhotoImage.sprite = passedImage;
-        // then you need to get the spirte from the render texture from the other thing
-        // then you need to assign the sprite to the image reference from the camera
+   
     }
 
     //checks if the object is a clue ( Chat GPT Helped fix scripting issues here )
@@ -99,7 +101,7 @@ public class CameraTakePicture : MonoBehaviour
 
         if (rangeChecks.Length != 0)
         {
-            bool anyObjectInFOV = false;  // Variable to track if any object within FOV meets conditions
+            bool anyObjectInFOV = false; 
 
             for (int i = 0; i < rangeChecks.Length; i++)
             {
@@ -113,8 +115,8 @@ public class CameraTakePicture : MonoBehaviour
                     {
                         locationName--; 
                         passString = target.gameObject.name;
-                        anyObjectInFOV = true;  // Set the flag to true if any object meets conditions
-                                                // You might want to perform additional logic here if needed
+                        anyObjectInFOV = true;  
+                                               
                     }
                 }
             }

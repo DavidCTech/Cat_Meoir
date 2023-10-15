@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(ClueImageManager))]
 public class PhotoManager : MonoBehaviour
@@ -38,11 +39,6 @@ public class PhotoManager : MonoBehaviour
         }
     }
 
-
-
-
-
-
     //this script will loop through all the scriptable objects in the list and look for 1. if it is a bool of clue and 2. if it has the same name as another. If so, it wll replace
     public bool checkClueImages(string clueName, PhotoScriptable snapshot)
     {
@@ -65,17 +61,81 @@ public class PhotoManager : MonoBehaviour
         return true;
 
     }
+
     
     public void deletePicture(PhotoScriptable snapshot)
     {
+
         snapshots.Remove(snapshot);
-        if(imagesFullText != null)
+
+    }
+    //delete from list is back up method currently for an idea of making the information dynamic 
+
+
+    
+
+    
+    public void deleteFromList(GameObject imagePlaceholder)
+    {
+        string imageName = imagePlaceholder.name;
+        if (int.TryParse(imageName, out int listNum))
         {
-            imagesFullText.SetActive(false);
+            //setting it and passing it to another script in order to update mappings between the image and the scriptable object name 
+            clueImageManager.SetSnapshotList(snapshots);
+            clueImageManager.DeleteAtIndex(listNum);
+
+
+
+
+
+            snapshots = clueImageManager.GetSnapshotList(); 
+        }
+            
+
+        /*
+        string imageName = imagePlaceholder.name; 
+        if (int.TryParse(imageName, out int listNum))
+        {
+            Debug.Log("snapshot count: " + snapshots.Count);
+            if (listNum >= 0 && listNum < snapshots.Count)
+            {
+                Debug.Log("RemoveAt "+ listNum);
+                Debug.Log("CurrentList:  " );
+                for (int i = 0; i < snapshots.Count; i++)
+                {
+                    Debug.Log("Name: " + snapshots[i].clueName);
+                    
+                }
+                clueImageManager.turnToNull(imagePlaceholder.GetComponent<Image>());
+                snapshots.RemoveAt(listNum);
+                for (int i = 0; i < snapshots.Count; i++)
+                {
+
+                    if(i == listNum + 1)
+                    {
+                        snapshots[i].name = (i - 1).ToString();
+                    }
+
+                }
+            }
+            if (imagesFullText != null)
+            {
+                Debug.Log("set active should be true");
+                imagesFullText.SetActive(false);
+
+            }
+        }
+        else
+        {
+            Debug.Log("Image name is not parseable " + imageName);
 
         }
+        */
+
     }
-    private void checkPictureClue(PhotoScriptable snapshot)
+    
+
+private void checkPictureClue(PhotoScriptable snapshot)
     {
         if (snapshot.isClue)
         {
@@ -104,7 +164,7 @@ public class PhotoManager : MonoBehaviour
             deletePicture(snapshot);
             if(imagesFullText != null)
             {
-                Debug.Log("set active should be true");
+                
                 imagesFullText.SetActive(true);
 
             }

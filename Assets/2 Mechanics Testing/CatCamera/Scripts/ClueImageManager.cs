@@ -9,7 +9,68 @@ public class ClueImageManager : MonoBehaviour
     public List<Image> failSpaces = new List<Image>();
 
     [Header("You need to reference the parent game object of the Image UI to turn on.")]
-    public GameObject imageUI; 
+    public GameObject imageUI;
+    [Header("You need to reference a defualt image for the clues.")]
+    public Sprite defaultSprite;
+
+
+    private Dictionary<int, int> indexMapping = new Dictionary<int, int>();
+    private List<PhotoScriptable> snapshotsPass; 
+
+
+    public void SetSnapshotList(List<PhotoScriptable> snapshotsList)
+    {
+        snapshotsPass = snapshotsList;
+    }
+    public List<PhotoScriptable> GetSnapshotList()
+    {
+        return snapshotsPass;
+    }
+
+    //deletes both the info from scriptable object and in the image list dictionary made with chatGPT help
+    public void DeleteAtIndex(int index)
+    {
+        if (index >= 0 && index < snapshotsPass.Count)
+        {
+        
+            snapshotsPass.RemoveAt(index);
+
+            UpdateMapping(index);
+
+            UpdateImageNames();
+        }
+    }
+
+    private void UpdateMapping(int removedIndex)
+    {
+        
+        indexMapping.Clear();
+        Debug.Log("snapshotspass count " + snapshotsPass.Count);
+        for (int i = 0; i < snapshotsPass.Count; i++)
+        {
+            indexMapping[i] = i;
+        }
+       
+        indexMapping.Remove(removedIndex);
+        Debug.Log("snapshotspass count after removal: " + snapshotsPass.Count);
+    }
+
+    private void UpdateImageNames()
+    {
+        Debug.Log("Failspaces count: "+ failSpaces.Count);
+        for (int i = 0; i < failSpaces.Count; i++)
+        {
+            if (indexMapping.TryGetValue(i, out int newIndex))
+            {
+                Debug.Log("try get value: " + i);
+                Debug.Log("new Index" + newIndex);
+
+                Image image = failSpaces[i];
+                image.name = newIndex.ToString();
+
+            }
+        }
+    }
 
     public void TurnUIOn()
     {
@@ -60,17 +121,33 @@ public class ClueImageManager : MonoBehaviour
         }
         return false;
     }
+
+    /*
+    public void fixFailList()
+    {
+        for(int i = 0; i < failSpaces.Count; i++)
+        {
+            if (failSpaces[1].name) ;
+        }
+    }
+    */
+
+
     public void turnToNull(Image imageToNull)
     {
+        imageToNull.sprite = defaultSprite;
+        imageToNull.name = null;
+        /*
         foreach (Image failSpace in failSpaces)
         {
             if (failSpace.name == imageToNull.name)
             {
-                failSpace.sprite = null;
-                failSpace.name = null; 
+                failSpace.sprite = defaultSprite;
+                failSpace.name = "Default"; 
             }
 
         }
+        */
         
     }
 }
