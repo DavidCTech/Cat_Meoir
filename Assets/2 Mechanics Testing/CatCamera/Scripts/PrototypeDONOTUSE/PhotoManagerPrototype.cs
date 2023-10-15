@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
 
+/*
 [RequireComponent(typeof(ClueImageManager))]
-public class PhotoManager : MonoBehaviour
+public class PhotoManagerPrototype : MonoBehaviour
 {
     //put this script on your game Manager
     [Header("This is the text for when the images are full.")]
@@ -38,11 +40,6 @@ public class PhotoManager : MonoBehaviour
         }
     }
 
-
-
-
-
-
     //this script will loop through all the scriptable objects in the list and look for 1. if it is a bool of clue and 2. if it has the same name as another. If so, it wll replace
     public bool checkClueImages(string clueName, PhotoScriptable snapshot)
     {
@@ -66,21 +63,83 @@ public class PhotoManager : MonoBehaviour
 
     }
 
+
     public void deletePicture(PhotoScriptable snapshot)
     {
-        snapshots.Remove(snapshot);
-        
-        
-    }
 
-    public void StopFullShow()
+        snapshots.Remove(snapshot);
+
+    }
+    //delete from list is back up method currently for an idea of making the information dynamic 
+
+
+
+
+
+    public void deleteFromList(GameObject imagePlaceholder)
     {
-        if (imagesFullText != null)
+        string imageName = imagePlaceholder.name;
+        if (int.TryParse(imageName, out int listNum))
         {
-            imagesFullText.SetActive(false);
+            //setting it and passing it to another script in order to update mappings between the image and the scriptable object name 
+            clueImageManager.SetSnapshotList(snapshots);
+            Debug.Log("list num: " + listNum);
+            clueImageManager.DeleteAtIndex(listNum);
+
+
+
+
+            if (!clueImageManager.CheckListForNull())
+            {
+                snapshots = clueImageManager.GetSnapshotList();
+            }
 
         }
+
+
+        /*
+        string imageName = imagePlaceholder.name; 
+        if (int.TryParse(imageName, out int listNum))
+        {
+            Debug.Log("snapshot count: " + snapshots.Count);
+            if (listNum >= 0 && listNum < snapshots.Count)
+            {
+                Debug.Log("RemoveAt "+ listNum);
+                Debug.Log("CurrentList:  " );
+                for (int i = 0; i < snapshots.Count; i++)
+                {
+                    Debug.Log("Name: " + snapshots[i].clueName);
+                    
+                }
+                clueImageManager.turnToNull(imagePlaceholder.GetComponent<Image>());
+                snapshots.RemoveAt(listNum);
+                for (int i = 0; i < snapshots.Count; i++)
+                {
+
+                    if(i == listNum + 1)
+                    {
+                        snapshots[i].name = (i - 1).ToString();
+                    }
+
+                }
+            }
+            if (imagesFullText != null)
+            {
+                Debug.Log("set active should be true");
+                imagesFullText.SetActive(false);
+
+            }
+        }
+        else
+        {
+            Debug.Log("Image name is not parseable " + imageName);
+
+        }
+        
+
     }
+
+
     private void checkPictureClue(PhotoScriptable snapshot)
     {
         if (snapshot.isClue)
@@ -106,13 +165,17 @@ public class PhotoManager : MonoBehaviour
         //if you didnt do the image, then it must be because its full, you need to delete - should be good to have some mechanic or words to the player here
         if (!didImage)
         {
+            Debug.Log("The Images are all Filled up! Deleting your newest Image taken from Memory!");
             deletePicture(snapshot);
             if (imagesFullText != null)
             {
-                
+
                 imagesFullText.SetActive(true);
 
             }
         }
     }
 }
+
+
+*/
