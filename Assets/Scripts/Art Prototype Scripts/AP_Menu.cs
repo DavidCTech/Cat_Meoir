@@ -11,7 +11,11 @@ public class AP_Menu : MonoBehaviour
     [Header("Paused Variables")]
     public bool isPaused;
     public CanvasGroup pauseMenu;
-    public GameObject renderToggle;
+
+    [Header("Shader and Button Variables")]
+    public GameObject resumeButton;
+    public GameObject ppEffects;
+    public bool isShaderOn;
 
     void Awake()
     {
@@ -32,6 +36,13 @@ public class AP_Menu : MonoBehaviour
         {
             PauseUnpauseGame();
         }
+
+        if (Input.GetButtonDown("Shader Toggle") && !isPaused)
+        {
+            Debug.Log("Shader");
+
+            TurnOffShader();
+        }
     }
 
     public void PauseUnpauseGame()
@@ -46,7 +57,7 @@ public class AP_Menu : MonoBehaviour
             AP_GameManager.instance.UnlockCursor();
 
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(renderToggle);
+            EventSystem.current.SetSelectedGameObject(resumeButton);
         }
         else if (isPaused)
         {
@@ -58,6 +69,20 @@ public class AP_Menu : MonoBehaviour
             AP_GameManager.instance.LockCursor();
 
             EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
+
+    public void TurnOffShader()
+    {
+        isShaderOn = !isShaderOn;
+
+        if (isShaderOn)
+        {
+            ppEffects.gameObject.SetActive(true);
+        }
+        else if (!isShaderOn)
+        {
+            ppEffects.gameObject.SetActive(false);
         }
     }
 }
