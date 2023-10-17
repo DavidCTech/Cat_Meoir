@@ -31,6 +31,9 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     private float currentRefreshRate;
     public PlayerController playerControls;
 
+    public Toggle vSyncToggle;
+
+
 
     private void Awake()
     {
@@ -161,6 +164,16 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         Application.Quit();
     }
 
-    
+    public void ApplyVSync()
+    {
+        if (vSyncToggle.isOn)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }
+    }
 
 }
