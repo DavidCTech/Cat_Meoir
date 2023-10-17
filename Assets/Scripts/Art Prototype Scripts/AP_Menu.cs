@@ -16,6 +16,8 @@ public class AP_Menu : MonoBehaviour
     public GameObject resumeButton;
     public GameObject ppEffects;
     public bool isShaderOn;
+    // public Shader shader = Shader.Find("CelShading");
+
 
     void Awake()
     {
@@ -76,13 +78,36 @@ public class AP_Menu : MonoBehaviour
     {
         isShaderOn = !isShaderOn;
 
-        if (isShaderOn)
+        Shader targetShader = Shader.Find("CelShading");
+        Renderer[] renderers = FindObjectsOfType<Renderer>();
+
+        // if (isShaderOn)
+        // {
+
+        //     ppEffects.gameObject.SetActive(true);
+        // }
+        // else if (!isShaderOn)
+        // {
+
+        //     ppEffects.gameObject.SetActive(false);
+        // }
+
+        // Camera[] cameras = FindObjectsOfType<Camera>();
+
+        // foreach (Camera camera in cameras)
+        // {
+        //     camera.enabled = isShaderOn;
+        // }
+        foreach (Renderer renderer in renderers)
         {
-            ppEffects.gameObject.SetActive(true);
-        }
-        else if (!isShaderOn)
-        {
-            ppEffects.gameObject.SetActive(false);
+            if (renderer.material.shader == targetShader)
+            {
+                // This renderer uses the shader you want to turn off
+                // You can set a different material or change shader properties here
+                // For example, you can replace it with a standard material to turn off the effect
+                renderer.material = new Material(Shader.Find("Standard"));
+            }
+
         }
     }
 }
