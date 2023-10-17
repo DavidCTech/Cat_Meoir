@@ -32,7 +32,7 @@ public class MaterialSwap : MonoBehaviour
         // Check for a button press, e.g., the 'x' key
         if (Input.GetKeyDown(KeyCode.X))
         {
-            Debug.LogError("space pressed");
+            //Debug.LogError("space pressed");
             // Toggle between originalMaterial and newMaterial
             ToggleMaterial();
         }
@@ -43,13 +43,13 @@ public class MaterialSwap : MonoBehaviour
         if (!toggled)
         {
             GetComponent<MeshRenderer>().sharedMaterial = newMaterial;
-            Debug.LogError("changed to new");
+            //Debug.LogError("changed to new");
             toggled = true;
         }
         else
         {
             GetComponent<MeshRenderer>().sharedMaterial = originalMaterial;
-            Debug.LogError("changed to original");
+            //Debug.LogError("changed to original");
             toggled = false;
         }
         // if (render != null)
