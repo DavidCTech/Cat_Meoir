@@ -30,7 +30,7 @@ public class MaterialSwap : MonoBehaviour
     void Update()
     {
         // Check for a button press, e.g., the 'x' key
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetButtonDown("Shader Toggle"))
         {
             //Debug.LogError("space pressed");
             // Toggle between originalMaterial and newMaterial
