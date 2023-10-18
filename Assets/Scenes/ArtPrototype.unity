@@ -1525,7 +1525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e6d802622dd2be248a798f5f7d67109c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.758
+      value: 0.897
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e6d802622dd2be248a798f5f7d67109c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3168,8 +3168,13 @@ Transform:
   - {fileID: 895557332}
   - {fileID: 465605842}
   - {fileID: 1601125803}
+  - {fileID: 2095502605}
+  - {fileID: 633877233}
+  - {fileID: 1964350546}
+  - {fileID: 1932512740}
+  - {fileID: 646901400}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &94400064
 GameObject:
@@ -5009,7 +5014,7 @@ GameObject:
   - component: {fileID: 123884536}
   - component: {fileID: 123884535}
   m_Layer: 0
-  m_Name: Spot Light (2)
+  m_Name: Lamp Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6810,7 +6815,7 @@ Transform:
   - {fileID: 755480889}
   - {fileID: 652889507}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &167228441
 GameObject:
@@ -7295,7 +7300,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ec626f381698e8469aa4de57b063625, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2004451732}
   m_SourcePrefab: {fileID: 100100000, guid: 9ec626f381698e8469aa4de57b063625, type: 3}
 --- !u!1001 &175822514
 PrefabInstance:
@@ -11017,7 +11025,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &262759636
 MonoBehaviour:
@@ -11647,7 +11655,7 @@ GameObject:
   - component: {fileID: 269278516}
   - component: {fileID: 269278515}
   m_Layer: 0
-  m_Name: Middle Room Light (2)
+  m_Name: Cat Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13588,11 +13596,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e6a6abea8c25264cb7b39ede16f4dba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.702735
+      value: 6.303064
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e6a6abea8c25264cb7b39ede16f4dba, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.505768
+      value: -5.8621726
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e6a6abea8c25264cb7b39ede16f4dba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18330,13 +18338,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407163030}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.691, z: -8.502903}
+  m_LocalPosition: {x: 0.5, y: 0.532, z: -8.444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2113421359}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &407163034
 MonoBehaviour:
@@ -18962,7 +18970,7 @@ Transform:
   - {fileID: 381480716}
   - {fileID: 1617057865}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417859276
 GameObject:
@@ -19401,7 +19409,7 @@ GameObject:
   - component: {fileID: 425824004}
   - component: {fileID: 425824005}
   m_Layer: 0
-  m_Name: Window Light
+  m_Name: Window Moon Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20951,7 +20959,7 @@ Transform:
   - {fileID: 1375741561}
   - {fileID: 548111752}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &474941992 stripped
 Transform:
@@ -21381,13 +21389,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 946907776}
   - {fileID: 2140294645}
-  - {fileID: 983789587}
-  - {fileID: 425824003}
   - {fileID: 841869927}
   - {fileID: 624259488}
   - {fileID: 512655184}
+  - {fileID: 123884534}
+  - {fileID: 1614186001}
+  - {fileID: 983789587}
+  - {fileID: 425824003}
+  - {fileID: 946907776}
   - {fileID: 1005291666}
   - {fileID: 1481238736}
   - {fileID: 2095643933}
@@ -21395,10 +21405,8 @@ Transform:
   - {fileID: 269278514}
   - {fileID: 1101492704}
   - {fileID: 1946409530}
-  - {fileID: 123884534}
-  - {fileID: 1614186001}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &486205216
 GameObject:
@@ -22422,7 +22430,7 @@ GameObject:
   - component: {fileID: 499204640}
   - component: {fileID: 499204639}
   m_Layer: 0
-  m_Name: Middle Room Light (1)
+  m_Name: Cat Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22979,7 +22987,7 @@ GameObject:
   - component: {fileID: 512655186}
   - component: {fileID: 512655185}
   m_Layer: 0
-  m_Name: Spot Light (7)
+  m_Name: Lamp Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27813,7 +27821,7 @@ GameObject:
   - component: {fileID: 624259490}
   - component: {fileID: 624259489}
   m_Layer: 0
-  m_Name: Spot Light (6)
+  m_Name: Lamp Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28339,6 +28347,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632164817}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &633877233 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
+  m_PrefabInstance: {fileID: 1298138060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &635084303
 GameObject:
   m_ObjectHideFlags: 0
@@ -29087,13 +29100,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646901396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.716, y: 0.22062358, z: -4.293}
   m_LocalScale: {x: 1.5, y: 0.2, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_Father: {fileID: 93320100}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &649718999 stripped
 Transform:
@@ -37413,7 +37426,7 @@ GameObject:
   - component: {fileID: 841869929}
   - component: {fileID: 841869928}
   m_Layer: 0
-  m_Name: Spot Light (5)
+  m_Name: Lamp Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38482,11 +38495,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 785ab0f4e54de3149932d89afbde7151, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.854671
+      value: 6.455
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 785ab0f4e54de3149932d89afbde7151, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.791595
+      value: -6.148
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 785ab0f4e54de3149932d89afbde7151, type: 3}
       propertyPath: m_LocalRotation.w
@@ -41675,7 +41688,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938662907}
   m_LocalRotation: {x: -0.8014213, y: -0.58368385, z: -0.10550875, w: -0.07684331}
-  m_LocalPosition: {x: 0.47197008, y: 4.9895926, z: -6.4968505}
+  m_LocalPosition: {x: 0.47197008, y: 6.5899215, z: -5.8532553}
   m_LocalScale: {x: 0.050000004, y: 2, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42338,13 +42351,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953467463}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1226366409}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &953467467
 MonoBehaviour:
@@ -42669,11 +42682,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc46fe78bc22e6e42b3db044e9843e50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.8962555
+      value: 6.4965844
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc46fe78bc22e6e42b3db044e9843e50, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.625041
+      value: -5.981446
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc46fe78bc22e6e42b3db044e9843e50, type: 3}
       propertyPath: m_LocalRotation.w
@@ -43283,7 +43296,7 @@ GameObject:
   - component: {fileID: 983789588}
   - component: {fileID: 983789589}
   m_Layer: 0
-  m_Name: Moon Light
+  m_Name: Alleyway Moon Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43992,7 +44005,7 @@ GameObject:
   - component: {fileID: 1005291667}
   - component: {fileID: 1005291668}
   m_Layer: 0
-  m_Name: Bed Light (2)
+  m_Name: Shower Corner Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47702,7 +47715,7 @@ GameObject:
   - component: {fileID: 1101492706}
   - component: {fileID: 1101492705}
   m_Layer: 0
-  m_Name: Middle Room Light (3)
+  m_Name: Killer Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50901,7 +50914,6 @@ GameObject:
   - component: {fileID: 1172585239}
   - component: {fileID: 1172585238}
   - component: {fileID: 1172585237}
-  - component: {fileID: 1172585236}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -50909,29 +50921,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1172585236
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172585235}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1172585237
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -52518,8 +52507,9 @@ RectTransform:
   m_Children:
   - {fileID: 1060131300}
   - {fileID: 14262227}
+  - {fileID: 953467466}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -55250,11 +55240,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 93320100}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55274,7 +55264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
       propertyPath: m_LocalRotation.y
@@ -55905,11 +55895,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc46fe78bc22e6e42b3db044e9843e50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.944619
+      value: 6.544948
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc46fe78bc22e6e42b3db044e9843e50, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.6938643
+      value: -6.050269
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc46fe78bc22e6e42b3db044e9843e50, type: 3}
       propertyPath: m_LocalRotation.w
@@ -55963,11 +55953,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 93320100}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 690a8e0a834c79d4f9eeed36f1d5303e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 690a8e0a834c79d4f9eeed36f1d5303e, type: 3}
       propertyPath: m_LocalScale.x
@@ -55999,7 +55989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 690a8e0a834c79d4f9eeed36f1d5303e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 690a8e0a834c79d4f9eeed36f1d5303e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -56337,7 +56327,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: -211.40399, y: 1.9349976, z: -8.884003}
 --- !u!114 &1326737973
 MonoBehaviour:
@@ -59316,7 +59306,7 @@ GameObject:
   - component: {fileID: 1418696514}
   - component: {fileID: 1418696513}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: World Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59399,7 +59389,7 @@ RectTransform:
   m_Children:
   - {fileID: 1584812907}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: -359.999, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -61542,7 +61532,7 @@ GameObject:
   - component: {fileID: 1481238738}
   - component: {fileID: 1481238737}
   m_Layer: 0
-  m_Name: Bed Light (4)
+  m_Name: Bed Corner Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62107,9 +62097,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497065850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.515, y: 0.488, z: -8.502903}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.515, y: 0.375, z: -8.502903}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 526171069}
   - {fileID: 1172585239}
@@ -65018,7 +65008,7 @@ Transform:
   - {fileID: 559001000}
   - {fileID: 1565291598}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1565291597
 GameObject:
@@ -65663,7 +65653,7 @@ Transform:
   - {fileID: 1110638313}
   - {fileID: 214496591}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1576835649
 GameObject:
@@ -67524,7 +67514,7 @@ GameObject:
   - component: {fileID: 1614186003}
   - component: {fileID: 1614186002}
   m_Layer: 0
-  m_Name: Spot Light (3)
+  m_Name: Lamp Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69937,7 +69927,7 @@ Transform:
   - {fileID: 1024126951}
   - {fileID: 691152361}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1683839856
 GameObject:
@@ -72030,6 +72020,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.089881584, y: 1.4389236, z: 0.10704568}
   m_Center: {x: -0.0004377365, y: -0.21946192, z: -0.0023367256}
+--- !u!1 &1743515661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ec626f381698e8469aa4de57b063625, type: 3}
+  m_PrefabInstance: {fileID: 174842870}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1748866120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73935,11 +73930,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e6a6abea8c25264cb7b39ede16f4dba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.377565
+      value: 5.977894
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e6a6abea8c25264cb7b39ede16f4dba, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.232
+      value: -5.5884047
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e6a6abea8c25264cb7b39ede16f4dba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78615,7 +78610,7 @@ GameObject:
   - component: {fileID: 1932512740}
   - component: {fileID: 1932512739}
   - component: {fileID: 1932512738}
-  - component: {fileID: 1932512737}
+  - component: {fileID: 1932512741}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -78623,29 +78618,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1932512737
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932512736}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1932512738
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -78703,14 +78675,35 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932512736}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.966, y: 0.22062358, z: -0.793}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.966, y: 0.2912, z: -0.793}
+  m_LocalScale: {x: 1, y: 0.27056, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_Father: {fileID: 93320100}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1932512741
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932512736}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1001 &1933221132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78737,11 +78730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5414fbd307d71944eaae113f5713ba38, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.0409393
+      value: 5.6412683
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5414fbd307d71944eaae113f5713ba38, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.390013
+      value: -5.746418
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5414fbd307d71944eaae113f5713ba38, type: 3}
       propertyPath: m_LocalRotation.w
@@ -79536,7 +79529,7 @@ GameObject:
   - component: {fileID: 1946409532}
   - component: {fileID: 1946409531}
   m_Layer: 0
-  m_Name: Middle Room Light (4)
+  m_Name: Killer Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80162,6 +80155,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960137461}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1964350546 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
+  m_PrefabInstance: {fileID: 2049155593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1965061565
 GameObject:
   m_ObjectHideFlags: 0
@@ -82114,6 +82112,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9ec626f381698e8469aa4de57b063625, type: 3}
   m_PrefabInstance: {fileID: 174842870}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &2004451732
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743515661}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 128.54805, y: 110.45771, z: 29.87437}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2004792932
 GameObject:
   m_ObjectHideFlags: 0
@@ -83659,11 +83678,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 93320100}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -83683,7 +83702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 834b387b5586e85418872ee6e77bbaf9, type: 3}
       propertyPath: m_LocalRotation.y
@@ -85239,6 +85258,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 235126b1ebb93d44e803ce58006de653, type: 3}
+--- !u!4 &2095502605 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 690a8e0a834c79d4f9eeed36f1d5303e, type: 3}
+  m_PrefabInstance: {fileID: 1323908584}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2095643932
 GameObject:
   m_ObjectHideFlags: 0
@@ -85251,7 +85275,7 @@ GameObject:
   - component: {fileID: 2095643935}
   - component: {fileID: 2095643934}
   m_Layer: 0
-  m_Name: Bed Light (5)
+  m_Name: Kitchen Corner Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87697,7 +87721,7 @@ GameObject:
   - component: {fileID: 2140294646}
   - component: {fileID: 2140294647}
   m_Layer: 0
-  m_Name: Spot Light (1)
+  m_Name: Lamp Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
