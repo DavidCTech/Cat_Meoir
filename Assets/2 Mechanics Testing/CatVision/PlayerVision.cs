@@ -26,8 +26,9 @@ public class PlayerVision : MonoBehaviour
 
     [Header("These are Events that can call methods for the vision.")]
     public UnityEvent visionOn;
-    public UnityEvent visionOff; 
+    public UnityEvent visionOff;
 
+    public PlayerState CurrentState { get; private set; }
 
 
     private PlayerState currentState = PlayerState.Normal;

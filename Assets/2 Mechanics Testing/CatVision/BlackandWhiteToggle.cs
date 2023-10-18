@@ -6,11 +6,26 @@ using UnityEngine.Rendering.Universal;
 
 public class BlackAndWhiteToggle : MonoBehaviour
 {
-    private Volume volume;
-    private FilmGrain filmGrain;
+    public GameObject player; // Assign the player GameObject in the Inspector
+    private PlayerVision playerVision; // Reference to the PlayerVision script
 
-    private void Awake()
+    public Volume postProcessingVolume; // Reference to the Volume component
+
+    private Volume volume;
+    private ColorAdjustments colorAdjustments;
+
+    private void Start()
     {
+        // Get the PlayerVision script from the player GameObject
+        playerVision = player.GetComponent<PlayerVision>();
+
+        if (playerVision == null)
+        {
+            Debug.LogError("PlayerVision component not found on the player GameObject.");
+            return;
+        }
+
+        // Find the Volume component on this GameObject
         volume = GetComponent<Volume>();
 
         if (volume == null)
@@ -19,30 +34,35 @@ public class BlackAndWhiteToggle : MonoBehaviour
             return;
         }
 
-        if (volume.profile.TryGet(out filmGrain))
+        // Check if the Volume has a ColorAdjustments effect
+        if (volume.profile.TryGet(out colorAdjustments))
         {
-
+            // The ColorAdjustments component was found, you can proceed safely.
         }
         else
         {
-            Debug.LogError("FilmGrain component not found in the Volume.");
+            Debug.LogError("ColorAdjustments component not found in the Volume.");
         }
     }
 
-    //originally I thought it was desaturate so I labedled the method as that but its grain? 
-    public void Desaturate()
+    private void Update()
     {
-        bool isInNoPostProcessingLayer = gameObject.layer == LayerMask.NameToLayer("NoPostProcessing");
-        if (!isInNoPostProcessingLayer)
+        if (player != null && playerVision != null && colorAdjustments != null)
         {
-            filmGrain.intensity.value = 1.0f; // Enable the FilmGrain effect for a black and white look
-        }
+            // Access the player's current state via the PlayerVision script
+            PlayerState playerState = playerVision.CurrentState;
 
+            // Determine whether to apply the black and white effect based on the player's state.
+            if (playerState == PlayerState.Vision)
+            {
+                // Set the saturation of the ColorAdjustments effect for black and white
+                colorAdjustments.saturation.value = -100; // -100 for full black & white
+            }
+            else
+            {
+                // Set the saturation back to 0 for full color
+                colorAdjustments.saturation.value = 0;
+            }
+        }
     }
-    //same with saturate 
-    public void Saturate()
-    {
-        filmGrain.intensity.value = 0.0f;
-    }
-   
 }
