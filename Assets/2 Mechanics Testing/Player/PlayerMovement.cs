@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private bool sprinting = false; // Flag to track if the player is sprinting
     public float rotationSpeed = 15;
     public bool isFrozen = false;
-    private PlayerVisionStates visionStates;
+    private float currentMoveSpeed;
+    //private PlayerVisionStates visionStates;
 
     public float gravity = 9.81f; // Default gravity value
 
@@ -25,7 +26,8 @@ public class PlayerMovement : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
-        visionStates = GetComponent<PlayerVisionStates>();
+        //visionStates = GetComponent<PlayerVisionStates>();
+        currentMoveSpeed = moveSpeed; 
     }
 
     void FixedUpdate()
@@ -55,12 +57,18 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = moveSpeed - 3;
         }
     }
-
+    public void ToggleVisionSpeed()
+    {
+        currentMoveSpeed = visionMoveSpeed;
+    }
+    public void ToggleNormalSpeed()
+    {
+        currentMoveSpeed = moveSpeed; 
+    }
     private void ManageMovement()
     {
         if (!isFrozen)
         {
-            float currentMoveSpeed = visionStates.currentState == PlayerState.Vision ? visionMoveSpeed : moveSpeed;
 
             moveDirection = cameraObject.forward * inputManager.vInput;
             moveDirection = moveDirection + cameraObject.right * inputManager.hInput;

@@ -44,10 +44,10 @@ GameObject:
   - component: {fileID: 6867147153755216504}
   - component: {fileID: 5350447011944614148}
   - component: {fileID: 1641172741056370682}
+  - component: {fileID: 6743479369673905163}
   - component: {fileID: 7876698759926526354}
   - component: {fileID: 4973055433327700478}
   - component: {fileID: 8795449349123206829}
-  - component: {fileID: 5573088188625903204}
   - component: {fileID: 7232274981438848809}
   - component: {fileID: -8590962783916332216}
   m_Layer: 6
@@ -74,7 +74,7 @@ Transform:
   - {fileID: 67743285880045893}
   - {fileID: 3291577528967147671}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -146.11, z: 0}
 --- !u!54 &7374544374103738546
 Rigidbody:
@@ -171,6 +171,105 @@ MonoBehaviour:
   movementInput: {x: 0, y: 0}
   vInput: 0
   hInput: 0
+--- !u!114 &6743479369673905163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4087429607615583397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04532350dcfa4c542958b0408688ee86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scentParticle: {fileID: 0}
+  fovRadius: 5.52
+  clueMask:
+    serializedVersion: 2
+    m_Bits: 1280
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 128
+  visionOn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6743479369673905163}
+        m_TargetAssemblyTypeName: PlayerVision, Assembly-CSharp
+        m_MethodName: OutRay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4973055433327700478}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: ToggleVisionSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BlackAndWhiteToggle, Assembly-CSharp
+        m_MethodName: Desaturate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  visionOff:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4973055433327700478}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: ToggleNormalSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6743479369673905163}
+        m_TargetAssemblyTypeName: PlayerVision, Assembly-CSharp
+        m_MethodName: TurnOffColors
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BlackAndWhiteToggle, Assembly-CSharp
+        m_MethodName: Saturate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  clues: []
 --- !u!114 &7876698759926526354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,19 +315,6 @@ MonoBehaviour:
   _isHidden: 0
   playerOriginalPosition: {x: 0, y: 0, z: 0}
   isStealthed: 0
---- !u!114 &5573088188625903204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4087429607615583397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d57103c4a8e137409b430e9e471518e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
 --- !u!114 &7232274981438848809
 MonoBehaviour:
   m_ObjectHideFlags: 0
