@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class NPCInteraction : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class NPCInteraction : MonoBehaviour
     public bool isLockingPlayer;
     [Header("You only need dialogue if this object is an NPC")]
     public Canvas dialogue;
-    private GameObject player; 
-    
+    private GameObject player;
+    public GameObject closedButton;
+
+
     public void Interact(GameObject playerObject)
     {
        
@@ -34,6 +37,8 @@ public class NPCInteraction : MonoBehaviour
     public void TurnCanvasOn(Canvas nextCanvas)
     {
         nextCanvas.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(closedButton);
     }
 
     public void TurnMenuOff(GameObject pauseMenu)

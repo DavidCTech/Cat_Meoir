@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
 
+    public GameObject optionsFirstButton, optionsClosedButton;
+
     void Start()
     {
         dropdown.value = QualitySettings.GetQualityLevel();
@@ -77,12 +79,16 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public void ActivateOptionsMenu()
     {
         optionsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
 
     public void DeactivateOptionsMenu()
     {
         optionsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsClosedButton);
     }
 
     public void ActivateMenu()

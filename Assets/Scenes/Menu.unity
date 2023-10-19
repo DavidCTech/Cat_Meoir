@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -579,10 +579,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1090330747}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1766765652}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: DeactivateMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -591,9 +591,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1757196728}
+      - m_Target: {fileID: 1766765652}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: DeactivateMenu
+        m_MethodName: ActivateOptionsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -908,9 +908,9 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1739822612}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1717460875}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 1717460875}
+    m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -936,10 +936,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1090330747}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1766765652}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: DeactivateOptionsMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -948,7 +948,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1757196728}
+      - m_Target: {fileID: 1766765652}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ActivateMenu
         m_Mode: 1
@@ -1142,8 +1142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 285492130}
-  - component: {fileID: 285492129}
-  - component: {fileID: 285492128}
+  - component: {fileID: 285492131}
   m_Layer: 0
   m_Name: InputManager (1)
   m_TagString: Untagged
@@ -1151,7 +1150,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &285492128
+--- !u!4 &285492130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285492127}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 763.32263, y: 525.0776, z: 38.648315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &285492131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1181,33 +1195,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &285492129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285492127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f2269aeae1d4d346b1e7f9137184f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &285492130
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285492127}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 763.32263, y: 525.0776, z: 38.648315}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352000496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1357,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1766765652}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -3541,7 +3528,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1090330751}
+      - m_Target: {fileID: 1766765652}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
@@ -3603,7 +3590,6 @@ GameObject:
   - component: {fileID: 1090330748}
   - component: {fileID: 1090330750}
   - component: {fileID: 1090330749}
-  - component: {fileID: 1090330751}
   m_Layer: 5
   m_Name: 'OptionsPanel '
   m_TagString: Untagged
@@ -3675,27 +3661,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090330747}
   m_CullTransparentMesh: 1
---- !u!114 &1090330751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090330747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c49b3122eb52f4f8f036905a7bb158, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  qualityLevels:
-  - {fileID: 11400000, guid: 426e9db71bd8905489755921c92d3256, type: 2}
-  - {fileID: 11400000, guid: b17eff2f4101c3c43b77fa88f30fb45a, type: 2}
-  - {fileID: 11400000, guid: 2223b0537fbde8a4daa09332e7ca9f6f, type: 2}
-  dropdown: {fileID: 1178467097}
-  audioMixer: {fileID: 24100000, guid: 214f7f63a8f362f4c80f0ff786bc204b, type: 2}
-  mainMenuPanel: {fileID: 1757196724}
-  optionsPanel: {fileID: 1090330747}
-  resolutionDropdown: {fileID: 1068425844}
 --- !u!1 &1161129592
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,7 +3841,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1090330751}
+      - m_Target: {fileID: 1766765652}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ChangeLevel
         m_Mode: 0
@@ -5252,7 +5217,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1090330751}
+      - m_Target: {fileID: 1766765652}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
@@ -5349,7 +5314,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1090330751}
+      - m_Target: {fileID: 1766765652}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 0
@@ -5373,7 +5338,6 @@ GameObject:
   - component: {fileID: 1757196725}
   - component: {fileID: 1757196727}
   - component: {fileID: 1757196726}
-  - component: {fileID: 1757196728}
   m_Layer: 5
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -5441,24 +5405,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757196724}
   m_CullTransparentMesh: 1
---- !u!114 &1757196728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757196724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c49b3122eb52f4f8f036905a7bb158, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  qualityLevels: []
-  dropdown: {fileID: 0}
-  audioMixer: {fileID: 0}
-  mainMenuPanel: {fileID: 1757196724}
-  optionsPanel: {fileID: 1090330747}
-  resolutionDropdown: {fileID: 0}
 --- !u!1 &1766765646
 GameObject:
   m_ObjectHideFlags: 0
@@ -5472,6 +5418,7 @@ GameObject:
   - component: {fileID: 1766765648}
   - component: {fileID: 1766765647}
   - component: {fileID: 1766765651}
+  - component: {fileID: 1766765652}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5576,6 +5523,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1766765652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766765646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c49b3122eb52f4f8f036905a7bb158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qualityLevels:
+  - {fileID: 11400000, guid: 426e9db71bd8905489755921c92d3256, type: 2}
+  - {fileID: 11400000, guid: b17eff2f4101c3c43b77fa88f30fb45a, type: 2}
+  - {fileID: 11400000, guid: 2223b0537fbde8a4daa09332e7ca9f6f, type: 2}
+  dropdown: {fileID: 1178467097}
+  audioMixer: {fileID: 24100000, guid: 214f7f63a8f362f4c80f0ff786bc204b, type: 2}
+  mainMenuPanel: {fileID: 1757196724}
+  optionsPanel: {fileID: 1090330747}
+  resolutionDropdown: {fileID: 1068425844}
+  optionsFirstButton: {fileID: 1717460872}
+  optionsClosedButton: {fileID: 138257691}
 --- !u!1 &1819711537
 GameObject:
   m_ObjectHideFlags: 0

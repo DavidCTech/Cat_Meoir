@@ -33,6 +33,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
+    public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
+
 
 
     private void Awake()
@@ -64,9 +66,39 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
             Resume();
         }
     }
-    private void Start()
+
+
+    public void DeactivateMenu()
     {
         pauseMenuUI.SetActive(false);
+    }
+
+    public void ActivateOptionsMenu()
+    {
+        optionsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+
+    }
+
+    public void DeactivateOptionsMenu()
+    {
+        optionsPanel.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsClosedButton);
+
+    }
+
+    public void ActivateMenu()
+    {
+        pauseMenuUI.SetActive(true);
+        optionsPanel.SetActive(false);
+    }
+
+
+    private void Start()
+    {
 
         dropdown.value = QualitySettings.GetQualityLevel();
 
@@ -118,6 +150,9 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+
     }
 
     public void OnSelect(BaseEventData eventData)
