@@ -38,14 +38,14 @@ public class PlayerVision : MonoBehaviour
     void OnCatVision()
     {
         // Check for input to toggle between Vision and Normal states
-        if (currentState == PlayerState.Normal)
+        if (CurrentState == PlayerState.Normal)
         {
-            currentState = PlayerState.Vision;
+            CurrentState = PlayerState.Vision;
             visionOn.Invoke();
         }
         else
         {
-            currentState = PlayerState.Normal;
+            CurrentState = PlayerState.Normal;
             visionOff.Invoke();
         }
     }
