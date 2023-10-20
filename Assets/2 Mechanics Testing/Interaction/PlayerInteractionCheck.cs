@@ -25,38 +25,7 @@ public class PlayerInteractionCheck : MonoBehaviour
         playerStealth = Player.GetComponent<PlayerStealth>();
     }
 
-    /*
-    private InputManager inputManager;
-
-    private void OnEnable()
-    {
-        inputManager = InputManager.Instance;
-
-        // Check if the reference is not null
-        if (inputManager != null)
-        {
-            // Subscribe to the OnInteraction event
-            inputManager.playerControls.Player.Interaction.performed += OnInteraction;
-        }
-        else
-        {
-            Debug.LogError("InputManager instance not found!");
-        }
-    }
-
-    private void OnDisable()
-    {
-        // Unsubscribe when the script is disabled
-        inputManager.playerControls.Player.Interaction.performed -= OnInteraction;
-    }
-
-    public void OnInteraction(InputAction.CallbackContext context)
-    {
-        Debug.Log("Interaction.");
-        // Implement your interaction logic here
-    }
-
-    */
+ 
     private string checkObject()
     {
         //the following code is the interaction logic 
@@ -85,41 +54,35 @@ public class PlayerInteractionCheck : MonoBehaviour
 
         return passString;
     }
-
-
-    void Update()
+    public void OnInteraction()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        Debug.Log("interaction");
+        //checks a raycast for the interactable objects to see what the tag is - depending on tag this script will call other scripts. 
+        string objectName = checkObject();
+        if (objectName == "Interact")
         {
-
-            //checks a raycast for the interactable objects to see what the tag is - depending on tag this script will call other scripts. 
-            string objectName = checkObject();
-            if(objectName == "Interact")
-            {
-                //should turn the player here    
-                targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
-                //reference the interaction code
-            }
-            if(objectName == "Hide")
-            {
-                playerStealth.GetComponent<PlayerStealth>().HideCheck();
-                //reference the Hide code
-            }
-            if(objectName == "Jump")
-            {
-                //refence the jump code
-            }
-            if(objectName == "Climb")
-            {
-                //reference the climbing code
-            }
-            else
-            {
-                //reference the meow code
-            }
-
-
+            //should turn the player here    
+            targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
+            //reference the interaction code
         }
-       
+        if (objectName == "Hide")
+        {
+            playerStealth.GetComponent<PlayerStealth>().HideCheck();
+            //reference the Hide code
+        }
+        if (objectName == "Jump")
+        {
+            //refence the jump code
+        }
+        if (objectName == "Climb")
+        {
+            //reference the climbing code
+        }
+        else
+        {
+            //reference the meow code
+        }
     }
+
+   
 }
