@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         // Apply custom gravity in the negative y direction
         Vector3 customGravity = new Vector3(0, -gravity * rb.mass, 0);
         rb.AddForce(customGravity, ForceMode.Force);
+        currentMoveSpeed = moveSpeed;
     }
 
     public void ManageAllMovement()
