@@ -20,6 +20,7 @@ public class PlayerInteractionCheck : MonoBehaviour
     private PlayerStealth playerStealth;
 
 
+
     void Start()
     {
         playerStealth = Player.GetComponent<PlayerStealth>();
@@ -47,6 +48,11 @@ public class PlayerInteractionCheck : MonoBehaviour
                     {
                         targetObject = target.gameObject;
                         passString = target.gameObject.tag;
+                        if(target.gameObject.tag != "Untagged")
+                        {
+                            return passString;
+                        }
+                        
                     }
                 }
             }
@@ -56,11 +62,12 @@ public class PlayerInteractionCheck : MonoBehaviour
     }
     public void OnInteraction()
     {
-        Debug.Log("interaction");
+        
         //checks a raycast for the interactable objects to see what the tag is - depending on tag this script will call other scripts. 
         string objectName = checkObject();
         if (objectName == "Interact")
         {
+           
             //should turn the player here    
             targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
             //reference the interaction code
@@ -76,7 +83,13 @@ public class PlayerInteractionCheck : MonoBehaviour
         }
         if (objectName == "Climb")
         {
+            
+            //Get the transforms from the climb object 
+            Transform middleTransform = targetObject.GetComponent<ClimbData>().middleTransform;
+            Transform endTransform = targetObject.GetComponent<ClimbData>().endTransform;
+           
             //reference the climbing code
+            this.gameObject.GetComponent<PlayerClimb>().Climb(middleTransform, endTransform);
         }
         else
         {

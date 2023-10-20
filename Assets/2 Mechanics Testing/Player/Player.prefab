@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 7876698759926526354}
   - component: {fileID: 4973055433327700478}
   - component: {fileID: 8795449349123206829}
+  - component: {fileID: 8356591341947633740}
   - component: {fileID: 7232274981438848809}
   - component: {fileID: -8590962783916332216}
   m_Layer: 6
@@ -74,7 +75,7 @@ Transform:
   - {fileID: 67743285880045893}
   - {fileID: 3291577528967147671}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -146.11, z: 0}
 --- !u!54 &7374544374103738546
 Rigidbody:
@@ -84,7 +85,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4087429607615583397}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -269,7 +270,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  clues: []
 --- !u!114 &7876698759926526354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626d43029cb12cc48a6b5ca80f248531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 6
   visionMoveSpeed: 1
   rotationSpeed: 12
   isFrozen: 0
@@ -315,6 +315,43 @@ MonoBehaviour:
   _isHidden: 0
   playerOriginalPosition: {x: 0, y: 0, z: 0}
   isStealthed: 0
+--- !u!114 &8356591341947633740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4087429607615583397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f87d431655b6204795e469804e4aba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.029167175
+      value: 1.0070801
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  duration: 0.6
 --- !u!114 &7232274981438848809
 MonoBehaviour:
   m_ObjectHideFlags: 0
