@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MaterialSwap : MonoBehaviour
+public class AP_MaterialSwap : MonoBehaviour
 {
     public Material originalMaterial; // Assign the original material in the Unity Editor
     public Material newMaterial; // Assign the new material in the Unity Editor
