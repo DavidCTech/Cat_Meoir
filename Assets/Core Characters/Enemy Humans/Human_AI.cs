@@ -16,6 +16,7 @@ public class Human_AI : MonoBehaviour
 
     public GameObject Player;
     private PlayerStealth playerStealth;
+    private PlayerInteractionCheck playerInteractionCheck;
 
     public LayerMask targetMask;
     public LayerMask obstructionMask;
@@ -74,6 +75,7 @@ public class Human_AI : MonoBehaviour
         _enemyColor = GetComponent<Renderer>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = GameObject.Find("Player");
+        playerInteractionCheck = Player.GetComponent<PlayerInteractionCheck>();
         playerStealth = Player.GetComponent<PlayerStealth>();
     }
 
@@ -279,7 +281,7 @@ public class Human_AI : MonoBehaviour
     private void Update()
     {
 
-        if (playerStealth._isHidden == true)
+        if (playerInteractionCheck.isHiding == true)
         {
             _canSeePlayer = false;
             _isChasingPlayer = false;

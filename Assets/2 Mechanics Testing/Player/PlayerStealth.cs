@@ -5,108 +5,58 @@ using UnityEngine.InputSystem;
 
 public class PlayerStealth : MonoBehaviour
 {
-    public GameObject player;
-
-    //Hiding Start
-    public bool _isHidden;
-    private bool _isHiding = false;
-    private bool isHidinginProgress = false;
-    private GameObject hidingSpot;
+    public float verticalOffset; // later change this to a gameobject reference on the hide location from a script you take in 
+ 
+  
     public Vector3 playerOriginalPosition;
-    private Vector3 lastHidingSpotPosition;
 
+    //stealth should be in another script
     private bool isStealth = false;
     public bool isStealthed = false;
-    //Hiding End
-
-
-    public void HideCheck()
-    {
-        //Hiding Start
-        if (isHidinginProgress)
-        {
-            // If a hiding/unhiding process is already in progress, do nothing
-            return;
-        }
-        if (_isHiding)
-        {
-            // Unhide the player
-            UnHide();
-        }
-        else if (hidingSpot != null)
-        {
-            // Hide the player
-            lastHidingSpotPosition = hidingSpot.transform.position;
-            Hide();
-        }
-        //Hiding End
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        //Hiding Start
-        if (collision.gameObject.CompareTag("Hide"))
-        {
-            hidingSpot = collision.gameObject;
-        }
-        //Hiding End
-    }
-
-    public void OnCollisionExit(Collision collision)
-    {
-        //Hiding Start
-        if (collision.gameObject.CompareTag("Hide"))
-        {
-            hidingSpot = null;
-        }
-        //Hiding End
-    }
+ 
 
     //Hiding Start
-    public void Hide()
+    public void Hide(GameObject hidingSpot, PlayerInteractionCheck playerInteractionCheck)
     {
-        isHidinginProgress = true;
-        // Set the player position inside the hiding spot
-        float verticalOffset = 2.0f;
-        //GetComponent<Collider>().enabled = false;
+        Debug.Log(hidingSpot.transform.position);
+        playerOriginalPosition = transform.position;
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = true; 
         transform.position = hidingSpot.transform.position + new Vector3(0f, verticalOffset, 0f);
-        _isHiding = true;
-        // Optionally, you can disable player controls or change the camera view here
-        _isHidden = true;
-        isHidinginProgress = false;
+        playerInteractionCheck.isHiding = true;
+        this.gameObject.GetComponent<PlayerMovement>().isFrozen = true;
+
+
     }
 
 
-    public void UnHide()
+    public void UnHide(PlayerInteractionCheck playerInteractionCheck)
     {
-        isHidinginProgress = true;
-        // Reset the player position to exit the hiding spot
-        // You may also need to reset player controls and camera view here
-        //GetComponent<Collider>().enabled = true;
-        transform.position = lastHidingSpotPosition;
-        _isHiding = false;
-        _isHidden = false;
-        isHidinginProgress = false;
+
+        transform.position = playerOriginalPosition;
+        playerInteractionCheck.isHiding = false;
+
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        this.gameObject.GetComponent<PlayerMovement>().isFrozen = false;
+
     }
 
+
+
+    //onstealth should be in another script..
     public void OnStealth()
     {
-        //ToggleStealth();
-        isStealth = !isStealth; // Toggle the stealth state
+        isStealth = !isStealth;
 
-        // Activate or deactivate the player's stealth-related components here
+
         if (isStealth)
         {
-            // Code to activate stealth mode
-            //player.SetActive(false);
+           
             isStealthed = true;
         }
         else
         {
-            // Code to deactivate stealth mode
-            //player.SetActive(true);
+
             isStealthed = false;
         }
     }
-    //Hiding End
 }

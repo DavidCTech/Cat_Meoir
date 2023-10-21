@@ -16,15 +16,10 @@ public class PlayerInteractionCheck : MonoBehaviour
     private GameObject targetObject;
     private string passString;
 
-    public GameObject Player;
-    private PlayerStealth playerStealth;
+    public bool isHiding; 
+ 
 
 
-
-    void Start()
-    {
-        playerStealth = Player.GetComponent<PlayerStealth>();
-    }
 
  
     private string checkObject()
@@ -62,39 +57,46 @@ public class PlayerInteractionCheck : MonoBehaviour
     }
     public void OnInteraction()
     {
-        
-        //checks a raycast for the interactable objects to see what the tag is - depending on tag this script will call other scripts. 
-        string objectName = checkObject();
-        if (objectName == "Interact")
+        if (!isHiding)
         {
-           
-            //should turn the player here    
-            targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
-            //reference the interaction code
-        }
-        if (objectName == "Hide")
-        {
-            playerStealth.GetComponent<PlayerStealth>().HideCheck();
-            //reference the Hide code
-        }
-        if (objectName == "Jump")
-        {
-            //refence the jump code
-        }
-        if (objectName == "Climb")
-        {
-            
-            //Get the transforms from the climb object 
-            Transform middleTransform = targetObject.GetComponent<ClimbData>().middleTransform;
-            Transform endTransform = targetObject.GetComponent<ClimbData>().endTransform;
-           
-            //reference the climbing code
-            this.gameObject.GetComponent<PlayerClimb>().Climb(middleTransform, endTransform);
+            //checks a raycast for the interactable objects to see what the tag is - depending on tag this script will call other scripts. 
+            string objectName = checkObject();
+            if (objectName == "Interact")
+            {
+
+                //should turn the player here    
+                targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
+                //reference the interaction code
+            }
+            if (objectName == "Hide")
+            {
+                this.gameObject.GetComponent<PlayerStealth>().Hide(targetObject, this);
+                //reference the Hide code
+            }
+            if (objectName == "Jump")
+            {
+                //refence the jump code
+            }
+            if (objectName == "Climb")
+            {
+
+                //Get the transforms from the climb object 
+                Transform middleTransform = targetObject.GetComponent<ClimbData>().middleTransform;
+                Transform endTransform = targetObject.GetComponent<ClimbData>().endTransform;
+
+                //reference the climbing code
+                this.gameObject.GetComponent<PlayerClimb>().Climb(middleTransform, endTransform);
+            }
+            else
+            {
+                //reference the meow code
+            }
         }
         else
         {
-            //reference the meow code
+            this.gameObject.GetComponent<PlayerStealth>().UnHide(this);
         }
+        
     }
 
    
