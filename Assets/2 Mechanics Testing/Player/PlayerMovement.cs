@@ -51,12 +51,10 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 0.2f, groundLayer))
         {
             // The player is grounded
-            Debug.Log("Grounded");
         }
         else
         {
             // The player is not grounded
-            Debug.Log("Not Grounded");
         }
     }
 
@@ -95,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isFrozen && isGrounded) // Check if the player is not frozen and is grounded
         {
-            Debug.Log("Jumping");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
