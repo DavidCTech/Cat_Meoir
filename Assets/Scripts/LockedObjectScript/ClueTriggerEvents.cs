@@ -60,7 +60,7 @@ public class ClueTriggerEvents : MonoBehaviour
         }
         if (isAllCluesFound)
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }
