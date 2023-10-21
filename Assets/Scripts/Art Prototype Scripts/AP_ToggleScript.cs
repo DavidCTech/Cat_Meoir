@@ -5,23 +5,15 @@ using UnityEngine.UI;
 
 public class AP_ToggleScript : MonoBehaviour
 {
-    public Image PPimg, CSimg;
-    public Sprite PPtoggleOn, PPtoggleOff, CStoggleOn, CStoggleOff;
-
+    [Header("UI Image Toggles")]
+    public Image PpImg;
+    public Image CsImg;
+    public Sprite PpToggleOn, PpToggleOff, CsToggleOn, CsToggleOff;
     public bool isPPon = true, isCSon = true;
-
     public GameObject PPfx;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
         if (Input.GetButtonDown("Shader Toggle"))
         {
             Debug.Log("Shader");
@@ -42,9 +34,9 @@ public class AP_ToggleScript : MonoBehaviour
         isCSon = !isCSon;
 
         if (isCSon)
-            CSimg.sprite = CStoggleOn;
+            CsImg.sprite = CsToggleOn;
         else
-            CSimg.sprite = CStoggleOff;
+            CsImg.sprite = CsToggleOff;
     }
 
     void TurnOffPP()
@@ -54,12 +46,12 @@ public class AP_ToggleScript : MonoBehaviour
         if (isPPon)
         {
             PPfx.gameObject.SetActive(true);
-            PPimg.sprite = PPtoggleOn;
+            PpImg.sprite = PpToggleOn;
         }
         else
         {
             PPfx.gameObject.SetActive(false);
-            PPimg.sprite = PPtoggleOff;
+            PpImg.sprite = PpToggleOff;
         }
     }
 }

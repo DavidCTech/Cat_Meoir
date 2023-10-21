@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class AP_Menu : MonoBehaviour
 {
@@ -11,12 +13,13 @@ public class AP_Menu : MonoBehaviour
     [Header("Paused Variables")]
     public bool isPaused;
     public CanvasGroup pauseMenu;
+    public string mainMenuScene;
+    public Image reticleImage;
+    public bool showReticle;
+    public TMP_Text reticleText;
 
     [Header("Shader and Button Variables")]
     public GameObject resumeButton;
-    public GameObject ppEffects;
-    public bool isShaderOn;
-    // public Shader shader = Shader.Find("CelShading");
 
 
     void Awake()
@@ -32,20 +35,13 @@ public class AP_Menu : MonoBehaviour
 
     }
 
+
     void Update()
     {
         if (Input.GetButtonDown("Pause"))
         {
             PauseUnpauseGame();
         }
-
-        if (Input.GetButtonDown("Shader Toggle") && !isPaused)
-        {
-            Debug.Log("Shader");
-
-            TurnOffShader();
-        }
-
     }
 
     public void PauseUnpauseGame()
@@ -75,40 +71,27 @@ public class AP_Menu : MonoBehaviour
         }
     }
 
-    public void TurnOffShader()
+    public void ShowReticle()
     {
-        isShaderOn = !isShaderOn;
+        showReticle = !showReticle;
 
-        Shader targetShader = Shader.Find("CelShading");
-        Renderer[] renderers = FindObjectsOfType<Renderer>();
-
-        // if (isShaderOn)
-        // {
-
-        //     ppEffects.gameObject.SetActive(true);
-        // }
-        // else if (!isShaderOn)
-        // {
-
-        //     ppEffects.gameObject.SetActive(false);
-        // }
-
-        // Camera[] cameras = FindObjectsOfType<Camera>();
-
-        // foreach (Camera camera in cameras)
-        // {
-        //     camera.enabled = isShaderOn;
-        // }
-        foreach (Renderer renderer in renderers)
+        if (showReticle)
         {
-            if (renderer.material.shader == targetShader)
-            {
-                // This renderer uses the shader you want to turn off
-                // You can set a different material or change shader properties here
-                // For example, you can replace it with a standard material to turn off the effect
-                renderer.material = new Material(Shader.Find("Standard"));
-            }
-
+            reticleImage.gameObject.SetActive(true);
+            reticleText.text = "Reticle On";
         }
+        if (!showReticle)
+        {
+            reticleImage.gameObject.SetActive(false);
+            reticleText.text = "Reticle Off";
+        }
+    }
+
+    public void QuitToMenu()
+    {
+        if (Time.timeScale == 0)
+            Time.timeScale = 1;
+
+        SceneManager.LoadScene(mainMenuScene);
     }
 }
