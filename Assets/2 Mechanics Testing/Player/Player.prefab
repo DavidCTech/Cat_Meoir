@@ -75,7 +75,7 @@ Transform:
   - {fileID: 67743285880045893}
   - {fileID: 3291577528967147671}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -146.11, z: 0}
 --- !u!54 &7374544374103738546
 Rigidbody:
@@ -184,8 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04532350dcfa4c542958b0408688ee86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scentParticle: {fileID: 0}
-  fovRadius: 5.52
+  scentParticle: {fileID: 3677266127761794117, guid: ccacee26de9ccd74885a8e55aee2a5ef, type: 3}
+  fovRadius: 7.6
   clueMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -210,18 +210,6 @@ MonoBehaviour:
       - m_Target: {fileID: 4973055433327700478}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: ToggleVisionSpeed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BlackAndWhiteToggle, Assembly-CSharp
-        m_MethodName: Desaturate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -258,18 +246,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BlackAndWhiteToggle, Assembly-CSharp
-        m_MethodName: Saturate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &7876698759926526354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,11 +270,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626d43029cb12cc48a6b5ca80f248531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 5
   visionMoveSpeed: 1
   rotationSpeed: 12
   isFrozen: 0
-  gravity: 9.81
+  gravity: 20
+  jumpForce: 250
+  groundDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!114 &8795449349123206829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,8 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ae689ac0acf0944882ee27e42bd527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4087429607615583397}
-  _isHidden: 0
+  verticalOffset: 1.5
   playerOriginalPosition: {x: 0, y: 0, z: 0}
   isStealthed: 0
 --- !u!114 &8356591341947633740
@@ -365,14 +345,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fovRadius: 4.1
-  fovAngle: 134.8
+  fovAngle: 71.6
   interactionMask:
     serializedVersion: 2
     m_Bits: 2048
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128
-  Player: {fileID: 4087429607615583397}
+  isHiding: 0
 --- !u!95 &-8590962783916332216
 Animator:
   serializedVersion: 5
@@ -572,6 +552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPerson Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 1195462642529111009, guid: b8494b7c872345348bf84d33156de7f8, type: 3}
+      propertyPath: controlSensitivity
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3752634032851413808, guid: b8494b7c872345348bf84d33156de7f8, type: 3}
       propertyPath: m_Follow
       value: 
@@ -582,7 +566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495796965850184076, guid: b8494b7c872345348bf84d33156de7f8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.000000106636435
       objectReference: {fileID: 0}
     - target: {fileID: 6495796965850184076, guid: b8494b7c872345348bf84d33156de7f8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -590,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495796965850184076, guid: b8494b7c872345348bf84d33156de7f8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.49
+      value: 0.4899999
       objectReference: {fileID: 0}
     - target: {fileID: 6495796965850184076, guid: b8494b7c872345348bf84d33156de7f8, type: 3}
       propertyPath: m_LocalRotation.w
