@@ -45,6 +45,7 @@ public class AP_Menu : MonoBehaviour
 
             TurnOffShader();
         }
+
     }
 
     public void PauseUnpauseGame()

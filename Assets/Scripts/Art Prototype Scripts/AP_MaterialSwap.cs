@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AP_MaterialSwap : MonoBehaviour
 {
-    public Material originalMaterial; // Assign the original material in the Unity Editor
-    public Material newMaterial; // Assign the new material in the Unity Editor
+    public Material[] originalMaterial, newMaterial;
 
     private MeshRenderer render;
 
@@ -40,18 +39,32 @@ public class AP_MaterialSwap : MonoBehaviour
 
     void ToggleMaterial()
     {
+        Material[] mats = GetComponent<MeshRenderer>().materials;
+
+        int l = originalMaterial.Length;
+
         if (!toggled)
         {
-            GetComponent<MeshRenderer>().sharedMaterial = newMaterial;
+
+            for (int i = 0; i < l; i++)
+            {
+                mats[i] = newMaterial[i];
+            }
             //Debug.LogError("changed to new");
             toggled = true;
         }
         else
         {
-            GetComponent<MeshRenderer>().sharedMaterial = originalMaterial;
+            for (int i = 0; i < l; i++)
+            {
+                mats[i] = originalMaterial[i];
+            }
             //Debug.LogError("changed to original");
             toggled = false;
         }
+
+        GetComponent<MeshRenderer>().materials = mats;
+
         // if (render != null)
         // {
         //     // Check the current material and toggle to the other one
