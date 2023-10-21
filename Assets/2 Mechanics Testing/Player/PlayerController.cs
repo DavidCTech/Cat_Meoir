@@ -89,6 +89,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""a35306e3-35f3-42fc-8a56-940a539dc764"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +342,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3371be35-7490-426a-8303-347c50d0e457"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -371,6 +391,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_MenuOpenClose = m_Player.FindAction("MenuOpenClose", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_CatVision = m_Player.FindAction("CatVision", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -439,6 +460,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MenuOpenClose;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_CatVision;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -450,6 +472,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @MenuOpenClose => m_Wrapper.m_Player_MenuOpenClose;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @CatVision => m_Wrapper.m_Player_CatVision;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -480,6 +503,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @CatVision.started += instance.OnCatVision;
             @CatVision.performed += instance.OnCatVision;
             @CatVision.canceled += instance.OnCatVision;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -505,6 +531,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @CatVision.started -= instance.OnCatVision;
             @CatVision.performed -= instance.OnCatVision;
             @CatVision.canceled -= instance.OnCatVision;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -549,5 +578,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnMenuOpenClose(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCatVision(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
