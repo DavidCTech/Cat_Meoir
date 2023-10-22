@@ -46,15 +46,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGrounded()
     {
-        // Create a ray from the player's position slightly above them to check for ground
+        // Define a layer mask for the ground objects
+        LayerMask groundLayerMask = LayerMask.GetMask("Ground"); // Adjust the layer name as needed
+
+        // Increase the ray length (e.g., to 2.0f)
+        float rayLength = 1.1f;
+
+        // Create a ray from the player's bottom to check for ground
         Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 0.2f, groundLayer))
+
+        // Visualize the ray in the scene view during play mode with red color
+        Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, rayLength, groundLayerMask))
         {
-            // The player is grounded
+            isGrounded = true;
         }
         else
         {
-            // The player is not grounded
+            isGrounded = false;
         }
     }
 
