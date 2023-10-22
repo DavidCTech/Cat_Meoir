@@ -465,20 +465,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "557d5d8eed7a45da81aefc8ab1d249ea"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "096e8a4832584a7ca67ea15c9a100d15"
-                },
-                "m_SlotId": 1058333052
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "56bd859f64a449118fab3bf48250c015"
                 },
                 "m_SlotId": 0
@@ -815,20 +801,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "a753ae074eee49e4a7617135408fb936"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "f09e05eb657044da9fd7b27ef99a2abf"
-                },
-                "m_SlotId": 1058333052
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "b2eaebedfc314fb8bcd3288d8a73864f"
                 },
                 "m_SlotId": 0
@@ -1075,8 +1047,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 170.0,
-            "y": -253.99996948242188,
+            "x": 293.0,
+            "y": -37.99999237060547,
             "width": 208.0,
             "height": 302.0
         }
@@ -1237,7 +1209,7 @@
     },
     "m_Slots": [
         {
-            "m_Id": "dcb252e9d2c54dc78e4f3bae8c2d6039"
+            "m_Id": "6d409128c0804f73b5e1417c37a67a8c"
         },
         {
             "m_Id": "f13ca378c1a5452fa6725990cab36e81"
@@ -1259,10 +1231,12 @@
     },
     "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"680ee26f9186ba14896c75a5635062fa\",\n        \"type\": 3\n    }\n}",
     "m_PropertyGuids": [
-        "1873e613-fc06-4f76-b74c-e2d5deb7f3bd"
+        "1873e613-fc06-4f76-b74c-e2d5deb7f3bd",
+        "9154f7af-a70d-431f-a3be-9392e92f94e6"
     ],
     "m_PropertyIds": [
-        1058333052
+        1058333052,
+        -1504919064
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -1577,6 +1551,29 @@
     "m_Property": {
         "m_Id": "25daa6473c8e42a4addc10554da7bfce"
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "18c0701691be422e860d402451ebaffa",
+    "m_Id": -1504919064,
+    "m_DisplayName": "World Pos",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_World_Pos",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -3284,29 +3281,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "66b6a6972ee4414196b9cb5828c69a3e",
-    "m_Id": 1058333052,
-    "m_DisplayName": "WorldPos",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "_WorldPos",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "6791bd2ab9974f758d6b99de41c6d882",
     "m_Id": 0,
@@ -3470,6 +3444,29 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "6d409128c0804f73b5e1417c37a67a8c",
+    "m_Id": -1504919064,
+    "m_DisplayName": "World Pos",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_World_Pos",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -5561,13 +5558,13 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"a714249ab68a0e14fbca5c93cea70e52\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"58a821e709618314bab06e04226363ec\",\"type\":3}}",
         "m_Guid": ""
     },
     "isMainTexture": false,
     "useTilingAndOffset": false,
     "m_Modifiable": true,
-    "m_DefaultType": 0
+    "m_DefaultType": 1
 }
 
 {
@@ -5899,7 +5896,7 @@
         "y": 0.0
     },
     "m_Labels": [],
-    "m_Channel": 1
+    "m_Channel": 0
 }
 
 {
@@ -6054,29 +6051,6 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "dcb252e9d2c54dc78e4f3bae8c2d6039",
-    "m_Id": 1058333052,
-    "m_DisplayName": "WorldPos",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "_WorldPos",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": []
 }
 
 {
@@ -6331,7 +6305,7 @@
     },
     "m_Slots": [
         {
-            "m_Id": "66b6a6972ee4414196b9cb5828c69a3e"
+            "m_Id": "18c0701691be422e860d402451ebaffa"
         },
         {
             "m_Id": "6bf7d813f0be4f0786a20f4cfbefbffe"
@@ -6353,10 +6327,12 @@
     },
     "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"680ee26f9186ba14896c75a5635062fa\",\n        \"type\": 3\n    }\n}",
     "m_PropertyGuids": [
-        "1873e613-fc06-4f76-b74c-e2d5deb7f3bd"
+        "1873e613-fc06-4f76-b74c-e2d5deb7f3bd",
+        "9154f7af-a70d-431f-a3be-9392e92f94e6"
     ],
     "m_PropertyIds": [
-        1058333052
+        1058333052,
+        -1504919064
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
