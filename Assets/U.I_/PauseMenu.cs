@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public GameObject optionsPanel;
 
     private bool isPaused;
+    private bool isOptionsPanelOpen;
     public RenderPipelineAsset[] qualityLevels;
     public TMP_Dropdown dropdown;
     private ScrollRect scrollRect;
@@ -56,17 +57,22 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void OnMenuOpenClose(InputAction.CallbackContext context)
     {
         Debug.Log("Pause");
-        if (!isPaused)
+        if (!isPaused && !isOptionsPanelOpen)
         {
             Pause();
         }
 
-        else
+        else if (isPaused || isOptionsPanelOpen)
         {
             Resume();
         }
     }
 
+    void OpenOptionsPanel()
+    {
+        // Add logic to open the options panel
+        isOptionsPanelOpen = true;
+    }
 
     public void DeactivateMenu()
     {
@@ -143,6 +149,9 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
        pauseMenuUI.SetActive(false);
        Time.timeScale = 1f;
        isPaused = false;
+       isOptionsPanelOpen = false;
+       optionsPanel.SetActive(false);
+
     }
 
     void Pause()
