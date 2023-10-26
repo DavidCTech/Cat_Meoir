@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -33,7 +34,6 @@ public static class SaveSystem
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
 
             stream.Close();
-            Debug.Log("data load in the static save system ");
             return data;
 
         }
@@ -96,7 +96,6 @@ public static class SaveSystem
             DoorData data = formatter.Deserialize(stream) as DoorData;
 
             stream.Close();
-            Debug.Log("data load in the static save system ");
             return data;
 
         }
@@ -112,6 +111,66 @@ public static class SaveSystem
     public static void DeleteDoors()
     {
         string path = Application.persistentDataPath + "/DoorData.CatMeoir";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
+        else
+        {
+            Debug.LogError("Save File not found in " + path);
+
+        }
+
+    }
+
+
+
+
+
+    //Clue Data
+    public static void SaveClues(List<PhotoScriptable> clues)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+
+        string path = Application.persistentDataPath + "/ClueData.CatMeoir";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+
+        ClueData data = new ClueData(clues);
+
+        formatter.Serialize(stream, data);
+
+        stream.Close();
+
+    }
+    public static ClueData LoadClues()
+    {
+        string path = Application.persistentDataPath + "/ClueData.CatMeoir";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            ClueData data = formatter.Deserialize(stream) as ClueData;
+
+            stream.Close();
+            return data;
+
+        }
+
+        else
+        {
+            Debug.LogError("Save File not found in " + path);
+            return null;
+        }
+
+    }
+
+    public static void DeleteClues()
+    {
+        string path = Application.persistentDataPath + "/ClueData.CatMeoir";
         if (File.Exists(path))
         {
             File.Delete(path);

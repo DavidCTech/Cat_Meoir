@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.IO;
 
 public class CameraTakePicture : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class CameraTakePicture : MonoBehaviour
     private int locationName = 0; //int that will be the name string for the non clue images in order to organize them 
     private CameraSwitch cameraSwitch;
     private CameraController cameraControls;
+    private int i = 0; 
+    private string saveFolder = "CatMeoirSavedImages";
 
     private void Awake()
     {
@@ -125,25 +128,42 @@ public class CameraTakePicture : MonoBehaviour
         }
         else
         {
-            Debug.Log("CameraTakePicture: Hey buddy you need to assign the clue layer in this script + have some object in that layer too in the scene.");
             return false;
         }
     }
 
-    
 
-    //this creates the image and gathers information to export into a scriptable object manager (photoManager) 
-    public IEnumerator TakeSnapshot(RenderTexture renderTexture)
+
+    //this creates the image and gathers information to export into a scriptable object manager (photoManager) - this commented out code is using one version of saving and gives grey pixels
+    /*public IEnumerator TakeSnapshot(RenderTexture renderTexture)
     {
-        yield return new WaitForEndOfFrame();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+        yield return new WaitForEndOfFrame();
 
         //turn render texture to 2D texture- texture format, no mipmaps to avoid error
-        Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
+        Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA32, false);
         Rect rect = new Rect(0, 0, renderTexture.width, renderTexture.height);
         Graphics.CopyTexture(renderTexture, texture2D);
 
         //turn 2dTexture to sprite send info to the PhotoManger
         passSprite = Sprite.Create(texture2D, rect, new Vector2(0.5f, 0.5f));
+
+        // Early Saving 
+        string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        sigTex.ReadPixels(new Rect(new Vector2(0.0f, Screen.height - bot), dims), 0, 0);
+
+        sigTex.Apply();
+        byte[] pngData = texture2D.EncodeToPNG();
+        string fileName = $"savedSprite_{i}.png";
+        string filePath = Path.Combine(folderPath, fileName);
+        File.WriteAllBytes(filePath, pngData);
+        i++; 
+        //
+
+        
         passString = null; 
         passBool = checkObject();
         AssignPicture(passSprite);
@@ -151,6 +171,44 @@ public class CameraTakePicture : MonoBehaviour
 
 
 
+    }*/
+    public IEnumerator TakeSnapshot(RenderTexture renderTexture)
+    {
+        yield return new WaitForEndOfFrame();
+
+        // Set the target texture of the camera
+        captureCamera.targetTexture = renderTexture;
+        captureCamera.Render();
+
+        // Create a new Texture2D and read the pixels from the RenderTexture
+        Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
+        RenderTexture.active = renderTexture;
+        texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+        texture2D.Apply();
+        RenderTexture.active = null;
+
+        // Reset the target texture of the camera
+        captureCamera.targetTexture = null;
+
+        // Convert 2D texture to sprite
+        passSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f));
+
+        // Early Saving 
+        string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        byte[] pngData = texture2D.EncodeToPNG();
+        string fileName = $"savedSprite_{i}.png";
+        string filePath = Path.Combine(folderPath, fileName);
+        File.WriteAllBytes(filePath, pngData);
+        i++;
+
+        passString = null;
+        passBool = checkObject();
+        AssignPicture(passSprite);
+        photoManager.addPictureToList(passSprite, passBool, passString);
     }
-    
+
 }

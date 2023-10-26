@@ -6,8 +6,6 @@ public class DoorSaves : MonoBehaviour
 {
     //This script goes on the game manager or an object in the scene to make sure anything that shouldnt appear after unlocking doesn't appear. ( aka doors) 
 
-    //Gross array ( lists arent serializable : (   ) - this array is the amount of objects put into here that is basically referenced to see if they are active
-    //or not to see their state
     public GameObject[] doors;
     private bool[] boolList;
     public PauseMenu pauseMenu;
