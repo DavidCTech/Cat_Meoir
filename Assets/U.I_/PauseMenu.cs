@@ -19,7 +19,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     private bool isOptionsPanelOpen;
     public RenderPipelineAsset[] qualityLevels;
     public TMP_Dropdown dropdown;
-    private ScrollRect scrollRect;
     private float scrollPosition = 1;
     public AudioMixer audioMixer;
     private Resolution[] resolutions;
@@ -27,6 +26,10 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     private List<Resolution> filteredResolutions;
 
     [SerializeField] private TMP_Dropdown resolutionDropdown;
+
+    public ScrollRect scrollRect;
+
+    public float scrollSpeed = 0.1f;
 
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
@@ -70,7 +73,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     void OpenOptionsPanel()
     {
-        // Add logic to open the options panel
+       
         isOptionsPanelOpen = true;
     }
 
@@ -142,7 +145,22 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         resolutionDropdown.RefreshShownValue();
     }
 
+    private void Update()
+    {
+        float scrollInput = Input.GetAxis("Vertical");  
 
+        if (scrollInput != 0)
+        {
+            
+            float newScrollPosition = scrollRect.verticalNormalizedPosition - scrollInput * scrollSpeed;
+
+            
+            newScrollPosition = Mathf.Clamp01(newScrollPosition);
+
+            
+            scrollRect.verticalNormalizedPosition = newScrollPosition;
+        }
+    }
 
     public void Resume()
     {
@@ -166,7 +184,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (scrollRect)
             scrollRect.verticalScrollbar.value = scrollPosition;
     }
 
