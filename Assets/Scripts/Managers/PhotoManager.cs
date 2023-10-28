@@ -22,12 +22,14 @@ public class PhotoManager : MonoBehaviour
     }
 
 
-    public void addPictureToList(Sprite pictureSprite, bool isClue, string clueName)
+    public void addPictureToList(Sprite pictureSprite, bool isClue, string clueName, Texture2D texture)
     {
         PhotoScriptable snapshot = ScriptableObject.CreateInstance<PhotoScriptable>();
         snapshot.sprite = pictureSprite;
         snapshot.isClue = isClue;
         snapshot.clueName = clueName;
+        snapshot.texture = texture; 
+       // snapshot.renderTexture = renderTexture; 
         // Update in clue image manager here if needed 
         canContinue = checkClueImages(clueName, snapshot);
         if (canContinue)
@@ -39,10 +41,28 @@ public class PhotoManager : MonoBehaviour
     }
 
 
+    public void PictureChecking()
+    {
+        //this method will go through all the scriptable objects list and then put them in the UI 
+        for (int i = 0; i < snapshots.Count; i++)
+        {
+            if (snapshots[i].isClue)
+            {
+                //loop through the clue images UI stuff for anything with a general name and put in the snapshot[i].sprite in it 
+                //and then name it to snapshot[i].clueName 
+                clueImageManager.newImageClue(snapshots[i].sprite, snapshots[i].clueName);
+            }
+            else
+            {
+                //loop through the non clue images UI stuff for anything with a general name and put a snapshot[i] sprite in it 
+                clueImageManager.newImageFail(snapshots[i].sprite, snapshots[i].clueName);
+            }
+        
+        }
+    }
 
 
-
-
+    
     //this script will loop through all the scriptable objects in the list and look for 1. if it is a bool of clue and 2. if it has the same name as another. If so, it wll replace
     public bool checkClueImages(string clueName, PhotoScriptable snapshot)
     {
@@ -71,6 +91,10 @@ public class PhotoManager : MonoBehaviour
         snapshots.Remove(snapshot);
         
         
+    }
+    public void ClearList()
+    {
+        snapshots.Clear(); 
     }
 
     public void StopFullShow()

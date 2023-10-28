@@ -22,6 +22,10 @@ public class DoorSaves : MonoBehaviour
         StartCoroutine(LoadDoorAsync());
 
     }
+    public void DeleteDoors()
+    {
+        SaveSystem.DeleteDoors(); 
+    }
 
     private IEnumerator LoadDoorAsync()
     {
@@ -68,7 +72,8 @@ public class DoorSaves : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to load Door data!");
+            Debug.Log("No Door data.");
+            // put the failed to load gemaobject UI On 
         }
     }
 
