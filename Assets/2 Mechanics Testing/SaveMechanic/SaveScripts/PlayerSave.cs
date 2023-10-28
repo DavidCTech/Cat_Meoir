@@ -17,6 +17,10 @@ public class PlayerSave : MonoBehaviour
         StartCoroutine(LoadPlayerAsync());
        
     }
+    public void DeletePlayer()
+    {
+        SaveSystem.DeletePlayer();
+    }
 
     private IEnumerator LoadPlayerAsync()
     {
@@ -37,7 +41,8 @@ public class PlayerSave : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to load player data!");
+            Debug.Log("No Player data.");
+            // put the failed to load gemaobject UI On 
         }
     }
 

@@ -14,8 +14,14 @@ public class ClueSaves : MonoBehaviour
         this.gameObject.GetComponent<ClueImagesSave>().SaveClueImages();
         SaveSystem.SaveClues(photoManager.snapshots);
     }
+    public void DeleteClues()
+    {
+        SaveSystem.DeleteClues();
+        SaveSystem.DeleteClueImages(); 
+    }
     public void LoadClues()
     {
+
         pauseMenu.Resume();
         loadingScreen.SetActive(true);
         StartCoroutine(LoadClueAsync());
@@ -40,6 +46,7 @@ public class ClueSaves : MonoBehaviour
                 // Create a new PhotoScriptable object
                 PhotoScriptable newPhoto = ScriptableObject.CreateInstance<PhotoScriptable>();
                 newPhoto.sprite = this.gameObject.GetComponent<ClueImagesSave>().LoadClueImages(i);
+                newPhoto.texture = this.gameObject.GetComponent<ClueImagesSave>().LoadClueTexture(i);
                 // Set the clue name
                 newPhoto.clueName = data.clueList[i];
 
@@ -49,10 +56,12 @@ public class ClueSaves : MonoBehaviour
                 // Add the new PhotoScriptable to the snapshots list
                 photoManager.snapshots.Add(newPhoto);
             }
+            photoManager.PictureChecking();
         }
         else
         {
-            Debug.LogError("Failed to load Clue data!");
+            // put the failed to load gemaobject UI On 
+            Debug.Log("No clue data.");
         }
     }
 }

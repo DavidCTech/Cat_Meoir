@@ -40,7 +40,7 @@ public static class SaveSystem
 
         else
         {
-            Debug.LogError("Save File not found in " + path);
+           // Debug.LogError("Save File not found in " + path);
             return null;
         }
 
@@ -56,7 +56,7 @@ public static class SaveSystem
 
         else
         {
-            Debug.LogError("Save File not found in " + path);
+            //Debug.LogError("Save File not found in " + path);
 
         }
 
@@ -102,7 +102,7 @@ public static class SaveSystem
 
         else
         {
-            Debug.LogError("Save File not found in " + path);
+            //Debug.LogError("Save File not found in " + path);
             return null;
         }
 
@@ -118,7 +118,7 @@ public static class SaveSystem
 
         else
         {
-            Debug.LogError("Save File not found in " + path);
+            //Debug.LogError("Save File not found in " + path);
 
         }
 
@@ -162,7 +162,7 @@ public static class SaveSystem
 
         else
         {
-            Debug.LogError("Save File not found in " + path);
+            //Debug.LogError("Save File not found in " + path);
             return null;
         }
 
@@ -178,12 +178,37 @@ public static class SaveSystem
 
         else
         {
-            Debug.LogError("Save File not found in " + path);
+            //Debug.LogError("Save File not found in " + path);
 
         }
 
     }
+    public static void DeleteClueImages()
+    {
+        string folderPath = Application.persistentDataPath + "/CatMeoirSavedImages";
 
+        if (Directory.Exists(folderPath))
+        {
+            // Get all files in the folder
+            string[] files = Directory.GetFiles(folderPath);
+
+            // Iterate through the files and delete each one
+            foreach (string file in files)
+            {
+                File.Delete(file);
+                Debug.Log("Deleted file: " + file);
+            }
+
+            Debug.Log("All files in the folder have been deleted.");
+        }
+        else
+        {
+            //Debug.LogError("Folder not found: " + folderPath);
+        }
+    }
 
 }
+
+
+
 
