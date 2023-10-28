@@ -10,7 +10,6 @@ public class Human_AI : MonoBehaviour
     {
         Passive,
         Hostile
-
     }
     private AIState _AIState;
 
@@ -327,7 +326,7 @@ public class Human_AI : MonoBehaviour
                 else
                 {
                     ChasePlayer();
-                    _navMeshAgent.speed = 10;
+                    _navMeshAgent.speed = 9;
                 }
                 if (_canSeePlayer == false)
                 {
