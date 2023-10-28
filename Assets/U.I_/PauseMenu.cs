@@ -40,7 +40,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
 
 
-
     private void Awake()
     {
         playerControls = new PlayerController();
@@ -160,6 +159,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
             
             scrollRect.verticalNormalizedPosition = newScrollPosition;
         }
+
     }
 
     public void Resume()
