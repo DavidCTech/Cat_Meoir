@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float gravity = 9.81f; // Default gravity value
     public float jumpForce = 10.0f; // Force applied when jumping
+    public float jumpTime = 0.5f; // The time it takes for the jump force to be applied
+    private bool isJumping = false;
     public float groundDistance = 0.2f; // The distance to check for ground
     public LayerMask groundLayer; // The layer for the ground objects
 
@@ -101,10 +103,28 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump()
     {
-        if (!isFrozen && isGrounded) // Check if the player is not frozen and is grounded
+        if (!isFrozen && isGrounded && !isJumping) // Check if the player is not frozen, is grounded, and not already jumping
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            StartCoroutine(ApplyJumpForce());
         }
+    }
+
+    private IEnumerator ApplyJumpForce()
+    {
+        isJumping = true;
+        float jumpTimer = 0;
+
+        while (jumpTimer < jumpTime)
+        {
+            float normalizedTime = jumpTimer / jumpTime;
+            float jumpForceToApply = Mathf.Lerp(0, jumpForce, normalizedTime);
+            rb.AddForce(Vector3.up * jumpForceToApply, ForceMode.VelocityChange);
+
+            jumpTimer += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        isJumping = false;
     }
 
     private void ManageMovement()
