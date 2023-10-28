@@ -33,7 +33,18 @@ public class PlayerVision : MonoBehaviour
 
     private PlayerState currentState = PlayerState.Normal;
     private GameObject targetObject;
-    private List<GameObject> clues = new List<GameObject>(); 
+    private List<GameObject> clues = new List<GameObject>();
+
+    public PlayerState GetCurrentState()
+    {
+        return currentState;
+    }
+
+    public void SetCurrentState(PlayerState state)
+    {
+        currentState = state;
+    }
+
 
     void OnCatVision()
     {
@@ -42,11 +53,13 @@ public class PlayerVision : MonoBehaviour
         {
             CurrentState = PlayerState.Vision;
             visionOn.Invoke();
+            GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Vision);
         }
         else
         {
             CurrentState = PlayerState.Normal;
             visionOff.Invoke();
+            GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Normal);
         }
     }
 

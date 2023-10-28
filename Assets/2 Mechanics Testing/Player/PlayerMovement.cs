@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer; // The layer for the ground objects
 
     private bool isGrounded = true; // Indicates if the player is grounded
+    private PlayerVision playerVision;
 
     private void Awake()
     {
@@ -33,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
         currentMoveSpeed = moveSpeed;
+
+        // Set the reference to the PlayerVision script
+        playerVision = GetComponent<PlayerVision>();
     }
 
     void FixedUpdate()
@@ -40,13 +44,26 @@ public class PlayerMovement : MonoBehaviour
         // Apply custom gravity in the negative y direction
         Vector3 customGravity = new Vector3(0, -gravity * rb.mass, 0);
         rb.AddForce(customGravity, ForceMode.Force);
-        currentMoveSpeed = moveSpeed;
+
+        // Adjust the currentMoveSpeed based on the player state from PlayerVision
+        if (playerVision != null)
+        {
+            currentMoveSpeed = (playerVision.CurrentState == PlayerState.Normal) ? moveSpeed : visionMoveSpeed;
+        }
 
         // Perform the ground check
         CheckGrounded();
     }
 
-    private void CheckGrounded()
+    public void SetPlayerState(PlayerState state)
+    {
+        if (playerVision != null)
+        {
+            playerVision.SetCurrentState(state);
+        }
+    }
+
+        private void CheckGrounded()
     {
         // Define a layer mask for the ground objects
         LayerMask groundLayerMask = LayerMask.GetMask("Ground"); // Adjust the layer name as needed
