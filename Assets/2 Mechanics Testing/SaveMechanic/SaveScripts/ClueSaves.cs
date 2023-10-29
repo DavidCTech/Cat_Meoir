@@ -53,6 +53,9 @@ public class ClueSaves : MonoBehaviour
                 // Set the isClue property
                 newPhoto.isClue = data.isClueArray[i];
 
+                //set the description property 
+                newPhoto.description = data.descriptionList[i];
+
                 // Add the new PhotoScriptable to the snapshots list
                 photoManager.snapshots.Add(newPhoto);
             }

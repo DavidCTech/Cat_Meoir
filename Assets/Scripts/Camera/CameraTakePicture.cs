@@ -33,7 +33,8 @@ public class CameraTakePicture : MonoBehaviour
     private CameraController cameraControls;
     private int i = 0; 
     private string saveFolder = "CatMeoirSavedImages";
-    private Texture2D passTexture; 
+    private Texture2D passTexture;
+    private string passDescription; 
 
     private void Awake()
     {
@@ -119,6 +120,15 @@ public class CameraTakePicture : MonoBehaviour
                     {
                         locationName--; 
                         passString = target.gameObject.name;
+                        if(target.gameObject.GetComponent<Description>() != null)
+                        {
+                            passDescription = target.gameObject.GetComponent<Description>().description;
+                        }
+                        if (target.gameObject.GetComponent<CutSceneClue>() != null)
+                        {
+                            target.gameObject.GetComponent<CutSceneClue>().CutScenePlay(); 
+                        }
+
                         anyObjectInFOV = true;  
                                                
                     }
@@ -151,15 +161,15 @@ public class CameraTakePicture : MonoBehaviour
         captureCamera.targetTexture = null;
 
         passSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f));
-        passTexture = texture2D; 
-   
+        passTexture = texture2D;
 
 
+        passDescription = "";
         passString = null;
         passBool = checkObject();
         AssignPicture(passSprite);
         //photoManager.addPictureToList(passSprite, passBool, passString, passRender);
-        photoManager.addPictureToList(passSprite, passBool, passString, passTexture);
+        photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription);
 
     }
 
