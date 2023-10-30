@@ -7,7 +7,8 @@ public class PhotoScriptable : ScriptableObject
     public Sprite sprite;
     public string clueName;
     public Texture2D texture;
-    public string description; 
+    public string description;
+    public string sceneName; 
     //public RenderTexture renderTexture;
 
 }

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class CameraTakePicture : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class CameraTakePicture : MonoBehaviour
     public LayerMask obstructionMask;
     [Header("Need a reference to the UI image that shows the last picture taken.")]
     public Image lastPhotoImage;
+    [Header("Reference to the scene name info object that it uses to locate the clues.")]
+    public GameObject sceneName;
+
 
     private bool passBool;
     private Sprite passSprite;
@@ -34,7 +38,8 @@ public class CameraTakePicture : MonoBehaviour
     private int i = 0; 
     private string saveFolder = "CatMeoirSavedImages";
     private Texture2D passTexture;
-    private string passDescription; 
+    private string passDescription;
+    private string passSceneName; 
 
     private void Awake()
     {
@@ -162,14 +167,19 @@ public class CameraTakePicture : MonoBehaviour
 
         passSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f));
         passTexture = texture2D;
-
+        passSceneName = "";
+        if (sceneName != null)
+        {
+            passSceneName = sceneName.GetComponent<SceneInfo>().sceneInfo; 
+        }
+        
 
         passDescription = "";
         passString = null;
         passBool = checkObject();
         AssignPicture(passSprite);
         //photoManager.addPictureToList(passSprite, passBool, passString, passRender);
-        photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription);
+        photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription, passSceneName);
 
     }
 
