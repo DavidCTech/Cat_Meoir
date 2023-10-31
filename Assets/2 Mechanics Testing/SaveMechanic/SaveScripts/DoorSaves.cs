@@ -9,8 +9,7 @@ public class DoorSaves : MonoBehaviour
     public GameObject[] doors;
     private bool[] boolList;
     public PauseMenu pauseMenu;
-    public GameObject loadingScreen; 
-
+    
     public void SaveDoors()
     {
         SaveSystem.SaveDoors(doors);
@@ -18,7 +17,6 @@ public class DoorSaves : MonoBehaviour
     public void LoadDoors()
     {
         pauseMenu.Resume();
-        loadingScreen.SetActive(true);
         StartCoroutine(LoadDoorAsync());
 
     }
@@ -31,7 +29,6 @@ public class DoorSaves : MonoBehaviour
     {
         
         yield return new WaitForSeconds(0.5f);
-        loadingScreen.SetActive(false);
 
 
         DoorData data = SaveSystem.LoadDoors();

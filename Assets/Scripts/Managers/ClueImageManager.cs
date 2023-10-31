@@ -5,7 +5,10 @@ using UnityEngine;
 public class ClueImageManager : MonoBehaviour
 {
     [Header("You need to put in the image references that have the clues and the fails.")]
-    public List<Image> clueSpaces = new List<Image>();
+    //public List<GameObject> clueLists = new List<GameObject>;
+    public List<GameObject> clueSpaces = new List<GameObject>();
+    //public List<clueSpaces> ClueList = new List<clueSpaces>();
+    //public List<List<Image>> clueSpaces = new List<Image>();
     public List<Image> failSpaces = new List<Image>();
 
     [Header("You need to reference the parent game object of the Image UI to turn on.")]
@@ -27,27 +30,44 @@ public class ClueImageManager : MonoBehaviour
     }
 
     //ChatGpt helped with the logic writing in this method for the foreach loops 
-    public void newImageClue(Sprite slotSprite, string slotName)
+    public void newImageClue(Sprite slotSprite, string slotName, string sceneName, string description)
     {
-        foreach (Image clueSpace in clueSpaces)
+        
+        foreach (GameObject clueSpace in clueSpaces)
         {
-            if (clueSpace.name == slotName)
+            Image clueSpaceImage = clueSpace.GetComponent<Image>();
+            ImageData imageData = clueSpace.GetComponent<ImageData>(); 
+            
+            if(imageData.sceneName == sceneName)
             {
-                // Case 1: The name matches, update the sprite
+                //get the clueSpace component of photodata
+                if (clueSpaceImage.name == slotName)
+                {
+                    // Case 1: The name matches, update the sprite
 
-                clueSpace.sprite = slotSprite;
-                return;
+                    clueSpaceImage.sprite = slotSprite;
+                    imageData.description = description; 
+                    return;
+                }
             }
+           
         }
 
-        foreach (Image clueSpace in clueSpaces)
+
+        foreach (GameObject clueSpace in clueSpaces)
         {
-            if (clueSpace.sprite == null)
+            Image clueSpaceImage = clueSpace.GetComponent<Image>();
+            ImageData imageData = clueSpace.GetComponent<ImageData>();
+            if (imageData.sceneName == sceneName)
             {
-                // Case 2: No match found, assign to the nearest null sprite
-                clueSpace.name = slotName;
-                clueSpace.sprite = slotSprite;
-                return;
+                if (clueSpaceImage.sprite == null)
+                {
+                    // Case 2: No match found, assign to the nearest null sprite
+                    clueSpaceImage.name = slotName;
+                    clueSpaceImage.sprite = slotSprite;
+                    imageData.description = description;
+                    return;
+                }
             }
         }
     }
@@ -111,10 +131,11 @@ public class ClueImageManager : MonoBehaviour
             
 
         }
-        foreach (Image clueSpace in clueSpaces)
+        foreach (GameObject clueSpace in clueSpaces)
         {
-            clueSpace.sprite = null;
-            clueSpace.name = null;
+            Image clueSpaceImage = clueSpace.GetComponent<Image>();
+            clueSpaceImage.sprite = null;
+            clueSpaceImage.name = null;
             
 
         }

@@ -13,7 +13,10 @@ public class PlayerSave : MonoBehaviour
     public void LoadPlayer()
     {
         pauseMenu.Resume();
-        loadingScreen.SetActive(true);
+        if (loadingScreen != null)
+        {
+            loadingScreen.SetActive(true);
+        }
         StartCoroutine(LoadPlayerAsync());
        
     }
@@ -26,8 +29,11 @@ public class PlayerSave : MonoBehaviour
     {
         
         yield return new WaitForSeconds(0.5f);
-        
-        loadingScreen.SetActive(false);
+        if(loadingScreen != null)
+        {
+
+            loadingScreen.SetActive(false);
+        }
 
 
         // Code to run during the asynchronous operation (if needed)

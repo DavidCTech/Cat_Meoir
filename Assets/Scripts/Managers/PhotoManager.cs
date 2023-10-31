@@ -52,7 +52,7 @@ public class PhotoManager : MonoBehaviour
             {
                 //loop through the clue images UI stuff for anything with a general name and put in the snapshot[i].sprite in it 
                 //and then name it to snapshot[i].clueName 
-                clueImageManager.newImageClue(snapshots[i].sprite, snapshots[i].clueName);
+                clueImageManager.newImageClue(snapshots[i].sprite, snapshots[i].clueName, snapshots[i].sceneName, snapshots[i].description);
             }
             else
             {
@@ -123,7 +123,7 @@ public class PhotoManager : MonoBehaviour
     public void addPictureClue(PhotoScriptable snapshot)
     {
 
-        clueImageManager.newImageClue(snapshot.sprite, snapshot.clueName);
+        clueImageManager.newImageClue(snapshot.sprite, snapshot.clueName, snapshot.sceneName, snapshot.description);
         // clueCount++;
     }
     public void addPictureFail(PhotoScriptable snapshot)
