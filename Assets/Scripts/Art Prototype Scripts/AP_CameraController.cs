@@ -6,9 +6,10 @@ public class AP_CameraController : MonoBehaviour
 {
     public Transform target;
 
-    void Start()
+    void Awake()
     {
-
+        transform.position = target.position;
+        transform.rotation = target.rotation;
     }
 
     void LateUpdate()
