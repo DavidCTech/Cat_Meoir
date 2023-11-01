@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class PlayerSave : MonoBehaviour
 {
-    public GameObject loadingScreen;
-    public PauseMenu pauseMenu; 
+
     public void Saveplayer()
     {
         SaveSystem.SavePlayer(this.gameObject.transform);
     }
     public void LoadPlayer()
     {
-        pauseMenu.Resume();
-        if (loadingScreen != null)
-        {
-            loadingScreen.SetActive(true);
-        }
+    
+      
         StartCoroutine(LoadPlayerAsync());
        
     }
@@ -29,16 +25,7 @@ public class PlayerSave : MonoBehaviour
     {
         
         yield return new WaitForSeconds(0.5f);
-        if(loadingScreen != null)
-        {
-
-            loadingScreen.SetActive(false);
-        }
-
-
         // Code to run during the asynchronous operation (if needed)
-
-        
         PlayerData data = SaveSystem.LoadPlayer();
         if (data != null)
         {

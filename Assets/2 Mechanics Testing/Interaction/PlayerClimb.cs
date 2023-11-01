@@ -6,15 +6,17 @@ public class PlayerClimb : MonoBehaviour
 {
     // this script goes on the player
     //chat gpt helped write the update and calculation method
-
-    public AnimationCurve timeCurve; // Curve for time 
+    [Header("The TimeCurve messes with the speed of the jump through time")]
+    public AnimationCurve timeCurve; 
+    [Header("The duration is how long the climb takes.")]
+    public float duration;
 
     // We will need the vector3 positions of these transforms 
     private Vector3 startingVector;
     private Vector3 middleVector;
     private Vector3 endVector;
-    //We will need time the duration this takes- it will control the speed
-    public float duration;
+    
+    
     //We will need to keep track of the elapsed time 
     private float elaspedTime;
     //a bool for stopping the animation

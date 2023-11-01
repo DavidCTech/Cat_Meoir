@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SceneInfo : MonoBehaviour
 {
+    [Header("Name Your Scene/Location for clues here.")]
     public string sceneInfo; 
 
 }

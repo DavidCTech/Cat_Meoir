@@ -57,10 +57,13 @@ public class PlayerInteractionCheck : MonoBehaviour
     }
     public void OnInteraction()
     {
+       
         if (!isHiding)
         {
+            
             //checks a raycast for the interactable objects to see what the tag is - depending on tag this script will call other scripts. 
             string objectName = checkObject();
+            
             if (objectName == "Interact")
             {
 
@@ -86,6 +89,11 @@ public class PlayerInteractionCheck : MonoBehaviour
 
                 //reference the climbing code
                 this.gameObject.GetComponent<PlayerClimb>().Climb(middleTransform, endTransform);
+            }
+            if (objectName == "Door")
+            {
+                Debug.Log("should have");
+                targetObject.GetComponent<ClueTriggerEvents>().CheckDoorUnlock();
             }
             else
             {

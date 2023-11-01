@@ -6,9 +6,9 @@ public class DoorSaves : MonoBehaviour
 {
     //This script goes on the game manager or an object in the scene to make sure anything that shouldnt appear after unlocking doesn't appear. ( aka doors) 
 
+    [Header("Put in all Doors you want saved")]
     public GameObject[] doors;
     private bool[] boolList;
-    public PauseMenu pauseMenu;
     
     public void SaveDoors()
     {
@@ -16,7 +16,6 @@ public class DoorSaves : MonoBehaviour
     }
     public void LoadDoors()
     {
-        pauseMenu.Resume();
         StartCoroutine(LoadDoorAsync());
 
     }

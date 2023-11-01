@@ -25,7 +25,7 @@ public class CameraTakePicture : MonoBehaviour
     [Header("Need a reference to the UI image that shows the last picture taken.")]
     public Image lastPhotoImage;
     [Header("Reference to the scene name info object that it uses to locate the clues.")]
-    public GameObject sceneName;
+    public SceneInfo sceneInfo;
 
 
     private bool passBool;
@@ -168,9 +168,9 @@ public class CameraTakePicture : MonoBehaviour
         passSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f));
         passTexture = texture2D;
         passSceneName = "";
-        if (sceneName != null)
+        if (sceneInfo != null)
         {
-            passSceneName = sceneName.GetComponent<SceneInfo>().sceneInfo; 
+            passSceneName = sceneInfo.sceneInfo; 
         }
         
 

@@ -6,10 +6,17 @@ using System.IO;
 //made with help from chat gpt and stack overflow
 public class ClueImagesSave : MonoBehaviour
 {
-    public PhotoManager photoManager;
+    private PhotoManager photoManager;
     private string saveFolder = "CatMeoirSavedImages"; // Folder name where the images will be saved
+
+    [Header("Grab from Asset Folder >scripts>mechanic Texture. ")]
     public RenderTexture renderTexture; 
 
+
+    private void Start()
+    {
+        photoManager = this.GetComponent<PhotoManager>(); 
+    }
 
     public void SaveClueImages()
     {

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ClueSaves : MonoBehaviour
 {
-    public PauseMenu pauseMenu;
-    public GameObject loadingScreen;
     // game object photo manager 
-    public PhotoManager photoManager; 
+    private PhotoManager photoManager; 
 
+    private void Start()
+    {
+        photoManager = this.gameObject.GetComponent<PhotoManager>();
+    }
     public void SaveClues()
     {
+        photoManager = this.gameObject.GetComponent<PhotoManager>();
         this.gameObject.GetComponent<ClueImagesSave>().SaveClueImages();
         SaveSystem.SaveClues(photoManager.snapshots);
     }
@@ -21,9 +24,6 @@ public class ClueSaves : MonoBehaviour
     }
     public void LoadClues()
     {
-
-        pauseMenu.Resume();
-        loadingScreen.SetActive(true);
         StartCoroutine(LoadClueAsync());
 
     }
@@ -32,11 +32,12 @@ public class ClueSaves : MonoBehaviour
     private IEnumerator LoadClueAsync()
     {
         yield return new WaitForSeconds(0.5f);
-        loadingScreen.SetActive(false);
 
         ClueData data = SaveSystem.LoadClues();
         // Clear the existing snapshots
         photoManager.snapshots.Clear();
+       
+        
 
         if (data != null)
         {
