@@ -24,7 +24,7 @@ public class AP_PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!AP_Menu.instance.isPaused)
+        if (!AP_Menu.instance.isPaused && Time.time > 1f)
         {
             //Control Player Movement
             //moveInput.x = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
