@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AP_PlayerController : MonoBehaviour
 {
+    public static AP_PlayerController instance;
+
     [Header("Movement Variables")]
     public float moveSpeed;
     private CharacterController charCon;
@@ -17,8 +19,13 @@ public class AP_PlayerController : MonoBehaviour
     [Header("Camera Variables")]
     public Transform camTrans;
 
-    void Start()
+    void Awake()
     {
+        if (instance != null)
+        {
+            instance = this;
+        }
+
         charCon = GetComponent<CharacterController>();
     }
 
