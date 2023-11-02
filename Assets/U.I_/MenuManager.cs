@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour, ISelectHandler
 {
     public RenderPipelineAsset[] qualityLevels;
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
+
+    public Toggle vSyncToggle;
 
     public GameObject optionsFirstButton, optionsClosedButton;
 
@@ -128,6 +131,20 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         Screen.fullScreen = isFullscreen;
     }
+
+
+    public void ApplyVSync()
+    {
+        if (vSyncToggle.isOn)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }
+    }
+
 
     public void QuitGame()
     {
