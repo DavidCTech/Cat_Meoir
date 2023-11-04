@@ -19,6 +19,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
+    private CinemachineComposer composerX;
+
 
     private bool isPaused;
     private bool isOptionsPanelOpen;
@@ -112,7 +114,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
-
         dropdown.value = QualitySettings.GetQualityLevel();
 
         filteredResolutions = new List<Resolution>();
@@ -204,6 +205,11 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     {
         audioMixer.SetFloat("MyExposedParam", volume);
         Debug.Log(volume);
+    }
+
+    public void ChangeSensitivity(float value)
+    {
+        
     }
 
     public void ChangeLevel(int value)
