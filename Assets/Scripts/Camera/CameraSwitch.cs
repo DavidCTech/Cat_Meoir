@@ -72,34 +72,53 @@ public class CameraSwitch : MonoBehaviour
         }
         else
         {
-            Debug.Log("You need to attach the playermovement script into the camera switch script. - camera and player objects respectively. ");
+            Debug.Log("You need to attach the playermovement script into the camera switch script - camera and player objects respectively.");
         }
 
-        
         isFirst = false;
         thirdPersonCamera.gameObject.SetActive(true);
-        firstPersonCamera.gameObject.SetActive(false);
+        firstPersonCamera.gameObject.SetActive(false); // Ensure the first-person camera is disabled
+
+        // Re-enable the child camera
+        if (gameObject.transform.childCount > 0)
+        {
+            Transform childCamera = gameObject.transform.GetChild(0);
+            childCamera.gameObject.SetActive(true);
+        }
+
+        // Adjust the culling mask to include the "Clue" layer (assuming "Clue" is on a specific layer)
+        Camera mainCamera = GetComponent<Camera>();
+        mainCamera.cullingMask &= ~(1 << 8);
     }
 
     void EnableFirstPersonCamera()
     {
-        
         if (cinemachinePOXExtension != null)
         {
-            cinemachinePOXExtension.ResetStart(firstPersonCamera.Follow.rotation); 
+            cinemachinePOXExtension.ResetStart(firstPersonCamera.Follow.rotation);
         }
-        if(playerMovement != null)
+        if (playerMovement != null)
         {
             playerMovement.isFrozen = true;
         }
         else
         {
-            Debug.Log("You need to attach the playermovement script into the camera switch script. - camera and player objects respectively. ");
+            Debug.Log("You need to attach the playermovement script into the camera switch script - camera and player objects respectively.");
         }
 
         isFirst = true;
-        //lock player rotation
-        firstPersonCamera.gameObject.SetActive(true);
-        thirdPersonCamera.gameObject.SetActive(false);
+        firstPersonCamera.gameObject.SetActive(true); // Ensure the first-person camera is enabled
+        thirdPersonCamera.gameObject.SetActive(false); // Ensure the third-person camera is disabled
+
+        // Disable the child camera
+        if (gameObject.transform.childCount > 0)
+        {
+            Transform childCamera = gameObject.transform.GetChild(0);
+            childCamera.gameObject.SetActive(false);
+        }
+
+        // Adjust the culling mask to exclude the "Clue" layer (assuming "Clue" is on a specific layer)
+        Camera mainCamera = GetComponent<Camera>();
+        mainCamera.cullingMask |= (1 << 8);
     }
 }
