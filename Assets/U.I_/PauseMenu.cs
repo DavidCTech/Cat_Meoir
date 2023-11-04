@@ -8,12 +8,17 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using Cinemachine;
+
 
 public class PauseMenu : MonoBehaviour, ISelectHandler
 {
     public static bool GameIsPause = false;
     public GameObject pauseMenuUI;
     public GameObject optionsPanel;
+
+    public Slider sensitivitySlider;
+    public CinemachineFreeLook cineCam;
 
     private bool isPaused;
     private bool isOptionsPanelOpen;
