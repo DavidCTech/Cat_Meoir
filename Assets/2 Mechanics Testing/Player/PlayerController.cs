@@ -73,6 +73,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""MapOpenClose"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c08e68e-664f-4b73-b8eb-a2a4de791027"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""7f2eb260-e62b-4233-a114-80dbd071b338"",
@@ -395,6 +404,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Vertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db7daae9-d471-4640-9685-400b8869858a"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapOpenClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc51a738-df9b-49fd-aa23-ee45e50b494d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapOpenClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -431,6 +462,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
         m_Player_Stealth = m_Player.FindAction("Stealth", throwIfNotFound: true);
         m_Player_MenuOpenClose = m_Player.FindAction("MenuOpenClose", throwIfNotFound: true);
+        m_Player_MapOpenClose = m_Player.FindAction("MapOpenClose", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_CatVision = m_Player.FindAction("CatVision", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
@@ -501,6 +533,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interaction;
     private readonly InputAction m_Player_Stealth;
     private readonly InputAction m_Player_MenuOpenClose;
+    private readonly InputAction m_Player_MapOpenClose;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_CatVision;
     private readonly InputAction m_Player_Jump;
@@ -514,6 +547,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
         public InputAction @Stealth => m_Wrapper.m_Player_Stealth;
         public InputAction @MenuOpenClose => m_Wrapper.m_Player_MenuOpenClose;
+        public InputAction @MapOpenClose => m_Wrapper.m_Player_MapOpenClose;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @CatVision => m_Wrapper.m_Player_CatVision;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
@@ -542,6 +576,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @MenuOpenClose.started += instance.OnMenuOpenClose;
             @MenuOpenClose.performed += instance.OnMenuOpenClose;
             @MenuOpenClose.canceled += instance.OnMenuOpenClose;
+            @MapOpenClose.started += instance.OnMapOpenClose;
+            @MapOpenClose.performed += instance.OnMapOpenClose;
+            @MapOpenClose.canceled += instance.OnMapOpenClose;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -573,6 +610,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @MenuOpenClose.started -= instance.OnMenuOpenClose;
             @MenuOpenClose.performed -= instance.OnMenuOpenClose;
             @MenuOpenClose.canceled -= instance.OnMenuOpenClose;
+            @MapOpenClose.started -= instance.OnMapOpenClose;
+            @MapOpenClose.performed -= instance.OnMapOpenClose;
+            @MapOpenClose.canceled -= instance.OnMapOpenClose;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -627,6 +667,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnInteraction(InputAction.CallbackContext context);
         void OnStealth(InputAction.CallbackContext context);
         void OnMenuOpenClose(InputAction.CallbackContext context);
+        void OnMapOpenClose(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCatVision(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
