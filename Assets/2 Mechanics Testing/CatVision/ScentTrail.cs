@@ -12,6 +12,14 @@ public class ScentTrail : MonoBehaviour
     public void SetDestination(Transform destination)
     {
         // Set the destination for the NavMeshAgent
-        navMeshAgent.SetDestination(destination.position);
+        if(navMeshAgent != null)
+        {
+            navMeshAgent.SetDestination(destination.position);
+        }
+        else
+        {
+            Debug.Log("Put in navmeshAgent for scent trail");
+        }
+       
     }
 }
