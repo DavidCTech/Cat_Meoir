@@ -86,11 +86,29 @@ public class CameraSwitch : MonoBehaviour
             childCamera.gameObject.SetActive(true);
         }
 
+        // Delay activating the overlay camera for 1 second
+        Invoke("ActivateOverlayCamera", 1.0f);
+
+        // Delay changing the culling mask for the "Clue" layer for 1 second
+        Invoke("ChangeCullingMaskForClue", 0.0f);
+    }
+
+    void ActivateOverlayCamera()
+    {
+        // Re-enable the child camera
+        if (gameObject.transform.childCount > 0)
+        {
+            Transform childCamera = gameObject.transform.GetChild(0);
+            childCamera.gameObject.SetActive(true);
+        }
+    }
+
+    void ChangeCullingMaskForClue()
+    {
         // Adjust the culling mask to include the "Clue" layer (assuming "Clue" is on a specific layer)
         Camera mainCamera = GetComponent<Camera>();
         mainCamera.cullingMask &= ~(1 << 8);
     }
-
     void EnableFirstPersonCamera()
     {
         if (cinemachinePOXExtension != null)
