@@ -209,7 +209,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void ChangeSensitivity(float value)
     {
-        
+        cineCam.m_XAxis.m_MaxSpeed = value;
     }
 
     public void ChangeLevel(int value)
