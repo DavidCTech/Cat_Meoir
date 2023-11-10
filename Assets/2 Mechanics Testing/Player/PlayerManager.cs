@@ -19,9 +19,10 @@ public class PlayerManager : MonoBehaviour
     {
         inputManager.HandleAllInputs();
     }
-
+    
     private void FixedUpdate()
     {
         playerMovement.ManageAllMovement();
     }
+    
 }

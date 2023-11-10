@@ -34,15 +34,22 @@ public class PlayerClimb : MonoBehaviour
     }
 
     // this method will set climbing to true and will set the motion to false - it gets passed in the middle and end vector 
-    public void Climb(Transform middleTransform, Transform endTransform)
+    //change the vector 3 to transforms if using this script 
+    public void Climb(Vector3 middleTransform, Vector3 endTransform)
     {
-        
-        startingVector = this.gameObject.transform.position;
-        middleVector = middleTransform.position;
-        endVector = endTransform.position;
-        isClimbing = true;
-        this.gameObject.GetComponent<PlayerMovement>().isFrozen = true; 
-        //set motion to false 
+        if (!isClimbing)
+        {
+            startingVector = this.gameObject.transform.position;
+            //middleVector = middleTransform.position;
+            //endVector = endTransform.position;
+            middleVector = middleTransform;
+            endVector = endTransform;
+
+            isClimbing = true;
+            this.gameObject.GetComponent<PlayerMovement>().isFrozen = true;
+            //set motion to false 
+        }
+
     }
 
     void Update()

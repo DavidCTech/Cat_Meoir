@@ -82,13 +82,17 @@ public class PlayerInteractionCheck : MonoBehaviour
             }
             if (objectName == "Climb")
             {
-
+                //old climb data
                 //Get the transforms from the climb object 
-                Transform middleTransform = targetObject.GetComponent<ClimbData>().middleTransform;
-                Transform endTransform = targetObject.GetComponent<ClimbData>().endTransform;
+                //Transform middleTransform = targetObject.GetComponent<ClimbData>().middleTransform;
+                //Transform endTransform = targetObject.GetComponent<ClimbData>().endTransform;
 
                 //reference the climbing code
-                this.gameObject.GetComponent<PlayerClimb>().Climb(middleTransform, endTransform);
+                //this.gameObject.GetComponent<PlayerClimb>().Climb(middleTransform, endTransform);
+
+
+                //new climb data 
+                this.gameObject.GetComponent<ClimbRaycast>().Jump(targetObject);
             }
             if (objectName == "Door")
             {

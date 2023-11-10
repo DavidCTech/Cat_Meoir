@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.2f; // The distance to check for ground
     public LayerMask groundLayer; // The layer for the ground objects
 
-    private bool isGrounded = true; // Indicates if the player is grounded
+    public bool isGrounded = true; // Indicates if the player is grounded
     private PlayerVision playerVision;
 
     private void Awake()
@@ -63,11 +63,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-        private void CheckGrounded()
+    private void CheckGrounded()
     {
-        // Define a layer mask for the ground objects
-        LayerMask groundLayerMask = LayerMask.GetMask("Ground"); // Adjust the layer name as needed
-
+        
         // Increase the ray length (e.g., to 2.0f)
         float rayLength = 1.1f;
 
@@ -77,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         // Visualize the ray in the scene view during play mode with red color
         Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, rayLength, groundLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, rayLength, groundLayer))
         {
             isGrounded = true;
         }
@@ -155,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = moveDirection * currentMoveSpeed;
 
             Vector3 movementVelocity = moveDirection;
-            rb.velocity = movementVelocity;
+            rb.velocity = new Vector3(movementVelocity.x, rb.velocity.y, movementVelocity.z);
         }
     }
 
