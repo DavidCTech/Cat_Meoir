@@ -24,7 +24,7 @@ public class DialogScriptable : ScriptableObject
     public struct DialogChoices
     {
         public string choiceText; 
-        public DialogSegments followingDialog;
+        public DialogScriptable followingDialog;
     }
 
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9d4e3d203dff84d90a14e2355acbbc, type: 3}
+  m_Name: Dialog1
+  m_EditorClassIdentifier: 
+  dialogSegments:
+  - dialogText: 'Hello! '
+    dialogDisplayTime: 1
+    dialogChoices: []
+  - dialogText: I'm the testing Dialog NPC.
+    dialogDisplayTime: 1.5
+    dialogChoices: []
+  - dialogText: 'Basically, My dialog is pointless. '
+    dialogDisplayTime: 2
+    dialogChoices:
+    - choiceText: Okay?
+      followingDialog: {fileID: 11400000, guid: 8c20b9dd5c77bab48a8859c0b1074041, type: 2}
+    - choiceText: Is your name really Dialog NPC?
+      followingDialog: {fileID: 11400000, guid: d6643aa24fcd8d1418ec792b2bf634d3, type: 2}
+  nextDialog: {fileID: 0}

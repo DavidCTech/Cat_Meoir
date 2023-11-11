@@ -7,7 +7,7 @@ public class NPCTalk : MonoBehaviour
 {
     //used tutorial from YT Jared Brandjes 
     public DialogScriptable dialogScriptable;
-    public Canvas dialogCanvas;
+    public GameObject dialogCanvas;
     public Text dialogText;
     public Transform dialogOptionsParent;
     public GameObject dialogOptionsPrefab;
@@ -22,10 +22,13 @@ public class NPCTalk : MonoBehaviour
     public void OptionSelected(DialogScriptable selectedOption)
     {
         optionSelected = true; 
+        dialogScriptable = selectedOption;
+        Interact();
     }
     IEnumerator displayDialog()
     {
-        dialogCanvas.enabled = true;
+        yield return null; 
+        dialogCanvas.SetActive(true);
         foreach(var dialog in dialogScriptable.dialogSegments)
         {
 
@@ -41,7 +44,7 @@ public class NPCTalk : MonoBehaviour
                 foreach(var option in dialog.dialogChoices)
                 {
                     GameObject newButton = Instantiate (dialogOptionsPrefab, dialogOptionsParent);
-                    newButton.transform.GetChild(0).GetComponent<Text>().text = option.choiceText; 
+                    newButton.GetComponent<UIDialogOption>().SetUp(this, option.followingDialog, option.choiceText);
                 }
                 while (!optionSelected)
                 {
@@ -52,7 +55,7 @@ public class NPCTalk : MonoBehaviour
             
         }
         dialogOptionsContainer.SetActive(false);
-        dialogCanvas.enabled = false;
+        dialogCanvas.SetActive(false);
     }
-  
+
 }
