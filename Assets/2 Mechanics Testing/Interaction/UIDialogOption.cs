@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 public class UIDialogOption : MonoBehaviour
 {
-    private NPCTalk npcTalk;
-    private DialogScriptable dialogScriptable;
-    private Text dialogText; 
-    
+  
+    private DialogData dialogData;
+    private Text dialogText;
+    private NPCSpeak npcSpeak;
+
+    //scriptable
+    /*
+     private NPCTalk npcTalk;
     public void SetUp(NPCTalk _npcTalk, DialogScriptable _dialogScriptable, string _dialogText)
     {
         npcTalk = _npcTalk;
@@ -16,12 +20,24 @@ public class UIDialogOption : MonoBehaviour
         dialogText = this.gameObject.GetComponentInChildren<Text>();
         dialogText.text = _dialogText; 
     }
-
-   
     public void SelectOption()
     {
-        //36.25  Dont delete that number ty 
         npcTalk.OptionSelected(dialogScriptable);
       
     }
+    */
+
+    public void SetUp(NPCSpeak _npcSpeak, DialogData _dialogData, string _dialogText)
+    {
+        npcSpeak = _npcSpeak;
+        dialogData = _dialogData;
+        dialogText = this.gameObject.GetComponentInChildren<Text>();
+        dialogText.text = _dialogText;
+    }
+    public void SelectOption()
+    {
+        npcSpeak.OptionSelected(dialogData);
+
+    }
+
 }

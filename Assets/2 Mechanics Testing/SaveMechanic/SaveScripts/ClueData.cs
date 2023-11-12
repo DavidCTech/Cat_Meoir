@@ -14,7 +14,7 @@ public class ClueData
     {
         // Initialize the arrays with the count of photoScriptableList
         clueList = new string[photoScriptableList.Count];
-        isClueArray = new bool[photoScriptableList.Count];  // Corrected the type to bool
+        isClueArray = new bool[photoScriptableList.Count];  
         descriptionList = new string[photoScriptableList.Count];
         sceneList = new string[photoScriptableList.Count];
 

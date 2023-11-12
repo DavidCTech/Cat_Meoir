@@ -69,7 +69,8 @@ public class PlayerInteractionCheck : MonoBehaviour
 
                 //should turn the player here    
                 //targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
-                targetObject.GetComponent<NPCTalk>().Interact();
+                //targetObject.GetComponent<NPCTalk>().Interact();
+                targetObject.GetComponent<NPCSpeak>().Interact();
                 //reference the interaction code
             }
             if (objectName == "Hide")
