@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentMoveSpeed;
 
     public float gravity = 9.81f; // Default gravity value
-    public float jumpForce = 10.0f; // Force applied when jumping
+    public float jumpForce = 1.0f; // Force applied when jumping
     public float jumpTime = 0.5f; // The time it takes for the jump force to be applied
     private bool isJumping = false;
     public float groundDistance = 0.2f; // The distance to check for ground
@@ -116,6 +116,10 @@ public class PlayerMovement : MonoBehaviour
         currentMoveSpeed = moveSpeed;
     }
 
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
     public void OnJump()
     {
         if (!isFrozen && isGrounded && !isJumping) // Check if the player is not frozen, is grounded, and not already jumping

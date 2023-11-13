@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 
 //Script developed by chatgpt for base camera switching
@@ -87,12 +88,26 @@ public class CameraSwitch : MonoBehaviour
         }
 
         // Delay activating the overlay camera for 1 second
-        Invoke("ActivateOverlayCamera", 1.0f);
+        StartCoroutine(ActivateOverlayCameraAfterDelay(1.0f));
 
         // Delay changing the culling mask for the "Clue" layer for 1 second
-        Invoke("ChangeCullingMaskForClue", 0.0f);
+        Invoke("ChangeCullingMaskForClue", 1.0f);
     }
 
+    IEnumerator ActivateOverlayCameraAfterDelay(float delay)
+    {
+        float timer = 0f;
+
+        // Wait for the specified delay
+        while (timer < delay)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Activate the overlay camera
+        ActivateOverlayCamera();
+    }
     void ActivateOverlayCamera()
     {
         // Re-enable the child camera
