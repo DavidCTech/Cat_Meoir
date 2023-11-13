@@ -78,36 +78,23 @@ public class CameraSwitch : MonoBehaviour
 
         isFirst = false;
         thirdPersonCamera.gameObject.SetActive(true);
-        firstPersonCamera.gameObject.SetActive(false); // Ensure the first-person camera is disabled
+        firstPersonCamera.gameObject.SetActive(false);
 
-        // Re-enable the child camera
-        if (gameObject.transform.childCount > 0)
-        {
-            Transform childCamera = gameObject.transform.GetChild(0);
-            childCamera.gameObject.SetActive(true);
-        }
-
-        // Delay activating the overlay camera for 1 second
-        StartCoroutine(ActivateOverlayCameraAfterDelay(1.0f));
+        // Re-enable the child camera after a delay
+        StartCoroutine(ActivateOverlayCameraAfterDelay(1.8f));
 
         // Delay changing the culling mask for the "Clue" layer for 1 second
-        Invoke("ChangeCullingMaskForClue", 1.0f);
+        Invoke("ChangeCullingMaskForClue", 1.8f);
     }
 
     IEnumerator ActivateOverlayCameraAfterDelay(float delay)
     {
-        float timer = 0f;
-
-        // Wait for the specified delay
-        while (timer < delay)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(delay);
 
         // Activate the overlay camera
         ActivateOverlayCamera();
     }
+
     void ActivateOverlayCamera()
     {
         // Re-enable the child camera
