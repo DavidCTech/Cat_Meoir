@@ -28,18 +28,18 @@ public class AP_MaterialSwap : MonoBehaviour
 
     void Update()
     {
-        // Check for a button press, e.g., the 'x' key
+        /*// Check for a button press, e.g., the 'x' key
         if (Input.GetButtonDown("Shader Toggle"))
         {
             //Debug.LogError("space pressed");
             // Toggle between originalMaterial and newMaterial
             ToggleMaterial();
-        }
+        }*/
     }
 
     void ToggleMaterial()
     {
-        Material[] mats = GetComponent<MeshRenderer>().materials;
+        /*Material[] mats = GetComponent<MeshRenderer>().materials;
 
         int l = originalMaterial.Length;
 
@@ -78,6 +78,6 @@ public class AP_MaterialSwap : MonoBehaviour
         //         render.material = originalMaterial;
         //     }
         // }
-
+    */
     }
 }
