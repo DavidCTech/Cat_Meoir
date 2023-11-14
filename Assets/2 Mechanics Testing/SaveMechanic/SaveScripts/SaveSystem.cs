@@ -207,7 +207,7 @@ public static class SaveSystem
         }
     }
 
-    public static void SaveNPC(string npcName)
+    public static void SaveNPC(string npcName, List<GameObject> dialogList, DialogData selectedOption)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
@@ -216,7 +216,7 @@ public static class SaveSystem
         FileStream stream = new FileStream(path, FileMode.Create);
 
 
-        NPCData data = new NPCData();
+        NPCData data = new NPCData(dialogList, selectedOption);
 
         formatter.Serialize(stream, data);
         
@@ -225,16 +225,15 @@ public static class SaveSystem
         stream.Close();
 
     }
-    /*
-    public static PlayerData LoadPlayer()
+    public static NPCData LoadNPC(string npcName)
     {
-        string path = Application.persistentDataPath + "/PlayerData.CatMeoir";
+        string path = Application.persistentDataPath + "/NPCData_" + npcName + ".CatMeoir";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
+            NPCData data = formatter.Deserialize(stream) as NPCData;
 
             stream.Close();
             return data;
@@ -243,28 +242,11 @@ public static class SaveSystem
 
         else
         {
-            // Debug.LogError("Save File not found in " + path);
+            //Debug.LogError("Save File not found in " + path);
             return null;
         }
 
     }
-
-    public static void DeletePlayer()
-    {
-        string path = Application.persistentDataPath + "/PlayerData.CatMeoir";
-        if (File.Exists(path))
-        {
-            File.Delete(path);
-        }
-
-        else
-        {
-            //Debug.LogError("Save File not found in " + path);
-
-        }
-
-    }
-    */
 
 
 }

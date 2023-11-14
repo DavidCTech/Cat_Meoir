@@ -7,33 +7,58 @@ public class NPCSpeak : MonoBehaviour
 {
     //used tutorial from YT Jared Brandjes 
     //UI Junk
+    public string npcName; 
     public GameObject dialogCanvas;
     public Text dialogText;
     public Transform dialogOptionsParent;
     public GameObject dialogOptionsPrefab;
     public GameObject dialogOptionsContainer;
+    public GameObject dialogParent; 
 
     //this is the dialog Data
     public DialogData startDialogObject;
 
-
+    private bool npcDataLoaded = false;
     private bool optionSelected = false;
     private bool finishedDialog = false;
 
-    
+    private List<GameObject> dialogChildren = new List<GameObject>();
+
+
     //this is the general interact method that will be brought up, currently it will always loop through the dialog beginning at start object. 
     public void Interact()
     {
+        NPCVariableChecker npcChecker = this.gameObject.GetComponent<NPCVariableChecker>();
+        if(npcChecker != null)
+        {
+            if (this.gameObject.GetComponent<NPCVariableChecker>().CheckNPCUnlock())
+            {
+                NextDialogCheck(startDialogObject);
+            }
+            else
+            {
+                StartCoroutine(LoadAndProceed());
+            }
+        }
+        else
+        {
+            StartCoroutine(LoadAndProceed());
+        }
+
+    }
+
+    private IEnumerator LoadAndProceed()
+    {
+        yield return StartCoroutine(LoadNPCAsync(npcName));
+
+        // Wait until NPC data is loaded
+        while (!npcDataLoaded)
+        {
+            yield return null;
+        }
 
         NextDialogCheck(startDialogObject);
     }
-
-
-    //overloaded method takes in the selected option could be good for manually putting in specific objects 
-    //will want to 1. check for saved dialog in future 
-    // 2. check a bool for saving 
-    //3. bring up that information and loop through the scriptable objects for the right reference and pass it into the interact before this script is called
-    // specifically, in the player interact section - 
 
 
     public void Interact(DialogData selectedOption)
@@ -45,23 +70,19 @@ public class NPCSpeak : MonoBehaviour
     {
         if (selectedOption.nextDialog == null)
         {
-            Debug.Log("next null");
             StartCoroutine(displayDialog(selectedOption));
         }
 
         //if there is a next dialog
         else
         {
-            Debug.Log("Next Not Null");
             //if you havent said your stuff yet: 
             if (!finishedDialog)
             {
-                Debug.Log("Not finished dialog");
                 StartCoroutine(displayDialog(selectedOption));
             }
             else
             {
-                Debug.Log("Finished dialog");
                 StartCoroutine(displayDialog(selectedOption.nextDialog));
             }
 
@@ -70,17 +91,87 @@ public class NPCSpeak : MonoBehaviour
 
     public void OptionSelected(DialogData selectedOption)
     {
-        Debug.Log("OptionSelected");
         optionSelected = true;
         Interact(selectedOption);
 
 
     }
+    public void Save(DialogData selectedOption)
+    {
+        dialogChildren.Clear();
+        if (dialogParent != null)
+        {
+            foreach (Transform child in dialogParent.transform)
+            {
+                DialogData dialogDataComponent = child.GetComponent<DialogData>();
+
+                if (dialogDataComponent != null)
+                {
+                    dialogChildren.Add(child.gameObject);
+                }
+            }
+        }
+        SaveSystem.SaveNPC(npcName, dialogChildren, selectedOption);
+    }
+
+
+    
+    private IEnumerator LoadNPCAsync(string npcName)
+    {
+        yield return new WaitForSeconds(0.5f);
+        NPCData data = SaveSystem.LoadNPC(npcName);
+
+        if (data != null)
+        {
+            //clear the children list
+            dialogChildren.Clear();
+            // get a list of the children of the dialog object again 
+            if (dialogParent != null)
+            {
+                foreach (Transform child in dialogParent.transform)
+                {
+                    DialogData dialogDataComponent = child.GetComponent<DialogData>();
+
+                    if (dialogDataComponent != null)
+                    {
+                        dialogChildren.Add(child.gameObject);
+                    }
+                }
+            }
+
+            //iterate through the bool list from the data 
+            for (int i = 0; i < data.dialogCheck.Length; i++)
+            {
+                //check if it is true 
+                if (data.dialogCheck[i])
+                {
+                    //if it is true, set that location of the dialog children list to the start object 
+                    DialogData dialogData = dialogChildren[i].GetComponent<DialogData>();
+                    startDialogObject = dialogData;
+
+                }
+               
+            }
+            npcDataLoaded = true;
+        }
+        
+        else
+        {
+            npcDataLoaded = true;
+        }
+    }
+
+
+
     IEnumerator displayDialog(DialogData selectedOption)
     {
         yield return null;
-        //saving
+        if(selectedOption.isSaved)
+        {
+            Save(selectedOption);
+        }
         
+
 
         finishedDialog = false;
         //object pooling 
@@ -102,18 +193,7 @@ public class NPCSpeak : MonoBehaviour
                     dialogText.text = dialog.dialogText;
                     GameObject newButton = Instantiate(dialogOptionsPrefab, dialogOptionsParent);
                     spawnedButtons.Add(newButton);
-                    if(this == null)
-                    {
-                        Debug.Log(this + " is null");
-                    }
-                    if (option.followingDialog == null)
-                    {
-                        Debug.Log(option.followingDialog + " is null");
-                    }
-                    if (option.choiceText == null)
-                    {
-                        Debug.Log(option.choiceText + " is null");
-                    }
+                    
 
                     newButton.GetComponent<UIDialogOption>().SetUp(this, option.followingDialog, option.choiceText);
                 }
