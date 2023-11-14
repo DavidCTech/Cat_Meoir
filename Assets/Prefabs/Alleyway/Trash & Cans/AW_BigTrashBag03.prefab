@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2329923849545275267}
   - component: {fileID: 1617571903555129178}
   - component: {fileID: 6840582713701538880}
-  - component: {fileID: 1881468129494986177}
+  - component: {fileID: 3769573362320733765}
   m_Layer: 0
   m_Name: AW_BigTrashBag03
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1617571903555129178
 MeshFilter:
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1881468129494986177
-BoxCollider:
+--- !u!64 &3769573362320733765
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 77.44156, y: 117.96369, z: 82.744675}
-  m_Center: {x: -1.9927711, y: -4.015352, z: -0.45871276}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6239469015914299103, guid: 9f6c186124902d5428a6d511db3ce35b, type: 3}

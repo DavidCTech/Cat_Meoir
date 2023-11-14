@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 4251751310113172143}
   - component: {fileID: 7885197561443204277}
   - component: {fileID: 8897884191567579668}
-  - component: {fileID: 8388089274107513807}
+  - component: {fileID: 9168404560486602837}
   m_Layer: 0
   m_Name: pPlane5
   m_TagString: Untagged
@@ -537,8 +537,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8388089274107513807
-BoxCollider:
+--- !u!64 &9168404560486602837
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -555,9 +555,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 198.66663, y: 136.48392, z: 468.24414}
-  m_Center: {x: 0.00012207031, y: 0.05298233, z: -1.4028854}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5591290641051094240, guid: aa63fff7292dddf4f949ddb6f19d76a4, type: 3}
 --- !u!1 &3632868048028041566
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +867,7 @@ Transform:
   - {fileID: 5934708531604235241}
   - {fileID: 4251751310113172143}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4616767949531081403
 GameObject:

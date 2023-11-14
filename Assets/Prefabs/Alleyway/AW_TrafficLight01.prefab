@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6113410243671027184}
   - component: {fileID: 4956869143923279679}
   - component: {fileID: 3187446490259671191}
-  - component: {fileID: 7286180638242095779}
+  - component: {fileID: 6001964951236465576}
   m_Layer: 0
   m_Name: AW_TrafficLight01
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955618952936465795}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -24.739546, y: 2.1830628, z: -1.484077}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b1a6807fd1b9d5d4f88b374dc72eb722, type: 2}
+  - {fileID: 2100000, guid: 0ee7539e2193d894b9dcaec45915be79, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,8 +86,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7286180638242095779
-BoxCollider:
+--- !u!64 &6001964951236465576
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,9 +104,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 66.548134, y: 400.61255, z: 48.0474}
-  m_Center: {x: 0, y: 0, z: 0.000061035156}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8409771424858943459, guid: ba005b7b5735c924d8e74fbc22052885, type: 3}
 --- !u!1 &3136122736100049811
 GameObject:
   m_ObjectHideFlags: 0
