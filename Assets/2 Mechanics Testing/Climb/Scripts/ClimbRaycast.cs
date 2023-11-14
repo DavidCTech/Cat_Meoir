@@ -26,7 +26,10 @@ public class ClimbRaycast : MonoBehaviour
         Vector3 closestPoint = targetCollider.ClosestPoint(this.gameObject.transform.position);
         Vector3 targetUpperPoint = targetCollider.bounds.center + Vector3.up * targetCollider.bounds.extents.y;
         //now with the target middle upper point and the cloest point - one can combine them 
-        targetUpperPoint = new Vector3(closestPoint.x, targetUpperPoint.y, closestPoint.z);
+
+        // closest point to target upper point which is the average up center could be sent average 
+
+        targetUpperPoint = new Vector3((closestPoint.x + targetUpperPoint.x) /2, targetUpperPoint.y, (closestPoint.z + targetUpperPoint.z) /2);
 
 
         float distance = Vector3.Distance(transform.position, targetUpperPoint);
@@ -56,6 +59,8 @@ public class ClimbRaycast : MonoBehaviour
             float playerHalfHeight = this.gameObject.GetComponent<Collider>().bounds.extents.y;
             targetMidPoint.y = targetMidPoint.y + playerHalfHeight + up;
             targetUpperPoint.y = targetUpperPoint.y + playerHalfHeight + up;
+
+
 
 
             //now put it into the original playerclimb 
