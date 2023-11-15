@@ -5,13 +5,14 @@ using UnityEngine;
 public class ClimbRaycast : MonoBehaviour
 {
 
-    public float offset;
+    //public float offset;
     public float up;
-    public float maxDistance; 
-    private PlayerMovement playerMovement; 
+    public float maxDistance;
+    public float directionMagnitude;
+    private PlayerMovement playerMovement;
+  
 
 
-    
     public void Jump(GameObject target)
     {
         
@@ -21,21 +22,28 @@ public class ClimbRaycast : MonoBehaviour
 
     private void JumpMethod(GameObject target)
     {
-
+     
         Collider targetCollider = target.GetComponent<Collider>();
         Vector3 closestPoint = targetCollider.ClosestPoint(this.gameObject.transform.position);
         Vector3 targetUpperPoint = targetCollider.bounds.center + Vector3.up * targetCollider.bounds.extents.y;
-        //now with the target middle upper point and the cloest point - one can combine them 
 
-        // closest point to target upper point which is the average up center could be sent average 
+        // Calculate the direction vector from the player to the target
+        Vector3 directionToTarget = (closestPoint - transform.position).normalized;
 
-        targetUpperPoint = new Vector3((closestPoint.x + targetUpperPoint.x) /2, targetUpperPoint.y, (closestPoint.z + targetUpperPoint.z) /2);
+        // You can adjust the magnitude of the direction vector based on your preferences
+        
+        Vector3 adjustedDirection = directionToTarget * directionMagnitude;
 
-
+        // Modify the targetUpperPoint based on the direction vector
+        targetUpperPoint = new Vector3(closestPoint.x , targetUpperPoint.y,closestPoint.z);
+        targetUpperPoint += adjustedDirection;
+        
+        
         float distance = Vector3.Distance(transform.position, targetUpperPoint);
+        
 
         //using the distance control if you should jump or not 
-        if(distance <= maxDistance)
+        if (distance <= maxDistance)
         {
             Vector3 jumpDirection = (targetUpperPoint - transform.position).normalized;
             
@@ -53,12 +61,12 @@ public class ClimbRaycast : MonoBehaviour
             Vector3 playerVector = this.gameObject.transform.position;
 
             //use the equation made to get mid point 
-            Vector3 targetMidPoint = new Vector3((targetUpperPoint.x * (1 - offset)), targetUpperPoint.y + (targetUpperPoint.y * offset), (playerVector.z + targetUpperPoint.z) / 2);
+            Vector3 targetMidPoint = new Vector3((targetUpperPoint.x + this.gameObject.transform.position.x) /2, (targetUpperPoint.y + this.gameObject.transform.position.y) / 2, (playerVector.z + targetUpperPoint.z) / 2);
 
             //change the mid and upper point to include half the players height in order to make it not glitch through walls
             float playerHalfHeight = this.gameObject.GetComponent<Collider>().bounds.extents.y;
             targetMidPoint.y = targetMidPoint.y + playerHalfHeight + up;
-            targetUpperPoint.y = targetUpperPoint.y + playerHalfHeight + up;
+            targetUpperPoint.y = targetUpperPoint.y + playerHalfHeight;
 
 
 
