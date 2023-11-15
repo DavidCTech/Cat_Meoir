@@ -28,7 +28,11 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public TMP_Dropdown dropdown;
     private float scrollPosition = 1;
     public AudioMixer audioMixer;
-    private Resolution[] resolutions;
+
+    private int currentResolutionIndex = 0;
+    private float currentRefreshRate;
+
+    Resolution[] resolutions;
 
     private List<Resolution> filteredResolutions;
 
@@ -38,8 +42,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public float scrollSpeed = 0.1f;
 
-    private int currentResolutionIndex = 0;
-    private float currentRefreshRate;
+  
     public PlayerController playerControls;
 
     public Toggle vSyncToggle;
@@ -114,15 +117,16 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
-        dropdown.value = QualitySettings.GetQualityLevel();
-
-        filteredResolutions = new List<Resolution>();
 
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
 
         currentRefreshRate = Screen.currentResolution.refreshRate;
+
+        List<string> options = new List<string>();
+
+        filteredResolutions = new List<Resolution>();
 
         for (int i = 0; i < resolutions.Length; i++)
         {
@@ -131,8 +135,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
                 filteredResolutions.Add(resolutions[i]);
             }
         }
-
-        List<string> options = new List<string>();
 
         for (int i = 0; i < filteredResolutions.Count; i++)
         {
@@ -145,26 +147,18 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
             }
         }
 
-        resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.AddOptions(options);
+
+        resolutionDropdown.value = currentResolutionIndex;
+        
         resolutionDropdown.RefreshShownValue();
+
+        dropdown.value = QualitySettings.GetQualityLevel();
+
     }
 
     private void Update()
     {
-        float scrollInput = Input.GetAxis("Vertical");  
-
-        if (scrollInput != 0)
-        {
-            
-            float newScrollPosition = scrollRect.verticalNormalizedPosition - scrollInput * scrollSpeed;
-
-            
-            newScrollPosition = Mathf.Clamp01(newScrollPosition);
-
-            
-            scrollRect.verticalNormalizedPosition = newScrollPosition;
-        }
 
     }
 
