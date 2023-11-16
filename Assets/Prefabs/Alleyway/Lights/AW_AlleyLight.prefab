@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6814124299099568772}
   - component: {fileID: 6983067156717353470}
   - component: {fileID: 2378118556068487801}
+  - component: {fileID: 5437940743010199082}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -45,10 +46,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.9111022, g: 0.9528302, b: 0.6777679, a: 1}
-  m_Intensity: 3
+  m_Intensity: 4.5
   m_Range: 5
-  m_SpotAngle: 90
-  m_InnerSpotAngle: 55
+  m_SpotAngle: 43.96484
+  m_InnerSpotAngle: 8.964832
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -79,7 +80,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -118,6 +119,24 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &5437940743010199082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55572824213900531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a170626ca8d744cb864be58f20d332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Light: {fileID: 6983067156717353470}
+  MinTime: 0.1
+  MaxTime: 0.7
+  Timer: 0
+  AS: {fileID: 0}
+  LightAudio: {fileID: 0}
 --- !u!1 &2443247704900175591
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +216,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -269,7 +288,7 @@ Transform:
   - {fileID: 6814124299099568772}
   - {fileID: 3478323749791916929}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!33 &1697017191122089326
 MeshFilter:
