@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ClimbRaycast))]
+ [CustomEditor(typeof(ClimbRaycast))]
 public class ClimbRaycastEditor : Editor
 {
     private void OnSceneGUI()
