@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
- [CustomEditor(typeof(NPCSight))]
+[CustomEditor(typeof(NPCSight))]
 public class NPCSightEditor : Editor
 {
     //This script just shows AI for the Camera. Do not mess with it, it does not appear in a build or play mode. 
