@@ -4,81 +4,89 @@ using UnityEngine;
 
 public class FlickeringLight : MonoBehaviour
 {
-    /*
-        public Light _Light;
-        public Light spotLight;
+    [Header("Light Sources Variables")]
+    public Light pointLight;
+    public Light spotLight;
 
-        public float MinTime;
-        public float MaxTime;
-        public float Timer;
+    [Header("Light Sources Variables")]
+    public float MinTime;
+    public float MaxTime;
+    public float Timer;
 
-        public AudioSource AS;
-        public AudioClip LightAudio;
-        public Material lightOff, lightOn;
-        public MeshRenderer meshRenderer;
-        Renderer renderer;
-        public int materialIndex;
-        bool wasCalled;
-        bool wasCalled2;
+    [Header("Audio Variables")]
+    public AudioSource AS;
+    public AudioClip LightAudio;
 
-        public void Start()
+    [Header("Material Variables")]
+    public int materialIndex;
+    public Material lightOff, lightOn;
+    public Material[] newMaterials;
+    private Material[] originalMaterials;
+    private Renderer renderer;
+
+    public void Start()
+    {
+        Timer = Random.Range(MinTime, MaxTime);
+        renderer = GetComponent<Renderer>();
+        originalMaterials = renderer.materials;
+    }
+
+
+    public void Update()
+    {
+        FlickerLight();
+    }
+
+    void FlickerLight()
+    {
+        if (Timer > 0)
         {
-            Timer = Random.Range(MinTime, MaxTime);
-            meshRenderer = GetComponent<MeshRenderer>();
-        }
-
-
-        public void Update()
-        {
-            FlickerLight();
-        }
-
-        void FlickerLight()
-        {
-            if (Timer > 0)
-            {
-                Timer -= Time.deltaTime;
-                wasCalled2 = false;
-
-                if (!wasCalled)
-                {
-                    wasCalled = true;
-                    ChangeToOn();
-                }
-            }
+            Timer -= Time.deltaTime;
 
             if (Timer <= 0)
             {
-                if (_Light != null)
+                if (pointLight != null)
                 {
-                    _Light.enabled = !_Light.enabled;
-                    spotLight.enabled = !spotLight.enabled;
-                    wasCalled = false;
+                    pointLight.enabled = !pointLight.enabled;
 
-                    if (!wasCalled2)
+                    if (pointLight.enabled)
                     {
-                        wasCalled2 = true;
-                        ChangeToOff();
-                        Timer = Random.Range(MinTime, MaxTime);
+                        ChangeToOn();
                     }
-
-
+                    else if (!pointLight.enabled)
+                    {
+                        ChangeToOff();
+                    }
                 }
-                //AS.PlayOneShot(LightAudio);
+
+                if (spotLight != null)
+                {
+                    spotLight.enabled = !spotLight.enabled;
+
+                    if (spotLight.enabled)
+                    {
+                        ChangeToOn();
+                    }
+                    else if (!spotLight.enabled)
+                    {
+                        ChangeToOff();
+                    }
+                }
+
+                Timer = Random.Range(MinTime, MaxTime);
             }
         }
 
-        void ChangeToOff()
-        {
-            var materialsCopy = meshRenderer.materials;
-            materialsCopy[materialIndex] = lightOff;
-            meshRenderer.materials = materialsCopy;
-        }
+        //AS.PlayOneShot(LightAudio);
+    }
 
-        void ChangeToOn()
-        {
-            var materialsCopy = meshRenderer.materials;
-            materialsCopy[materialIndex] = lightOn;
-            meshRenderer.materials = materialsCopy;
-        }*/
+    public void ChangeToOff()
+    {
+        renderer.materials = newMaterials;
+    }
+
+    public void ChangeToOn()
+    {
+        renderer.materials = originalMaterials;
+    }
 }
