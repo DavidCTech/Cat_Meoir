@@ -110,7 +110,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3255589778157924098}
-  m_LocalRotation: {x: -0, y: -0.6087605, z: -0, w: 0.79335415}
+  m_LocalRotation: {x: 0, y: -0.60876137, z: 0, w: 0.7933534}
   m_LocalPosition: {x: 37.249752, y: 1.25, z: 8.992514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -118,7 +118,7 @@ Transform:
   - {fileID: 2064477787394866385}
   - {fileID: 288312503788165572}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -75, z: 0}
 --- !u!23 &5361484771850044597
 MeshRenderer:
@@ -182,7 +182,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5896811465032772436
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a28058467704a4c96c18c1097c84da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 3255589778157924098}
+  Player: {fileID: 0}
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -211,11 +211,11 @@ MonoBehaviour:
   _randomWander: 0
   _alwaysMoving: 0
   _fleeFromPlayer: 0
-  wait_time: 0
+  wait_time: 2
   _speed: 1
   _walkRadius: 0
-  _FoVRadius: 90
-  _FoVAngle: 34
+  _FoVRadius: 10
+  _FoVAngle: 71
   _proximityRadius: 2
   _proximityAngle: 360
   _waypoints:
