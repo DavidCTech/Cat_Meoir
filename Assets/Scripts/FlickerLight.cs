@@ -8,7 +8,7 @@ public class FlickeringLight : MonoBehaviour
     public Light pointLight;
     public Light spotLight;
 
-    [Header("Light Sources Variables")]
+    [Header("Time Variables")]
     public float MinTime;
     public float MaxTime;
     public float Timer;
@@ -19,7 +19,6 @@ public class FlickeringLight : MonoBehaviour
 
     [Header("Material Variables")]
     public int materialIndex;
-    public Material lightOff, lightOn;
     public Material[] newMaterials;
     private Material[] originalMaterials;
     private Renderer renderer;
