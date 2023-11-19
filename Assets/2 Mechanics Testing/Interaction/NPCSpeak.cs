@@ -28,12 +28,16 @@ public class NPCSpeak : MonoBehaviour
     //this is the general interact method that will be brought up, currently it will always loop through the dialog beginning at start object. 
     public void Interact()
     {
+        //finishedDialog = false;
         NPCVariableChecker npcChecker = this.gameObject.GetComponent<NPCVariableChecker>();
         if(npcChecker != null)
         {
             if (this.gameObject.GetComponent<NPCVariableChecker>().CheckNPCUnlock())
             {
+                Debug.Log("---");
                 NextDialogCheck(startDialogObject);
+               
+
             }
             else
             {
@@ -45,6 +49,12 @@ public class NPCSpeak : MonoBehaviour
             StartCoroutine(LoadAndProceed());
         }
 
+    }
+
+    public void Interact(DialogData selectedOption)
+    {
+        finishedDialog = false;
+        NextDialogCheck(selectedOption);
     }
 
     private IEnumerator LoadAndProceed()
@@ -61,31 +71,35 @@ public class NPCSpeak : MonoBehaviour
     }
 
 
-    public void Interact(DialogData selectedOption)
-    {
-        NextDialogCheck(selectedOption);
-    }
-
     public void NextDialogCheck(DialogData selectedOption)
     {
         if (selectedOption.nextDialog == null)
         {
             StartCoroutine(displayDialog(selectedOption));
+            Debug.Log("this");
         }
 
         //if there is a next dialog
         else
         {
-            //if you havent said your stuff yet: 
-            if (!finishedDialog)
+            if (finishedDialog)
             {
-                StartCoroutine(displayDialog(selectedOption));
+                Debug.Log("Intect again?" );
+                Interact(startDialogObject);
             }
             else
             {
-                StartCoroutine(displayDialog(selectedOption.nextDialog));
+                startDialogObject = selectedOption.nextDialog;
+                Debug.Log("next dialog option " + startDialogObject);
+                Debug.Log("Current dialog Option:  " + selectedOption);
+                StartCoroutine(displayDialog(selectedOption));
             }
-
+            
+            
+            
+           
+            
+           
         }
     }
 
@@ -170,10 +184,17 @@ public class NPCSpeak : MonoBehaviour
         {
             Save(selectedOption);
         }
-        
 
 
-        finishedDialog = false;
+        GameObject optionObj = selectedOption.gameObject;
+        DialogAction dialogAction = optionObj.GetComponent<DialogAction>(); 
+        if(dialogAction != null)
+        {
+            dialogAction.Action(); 
+        }
+
+        //finishedDialog = false;
+        Debug.Log("Last option: " + selectedOption);
         //object pooling 
         List<GameObject> spawnedButtons = new List<GameObject>();
         dialogCanvas.SetActive(true);
@@ -207,15 +228,19 @@ public class NPCSpeak : MonoBehaviour
         dialogOptionsContainer.SetActive(false);
         dialogCanvas.SetActive(false);
         optionSelected = false;
+        Debug.Log("finished dialog true "+ selectedOption);
         finishedDialog = true;
         foreach (GameObject button in spawnedButtons)
         {
             Destroy(button);
         }
+       
+        /*
         if (selectedOption.nextDialog != null)
         {
             NextDialogCheck(selectedOption);
         }
+        */
 
     }
 

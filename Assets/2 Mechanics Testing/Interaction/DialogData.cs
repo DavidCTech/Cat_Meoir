@@ -6,6 +6,7 @@ public class DialogData : MonoBehaviour
 {
 
     public List<DialogSegments> dialogSegments = new List<DialogSegments>();
+    //next dialog will be like the next dialog that gets turned on when you talk again 
     public DialogData nextDialog;
     public bool isSaved;
 

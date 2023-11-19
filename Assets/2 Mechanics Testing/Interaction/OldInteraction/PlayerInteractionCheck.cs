@@ -57,7 +57,7 @@ public class PlayerInteractionCheck : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Not in the angle " );
+                    //Debug.Log("Not in the angle " );
                 }
             }
         }
@@ -71,10 +71,10 @@ public class PlayerInteractionCheck : MonoBehaviour
         {
             //checks a raycast for the interactable objects to see what the tag is - depending on tag this script will call other scripts. 
             string objectName = CheckObject();
-            Debug.Log(objectName);
+            
             if (objectName == "Interact")
             {
-
+                Debug.Log("Interact");
                 //should turn the player here    
                 //targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
                 //targetObject.GetComponent<NPCTalk>().Interact();
@@ -96,7 +96,7 @@ public class PlayerInteractionCheck : MonoBehaviour
             }
             if (objectName == "Door")
             {
-                Debug.Log("should have");
+                //Debug.Log("should have");
                 targetObject.GetComponent<ClueTriggerEvents>().CheckDoorUnlock();
             }
             else

@@ -170,6 +170,129 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 96693612}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &96693611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 96693612}
+  m_Layer: 0
+  m_Name: GeneralDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &96693612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96693611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1806984212}
+  - {fileID: 65276194}
+  - {fileID: 1866800640}
+  - {fileID: 304493565}
+  - {fileID: 1300101223}
+  m_Father: {fileID: 549757721}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &212760956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212760958}
+  - component: {fileID: 212760957}
+  m_Layer: 0
+  m_Name: FinalDialog (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &212760957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212760956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a162b70f43faa46a357a42cd40a5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogSegments:
+  - dialogText: You can go now...
+    dialogDisplayTime: 1
+    dialogChoices: []
+  - dialogText: 'I mean it. '
+    dialogDisplayTime: 1
+    dialogChoices: []
+  nextDialog: {fileID: 212760957}
+  isSaved: 1
+--- !u!4 &212760958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212760956}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 549757721}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &240102236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 240102237}
+  m_Layer: 0
+  m_Name: ClueDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &240102237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240102236}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1618252720}
+  - {fileID: 969372138}
+  - {fileID: 1727790430}
   m_Father: {fileID: 549757721}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -424,7 +547,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 549757721}
+  m_Father: {fileID: 96693612}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &304493566
@@ -443,8 +566,8 @@ MonoBehaviour:
   - dialogText: 'Thanks I''ll wait here until you do. '
     dialogDisplayTime: 1
     dialogChoices: []
-  nextDialog: {fileID: 0}
-  isSaved: 1
+  nextDialog: {fileID: 969372139}
+  isSaved: 0
 --- !u!1 &345643825
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,17 +1097,63 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1727790430}
-  - {fileID: 914612925}
-  - {fileID: 749176859}
-  - {fileID: 1806984212}
-  - {fileID: 65276194}
-  - {fileID: 1866800640}
-  - {fileID: 304493565}
-  - {fileID: 1300101223}
+  - {fileID: 212760958}
+  - {fileID: 557446654}
+  - {fileID: 240102237}
+  - {fileID: 96693612}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &557446653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 557446654}
+  - component: {fileID: 557446655}
+  m_Layer: 0
+  m_Name: FinalDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &557446654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557446653}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 549757721}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &557446655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557446653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a162b70f43faa46a357a42cd40a5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogSegments:
+  - dialogText: Good Job! You took a picture of it all!
+    dialogDisplayTime: 1
+    dialogChoices: []
+  nextDialog: {fileID: 212760957}
+  isSaved: 1
 --- !u!1 &645695293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1199,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 921495b33fa6e34458f684c3eb30fdcf, type: 2}
   - {fileID: 11400000, guid: e96e86bb63fea9744b1aead9d84840cf, type: 2}
   - {fileID: 11400000, guid: 7ff7c4f528dc5d04b9cf6574f1fd2fa5, type: 2}
+  npcSaves: {fileID: 0}
+  optionSelected: 0
+  finishedDialog: 0
 --- !u!136 &645695295
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1393,56 +1565,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &749176858
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 749176859}
-  - component: {fileID: 749176860}
-  m_Layer: 0
-  m_Name: ClueDialog (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &749176859
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 749176858}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 549757721}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &749176860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 749176858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52a162b70f43faa46a357a42cd40a5da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogSegments:
-  - dialogText: 'It''s a shame you don''t like beans. '
-    dialogDisplayTime: 1
-    dialogChoices: []
-  nextDialog: {fileID: 0}
-  isSaved: 1
 --- !u!1 &770169444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,6 +1608,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 921495b33fa6e34458f684c3eb30fdcf, type: 2}
   - {fileID: 11400000, guid: e96e86bb63fea9744b1aead9d84840cf, type: 2}
   - {fileID: 11400000, guid: 7ff7c4f528dc5d04b9cf6574f1fd2fa5, type: 2}
+  npcSaves: {fileID: 0}
+  optionSelected: 0
+  finishedDialog: 0
 --- !u!136 &770169446
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1652,7 +1777,7 @@ RectTransform:
   m_AnchoredPosition: {x: 385, y: -261}
   m_SizeDelta: {x: 770, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &914612924
+--- !u!1 &969372137
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1660,44 +1785,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 914612925}
-  - component: {fileID: 914612926}
+  - component: {fileID: 969372138}
+  - component: {fileID: 969372139}
   m_Layer: 0
-  m_Name: ClueDialog (1)
+  m_Name: WaitDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &914612925
+--- !u!4 &969372138
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914612924}
+  m_GameObject: {fileID: 969372137}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 549757721}
+  m_Father: {fileID: 240102237}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &914612926
+--- !u!114 &969372139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914612924}
+  m_GameObject: {fileID: 969372137}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52a162b70f43faa46a357a42cd40a5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogSegments:
-  - dialogText: 'I like beans too. '
+  - dialogText: What are you doing?
+    dialogDisplayTime: 1
+    dialogChoices: []
+  - dialogText: Take a pic of the clue!
     dialogDisplayTime: 1
     dialogChoices: []
   nextDialog: {fileID: 0}
@@ -2340,8 +2468,8 @@ MonoBehaviour:
   - dialogText: Take the picture already.
     dialogDisplayTime: 1
     dialogChoices: []
-  nextDialog: {fileID: 0}
-  isSaved: 1
+  nextDialog: {fileID: 969372139}
+  isSaved: 0
 --- !u!4 &1300101223
 Transform:
   m_ObjectHideFlags: 0
@@ -2354,7 +2482,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 549757721}
+  m_Father: {fileID: 96693612}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1458693420
@@ -2580,6 +2708,155 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1496224404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1496224405}
+  - component: {fileID: 1496224411}
+  - component: {fileID: 1496224410}
+  - component: {fileID: 1496224409}
+  - component: {fileID: 1496224408}
+  - component: {fileID: 1496224407}
+  - component: {fileID: 1496224406}
+  m_Layer: 8
+  m_Name: Dirt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!4 &1496224405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496224404}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.48, y: -0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7842286825055333516}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1496224406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496224404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a593c8cecae58742a08e1f3fc73b42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCutScene: 1
+  video: {fileID: 9011169367490887919}
+  videoCanvas: {fileID: 952952791418654234}
+--- !u!114 &1496224407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496224404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd385733ca0048c4ca5d0af279609dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: A key that might unlock a door.
+--- !u!114 &1496224408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496224404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca60954d478aaa4408035fe598d64d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionColor: {r: 0.028574357, g: 0.015686274, b: 1, a: 1}
+--- !u!65 &1496224409
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496224404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1496224410
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496224404}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f9135775643fdd940b2f26c1d9befe50, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1496224411
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496224404}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1618051941
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,6 +2973,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1618252718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618252720}
+  - component: {fileID: 1618252719}
+  - component: {fileID: 1618252721}
+  m_Layer: 0
+  m_Name: WaitDialog2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1618252719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618252718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a162b70f43faa46a357a42cd40a5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogSegments:
+  - dialogText: The other clue- Take a pic!
+    dialogDisplayTime: 1
+    dialogChoices: []
+  nextDialog: {fileID: 0}
+  isSaved: 1
+--- !u!4 &1618252720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618252718}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 240102237}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1618252721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618252718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609311d46e4ba2e47894d0aac4340b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clueEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7337194538567982007}
+        m_TargetAssemblyTypeName: NPCVariableChecker, Assembly-CSharp
+        m_MethodName: UnlockDialog
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  actionEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  clueNames:
+  - Clue
+  - Dirt
+  dialogData: {fileID: 557446655}
 --- !u!1 &1667685997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,6 +3205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727790430}
   - component: {fileID: 1727790431}
+  - component: {fileID: 1727790432}
   m_Layer: 0
   m_Name: ClueDialog
   m_TagString: Untagged
@@ -2862,7 +3225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 549757721}
+  m_Father: {fileID: 240102237}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1727790431
@@ -2884,8 +3247,45 @@ MonoBehaviour:
   - dialogText: 'Good job. '
     dialogDisplayTime: 1
     dialogChoices: []
-  nextDialog: {fileID: 0}
+  - dialogText: 'I''ll want a picture of the other clue- the Dirt. '
+    dialogDisplayTime: 1
+    dialogChoices: []
+  nextDialog: {fileID: 1618252719}
   isSaved: 0
+--- !u!114 &1727790432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727790429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609311d46e4ba2e47894d0aac4340b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clueEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7337194538567982007}
+        m_TargetAssemblyTypeName: NPCVariableChecker, Assembly-CSharp
+        m_MethodName: UnlockDialog
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  actionEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  clueNames:
+  - Clue
+  - Dirt
+  dialogData: {fileID: 557446655}
 --- !u!1 &1806984210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2940,7 +3340,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 549757721}
+  m_Father: {fileID: 96693612}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1866800638
@@ -2994,7 +3394,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 549757721}
+  m_Father: {fileID: 96693612}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1876226166
@@ -3360,7 +3760,7 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 --- !u!114 &323441266227861506
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9382,7 +9782,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3161522841982568244
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9662,6 +10062,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isHiding: 0
+  closestPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &3251568974140689208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11043,7 +11444,7 @@ MonoBehaviour:
   - {fileID: 2636268154988382608}
 --- !u!4 &4108603008862391439
 Transform:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -12683,7 +13084,7 @@ MonoBehaviour:
         m_CallState: 2
 --- !u!1 &4785471774126430491
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -18558,7 +18959,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2865422467237566021}
-  m_LocalRotation: {x: 0.22975291, y: 0.0000000187227, z: -0.0000000044198294, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: -0.0000000187227, z: 0.0000000044198294, w: 0.973249}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18811,6 +19212,7 @@ Transform:
   - {fileID: 3768090094751395594}
   - {fileID: 4694713191202919965}
   - {fileID: 5694330022117156957}
+  - {fileID: 1496224405}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

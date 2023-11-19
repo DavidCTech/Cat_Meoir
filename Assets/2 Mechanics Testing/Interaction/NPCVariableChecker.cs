@@ -72,5 +72,51 @@ public class NPCVariableChecker : MonoBehaviour
         
     }
 
+    public void UnlockDialog(List<string> inputClueNames, DialogData _dialogData)
+    {
+        foreach (PhotoScriptable snapshot in photoManager.snapshots)
+        {
+            if (snapshot.isClue)
+            {
+                if (!cluesFound.Contains(snapshot.clueName))
+                {
+                    cluesFound.Add(snapshot.clueName);
+                }
+
+
+            }
+        }
+
+        foreach (PhotoScriptable snapshot in photoManager.snapshots)
+        {
+            if (snapshot.isClue)
+            {
+                string snapshotClueName = snapshot.clueName;
+                isAllCluesFound = false;
+            }
+        }
+
+        // Check if all level designer clues are present in player's clues
+        isAllCluesFound = true;
+        foreach (string clueName in inputClueNames)
+        {
+            if (!cluesFound.Contains(clueName))
+            {
+                isAllCluesFound = false;
+                break;
+
+                // No need to check further if one clue is missing
+            }
+
+
+        }
+        if (isAllCluesFound)
+        {
+            this.gameObject.GetComponent<NPCSpeak>().startDialogObject = _dialogData;
+
+        }
+       
+    }
+
 
 }
