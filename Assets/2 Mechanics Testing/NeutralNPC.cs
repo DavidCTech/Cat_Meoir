@@ -24,7 +24,13 @@ public class NeutralNPC : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstructionMask;
 
+    public float timer = 0f;
+    public float duration = 20f; // Adjust the duration as needed
+
     public GameObject Player;
+    public Transform player;
+    public float rotationSpeed = 5f; // Adjust the rotation speed as needed
+
     public float _proximityRadius;
     [Range(0, 360)] public float _proximityAngle;
 
@@ -56,10 +62,21 @@ public class NeutralNPC : MonoBehaviour
         }
     }
 
+    public bool IsTimerFinished()
+    {
+        return timer >= duration;
+    }
+
     void Update()
     {
 
         ProximityCheck();
+        timer += Time.deltaTime;
+
+        if (timer >= duration)
+        {
+            timer = 0f;
+        }
 
         switch (currentState)
         {
@@ -78,7 +95,8 @@ public class NeutralNPC : MonoBehaviour
             case NPCState.Walk:
                 if (awake)
                 {
-                    StartCoroutine(Walking());
+                    //StartCoroutine(Walking());
+                    Walking();
                 }
                 else if (tired && interested)
                 {
@@ -99,22 +117,45 @@ public class NeutralNPC : MonoBehaviour
 
     void Idling()
     {
-        StartCoroutine(IdleWaitTimer());
+        if (player != null && interested)
+        {
+            // Calculate the direction from the NPC to the player
+            Vector3 directionToPlayer = player.position - transform.position;
+
+            // Ignore the y-component to only rotate on the horizontal plane
+            directionToPlayer.y = 0;
+
+            // Set the rotation to smoothly look at the player
+            if (directionToPlayer != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer.normalized, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+        }
+        else
+        {
+            StartCoroutine(IdleWaitTimer());
+        }
+
     }
 
 
-    IEnumerator Walking()
+    /*IEnumerator*/void Walking()
     {
         //Random Movement
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Vector3 point;
-            if (RandomPoint(centrePoint.position, range, out point))
+            if (RandomPoint(centrePoint.position, range, out point) && timer <= 10)
             {
                 agent.SetDestination(point);
-                yield return new WaitForSeconds(10.0f);
+                //yield return new WaitForSeconds(10.0f);
+                
+            }
+            else
+            {
                 tired = true;
-                if(tired && interested)
+                if (tired && interested)
                 {
                     currentState = NPCState.Idle;
                 }
@@ -123,7 +164,6 @@ public class NeutralNPC : MonoBehaviour
                     awake = true;
                 }
             }
-
         }
 
         //Random Movement
