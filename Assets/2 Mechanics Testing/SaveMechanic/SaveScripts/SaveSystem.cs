@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -7,12 +8,12 @@ public static class SaveSystem
 {
     
     //player data
-    public static void SavePlayer(Transform playerTransform)
+    public static void SavePlayer(Transform playerTransform, string sceneName)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
 
-        string path = Application.persistentDataPath + "/PlayerData.CatMeoir";
+        string path = Application.persistentDataPath + "/PlayerData_" + sceneName +".CatMeoir";
         FileStream stream = new FileStream(path, FileMode.Create);
 
 
@@ -23,9 +24,9 @@ public static class SaveSystem
         stream.Close();
 
     }
-    public static PlayerData LoadPlayer()
+    public static PlayerData LoadPlayer(string sceneName)
     {
-        string path = Application.persistentDataPath + "/PlayerData.CatMeoir";
+        string path = Application.persistentDataPath + "/PlayerData_" + sceneName + ".CatMeoir";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -48,19 +49,28 @@ public static class SaveSystem
 
     public static void DeletePlayer()
     {
-        string path = Application.persistentDataPath + "/PlayerData.CatMeoir";
-        if (File.Exists(path))
+        string directoryPath = Application.persistentDataPath;
+        string searchPattern = "playerdata*";  // Remove the leading slash
+
+        // Combine the directory path and search pattern to create a platform-specific path
+        string[] filesToDelete = Directory.GetFiles(directoryPath, searchPattern);
+
+        foreach (string filePath in filesToDelete)
         {
-            File.Delete(path);
+            try
+            {
+                // Delete each file
+                File.Delete(filePath);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error deleting file {filePath}: {e.Message}");
+            }
         }
 
-        else
-        {
-            //Debug.LogError("Save File not found in " + path);
-
-        }
 
     }
+  
 
 
 
@@ -246,6 +256,27 @@ public static class SaveSystem
             return null;
         }
 
+    }
+    public static void DeleteNPC()
+    {
+        string directoryPath = Application.persistentDataPath;
+        string searchPattern = "NPCData*";  
+
+        // Combine the directory path and search pattern to create a platform-specific path
+        string[] filesToDelete = Directory.GetFiles(directoryPath, searchPattern);
+
+        foreach (string filePath in filesToDelete)
+        {
+            try
+            {
+                // Delete each file
+                File.Delete(filePath);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error deleting file {filePath}: {e.Message}");
+            }
+        }
     }
 
 
