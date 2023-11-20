@@ -6,27 +6,12 @@ using UnityEngine.UI;
 public class UIDialogOption : MonoBehaviour
 {
   
+    //this goes on the dialogbutton prefab 
     private DialogData dialogData;
     private Text dialogText;
     private NPCSpeak npcSpeak;
 
-    //scriptable
-    /*
-     private NPCTalk npcTalk;
-    public void SetUp(NPCTalk _npcTalk, DialogScriptable _dialogScriptable, string _dialogText)
-    {
-        npcTalk = _npcTalk;
-        dialogScriptable = _dialogScriptable;
-        dialogText = this.gameObject.GetComponentInChildren<Text>();
-        dialogText.text = _dialogText; 
-    }
-    public void SelectOption()
-    {
-        npcTalk.OptionSelected(dialogScriptable);
-      
-    }
-    */
-
+    //set up creates info for the button 
     public void SetUp(NPCSpeak _npcSpeak, DialogData _dialogData, string _dialogText)
     {
         npcSpeak = _npcSpeak;
@@ -34,6 +19,7 @@ public class UIDialogOption : MonoBehaviour
         dialogText = this.gameObject.GetComponentInChildren<Text>();
         dialogText.text = _dialogText;
     }
+    //on select option it will do option selected in the npcspeak - which changes the dialog
     public void SelectOption()
     {
         npcSpeak.OptionSelected(dialogData);

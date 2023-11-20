@@ -5,24 +5,32 @@ using UnityEngine;
 public class NPCVariableChecker : MonoBehaviour
 {
     // Place on your npc
-    private PhotoManager photoManager;
+   
     [Header("Write the name of the Game Object of the clue your looking for")]
     public List<string> clueNames = new List<string>();
-    private List<string> cluesFound = new List<string>();
-    private bool isAllCluesFound = false;
     [Header("Get reference to Photo Manager")]
     public GameObject gameManagerObject;
-    [Header("Special Dialog")]
+    [Header("Special Dialog that appears when you complete the task")]
     public DialogData dialogData;
+    [HideInInspector]
+    public bool isSaid = false;
 
+    private List<string> cluesFound = new List<string>();
+    private bool isAllCluesFound;
+    private PhotoManager photoManager;
+    private NPCSpeak npcSpeak; 
 
     void Awake()
     {
         photoManager = gameManagerObject.GetComponent<PhotoManager>();
+        npcSpeak = this.gameObject.GetComponent<NPCSpeak>();
     }
 
     public bool CheckNPCUnlock()
     {
+        //look through the photos for things that have a clue name related to 
+        // what you are looking for - add those clues to the clues found here
+       
         foreach (PhotoScriptable snapshot in photoManager.snapshots)
         {
             if (snapshot.isClue)
@@ -31,21 +39,11 @@ public class NPCVariableChecker : MonoBehaviour
                 {
                     cluesFound.Add(snapshot.clueName);
                 }
-
-
             }
         }
 
-        foreach (PhotoScriptable snapshot in photoManager.snapshots)
-        {
-            if (snapshot.isClue)
-            {
-                string snapshotClueName = snapshot.clueName;
-                isAllCluesFound = false;
-            }
-        }
-
-        // Check if all level designer clues are present in player's clues
+        // loop through the clue names found
+        // and check if the ones require have it 
         isAllCluesFound = true;
         foreach (string clueName in clueNames)
         {
@@ -56,15 +54,16 @@ public class NPCVariableChecker : MonoBehaviour
 
                 // No need to check further if one clue is missing
             }
-
-
         }
+
+        // clues were found- npc speak start dialog is set to the clue solve information 
         if (isAllCluesFound)
         {
-            this.gameObject.GetComponent<NPCSpeak>().startDialogObject = dialogData;
+            isSaid = true; 
+            npcSpeak.startDialogObject = dialogData;
             return true; 
-
         }
+
         else
         {
             return false; 
@@ -72,6 +71,8 @@ public class NPCVariableChecker : MonoBehaviour
         
     }
 
+    //this is a public method one can use in actions-
+    //it does the same as the one above but takes in arguments 
     public void UnlockDialog(List<string> inputClueNames, DialogData _dialogData)
     {
         foreach (PhotoScriptable snapshot in photoManager.snapshots)
@@ -82,21 +83,9 @@ public class NPCVariableChecker : MonoBehaviour
                 {
                     cluesFound.Add(snapshot.clueName);
                 }
-
-
             }
         }
 
-        foreach (PhotoScriptable snapshot in photoManager.snapshots)
-        {
-            if (snapshot.isClue)
-            {
-                string snapshotClueName = snapshot.clueName;
-                isAllCluesFound = false;
-            }
-        }
-
-        // Check if all level designer clues are present in player's clues
         isAllCluesFound = true;
         foreach (string clueName in inputClueNames)
         {
@@ -104,19 +93,13 @@ public class NPCVariableChecker : MonoBehaviour
             {
                 isAllCluesFound = false;
                 break;
-
-                // No need to check further if one clue is missing
             }
 
-
         }
+
         if (isAllCluesFound)
         {
-            this.gameObject.GetComponent<NPCSpeak>().startDialogObject = _dialogData;
-
+            npcSpeak.startDialogObject = _dialogData;
         }
-       
     }
-
-
 }

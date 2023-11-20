@@ -18,6 +18,7 @@ public class PlayerInteractionCheck : MonoBehaviour
     private string passString;
 
     public bool isHiding;
+    public bool isInteracting; 
     [HideInInspector]
     public Vector3 closestPoint = new Vector3(); 
 
@@ -71,38 +72,42 @@ public class PlayerInteractionCheck : MonoBehaviour
         {
             //checks a raycast for the interactable objects to see what the tag is - depending on tag this script will call other scripts. 
             string objectName = CheckObject();
+            if (!isInteracting)
+            {
+                if (objectName == "Interact")
+                {
+                    Debug.Log("Interact");
+
+                    //should turn the player here    
+                    //targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
+                    //targetObject.GetComponent<NPCTalk>().Interact();
+                    targetObject.GetComponent<NPCSpeak>().Interact();
+                    //reference the interaction code
+                }
+                if (objectName == "Hide")
+                {
+                    this.gameObject.GetComponent<PlayerStealth>().Hide(targetObject, this);
+                    //reference the Hide code
+                }
+                if (objectName == "Jump")
+                {
+                    //refence the jump code
+                }
+                if (objectName == "Climb")
+                {
+                    this.gameObject.GetComponent<ClimbRaycast>().Jump(targetObject);
+                }
+                if (objectName == "Door")
+                {
+                    //Debug.Log("should have");
+                    targetObject.GetComponent<ClueTriggerEvents>().CheckDoorUnlock();
+                }
+                else
+                {
+                    //reference the meow code
+                }
+            }
             
-            if (objectName == "Interact")
-            {
-                Debug.Log("Interact");
-                //should turn the player here    
-                //targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
-                //targetObject.GetComponent<NPCTalk>().Interact();
-                targetObject.GetComponent<NPCSpeak>().Interact();
-                //reference the interaction code
-            }
-            if (objectName == "Hide")
-            {
-                this.gameObject.GetComponent<PlayerStealth>().Hide(targetObject, this);
-                //reference the Hide code
-            }
-            if (objectName == "Jump")
-            {
-                //refence the jump code
-            }
-            if (objectName == "Climb")
-            {
-                this.gameObject.GetComponent<ClimbRaycast>().Jump(targetObject);
-            }
-            if (objectName == "Door")
-            {
-                //Debug.Log("should have");
-                targetObject.GetComponent<ClueTriggerEvents>().CheckDoorUnlock();
-            }
-            else
-            {
-                //reference the meow code
-            }
         }
         else
         {
