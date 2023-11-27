@@ -246,6 +246,7 @@ public static class SaveSystem
             NPCData data = formatter.Deserialize(stream) as NPCData;
 
             stream.Close();
+            Debug.Log("data");
             return data;
 
         }
@@ -253,6 +254,7 @@ public static class SaveSystem
         else
         {
             //Debug.LogError("Save File not found in " + path);
+            
             return null;
         }
 

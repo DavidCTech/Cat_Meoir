@@ -15,16 +15,20 @@ public class NPCData
         dialogCheck = new bool[dialogList.Count];
         for (int i = 0; i < dialogList.Count; i++)
         {
-            if(dialogList[i].GetComponent<DialogData>() == selectedOption)
+            
+            if (dialogList[i].GetComponent<DialogData>() == selectedOption)
             {
-                dialogCheck[i] = true; 
+                dialogCheck[i] = true;
             }
             else
             {
                 dialogCheck[i] = false;
             }
+            
+            
         
         }
 
-    }
+
+     }
 }

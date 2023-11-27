@@ -41,14 +41,12 @@ public class NPCSpeak : MonoBehaviour
     public void Interact()
     {
         //freeze the player 
-        
-        //this is for dialog actions- specific to the dialog object it is currently on. 
-        // this takes priority over everything 
-        DialogAction dialogAction = startDialogObject.gameObject.GetComponent<DialogAction>();
 
-        if (dialogAction != null)
+        // if the selected object about to be diaplayed is noted to be saved
+        //it saves
+        if (startDialogObject.isSaved)
         {
-            dialogAction.Action();
+            Save(startDialogObject);
         }
         //this is for the npc checker - it will see if you took pictures 
         // of the needed clues or not for the original clue checker.
@@ -82,6 +80,7 @@ public class NPCSpeak : MonoBehaviour
         }
     }
 
+
     //this coroutine is meant to run the loading npc function and 
     // will wait for it to finish. 
     // this is to ensure no race consitions 
@@ -103,7 +102,7 @@ public class NPCSpeak : MonoBehaviour
     //name dependent on npc- same with saving 
     private IEnumerator LoadNPCAsync(string npcName)
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.5f);
         //this data is mainly a bool system for what is loaded and what isn't 
         NPCData data = SaveSystem.LoadNPC(npcName);
 
@@ -112,23 +111,16 @@ public class NPCSpeak : MonoBehaviour
             // dialog children is the list of objects we loop through to figure out which to load. 
             //It is cleared then remade based on what has dialogdata component. 
             dialogChildren.Clear();
+            
+            // Call the function with the parent transform
             if (dialogParent != null)
             {
-                foreach (Transform child in dialogParent.transform)
-                {
-                    DialogData dialogDataComponent = child.GetComponent<DialogData>();
-
-                    if (dialogDataComponent != null)
-                    {
-                        dialogChildren.Add(child.gameObject);
-                    }
-                }
+                TraverseChildren(dialogParent.transform);
             }
-
             //iterate through the bool list from the NPCData 
             for (int i = 0; i < data.dialogCheck.Length; i++)
             {
-                //check if it is true 
+               
                 if (data.dialogCheck[i])
                 {
                     //if it is true, set that location of the dialog children list to the start object
@@ -137,6 +129,14 @@ public class NPCSpeak : MonoBehaviour
 
                 }
 
+            }
+            //this is for dialog actions- specific to the dialog object it is currently on. 
+            // this takes priority over everything 
+            DialogAction dialogAction = startDialogObject.gameObject.GetComponent<DialogAction>();
+
+            if (dialogAction != null)
+            {
+                dialogAction.Action();
             }
             //this true bool ends the load and progress coroutine while loop
             npcDataLoaded = true;
@@ -147,7 +147,32 @@ public class NPCSpeak : MonoBehaviour
             //this true bool ends the load and progress coroutine while loop
             npcDataLoaded = true;
         }
+       
+
     }
+
+    //traverse children loops through the children of a game object and can add it into a given list 
+    //based on if it has the required script or not 
+    void TraverseChildren(Transform parentTransform)
+    {
+        foreach (Transform child in parentTransform)
+        {
+
+            DialogData dialogDataComponent = child.GetComponent<DialogData>();
+
+            if (dialogDataComponent != null)
+            {
+                dialogChildren.Add(child.gameObject);
+            }
+
+            // Recursively call the function for the grandchildren
+            TraverseChildren(child);
+        }
+    }
+
+   
+
+
 
     //this is the saving function 
     public void Save(DialogData selectedOption)
@@ -156,17 +181,10 @@ public class NPCSpeak : MonoBehaviour
         dialogChildren.Clear();
         if (dialogParent != null)
         {
-            foreach (Transform child in dialogParent.transform)
-            {
-                DialogData dialogDataComponent = child.GetComponent<DialogData>();
-
-                if (dialogDataComponent != null)
-                {
-                    dialogChildren.Add(child.gameObject);
-                }
-            }
+            TraverseChildren(dialogParent.transform);
         }
         // uses method in save npc to create the bool list in the data
+
         SaveSystem.SaveNPC(npcName, dialogChildren, selectedOption);
     }
 
@@ -176,6 +194,7 @@ public class NPCSpeak : MonoBehaviour
     // dialog 
     public void NextDialogCheck(DialogData selectedOption)
     {
+
         if(selectedOption.nextDialog != null)
         {
             startDialogObject = selectedOption.nextDialog;
@@ -189,6 +208,7 @@ public class NPCSpeak : MonoBehaviour
     public void OptionSelected(DialogData selectedOption)
     {
         optionSelected = true;
+        startDialogObject = selectedOption; 
         NextDialogCheck(selectedOption);
     }
 
@@ -197,14 +217,6 @@ public class NPCSpeak : MonoBehaviour
     IEnumerator displayDialog(DialogData selectedOption)
     {
         yield return null;
-        // if the selected object about to be diaplayed is noted to be saved
-        //it saves
-        if (selectedOption.isSaved)
-        {
-            Save(selectedOption);
-        }
-
-
         //spawned button list is for object pooling to destroy it all
         //when object is selected 
         List<GameObject> spawnedButtons = new List<GameObject>();
