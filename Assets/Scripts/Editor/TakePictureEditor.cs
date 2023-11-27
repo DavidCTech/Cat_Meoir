@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -26,3 +27,4 @@ public class CameraTakePictureEditor : Editor
 
     }
 }
+#endif
