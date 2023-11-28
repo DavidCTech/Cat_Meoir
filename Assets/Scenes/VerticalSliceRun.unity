@@ -22127,6 +22127,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!108 &1329837852 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 7272540968553173131, guid: 8fcdcae2638d4fa4f907bf1f36c883e8, type: 3}
+  m_PrefabInstance: {fileID: 2129110143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1333718106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22310,15 +22315,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a170626ca8d744cb864be58f20d332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointLight: {fileID: 689348459}
-  spotLight: {fileID: 0}
-  MinTime: 1
-  MaxTime: 1
-  Timer: 0
+  pointLight: {fileID: 0}
+  spotLight: {fileID: 689348459}
+  MinTime: 0.6
+  MaxTime: 0.6
+  Timer: 0.6
   AS: {fileID: 0}
   LightAudio: {fileID: 0}
-  materialIndex: 1
+  materialIndex: 0
   newMaterials:
+  - {fileID: 2100000, guid: 7b5e10dfc3af266408cf935d47343093, type: 2}
   - {fileID: 2100000, guid: 9de2fce5d586a56458acdf1bcafae2d5, type: 2}
 --- !u!1001 &1360842373
 PrefabInstance:
@@ -22868,19 +22874,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6905468
+      value: 0.69054675
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.15214024
+      value: 0.15214027
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6905448
+      value: 0.6905447
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1521398
+      value: -0.15213981
       objectReference: {fileID: 0}
     - target: {fileID: 1989909482736844609, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_SizeDelta.x
@@ -24084,7 +24090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7701999867838834851, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.16818574
+      value: -0.16818573
       objectReference: {fileID: 0}
     - target: {fileID: 7798867828713232657, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_IsActive
@@ -36951,6 +36957,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 205.762
       objectReference: {fileID: 0}
+    - target: {fileID: 3739082935198217054, guid: 8fcdcae2638d4fa4f907bf1f36c883e8, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3739082935198217054, guid: 8fcdcae2638d4fa4f907bf1f36c883e8, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f139ed15014de6141895d89446dd9356, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37109,15 +37123,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a170626ca8d744cb864be58f20d332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointLight: {fileID: 689348459}
-  spotLight: {fileID: 0}
-  MinTime: 1
-  MaxTime: 1
-  Timer: 0
+  pointLight: {fileID: 0}
+  spotLight: {fileID: 1329837852}
+  MinTime: 0.6
+  MaxTime: 0.6
+  Timer: 0.6
   AS: {fileID: 0}
   LightAudio: {fileID: 0}
-  materialIndex: 1
+  materialIndex: 0
   newMaterials:
+  - {fileID: 2100000, guid: 7b5e10dfc3af266408cf935d47343093, type: 2}
+  - {fileID: 2100000, guid: 9de2fce5d586a56458acdf1bcafae2d5, type: 2}
   - {fileID: 2100000, guid: 9de2fce5d586a56458acdf1bcafae2d5, type: 2}
 --- !u!1001 &2137301181
 PrefabInstance:
