@@ -100,21 +100,21 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""a35306e3-35f3-42fc-8a56-940a539dc764"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Vertical"",
                     ""type"": ""PassThrough"",
                     ""id"": ""bb278848-1cee-497c-a7f8-46fdf11a84d8"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BoxPush"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebdfa6fe-0dc6-432d-ae28-dfbc4fd9702b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -363,28 +363,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3371be35-7490-426a-8303-347c50d0e457"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7bf7adc7-19eb-4081-8f3c-f38a60a5a847"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5592adb9-b4a8-4331-9578-3915df453f69"",
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
@@ -426,6 +404,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""MapOpenClose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3243231-dcaf-4012-b518-cd9ded72cf2c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BoxPush"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""934be5bb-5199-4718-af29-3869d9604140"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BoxPush"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -465,8 +465,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_MapOpenClose = m_Player.FindAction("MapOpenClose", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_CatVision = m_Player.FindAction("CatVision", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Vertical = m_Player.FindAction("Vertical", throwIfNotFound: true);
+        m_Player_BoxPush = m_Player.FindAction("BoxPush", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -536,8 +536,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MapOpenClose;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_CatVision;
-    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Vertical;
+    private readonly InputAction m_Player_BoxPush;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -550,8 +550,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @MapOpenClose => m_Wrapper.m_Player_MapOpenClose;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @CatVision => m_Wrapper.m_Player_CatVision;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Vertical => m_Wrapper.m_Player_Vertical;
+        public InputAction @BoxPush => m_Wrapper.m_Player_BoxPush;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -585,12 +585,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @CatVision.started += instance.OnCatVision;
             @CatVision.performed += instance.OnCatVision;
             @CatVision.canceled += instance.OnCatVision;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
             @Vertical.started += instance.OnVertical;
             @Vertical.performed += instance.OnVertical;
             @Vertical.canceled += instance.OnVertical;
+            @BoxPush.started += instance.OnBoxPush;
+            @BoxPush.performed += instance.OnBoxPush;
+            @BoxPush.canceled += instance.OnBoxPush;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -619,12 +619,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @CatVision.started -= instance.OnCatVision;
             @CatVision.performed -= instance.OnCatVision;
             @CatVision.canceled -= instance.OnCatVision;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
             @Vertical.started -= instance.OnVertical;
             @Vertical.performed -= instance.OnVertical;
             @Vertical.canceled -= instance.OnVertical;
+            @BoxPush.started -= instance.OnBoxPush;
+            @BoxPush.performed -= instance.OnBoxPush;
+            @BoxPush.canceled -= instance.OnBoxPush;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -670,7 +670,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnMapOpenClose(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCatVision(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
         void OnVertical(InputAction.CallbackContext context);
+        void OnBoxPush(InputAction.CallbackContext context);
     }
 }
