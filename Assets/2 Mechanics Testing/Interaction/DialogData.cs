@@ -14,6 +14,8 @@ public class DialogData : MonoBehaviour
     public bool isNext;
     [Header("This bool should be checked if it's a checkpoint of saving.")]
     public bool isSaved;
+    [Header("This bool should be checked if the next dialog is a next segment dialog instead.")]
+    public bool nextSegment; 
 
 
     [System.Serializable]

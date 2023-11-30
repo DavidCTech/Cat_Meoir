@@ -200,6 +200,8 @@ public class NPCSpeak : MonoBehaviour
             startDialogObject = selectedOption.nextDialog;
         }
         StartCoroutine(displayDialog(selectedOption));
+
+
     }
 
     //Option selected controls - this is referenced in buttons that get spawned 
@@ -256,6 +258,12 @@ public class NPCSpeak : MonoBehaviour
                 break;
             }
         }
+        //when finished with segments - look to see if the dialog container has a next segment option 
+        if (selectedOption.nextSegment)
+        {
+            NextDialogCheck(selectedOption.nextDialog);
+        }
+
         //when the dialog segments and choices are done, the container and canvas are turned off. 
         dialogOptionsContainer.SetActive(false);
         dialogCanvas.SetActive(false);
