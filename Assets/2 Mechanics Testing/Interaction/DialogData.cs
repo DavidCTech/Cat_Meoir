@@ -19,7 +19,7 @@ public class DialogData : MonoBehaviour
     [System.Serializable]
     public struct DialogSegments
     {
-        public string dialogText;
+        [TextArea] public string dialogText;
         public float dialogDisplayTime;
         public List<DialogChoices> dialogChoices;
 
@@ -27,7 +27,7 @@ public class DialogData : MonoBehaviour
     [System.Serializable]
     public struct DialogChoices
     {
-        public string choiceText;
+        [TextArea] public string choiceText;
         public DialogData followingDialog;
     }
 
