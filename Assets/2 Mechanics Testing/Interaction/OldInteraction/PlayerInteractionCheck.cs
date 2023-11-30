@@ -74,6 +74,7 @@ public class PlayerInteractionCheck : MonoBehaviour
             string objectName = CheckObject();
             if (!isInteracting)
             {
+                Debug.Log("Object name "+ objectName);
                 if (objectName == "Interact")
                 {
                     Debug.Log("Interact");
@@ -95,6 +96,7 @@ public class PlayerInteractionCheck : MonoBehaviour
                 }
                 if (objectName == "Climb")
                 {
+                    Debug.Log("object ", targetObject);
                     this.gameObject.GetComponent<ClimbRaycast>().Jump(targetObject);
                 }
                 if (objectName == "Door")

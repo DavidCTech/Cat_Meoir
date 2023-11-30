@@ -225,11 +225,6 @@ public class NPCSpeak : MonoBehaviour
         //when object is selected 
 
 
-       
-
-
-
-
         List<GameObject> spawnedButtons = new List<GameObject>();
         dialogCanvas.SetActive(true);
 
