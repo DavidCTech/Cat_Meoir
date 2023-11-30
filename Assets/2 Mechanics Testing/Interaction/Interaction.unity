@@ -339,14 +339,17 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4684132435518060470, guid: 7bf921906eddb104383d86935468043e, type: 3}
       insertIndex: 0
       addedObject: {fileID: 695063685}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1187245815265888864, guid: 7bf921906eddb104383d86935468043e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 523507327}
   m_SourcePrefab: {fileID: 100100000, guid: 7bf921906eddb104383d86935468043e, type: 3}
 --- !u!114 &159830422 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6862316172310538981, guid: 7bf921906eddb104383d86935468043e, type: 3}
   m_PrefabInstance: {fileID: 159830421}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 523507322}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42eff1366ff43ca418f631d6bd38e137, type: 3}
@@ -421,6 +424,7 @@ MonoBehaviour:
   dialogSegments:
   - dialogText: awe..
     dialogDisplayTime: 1
+    audio: {fileID: 0}
     dialogChoices: []
   nextDialog: {fileID: 0}
   isNext: 0
@@ -446,6 +450,107 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6180230016536307444, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
   m_PrefabInstance: {fileID: 1135530891}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &523507322 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1187245815265888864, guid: 7bf921906eddb104383d86935468043e, type: 3}
+  m_PrefabInstance: {fileID: 159830421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &523507327
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523507322}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &612658339
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +599,7 @@ MonoBehaviour:
   dialogSegments:
   - dialogText: Yay!
     dialogDisplayTime: 1
+    audio: {fileID: 0}
     dialogChoices: []
   nextDialog: {fileID: 1357712450}
   isNext: 0
@@ -803,9 +909,11 @@ MonoBehaviour:
   dialogSegments:
   - dialogText: Hello!
     dialogDisplayTime: 1
+    audio: {fileID: 8300000, guid: a4149d49054c15f499ad89086902a2b2, type: 3}
     dialogChoices: []
   - dialogText: Lovely Day it is. Right?
     dialogDisplayTime: 1.5
+    audio: {fileID: 8300000, guid: 1c5b0f150e1ce8543ade68ba923226e7, type: 3}
     dialogChoices:
     - choiceText: I agree!
       followingDialog: {fileID: 612658341}
@@ -1034,11 +1142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7701999867838834851, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000018722702
+      value: 0.000000018722702
       objectReference: {fileID: 0}
     - target: {fileID: 7701999867838834851, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000000441983
+      value: -0.00000000441983
       objectReference: {fileID: 0}
     - target: {fileID: 7799659394549542812, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: isSaved
@@ -1161,6 +1269,7 @@ MonoBehaviour:
   dialogSegments:
   - dialogText: Byebye!
     dialogDisplayTime: 1
+    audio: {fileID: 0}
     dialogChoices: []
   nextDialog: {fileID: 0}
   isNext: 1

@@ -8,15 +8,23 @@ public class UIPlayerControl : MonoBehaviour
 
     void OnEnable()
     {
-        player.GetComponent<PlayerMovement>().isFrozen = true;
-        player.GetComponent<PlayerInteractionCheck>().isInteracting = true; 
+        if(player != null)
+        {
+            player.GetComponent<PlayerMovement>().isFrozen = true;
+            player.GetComponent<PlayerInteractionCheck>().isInteracting = true;
+        }
+        
     }
 
 
     void OnDisable()
     {
-        player.GetComponent<PlayerMovement>().isFrozen = false;
-        player.GetComponent<PlayerInteractionCheck>().isInteracting = false;
+        if(player != null)
+        {
+            player.GetComponent<PlayerMovement>().isFrozen = false;
+            player.GetComponent<PlayerInteractionCheck>().isInteracting = false;
+        }
+        
 
     }
 }

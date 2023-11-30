@@ -28,12 +28,14 @@ public class NPCSpeak : MonoBehaviour
 
     //dialog children is just a list of the children to loop through and save. 
     private List<GameObject> dialogChildren = new List<GameObject>();
-    private NPCVariableChecker npcChecker; 
+    private NPCVariableChecker npcChecker;
+    private AudioSource audioSource; 
 
     private void Start()
     {
         // first it will get the npcVariable checker to see if you did the right combination first. 
         npcChecker = this.gameObject.GetComponent<NPCVariableChecker>();
+        audioSource = this.gameObject.GetComponent<AudioSource>(); 
     }
 
     //this is the general interact method that will be brought up,
@@ -221,6 +223,13 @@ public class NPCSpeak : MonoBehaviour
         yield return null;
         //spawned button list is for object pooling to destroy it all
         //when object is selected 
+
+
+       
+
+
+
+
         List<GameObject> spawnedButtons = new List<GameObject>();
         dialogCanvas.SetActive(true);
 
@@ -228,6 +237,15 @@ public class NPCSpeak : MonoBehaviour
         foreach (var dialog in selectedOption.dialogSegments)
         {
 
+            if (audioSource != null)
+            {
+                if (dialog.audio != null)
+                {
+                    audioSource.clip = dialog.audio;
+                    audioSource.Play();
+                }
+
+            }
             if (dialog.dialogChoices.Count == 0)
             {
                 // if there is no choices - just make the text show up for the display time. 

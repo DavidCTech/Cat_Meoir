@@ -8,6 +8,7 @@ public class DialogData : MonoBehaviour
     [Header("This is the dialog you say - it consists of string and time on the UI")]
     public List<DialogSegments> dialogSegments = new List<DialogSegments>();
     //next dialog will be like the next dialog that gets turned on when you talk again 
+    
     [Header("This is for the next interaction dialog.")]
     public DialogData nextDialog;
     [Header("This bool should be checked if its a next interaction dialog.")]
@@ -23,13 +24,17 @@ public class DialogData : MonoBehaviour
     {
         [TextArea] public string dialogText;
         public float dialogDisplayTime;
+        [Header("This is the audio clip you will want. Optional")]
+        public AudioClip audio;
         public List<DialogChoices> dialogChoices;
+        
 
     }
     [System.Serializable]
     public struct DialogChoices
     {
         [TextArea] public string choiceText;
+       
         public DialogData followingDialog;
     }
 
