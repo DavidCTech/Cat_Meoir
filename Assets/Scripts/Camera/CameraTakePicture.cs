@@ -26,6 +26,9 @@ public class CameraTakePicture : MonoBehaviour
     public Image lastPhotoImage;
     [Header("Reference to the scene name info object that it uses to locate the clues.")]
     public SceneInfo sceneInfo;
+    [Header("Reference to the sound script for picture taking. ")]
+    public PlaySound playSound;
+    public AudioClip audioClip; 
 
 
     private bool passBool;
@@ -80,6 +83,9 @@ public class CameraTakePicture : MonoBehaviour
                {
                     captureCamera.targetTexture = renderTexture;
                     captureCamera.Render();
+                    
+                    
+                    //taking picture 
                     StartCoroutine(TakeSnapshot(renderTexture));
                     captureCamera.targetTexture = null;
 
@@ -155,6 +161,13 @@ public class CameraTakePicture : MonoBehaviour
     public IEnumerator TakeSnapshot(RenderTexture renderTexture)
     {
         yield return new WaitForEndOfFrame();
+
+        //making sound 
+        if (playSound != null && audioClip != null)
+        {
+            playSound.PutInClip(audioClip);
+        }
+
         captureCamera.targetTexture = renderTexture;
         captureCamera.Render();
 
