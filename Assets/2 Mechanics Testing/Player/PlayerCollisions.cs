@@ -11,12 +11,15 @@ public class PlayerCollisions : MonoBehaviour
     private FadeScreen fadeScreen;
 
     private Rigidbody rb;
+    private PlayerMovement playerMovement;
+
     // Start is called before the first frame update
     void Start()
     {
         fadeScreen = Fade.GetComponent<FadeScreen>();
         rb = GetComponent<Rigidbody>();
         this.gameObject.GetComponent<Rigidbody>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -41,16 +44,23 @@ public class PlayerCollisions : MonoBehaviour
 
         if (other.gameObject.CompareTag("Killer"))
         {
+            if (playerMovement != null)
+            {
+                rb.isKinematic = true;
+                rb.freezeRotation = true;
+                playerMovement.moveSpeed = 0f;
+            }
             if (fadeScreen != null)
             {
-                fadeScreen.StartFade();
                 StartCoroutine(ReloadScene());
             }
         }
     }
 
-    IEnumerator ReloadScene() //Delete Later
+    IEnumerator ReloadScene() //VSKiller
     {
+        yield return new WaitForSeconds(0.5f);
+        fadeScreen.StartFade();
         yield return new WaitForSeconds(2.0f);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);

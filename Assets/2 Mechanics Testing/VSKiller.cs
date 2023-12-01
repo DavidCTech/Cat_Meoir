@@ -7,10 +7,13 @@ using UnityEngine.AI;
 public class VSKiller : MonoBehaviour
 {
     NavMeshAgent agent;
+    private Animator anim;
 
     public bool bloodLusted;
     public LayerMask targetMask;
 
+    private AudioSource soundSource;
+    public AudioClip grabVoice;
 
     public GameObject Player;
     public Transform player;
@@ -18,10 +21,16 @@ public class VSKiller : MonoBehaviour
     public float _proximityRadius;
     [Range(0, 360)] public float _proximityAngle;
 
+    private VoiceClipRando clipRando;
+
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
+        soundSource = GetComponent<AudioSource>();
+        clipRando = GetComponent<VoiceClipRando>();
+
         //agent.destination = player.transform.position;
     }
 
@@ -41,13 +50,42 @@ public class VSKiller : MonoBehaviour
         }
     }
 
+    public void Grab()
+    {
+        if (bloodLusted)
+        {
+            //bool isCaught = anim.GetBool("Catch");
+            anim.SetBool("Grab", true);
+        }
+        else
+        {
+            anim.SetBool("Grab", false);
+        }
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Check if the player tag is detected
+            if (grabVoice != null)
+            {
+                clipRando.enabled = false;
+                soundSource.PlayOneShot(grabVoice);
+            }
+
+            if (agent != null)
+            {
+                agent.speed = 0f;
+                anim.SetBool("Catch", true);
+            }
+        }
+    }
 
     void Update()
     {
         agent.destination = player.transform.position;
         ProximityCheck();
-
-
+        Grab();
     }
 }
