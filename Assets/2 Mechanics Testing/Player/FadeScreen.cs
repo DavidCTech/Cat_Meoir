@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FadeScreen : MonoBehaviour
 {
+    public GameObject fadeScreen;
+
     public float fadeDuration = 1.5f; // Duration of the fade effect in seconds
     public Color startColor = Color.clear; // Starting color (usually transparent)
     public Color endColor = Color.black; // Target color (black in this case)
@@ -15,6 +17,7 @@ public class FadeScreen : MonoBehaviour
 
     void Start()
     {
+        fadeScreen.SetActive(false);
         fadeImage = GetComponent<Image>();
         fadeImage.color = startColor; // Set the initial color of the image
         //StartFade();
@@ -22,6 +25,7 @@ public class FadeScreen : MonoBehaviour
 
     public void StartFade()
     {
+        fadeScreen.SetActive(true);
         Fading = true;
         timer = 0f;
     }
