@@ -15,6 +15,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 {
     public static bool GameIsPause = false;
     public GameObject pauseMenuUI;
+    //added in a ref to the photo menu UI
+    public GameObject photoMenuUI; 
     public GameObject optionsPanel;
 
     public Slider sensitivitySlider;
@@ -76,6 +78,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         else if (isPaused || isOptionsPanelOpen)
         {
+
             Resume();
         }
     }
@@ -164,6 +167,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void Resume()
     {
+       //turned off the photo menu ui 
+       photoMenuUI.SetActive(false);
        pauseMenuUI.SetActive(false);
        Time.timeScale = 1f;
        isPaused = false;

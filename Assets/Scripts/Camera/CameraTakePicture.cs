@@ -163,8 +163,11 @@ public class CameraTakePicture : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         //making sound 
+        Debug.Log(playSound);
+        Debug.Log(audioClip);
         if (playSound != null && audioClip != null)
         {
+           
             playSound.PutInClip(audioClip);
         }
 
