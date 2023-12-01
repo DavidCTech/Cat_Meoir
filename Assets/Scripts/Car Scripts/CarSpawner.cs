@@ -1,26 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
 {
     public GameObject[] carPrefabs;
-    public float spawnInterval = 5f; // Set the time interval between spawns
-    public float despawnDelay = 12f; // Set the delay before despawning a car
-
+    public Transform[] waypoints;
+    public float spawnInterval = 5f;
 
     private void Start()
     {
-        // Start spawning cars after a delay of 0 seconds, and repeat every spawnInterval seconds
         InvokeRepeating("SpawnCar", 0f, spawnInterval);
     }
+
     private void SpawnCar()
     {
         GameObject selectedCarPrefab = SelectACarPrefab();
         GameObject spawnedCar = Instantiate(selectedCarPrefab, transform.position, transform.rotation);
 
-        // Destroy the spawned car after despawnDelay seconds
-        Destroy(spawnedCar, despawnDelay);
+        // Attach the CarMovement script to the spawned car
+        CarMovement carMovement = spawnedCar.AddComponent<CarMovement>();
+        carMovement.waypoints = waypoints;
     }
 
     private GameObject SelectACarPrefab()

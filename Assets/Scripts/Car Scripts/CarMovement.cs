@@ -1,36 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-[RequireComponent(typeof(CarController))] // Make sure there is a CarController component on the GameObject
+using UnityEngine.AI;
 
 public class CarMovement : MonoBehaviour
 {
-    private CarController carController;
+    public Transform[] waypoints; // No need for an array, just reference the waypoints directly
+    private int currentWaypointIndex = 0;
+    private NavMeshAgent navMeshAgent;
 
     private void Start()
     {
-        carController = GetComponent<CarController>();
-        StartCoroutine(MoveCar());
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        SetDestination();
     }
 
-    private IEnumerator MoveCar()
+    private void SetDestination()
     {
-        while (true)
+        if (currentWaypointIndex < waypoints.Length)
         {
-            // Move the car forward
-            carController.Move(new Vector2(0, 1));
-
-            yield return null;
+            // Set the destination to the position of the current waypoint
+            navMeshAgent.SetDestination(waypoints[currentWaypointIndex].position);
         }
     }
 
     private void Update()
     {
-        // Check if the car is out of bounds and despawn it
-        if (transform.position.z > 10f) // Change the value according to your street length
+        // Check if the car has reached its destination waypoint
+        if (navMeshAgent.remainingDistance < 0.1f && !navMeshAgent.pathPending)
         {
-            Destroy(gameObject);
+            currentWaypointIndex++;
+
+            // Check if all waypoints have been reached
+            if (currentWaypointIndex >= waypoints.Length)
+            {
+                // All waypoints reached, destroy the car
+                Destroy(gameObject);
+            }
+            else
+            {
+                // Set the next destination
+                SetDestination();
+            }
         }
     }
 }
