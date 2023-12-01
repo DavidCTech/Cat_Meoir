@@ -34,6 +34,7 @@ public class PlayerVision : MonoBehaviour
     private PlayerState currentState = PlayerState.Normal;
     private GameObject targetObject;
     private List<GameObject> clues = new List<GameObject>();
+    private List<GameObject> particles = new List<GameObject>(); 
 
     public PlayerState GetCurrentState()
     {
@@ -59,7 +60,16 @@ public class PlayerVision : MonoBehaviour
         {
             CurrentState = PlayerState.Normal;
             visionOff.Invoke();
-            GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Normal);
+            for (int i = 0; i < particles.Count; i++)
+            {
+                GameObject destoryObj = particles[i];
+                particles.Remove(particles[i]);
+                Destroy(destoryObj); 
+                
+            
+            
+            }
+                GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Normal);
         }
     }
 
@@ -108,6 +118,7 @@ public class PlayerVision : MonoBehaviour
     private void ScentTrail(GameObject target)
     {
         GameObject spawnedObject = Instantiate(scentParticle, this.gameObject.transform.position, this.gameObject.transform.rotation);
+        particles.Add(spawnedObject);
         spawnedObject.SetActive(true);
         spawnedObject.GetComponent<ScentTrail>().SetDestination(target.transform);
 
