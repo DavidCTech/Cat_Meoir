@@ -10,7 +10,7 @@ public class QuickFind : MonoBehaviour
     void Start()
     {
         GameObject[] foundObjects = GameObject.FindGameObjectsWithTag(searchTag);
-        objects.AddRange(obj);
+        objects.AddRange(foundObjects);
 
         // Optional: Print the names of the found objects
         foreach (GameObject obj in foundObjects)
