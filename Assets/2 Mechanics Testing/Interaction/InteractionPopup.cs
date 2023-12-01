@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class InteractionPopup : MonoBehaviour
 {
+    /*
     public GameObject interactUI;
     public GameObject hideUI;
     public GameObject jumpUI;
     public GameObject climbUI;
     public GameObject doorUI; 
+    */
 
     private float checkTime = 1f;
     private PlayerInteractionCheck playerCheck; 
+
     private void Start()
     {
         playerCheck = this.gameObject.GetComponent<PlayerInteractionCheck>(); 
@@ -28,11 +31,11 @@ public class InteractionPopup : MonoBehaviour
             
 
             string objectName = playerCheck.CheckObject();
+            GameObject obj = playerCheck.ReturnTarget();
+            Vector3 closePoint = playerCheck.closestPoint; 
             Debug.Log(objectName);
             if (objectName == "Interact")
             {
-                GameObject newObject = Instantiate(interactUI, playerCheck.closestPoint , Quaternion.identity);
-                newObject.transform.LookAt(this.gameObject.transform);
 
             }
             if (objectName == "Hide")
@@ -45,8 +48,16 @@ public class InteractionPopup : MonoBehaviour
             }
             if (objectName == "Climb")
             {
+                /*
                 GameObject newObject = Instantiate(climbUI, playerCheck.closestPoint, Quaternion.identity);
                 newObject.transform.LookAt(this.gameObject.transform);
+                */
+                ClimbUI climbUI = obj.GetComponent<ClimbUI>();
+                
+                if(climbUI != null)
+                {
+                    climbUI.TurnOn(closePoint); 
+                }
             }
             if (objectName == "Door")
             {

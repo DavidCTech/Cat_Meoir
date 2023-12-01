@@ -29,6 +29,7 @@ public class PlayerInteractionCheck : MonoBehaviour
         //the following code is the interaction logic 
         Collider[] rangeChecks = Physics.OverlapSphere(this.gameObject.transform.position, fovRadius, interactionMask);
         passString = "nothing";
+        
         if (rangeChecks.Length != 0)
         {
 
@@ -38,6 +39,7 @@ public class PlayerInteractionCheck : MonoBehaviour
                
                 Transform target = rangeChecks[i].transform;
                 closestPoint = rangeChecks[i].ClosestPoint(this.gameObject.transform.position);
+                //distance to target can be addedinto an array same with the game object to determine which object is closest within given parameters
                 Vector3 directionToTarget = (closestPoint - this.gameObject.transform.position).normalized;
                
                 if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2)
@@ -64,6 +66,10 @@ public class PlayerInteractionCheck : MonoBehaviour
         }
 
         return passString;
+    }
+    public GameObject ReturnTarget()
+    {
+        return targetObject; 
     }
     public void OnInteraction()
     {
