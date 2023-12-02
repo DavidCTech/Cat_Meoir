@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public GameObject mainMenuPanel;
 
     public GameObject optionsPanel;
-  
+
+    public GameObject creditsPanel;
 
     private Resolution[] resolutions;
 
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
-    public GameObject optionsFirstButton, optionsClosedButton;
+    public GameObject optionsFirstButton, optionsClosedButton, creditsFirstButton;
 
     void Start()
     {
@@ -90,14 +91,24 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         optionsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+        creditsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
+    }
+
+    public void ActivateCreditsPanel()
+    {
+        optionsPanel.SetActive(false);
+        creditsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(creditsFirstButton);
     }
 
     public void ActivateMenu()
     {
         mainMenuPanel.SetActive(true);
         optionsPanel.SetActive(false);
+        creditsPanel.SetActive(false); 
     }
 
     public void OnSelect(BaseEventData eventData)
