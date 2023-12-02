@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Description : MonoBehaviour
 {
-    public string description; 
+    [TextArea] public string description;
     // Start is called before the first frame update
 
 }
