@@ -13,6 +13,8 @@ public class Human_AI : MonoBehaviour
     }
     private AIState _AIState;
 
+    private Animator anim;
+
     public GameObject Player;
     private PlayerStealth playerStealth;
     private PlayerInteractionCheck playerInteractionCheck;
@@ -72,6 +74,7 @@ public class Human_AI : MonoBehaviour
     void Start()
     {
         _enemyColor = GetComponent<Renderer>();
+        anim = GetComponentInChildren<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = GameObject.Find("Player");
         playerInteractionCheck = Player.GetComponent<PlayerInteractionCheck>();
@@ -245,6 +248,7 @@ public class Human_AI : MonoBehaviour
         while (true)
         {
             //run the scan every point 2 seconds
+            //anim.SetBool("Waiting", true);
             yield return wait;
             FieldOfViewCheck();
         }
@@ -256,10 +260,15 @@ public class Human_AI : MonoBehaviour
         if (_canSeePlayer == true)
         {
             _enemyColor.material.color = Color.red;
+            //anim.SetBool("Chase", true);
+            //anim.SetBool("Patrol", false);
         }
         else
         {
             _enemyColor.material.color = Color.magenta;
+            //anim.SetBool("Chase", false);
+            //anim.SetBool("Patrol", true);
+
         }
         FieldOfViewCheck();
     }
@@ -288,9 +297,21 @@ public class Human_AI : MonoBehaviour
             _timeSinceSeenPlayer = 0;
         }
 
+        if(_IAmWaiting == true)
+        {
+            anim.SetBool("Waiting", true);
+        }
+        else
+        {
+            anim.SetBool("Waiting", false);
+        }
+
         switch (_AIState)
         {
             case AIState.Passive:
+                anim.SetBool("Patrol", true);
+                anim.SetBool("Chase", false);
+                //anim.SetBool("Waiting", false);
                 _enemyColor.material.color = Color.yellow;
                 if (_randomWander == true)
                 {
@@ -317,6 +338,9 @@ public class Human_AI : MonoBehaviour
                 }
                 break;
             case AIState.Hostile:
+                anim.SetBool("Patrol", false);
+                anim.SetBool("Chase", true);
+                //anim.SetBool("Waiting", false);
                 if (_fleeFromPlayer == true)
                 {
                     FleeFromPlayer();

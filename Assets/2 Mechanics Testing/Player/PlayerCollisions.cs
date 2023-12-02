@@ -32,13 +32,15 @@ public class PlayerCollisions : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            rb.isKinematic = true;
-            //rb.gameObject.SetActive(false);
-
-            //I also Added a null check to it so it doesnt show errors. 
+            if (playerMovement != null)
+            {
+                rb.isKinematic = true;
+                rb.freezeRotation = true;
+                playerMovement.moveSpeed = 0f;
+            }
             if (fadeScreen != null)
             {
-                fadeScreen.StartFade();
+                StartCoroutine(ReloadScene());
             }
         }
 
