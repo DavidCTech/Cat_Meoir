@@ -46,31 +46,71 @@ public class PlayerVision : MonoBehaviour
         currentState = state;
     }
 
+    void Update()
+    {
+        if (CurrentState == PlayerState.Vision)
+        {
+            OutRay(); // Check for clues in range
+
+            // Call ScentTrail and ColorChange here for each clue in the list
+            foreach (var clue in clues)
+            {
+                ClueObjectColor clueColorScript = clue.GetComponent<ClueObjectColor>();
+                if (clueColorScript != null)
+                {
+                    ScentTrail(clue);
+                    clueColorScript.ColorChange();
+                }
+            }
+        }
+        else
+        {
+            // If not in vision mode, turn off colors
+            TurnOffColors();
+        }
+    }
 
     void OnCatVision()
     {
         // Check for input to toggle between Vision and Normal states
-        if (CurrentState == PlayerState.Normal)
+    if (CurrentState == PlayerState.Normal)
+    {
+        CurrentState = PlayerState.Vision;
+        visionOn.Invoke();
+        GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Vision);
+
+        // Activate ClueObjectColor scripts when entering vision mode
+        foreach (var clue in clues)
         {
-            CurrentState = PlayerState.Vision;
-            visionOn.Invoke();
-            GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Vision);
-        }
-        else
-        {
-            CurrentState = PlayerState.Normal;
-            visionOff.Invoke();
-            for (int i = 0; i < particles.Count; i++)
+            ClueObjectColor clueColorScript = clue.GetComponent<ClueObjectColor>();
+            if (clueColorScript != null)
             {
-                GameObject destoryObj = particles[i];
-                particles.Remove(particles[i]);
-                Destroy(destoryObj); 
-                
-            
-            
+                clueColorScript.SetInVisionMode(true);
             }
-                GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Normal);
         }
+    }
+    else
+    {
+        CurrentState = PlayerState.Normal;
+        visionOff.Invoke();
+        for (int i = 0; i < particles.Count; i++)
+        {
+            GameObject destoryObj = particles[i];
+            particles.Remove(particles[i]);
+            Destroy(destoryObj);
+        }
+        GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Normal);
+
+        // Deactivate ClueObjectColor scripts when exiting vision mode
+        foreach (var clue in clues)
+        {
+            ClueObjectColor clueColorScript = clue.GetComponent<ClueObjectColor>();
+            if (clueColorScript != null)
+            {
+                clueColorScript.SetInVisionMode(false);
+            }
+        }
+    }
     }
 
     public void OutRay()
@@ -117,11 +157,17 @@ public class PlayerVision : MonoBehaviour
     //this just spawns the scent trail ai that goes to the clue 
     private void ScentTrail(GameObject target)
     {
-        GameObject spawnedObject = Instantiate(scentParticle, this.gameObject.transform.position, this.gameObject.transform.rotation);
-        particles.Add(spawnedObject);
-        spawnedObject.SetActive(true);
-        spawnedObject.GetComponent<ScentTrail>().SetDestination(target.transform);
+        // Check if the clue has already been processed
+        if (!clues.Contains(target))
+        {
+            GameObject spawnedObject = Instantiate(scentParticle, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            particles.Add(spawnedObject);
+            spawnedObject.SetActive(true);
+            spawnedObject.GetComponent<ScentTrail>().SetDestination(target.transform);
 
+            // Mark the clue as processed
+            clues.Add(target);
+        }
     }
 }
 

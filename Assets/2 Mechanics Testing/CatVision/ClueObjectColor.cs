@@ -12,15 +12,43 @@ public class ClueObjectColor : MonoBehaviour
     private Renderer objectRenderer;
     private Color originalColor;
     //start assigns the rendering and color
+    private bool isInVisionMode = false;
+
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
         originalColor = objectRenderer.material.color;
     }
-    //method for changing the color
+
+    public void SetInVisionMode(bool inVisionMode)
+    {
+        isInVisionMode = inVisionMode;
+
+        // If not in vision mode, revert to the original color
+        if (!isInVisionMode)
+        {
+            ColorRevert();
+        }
+    }
+    public void ActivateColor()
+    {
+        isInVisionMode = true;
+        ColorChange();
+    }
+
+    public void DeactivateColor()
+    {
+        isInVisionMode = false;
+        ColorRevert();
+    }
+
+    // Modify ColorChange to check for both vision mode and range
     public void ColorChange()
     {
-        StartCoroutine(ChangeColorAfterFrame());
+        if (isInVisionMode)
+        {
+            objectRenderer.material.color = visionColor;
+        }
     }
     //method for reverting the color
     public void ColorRevert()
