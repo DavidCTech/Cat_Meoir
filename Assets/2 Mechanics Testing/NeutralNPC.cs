@@ -14,9 +14,9 @@ public class NeutralNPC : MonoBehaviour
     }
 
     public NPCState currentState = NPCState.Idle;
-    //private Animator anim;
 
     NavMeshAgent agent;
+    private Animator anim;
 
     public float range;
     public Transform centrePoint;
@@ -25,7 +25,7 @@ public class NeutralNPC : MonoBehaviour
     public LayerMask obstructionMask;
 
     public float timer = 0f;
-    public float duration = 20f; // Adjust the duration as needed
+    public float duration = 15f; // Adjust the duration as needed
 
     public GameObject Player;
     public Transform player;
@@ -41,8 +41,11 @@ public class NeutralNPC : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
         tired = true;
         currentState = NPCState.Idle;
+        anim.SetBool("Idle", true);
+        anim.SetBool("Walk", false);
 
     }
 
@@ -82,6 +85,8 @@ public class NeutralNPC : MonoBehaviour
         {
             case NPCState.Idle:
                 Idling();
+                anim.SetBool("Idle", true);
+                anim.SetBool("Walk", false);
                 if (tired && interested)
                 {
                     Idling();
@@ -93,6 +98,8 @@ public class NeutralNPC : MonoBehaviour
                 break;
 
             case NPCState.Walk:
+                anim.SetBool("Idle", false);
+                anim.SetBool("Walk", true);
                 if (awake)
                 {
                     //StartCoroutine(Walking());
@@ -155,6 +162,8 @@ public class NeutralNPC : MonoBehaviour
             else
             {
                 tired = true;
+                anim.SetBool("Idle", true);
+                anim.SetBool("Walk", false);
                 if (tired && interested)
                 {
                     currentState = NPCState.Idle;
