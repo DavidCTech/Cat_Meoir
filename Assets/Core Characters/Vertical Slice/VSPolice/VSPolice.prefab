@@ -129,6 +129,7 @@ MonoBehaviour:
   _randomWander: 0
   _alwaysMoving: 0
   _fleeFromPlayer: 0
+  hasSeenPlayer: 0
   wait_time: 2
   _speed: 1
   _walkRadius: 0
@@ -154,8 +155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc188fd411f1854f95ac0a22c182009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  voiceClips:
+  - {fileID: 8300000, guid: 1c5b0f150e1ce8543ade68ba923226e7, type: 3}
+  voiceAware:
+  - {fileID: 8300000, guid: 57fefb06a3d32784bb08978e07bb9244, type: 3}
+  voiceLost:
+  - {fileID: 8300000, guid: 25e8f01b96df9a24b9abf222a83f8177, type: 3}
+  voiceDelay: 6
   policeVS: {fileID: 3255589778157924098}
-  voiceHuman: {fileID: 0}
+  voiceHuman: {fileID: 5896811465032772436}
 --- !u!195 &7445898776962825688
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -190,7 +198,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.289
   m_Pitch: 1
   Loop: 0
   Mute: 0

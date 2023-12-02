@@ -5,10 +5,9 @@ using UnityEngine;
 public class VoiceClipRando : MonoBehaviour
 {
 
+    AudioSource soundSource;
     [SerializeField] AudioClip[] voiceClips;
     [SerializeField] float voiceDelay = 10.0f; // Adjust in the inspector
-
-    AudioSource soundSource;
 
     // Start is called before the first frame update
     void Start()

@@ -30,6 +30,7 @@ public class Human_AI : MonoBehaviour
     public bool _randomWander;
     public bool _alwaysMoving;
     public bool _fleeFromPlayer;
+    public bool hasSeenPlayer;
 
     [SerializeField]
     //serialized feilds allow you to see the following in the inspector 
@@ -159,6 +160,7 @@ public class Human_AI : MonoBehaviour
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
                     _canSeePlayer = true;
+                    hasSeenPlayer = true;
                 }
                 // if the raycast is obstructued, you cant see the player : ( 
                 else
@@ -210,6 +212,7 @@ public class Human_AI : MonoBehaviour
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask) && playerStealth.isStealthed == false)
                 {
                     _canSeePlayer = true;
+                    hasSeenPlayer = true;
                 }
                 // if the raycast is obstructued, you cant see the player : ( 
                 else
@@ -350,7 +353,7 @@ public class Human_AI : MonoBehaviour
                 else
                 {
                     ChasePlayer();
-                    _navMeshAgent.speed = 9;
+                    _navMeshAgent.speed = 6;
                 }
                 if (_canSeePlayer == false)
                 {
