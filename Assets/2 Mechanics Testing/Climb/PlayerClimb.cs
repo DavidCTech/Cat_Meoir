@@ -10,6 +10,8 @@ public class PlayerClimb : MonoBehaviour
     public AnimationCurve timeCurve; 
     [Header("The duration is how long the climb takes.")]
     public float duration;
+    //anim
+    public Animator anim; 
 
     // We will need the vector3 positions of these transforms 
     private Vector3 startingVector;
@@ -35,7 +37,7 @@ public class PlayerClimb : MonoBehaviour
 
     // this method will set climbing to true and will set the motion to false - it gets passed in the middle and end vector 
     //change the vector 3 to transforms if using this script 
-    public void Climb(Vector3 middleTransform, Vector3 endTransform)
+    public void Climb(Vector3 middleTransform, Vector3 endTransform, float distance)
     {
         if (!isClimbing)
         {
@@ -49,8 +51,22 @@ public class PlayerClimb : MonoBehaviour
             this.gameObject.GetComponent<PlayerMovement>().isFrozen = true;
             //set motion to false 
         }
+        
+
 
     }
+    private float ClampValue(float inputValue, float minValue, float maxValue)
+    {
+
+        // Clamp inputValue between minValue and maxvalue
+        float clampedValue = Mathf.Clamp(inputValue, minValue, maxValue);
+
+        // Scale the clampedValue to the range [1, 2]
+        float scaledValue = (clampedValue - minValue) / (maxValue - minValue);
+
+        return scaledValue;
+    }
+
 
     void Update()
     {
@@ -69,9 +85,19 @@ public class PlayerClimb : MonoBehaviour
                 float scaledT = timeCurve.Evaluate(t);
 
                 Vector3 parabolicPosition = CalculateParabola(startingVector, middleVector, endVector, t);
+                
+                float climbDuration = ClampValue(1 + 1-t , 1f, 2f);
+                if(anim != null)
+                {
+                    anim.SetFloat("AnimSpeed", 1+ (1-t));
+                }
 
                 transform.position = parabolicPosition;
             }
+        }
+        if (!isClimbing)
+        {
+            anim.SetFloat("AnimSpeed", 1f);
         }
         
         if(elaspedTime >= duration)

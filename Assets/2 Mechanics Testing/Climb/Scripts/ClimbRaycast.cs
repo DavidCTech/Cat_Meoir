@@ -71,8 +71,8 @@ public class ClimbRaycast : MonoBehaviour
 
 
 
-            //now put it into the original playerclimb 
-            this.gameObject.GetComponent<PlayerClimb>().Climb(targetMidPoint, targetUpperPoint);
+            //now put it into the original playerclimb  same with the distance for anim
+            this.gameObject.GetComponent<PlayerClimb>().Climb(targetMidPoint, targetUpperPoint, distance);
 
         }
 

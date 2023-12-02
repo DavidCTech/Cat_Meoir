@@ -9,13 +9,26 @@ public class QuickFind : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] foundObjects = GameObject.FindGameObjectsWithTag(searchTag);
+
+        //GameObject[] foundObjects = GameObject.FindGameObjectsWithTag(searchTag);
+        /*
+        GameObject[] foundObjects = FindObjectOfType<AudioListener>().gameObject;
         objects.AddRange(foundObjects);
 
         // Optional: Print the names of the found objects
         foreach (GameObject obj in foundObjects)
         {
             Debug.Log("Found object with tag " + searchTag + ": " + obj.name);
+        }
+        */
+        AudioListener[] foundListeners = FindObjectsOfType<AudioListener>();
+
+        foreach (AudioListener listener in foundListeners)
+        {
+            objects.Add(listener.gameObject);
+
+            // Optional: Print the names of the found objects
+            Debug.Log("Found object with AudioListener: " + listener.gameObject.name);
         }
     }
 

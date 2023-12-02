@@ -28,6 +28,12 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded = true; // Indicates if the player is grounded
     private PlayerVision playerVision;
 
+    //anim
+    public Animator anim;
+
+    private float velocitySpeed;
+    private float velocityUp;
+
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -37,6 +43,17 @@ public class PlayerMovement : MonoBehaviour
 
         // Set the reference to the PlayerVision script
         playerVision = GetComponent<PlayerVision>();
+    }
+    private float ClampValue(float inputValue, float minValue, float maxValue)
+    {
+
+        // Clamp inputValue between minValue and maxValue
+        float clampedValue = Mathf.Clamp(inputValue, minValue, maxValue);
+
+        // Scale the clampedValue to the range [0, 1]
+        float scaledValue = (clampedValue - minValue) / (maxValue - minValue);
+
+        return scaledValue;
     }
 
     void FixedUpdate()
@@ -53,6 +70,15 @@ public class PlayerMovement : MonoBehaviour
 
         // Perform the ground check
         CheckGrounded();
+
+        //anim work 
+        if(anim != null)
+        {
+            float velocitySpeedValue = ClampValue(rb.velocity.magnitude, 0f, moveSpeed + 3f); 
+            float velocityUpValue = ClampValue(Mathf.Abs(rb.velocity.y), 0f, 0.1f);
+            anim.SetFloat("VelocitySpeed", velocitySpeedValue);
+            anim.SetFloat("VelocityUp", velocityUpValue); 
+        }
     }
 
     public void SetPlayerState(PlayerState state)

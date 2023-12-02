@@ -11,13 +11,25 @@ public class PlaySound : MonoBehaviour
     public bool isRandom; 
     public float maxPitch;
     public float minPitch;
-    private AudioClip audioClip; 
+    [SerializeField] AudioClip[] randomClips;
+    private AudioClip audioClip;
+    
     
     public void PutInClip(AudioClip _audioClip)
     {
         audioClip = _audioClip; 
         Invoke("PlayAudio", soundDelay);
 
+    }
+    public void RandomClips()
+    {
+        AudioClip clip = randomClips[UnityEngine.Random.Range(0, randomClips.Length)];
+
+        float randomPitch = Random.Range(minPitch, maxPitch);
+        audioSource.pitch = randomPitch;
+        
+        audioSource.clip = clip;
+        audioSource.Play();
     }
     public void PlayAudio()
     {
