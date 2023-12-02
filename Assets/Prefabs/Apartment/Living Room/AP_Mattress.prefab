@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 5389495213167766817}
   - component: {fileID: 2461494346601650578}
   - component: {fileID: 2044564535810482546}
-  m_Layer: 0
+  - component: {fileID: 5660114456004323323}
+  m_Layer: 11
   m_Name: AP_Mattress
-  m_TagString: Untagged
+  m_TagString: Climb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2200111342132423807
 Transform:
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &5389495213167766817
 MeshFilter:
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e4ed5d332e82b404096fdf18227ee5a9, type: 2}
+  - {fileID: 2100000, guid: 24e3163b664035549b330f2a4506ce82, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,3 +106,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 163.16017, y: 41.503498, z: 230.25342}
   m_Center: {x: 0, y: 20.04999, z: 3.1195107}
+--- !u!114 &5660114456004323323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4849339793401795174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6330978bdbaf145bc19fe462966bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbUI: {fileID: 0}
+  offTime: 2
+  up: 1.5

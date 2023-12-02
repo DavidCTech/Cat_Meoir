@@ -39,7 +39,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48656806318137102}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ff80d24aad326d54ebff69a6be325bb1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -64,8 +64,7 @@ GameObject:
   - component: {fileID: 2176070469587368291}
   - component: {fileID: 8033821624740843004}
   - component: {fileID: 995743749264974510}
-  - component: {fileID: 6835495220358340672}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: pCube3
   m_TagString: Climb
   m_Icon: {fileID: 0}
@@ -137,27 +136,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6835495220358340672
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479765193212621008}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.42751005, y: 0.051071644, z: 0.24462855}
-  m_Center: {x: 0, y: 0.059709422, z: 0}
 --- !u!1 &3267614644579567480
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,10 +145,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986380171096426787}
-  - component: {fileID: 1098630309308714822}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: AP_CoffeeTable
-  m_TagString: Climb
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -184,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 3267614644579567480}
   m_LocalRotation: {x: 0, y: 0, z: -0, w: -1}
   m_LocalPosition: {x: -7.807, y: -0.023999989, z: 2.968}
-  m_LocalScale: {x: 4.4, y: 4.8, z: 3.3000002}
+  m_LocalScale: {x: 4.4, y: 4.8, z: 3.3000004}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2176070469587368291}
@@ -192,24 +169,10 @@ Transform:
   - {fileID: 6715496664670073311}
   - {fileID: 6812019441418965465}
   - {fileID: 6657160487607939882}
+  - {fileID: 7546294454525643921}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -360, z: 0}
---- !u!114 &1098630309308714822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3267614644579567480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c6330978bdbaf145bc19fe462966bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbUI: {fileID: 0}
-  offTime: 2
-  up: 1
 --- !u!1 &3455546933346148151
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +212,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3455546933346148151}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ff80d24aad326d54ebff69a6be325bb1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -302,7 +265,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4811522074080542811}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ff80d24aad326d54ebff69a6be325bb1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -316,6 +279,75 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.053901996, y: 0.26346985, z: 0.03950729}
   m_Center: {x: 0.31213316, y: 0.152784, z: -0.049798615}
+--- !u!1 &6711846000362645956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7546294454525643921}
+  - component: {fileID: 8894907391866513990}
+  - component: {fileID: 4986596030944629451}
+  m_Layer: 11
+  m_Name: Box Collider
+  m_TagString: Climb
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7546294454525643921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711846000362645956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.1563, z: -0.118}
+  m_LocalScale: {x: 0.049999997, y: 0.049999997, z: 0.049999997}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1986380171096426787}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8894907391866513990
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711846000362645956}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.7, y: 1, z: 4.8}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4986596030944629451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711846000362645956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6330978bdbaf145bc19fe462966bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbUI: {fileID: 0}
+  offTime: 2
+  up: 0.6
 --- !u!1 &7600395324318785377
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +387,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7600395324318785377}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ff80d24aad326d54ebff69a6be325bb1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
