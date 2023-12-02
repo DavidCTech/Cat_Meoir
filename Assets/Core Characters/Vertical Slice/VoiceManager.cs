@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class VoiceManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public GameObject policeVS;
+    public Human_AI voiceHuman;
+
     void Start()
     {
-        
+        voiceHuman = policeVS.GetComponent<Human_AI>();
     }
 
     // Update is called once per frame
