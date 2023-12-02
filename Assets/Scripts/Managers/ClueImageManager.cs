@@ -14,6 +14,7 @@ public class ClueImageManager : MonoBehaviour
     [Header("You need to reference the parent game object of the Image UI to turn on.")]
     public GameObject imageUI;
     private PhotoManager photoManager;
+    private Color initialColor; 
 
 
     void Awake()
@@ -63,6 +64,7 @@ public class ClueImageManager : MonoBehaviour
                 if (clueSpaceImage.sprite == null)
                 {
                     // Case 2: No match found, assign to the nearest null sprite
+                    clueSpaceImage.color = Color.white;
                     clueSpaceImage.name = slotName;
                     clueSpaceImage.sprite = slotSprite;
                     imageData.description = description;
@@ -78,6 +80,8 @@ public class ClueImageManager : MonoBehaviour
         {
             if (failSpace.sprite == null)
             {
+                initialColor = failSpace.color; 
+                failSpace.color = Color.white;
                 failSpace.name = slotName;
                 failSpace.sprite = slotSprite;
                 return true;
@@ -93,31 +97,41 @@ public class ClueImageManager : MonoBehaviour
            
             if (failSpace.name == imageToNull.name)
             {
-                //take the failSpace name and compare it with a bunch of photo manager scriptable list 
-                // when there's a match, delete that one in the list and then reorganize the list 
-                
-                for (int i = 0; i < photoManager.snapshots.Count; i++)
+                if (!failSpace.name.Contains("Image"))
                 {
-                    if(photoManager.snapshots[i] != null)
-                    {
-                        if (photoManager.snapshots[i].clueName == imageToNull.name)
-                        {
+                    //take the failSpace name and compare it with a bunch of photo manager scriptable list 
+                    // when there's a match, delete that one in the list and then reorganize the list 
 
-                            photoManager.deletePicture(photoManager.snapshots[i]);
-                            break; // Break out of the loop once the item is removed
-                        }
-                    }
-                    else
+                    for (int i = 0; i < photoManager.snapshots.Count; i++)
                     {
-                        Debug.Log("there was an issue here Screenshot this debug message ");
-                        break; 
+                        if (photoManager.snapshots[i] != null)
+                        {
+                            if (photoManager.snapshots[i].clueName == imageToNull.name)
+                            {
+
+                                photoManager.deletePicture(photoManager.snapshots[i]);
+                                break; // Break out of the loop once the item is removed
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("there was an issue here Screenshot this debug message ");
+                            break;
+                        }
+
                     }
-                    
+
+                    failSpace.sprite = null;
+                    if (initialColor != null)
+                    {
+                        failSpace.color = initialColor;
+                    }
+
+                    failSpace.name = null;
+                    break; // Break out of the outer loop since the item has been processed
                 }
-                failSpace.sprite = null;
-                failSpace.name = null;
-                break; // Break out of the outer loop since the item has been processed
             }
+                    
 
         }
 
