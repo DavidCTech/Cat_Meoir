@@ -15,17 +15,18 @@ public class NPCInteraction : MonoBehaviour
     public GameObject closedButton;
 
 
+
     public void Interact(GameObject playerObject)
     {
        
         if (isNPC)
         {
             dialogue.gameObject.SetActive(true);
-            //lock the player
             if (isLockingPlayer)
             {
                 player = playerObject;
                 player.GetComponent<PlayerMovement>().isFrozen = true;
+               
             }
         }
 
@@ -47,7 +48,6 @@ public class NPCInteraction : MonoBehaviour
     }
     public void End(Canvas current)
     {
-        //unlock the player
         player.GetComponent<PlayerMovement>().isFrozen = false;
         current.gameObject.SetActive(false);
     }

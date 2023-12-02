@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIPlayerControl : MonoBehaviour
 {
-    public GameObject player; 
+    public GameObject player;
 
     void OnEnable()
     {
@@ -12,7 +12,9 @@ public class UIPlayerControl : MonoBehaviour
         {
             player.GetComponent<PlayerMovement>().isFrozen = true;
             player.GetComponent<PlayerInteractionCheck>().isInteracting = true;
+
         }
+       
         
     }
 
@@ -24,7 +26,7 @@ public class UIPlayerControl : MonoBehaviour
             player.GetComponent<PlayerMovement>().isFrozen = false;
             player.GetComponent<PlayerInteractionCheck>().isInteracting = false;
         }
-        
+
 
     }
 }

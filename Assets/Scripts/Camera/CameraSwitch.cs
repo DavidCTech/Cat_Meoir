@@ -12,16 +12,23 @@ public class CameraSwitch : MonoBehaviour
     public CinemachineVirtualCameraBase firstPersonCamera;
     [Header("Need a reference to the playermovement to freeze during switch.")]
     public PlayerMovement playerMovement;
+   
     [Header("Need a reference to the CinemachinePOVExtension on cam first person.")]
     public CinemachinePOVExtension cinemachinePOXExtension;
     [HideInInspector]
     public bool isFirst;
     public CameraController cameraControls;
 
+    private GameObject player;
+    private PlayerInteractionCheck playerInteraction;
 
     private void Awake()
     {
         cameraControls = new CameraController();
+        //need ref to game object player to get interaction check to ensure you cant switch while interacting 
+        player = playerMovement.gameObject;
+        playerInteraction = player.GetComponent<PlayerInteractionCheck>(); 
+
     }
     private void OnEnable()
     {
@@ -55,14 +62,19 @@ public class CameraSwitch : MonoBehaviour
 
     void ToggleCamera()
     {
-        if (thirdPersonCamera.gameObject.activeSelf)
+        if (!playerInteraction.isInteracting)
         {
-            EnableFirstPersonCamera();
+            if (thirdPersonCamera.gameObject.activeSelf)
+            {
+                EnableFirstPersonCamera();
+            }
+            else
+            {
+                EnableThirdPersonCamera();
+            }
+
         }
-        else
-        {
-            EnableThirdPersonCamera();
-        }
+        
     }
 
     void EnableThirdPersonCamera()
