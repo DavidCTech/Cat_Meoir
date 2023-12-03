@@ -5,7 +5,8 @@ using UnityEngine;
 public class ClueSaves : MonoBehaviour
 {
     // game object photo manager 
-    private PhotoManager photoManager; 
+    private PhotoManager photoManager;
+    public GameObject loadingScreen; 
 
     private void Start()
     {
@@ -24,6 +25,10 @@ public class ClueSaves : MonoBehaviour
     }
     public void LoadClues()
     {
+        if (loadingScreen != null)
+        {
+            loadingScreen.SetActive(true);
+        }
         StartCoroutine(LoadClueAsync());
 
     }
@@ -33,6 +38,10 @@ public class ClueSaves : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
+        if (loadingScreen != null)
+        {
+            loadingScreen.SetActive(false);
+        }
         ClueData data = SaveSystem.LoadClues();
         // Clear the existing snapshots
         photoManager.snapshots.Clear();
