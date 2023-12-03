@@ -29,6 +29,11 @@ public class TestingScript : MonoBehaviour
             ReloadScene();
         }
 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            LoadSceneByName("Menu");
+        }
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             LoadSceneByName("VerticalSliceAlleyway");
