@@ -42,7 +42,7 @@ public class NeutralNPC : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-        tired = true;
+        //tired = true;
         currentState = NPCState.Idle;
         anim.SetBool("Idle", true);
         anim.SetBool("Walk", false);
