@@ -21,9 +21,9 @@ public class QuickFind : MonoBehaviour
             Debug.Log("Found object with tag " + searchTag + ": " + obj.name);
         }
         */
-        AudioListener[] foundListeners = FindObjectsOfType<AudioListener>();
+        AudioSource[] foundListeners = FindObjectsOfType<AudioSource>();
 
-        foreach (AudioListener listener in foundListeners)
+        foreach (AudioSource listener in foundListeners)
         {
             objects.Add(listener.gameObject);
 
