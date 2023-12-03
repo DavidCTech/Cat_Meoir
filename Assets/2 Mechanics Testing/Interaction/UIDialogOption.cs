@@ -11,14 +11,22 @@ public class UIDialogOption : MonoBehaviour
     private Text dialogText;
     private NPCSpeak npcSpeak;
 
-    //set up creates info for the button 
+    //set up creates info for the button  - this is for a button with no other choices 
     public void SetUp(NPCSpeak _npcSpeak, DialogData _dialogData, string _dialogText)
     {
         npcSpeak = _npcSpeak;
         dialogData = _dialogData;
         dialogText = this.gameObject.GetComponentInChildren<Text>();
         dialogText.text = _dialogText;
+
+        // Get the Button component
+        Button button = this.gameObject.GetComponent<Button>();
+
+        
     }
+    
+
+
     //on select option it will do option selected in the npcspeak - which changes the dialog
     public void SelectOption()
     {

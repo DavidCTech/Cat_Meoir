@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems; 
 
 public class NPCSpeak : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class NPCSpeak : MonoBehaviour
     //dialog children is just a list of the children to loop through and save. 
     private List<GameObject> dialogChildren = new List<GameObject>();
     private NPCVariableChecker npcChecker;
-    private AudioSource audioSource; 
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -260,9 +261,54 @@ public class NPCSpeak : MonoBehaviour
                     GameObject newButton = Instantiate(dialogOptionsPrefab, dialogOptionsParent);
                     spawnedButtons.Add(newButton);
                     
-                    // new buttons are then set up to have the option press ability, and gets the dialog 
+                    // new buttons are then set up to have the option press ability
                     newButton.GetComponent<UIDialogOption>().SetUp(this, option.followingDialog, option.choiceText);
+                    //make a list of these button objects and feed it into UIDialogOption
+                 
                 }
+                //for controller support 
+
+                for (int i = 0; i < spawnedButtons.Count; i++)
+                {
+                    //choose the first to set the event system to it 
+                    if(i == 0)
+                    {
+                        EventSystem.current.SetSelectedGameObject(spawnedButtons[i]);
+                    }
+                    // If spawned button I isn't first (has a previous button)
+                    if (i != 0)
+                    {
+                        // Get the current button and its Navigation
+                        Button currentButton = spawnedButtons[i].GetComponent<Button>();
+                        Navigation nav = currentButton.navigation;
+
+                        // Set the up navigation target
+                        Button upButton = spawnedButtons[i - 1].GetComponent<Button>();
+                        nav.selectOnUp = upButton;
+
+                        // Assign the modified Navigation back to the button
+                        currentButton.navigation = nav;
+                    }
+
+                    // If spawned button I isn't the last one (has a next button)
+                    if (i != (spawnedButtons.Count - 1))
+                    {
+                        // Get the current button and its Navigation
+                        Button currentButton = spawnedButtons[i].GetComponent<Button>();
+                        Navigation nav = currentButton.navigation;
+
+                        // Set the down navigation target
+                        Button downButton = spawnedButtons[i + 1].GetComponent<Button>();
+                        nav.selectOnDown = downButton;
+
+                        // Assign the modified Navigation back to the button
+                        currentButton.navigation = nav;
+                    }
+                }
+                
+
+
+
                 // wait for the option to be selected before going on 
                 while (!optionSelected)
                 {
