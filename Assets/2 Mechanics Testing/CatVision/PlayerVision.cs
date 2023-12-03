@@ -93,12 +93,14 @@ public class PlayerVision : MonoBehaviour
     {
         CurrentState = PlayerState.Normal;
         visionOff.Invoke();
+        
         for (int i = 0; i < particles.Count; i++)
         {
             GameObject destoryObj = particles[i];
             particles.Remove(particles[i]);
             Destroy(destoryObj);
         }
+
         GetComponent<PlayerMovement>().SetPlayerState(PlayerState.Normal);
 
         // Deactivate ClueObjectColor scripts when exiting vision mode
@@ -161,6 +163,7 @@ public class PlayerVision : MonoBehaviour
         if (!clues.Contains(target))
         {
             GameObject spawnedObject = Instantiate(scentParticle, this.gameObject.transform.position, this.gameObject.transform.rotation);
+           
             particles.Add(spawnedObject);
             spawnedObject.SetActive(true);
             spawnedObject.GetComponent<ScentTrail>().SetDestination(target.transform);
