@@ -20,8 +20,12 @@ public class VoiceClipRando : MonoBehaviour
     {
         while (true)
         {
-            AudioClip clip = voiceClips[UnityEngine.Random.Range(0, voiceClips.Length)];
-            soundSource.PlayOneShot(clip);
+            if(voiceClips.Length != 0)
+            {
+                AudioClip clip = voiceClips[UnityEngine.Random.Range(0, voiceClips.Length)];
+                soundSource.PlayOneShot(clip);
+            }
+           
             yield return new WaitForSeconds(voiceDelay); // Adjust the delay time as needed
         }
     }
