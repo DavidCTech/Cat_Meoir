@@ -116,6 +116,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenPhotos"",
+                    ""type"": ""Button"",
+                    ""id"": ""191fec73-9ef5-411f-b6f4-cd8d0b2ba5c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -426,6 +435,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""BoxPush"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfb48ddc-09df-4ead-866b-56058306a9d5"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenPhotos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb473a64-0dd0-4e34-984e-80f5fb9e60a8"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenPhotos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -467,6 +498,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_CatVision = m_Player.FindAction("CatVision", throwIfNotFound: true);
         m_Player_Vertical = m_Player.FindAction("Vertical", throwIfNotFound: true);
         m_Player_BoxPush = m_Player.FindAction("BoxPush", throwIfNotFound: true);
+        m_Player_OpenPhotos = m_Player.FindAction("OpenPhotos", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -538,6 +570,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CatVision;
     private readonly InputAction m_Player_Vertical;
     private readonly InputAction m_Player_BoxPush;
+    private readonly InputAction m_Player_OpenPhotos;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -552,6 +585,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @CatVision => m_Wrapper.m_Player_CatVision;
         public InputAction @Vertical => m_Wrapper.m_Player_Vertical;
         public InputAction @BoxPush => m_Wrapper.m_Player_BoxPush;
+        public InputAction @OpenPhotos => m_Wrapper.m_Player_OpenPhotos;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -591,6 +625,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @BoxPush.started += instance.OnBoxPush;
             @BoxPush.performed += instance.OnBoxPush;
             @BoxPush.canceled += instance.OnBoxPush;
+            @OpenPhotos.started += instance.OnOpenPhotos;
+            @OpenPhotos.performed += instance.OnOpenPhotos;
+            @OpenPhotos.canceled += instance.OnOpenPhotos;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -625,6 +662,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @BoxPush.started -= instance.OnBoxPush;
             @BoxPush.performed -= instance.OnBoxPush;
             @BoxPush.canceled -= instance.OnBoxPush;
+            @OpenPhotos.started -= instance.OnOpenPhotos;
+            @OpenPhotos.performed -= instance.OnOpenPhotos;
+            @OpenPhotos.canceled -= instance.OnOpenPhotos;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -672,5 +712,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnCatVision(InputAction.CallbackContext context);
         void OnVertical(InputAction.CallbackContext context);
         void OnBoxPush(InputAction.CallbackContext context);
+        void OnOpenPhotos(InputAction.CallbackContext context);
     }
 }
