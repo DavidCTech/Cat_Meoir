@@ -249,6 +249,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4853515133595528036, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
   m_PrefabInstance: {fileID: 1135530891}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &120518161 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5095627263255918025, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
+  m_PrefabInstance: {fileID: 1135530891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120518159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65dac8c9397640044928dca732c415b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &159830421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,7 +344,8 @@ PrefabInstance:
       propertyPath: gameManagerObject
       value: 
       objectReference: {fileID: 120518159}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6862316172310538981, guid: 7bf921906eddb104383d86935468043e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4684132435518060470, guid: 7bf921906eddb104383d86935468043e, type: 3}
@@ -344,17 +356,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 523507327}
   m_SourcePrefab: {fileID: 100100000, guid: 7bf921906eddb104383d86935468043e, type: 3}
---- !u!114 &159830422 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6862316172310538981, guid: 7bf921906eddb104383d86935468043e, type: 3}
-  m_PrefabInstance: {fileID: 159830421}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523507322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42eff1366ff43ca418f631d6bd38e137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &159830423 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4684132435518060470, guid: 7bf921906eddb104383d86935468043e, type: 3}
@@ -582,6 +583,7 @@ GameObject:
   - component: {fileID: 612658340}
   - component: {fileID: 612658341}
   - component: {fileID: 612658342}
+  - component: {fileID: 612658343}
   m_Layer: 0
   m_Name: Agree
   m_TagString: Untagged
@@ -640,9 +642,9 @@ MonoBehaviour:
   actionEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 77503780}
-        m_TargetAssemblyTypeName: ClueTriggerEvents, Assembly-CSharp
-        m_MethodName: CheckDoorUnlock
+      - m_Target: {fileID: 612658343}
+        m_TargetAssemblyTypeName: DialogClueDescription, Assembly-CSharp
+        m_MethodName: ChangeClueDescription
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -654,22 +656,24 @@ MonoBehaviour:
         m_CallState: 2
   clueEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 159830422}
-        m_TargetAssemblyTypeName: NPCVariableChecker, Assembly-CSharp
-        m_MethodName: UnlockDialog
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  clueNames:
-  - Clue
+      m_Calls: []
+  clueNames: []
   dialogData: {fileID: 1357712450}
+--- !u!114 &612658343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612658339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbbfc5d35efa4f439e3be6ae5e7750e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clueName: Clue
+  clueDescription: The Yellow Block of yellowness
+  photoManager: {fileID: 120518161}
 --- !u!1001 &695063683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -681,7 +685,7 @@ PrefabInstance:
     - target: {fileID: 174954039354372482, guid: 98e2e539224290147be2c568a4184075, type: 3}
       propertyPath: clueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 159830422}
+      objectReference: {fileID: 0}
     - target: {fileID: 4551248256562280597, guid: 98e2e539224290147be2c568a4184075, type: 3}
       propertyPath: actionEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -693,7 +697,7 @@ PrefabInstance:
     - target: {fileID: 4551248256562280597, guid: 98e2e539224290147be2c568a4184075, type: 3}
       propertyPath: clueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 159830422}
+      objectReference: {fileID: 0}
     - target: {fileID: 4551248256562280597, guid: 98e2e539224290147be2c568a4184075, type: 3}
       propertyPath: actionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -929,11 +933,11 @@ MonoBehaviour:
   dialogSegments:
   - dialogText: Hello!
     dialogDisplayTime: 1
-    audio: {fileID: 8300000, guid: a4149d49054c15f499ad89086902a2b2, type: 3}
+    audio: {fileID: 0}
     dialogChoices: []
   - dialogText: Lovely Day it is. Right?
     dialogDisplayTime: 1.5
-    audio: {fileID: 8300000, guid: 1c5b0f150e1ce8543ade68ba923226e7, type: 3}
+    audio: {fileID: 0}
     dialogChoices:
     - choiceText: I agree!
       followingDialog: {fileID: 612658341}
@@ -1645,7 +1649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1496224405
 Transform:
   m_ObjectHideFlags: 0

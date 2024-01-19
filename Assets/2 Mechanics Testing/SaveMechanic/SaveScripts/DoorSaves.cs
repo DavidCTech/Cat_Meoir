@@ -68,7 +68,7 @@ public class DoorSaves : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Door data.");
+            
             // put the failed to load gemaobject UI On 
         }
     }

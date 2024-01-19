@@ -14,7 +14,7 @@ public class ClueImageManager : MonoBehaviour
     [Header("You need to reference the parent game object of the Image UI to turn on.")]
     public GameObject imageUI;
     private PhotoManager photoManager;
-    private Color initialColor; 
+    private Color initialColor;
 
 
     void Awake()
@@ -152,6 +152,24 @@ public class ClueImageManager : MonoBehaviour
             clueSpaceImage.name = null;
             
 
+        }
+    }
+    public void UpdateDescription(string clueName, string description)
+    {
+        foreach (GameObject clueSpace in clueSpaces)
+        {
+            Image clueSpaceImage = clueSpace.GetComponent<Image>();
+            ImageData imageData = clueSpace.GetComponent<ImageData>();
+            
+            if (clueSpaceImage.name == clueName)
+            {
+
+                imageData.description = description;
+                clueSpaceImage.GetComponent<Button>().onClick.Invoke();
+             
+                return;
+            }
+            
         }
     }
 }

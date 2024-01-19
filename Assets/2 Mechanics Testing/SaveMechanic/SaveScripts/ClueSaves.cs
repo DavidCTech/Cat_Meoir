@@ -77,7 +77,8 @@ public class ClueSaves : MonoBehaviour
         else
         {
             // put the failed to load gemaobject UI On 
-            Debug.Log("No clue data.");
+            
+            
         }
     }
 }

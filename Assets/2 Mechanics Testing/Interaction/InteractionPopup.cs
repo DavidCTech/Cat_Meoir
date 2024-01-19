@@ -33,7 +33,7 @@ public class InteractionPopup : MonoBehaviour
             string objectName = playerCheck.CheckObject();
             GameObject obj = playerCheck.ReturnTarget();
             Vector3 closePoint = playerCheck.closestPoint; 
-            Debug.Log(objectName);
+            
             if (objectName == "Interact")
             {
                 ClimbUI climbUI = obj.GetComponent<ClimbUI>();

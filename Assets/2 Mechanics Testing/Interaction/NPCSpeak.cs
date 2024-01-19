@@ -213,8 +213,19 @@ public class NPCSpeak : MonoBehaviour
     public void OptionSelected(DialogData selectedOption)
     {
         optionSelected = true;
-        startDialogObject = selectedOption; 
+        startDialogObject = selectedOption;
+        //this is the dialog action associated with the selected option 
+
+        DialogAction dialogAction = startDialogObject.gameObject.GetComponent<DialogAction>();
+
+        if (dialogAction != null)
+        {
+            dialogAction.Action();
+        }
+
         NextDialogCheck(selectedOption);
+
+        
     }
 
     //Display dialog handles the actual displaying of the dialog, 
