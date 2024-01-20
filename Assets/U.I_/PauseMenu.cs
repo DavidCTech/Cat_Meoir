@@ -40,8 +40,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     [SerializeField] private TMP_Dropdown resolutionDropdown;
 
-    public ScrollRect scrollRect;
-
     public float scrollSpeed = 0.1f;
 
   
@@ -189,7 +187,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-            scrollRect.verticalScrollbar.value = scrollPosition;
+            
     }
 
 
