@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine.Events;
 
 
 public class PauseMenu : MonoBehaviour, ISelectHandler
@@ -30,7 +31,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public TMP_Dropdown dropdown;
     private float scrollPosition = 1;
     public AudioMixer audioMixer;
-
+    public Slider volumeSlider;
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
 
@@ -42,16 +43,44 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public float scrollSpeed = 0.1f;
 
-  
+    public Toggle fullScreenToggle;
+    private int screenInt;
+
+    private bool isFullScreen = false;
+
     public PlayerController playerControls;
 
     public Toggle vSyncToggle;
 
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
 
+    const string prefName = "optionsvalue";
+    const string resName = "resolutionoption";
+
 
     private void Awake()
     {
+        screenInt = PlayerPrefs.GetInt("togglestate");
+        if(screenInt == 1)
+        {
+            isFullScreen = true;
+            fullScreenToggle.isOn = true;
+        }
+        else
+        {
+            fullScreenToggle.isOn = false;
+        }
+
+        resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>
+        {
+            PlayerPrefs.SetInt(resName, resolutionDropdown.value);
+            PlayerPrefs.Save();
+        }));
+        dropdown.onValueChanged.AddListener(new UnityAction<int>(index =>
+        {
+            PlayerPrefs.SetInt(prefName, dropdown.value);
+        }));
+
         playerControls = new PlayerController();
     }
     public void OnEnable()
@@ -118,6 +147,10 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
+        volumeSlider.value = PlayerPrefs.GetFloat("MVolume", 1f);
+        audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
+
+        dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
         resolutions = Screen.resolutions;
 
@@ -127,22 +160,16 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         List<string> options = new List<string>();
 
-        filteredResolutions = new List<Resolution>();
+        int currentResolutionIndex = 0;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            if (resolutions[i].refreshRate == currentRefreshRate)
-            {
-                filteredResolutions.Add(resolutions[i]);
-            }
-        }
-
-        for (int i = 0; i < filteredResolutions.Count; i++)
-        {
-            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + filteredResolutions[i].refreshRate + "Hz";
+            string resolutionOption = resolutions[i].width + "x" + resolutions[i].height + " " + resolutions[i].refreshRate + "Hz";
             options.Add(resolutionOption);
 
-            if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
+            if (resolutions[i].width == Screen.width && 
+                resolutions[i].height == Screen.height &&
+                resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
             {
                 currentResolutionIndex = i;
             }
@@ -150,11 +177,9 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         resolutionDropdown.AddOptions(options);
 
-        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.value = PlayerPrefs.GetInt(resName, currentResolutionIndex);
         
         resolutionDropdown.RefreshShownValue();
-
-        dropdown.value = QualitySettings.GetQualityLevel();
 
     }
 
@@ -193,14 +218,15 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = filteredResolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, true);
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("MyExposedParam", volume);
+        PlayerPrefs.SetFloat("MVolume", volume);
+        audioMixer.SetFloat("MyExposedParam",PlayerPrefs.GetFloat("MVolume"));
         Debug.Log(volume);
     }
 
@@ -219,6 +245,15 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+        if (isFullscreen == false)
+        {
+            PlayerPrefs.SetInt("togglestate", 0);
+        }
+        else
+        {
+            isFullscreen = true;
+            PlayerPrefs.SetInt("togglestate", 1);
+        }
     }
 
     public void LoadMenu()
