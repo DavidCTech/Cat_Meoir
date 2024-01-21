@@ -223,11 +223,12 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     }
 
 
-    public void SetVolume(float volume)
+    public void SetVolume(float sliderValue)
     {
-        PlayerPrefs.SetFloat("MVolume", volume);
-        audioMixer.SetFloat("MyExposedParam",PlayerPrefs.GetFloat("MVolume"));
-        Debug.Log(volume);
+        PlayerPrefs.SetFloat("MVolume", sliderValue);
+        audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
+        audioMixer.SetFloat("MyExposedParam", Mathf.Log10(sliderValue) * 20);
+        Debug.Log(sliderValue);
     }
 
     public void ChangeSensitivity(float value)

@@ -2231,20 +2231,36 @@ PrefabInstance:
       objectReference: {fileID: 1428509469}
     - target: {fileID: 2778869540803903535, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
       propertyPath: m_Value
-      value: -5
+      value: 0.0001
       objectReference: {fileID: 0}
     - target: {fileID: 2778869540803903535, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
       propertyPath: m_MaxValue
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2778869540803903535, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
       propertyPath: m_MinValue
-      value: -5
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778869540803903535, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2778869540803903535, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
       objectReference: {fileID: 1428509468}
+    - target: {fileID: 2778869540803903535, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1766765652}
+    - target: {fileID: 2778869540803903535, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778869540803903535, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2881980771305064576, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -3445,6 +3461,9 @@ MonoBehaviour:
   optionsPanel: {fileID: 1900887389}
   creditsPanel: {fileID: 1486473587}
   resolutionDropdown: {fileID: 898098224}
+  volumeSlider: {fileID: 1428509469}
+  fullScreenToggle: {fileID: 1908238963}
+  isFullScreen: 0
   vSyncToggle: {fileID: 1681710631}
   optionsFirstButton: {fileID: 1428509467}
   optionsClosedButton: {fileID: 138257691}
@@ -3584,6 +3603,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7545674375179376497, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
   m_PrefabInstance: {fileID: 1428509466}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1908238963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3786616923566699645, guid: e9a3be6aea77729418da588d95eec9c2, type: 3}
+  m_PrefabInstance: {fileID: 1428509466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1925027464
 GameObject:
   m_ObjectHideFlags: 0
