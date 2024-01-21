@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ClueTriggerEvents : MonoBehaviour
+public class DoorOpener : MonoBehaviour
 {
     // Place on locked Game Object!
     private PhotoManager photoManager;

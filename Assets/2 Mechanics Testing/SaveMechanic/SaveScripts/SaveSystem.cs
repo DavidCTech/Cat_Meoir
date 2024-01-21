@@ -282,6 +282,65 @@ public static class SaveSystem
     }
 
 
+    public static void SaveCuts(List<UICutSceneToggle> toggles)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+
+        string path = Application.persistentDataPath + "/CutData.CatMeoir";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+
+        CutData data = new CutData(toggles);
+
+        formatter.Serialize(stream, data);
+
+
+
+        stream.Close();
+
+    }
+    public static CutData LoadCuts()
+    {
+        string path = Application.persistentDataPath + "/CutData.CatMeoir";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            CutData data = formatter.Deserialize(stream) as CutData;
+
+            stream.Close();
+            return data;
+
+        }
+
+        else
+        {
+           
+            return null;
+        }
+
+    }
+
+    public static void DeleteCuts()
+    {
+        string path = Application.persistentDataPath + "/CutData.CatMeoir";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
+        else
+        {
+            //Debug.LogError("Save File not found in " + path);
+
+        }
+
+    }
+
+
+
 }
 
 

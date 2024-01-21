@@ -11,6 +11,7 @@ public class PhotoManager : MonoBehaviour
     public GameObject imagesFullText;
     [Header("You do not need to ref anything, this is just nice info.")]
     public List<PhotoScriptable> snapshots = new List<PhotoScriptable>();
+    public List<ClueEventTrigger> triggers = new List<ClueEventTrigger>(); 
 
 
     private bool canContinue;
@@ -30,8 +31,8 @@ public class PhotoManager : MonoBehaviour
         snapshot.clueName = clueName;
         snapshot.texture = texture;
         snapshot.description = description;
-        snapshot.sceneName = sceneName; 
-       // snapshot.renderTexture = renderTexture; 
+        snapshot.sceneName = sceneName;
+        // snapshot.renderTexture = renderTexture; 
         // Update in clue image manager here if needed 
         canContinue = checkClueImages(clueName, snapshot);
         if (canContinue)
@@ -40,9 +41,17 @@ public class PhotoManager : MonoBehaviour
             checkPictureClue(snapshot);
 
         }
+        //check for any clue events to occur 
+        for (int i = triggers.Count - 1; i >= 0; i--)
+        {
+            if (triggers[i].Check(this))
+            {
+                // If the condition is true, remove the trigger from the list
+                triggers.RemoveAt(i);
+            }
+        }
+
     }
-
-
     public void PictureChecking()
     {
         //this method will go through all the scriptable objects list and then put them in the UI 

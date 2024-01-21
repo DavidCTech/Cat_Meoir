@@ -108,7 +108,7 @@ public class PlayerInteractionCheck : MonoBehaviour
                 if (objectName == "Door")
                 {
                     //Debug.Log("should have");
-                    targetObject.GetComponent<ClueTriggerEvents>().CheckDoorUnlock();
+                    targetObject.GetComponent<DoorOpener>().CheckDoorUnlock();
                 }
                 else
                 {
