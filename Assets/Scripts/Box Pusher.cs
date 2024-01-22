@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 public class BoxPusher : MonoBehaviour
 {
     private Rigidbody boxRigidbody;
-    private bool isPushing = false;
+    private bool isGrabbing = false;
+    private Transform playerTransform;
     private InputAction boxPushAction;
     private bool collisionWithPlayer = false;
-
 
     private void Start()
     {
@@ -17,6 +17,12 @@ public class BoxPusher : MonoBehaviour
             Debug.LogError("Rigidbody not found on BoxPusher GameObject!");
         }
 
+        playerTransform = FindObjectOfType<PlayerBoxInteraction>()?.transform;
+        if (playerTransform == null)
+        {
+            Debug.LogError("Player transform not found!");
+        }
+
         // Set the box to be initially kinematic
         SetBoxKinematic(true);
     }
@@ -24,15 +30,23 @@ public class BoxPusher : MonoBehaviour
     private void OnEnable()
     {
         // Register to the events in PlayerBoxInteraction when this script is enabled
-        FindObjectOfType<PlayerBoxInteraction>().onStartPush.AddListener(StartPush);
-        FindObjectOfType<PlayerBoxInteraction>().onStopPush.AddListener(StopPush);
+        var playerInteraction = FindObjectOfType<PlayerBoxInteraction>();
+        if (playerInteraction != null)
+        {
+            playerInteraction.onStartAction.AddListener(StartAction);
+            playerInteraction.onStopAction.AddListener(StopAction);
+        }
     }
 
     private void OnDisable()
     {
         // Unregister from the events when this script is disabled
-        FindObjectOfType<PlayerBoxInteraction>().onStartPush.RemoveListener(StartPush);
-        FindObjectOfType<PlayerBoxInteraction>().onStopPush.RemoveListener(StopPush);
+        var playerInteraction = FindObjectOfType<PlayerBoxInteraction>();
+        if (playerInteraction != null)
+        {
+            playerInteraction.onStartAction.RemoveListener(StartAction);
+            playerInteraction.onStopAction.RemoveListener(StopAction);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,65 +69,49 @@ public class BoxPusher : MonoBehaviour
 
     private void Update()
     {
-        if (isPushing)
+        if (isGrabbing)
         {
-            // Check if colliding with the player
             if (collisionWithPlayer)
             {
-                // Use the new Input System to get input direction
-                Vector2 inputVector = boxPushAction.ReadValue<Vector2>();
-                Vector3 movementDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
+                // Attach the box to the player
+                transform.parent = playerTransform;
 
-                // Check if the movement direction is significant (not close to zero)
-                if (Mathf.Abs(movementDirection.z) > 0.1f)
-                {
-                    Debug.Log("Pushing");
-                    // Apply force to move the box in the Z direction
-                    float forceMagnitude = 10.0f; // Adjust this value as needed
-                    Vector3 force = new Vector3(0, 0, movementDirection.z) * forceMagnitude;
-                    boxRigidbody.AddForce(force, ForceMode.Force);
-
-                    // Set the box to be dynamic when pushing
-                    SetBoxKinematic(false);
-                }
-                else
-                {
-                    StopPush();
-                }
+                // Set to non-kinematic when attached to the player
+                SetBoxKinematic(false);
             }
             else
             {
-                // If not colliding with the player, stop pushing
-                StopPush();
+                // If not colliding with the player, stop grabbing
+                StopAction();
             }
         }
         else
         {
-            // Set the box to be kinematic when not pushing
+            // Set the box to be kinematic when not grabbing
             SetBoxKinematic(true);
+
+            // Unparent the box from the player
+            transform.parent = null;
         }
     }
 
     private void SetBoxKinematic(bool value)
     {
-        if (boxRigidbody.isKinematic != value)
+        if (boxRigidbody != null && boxRigidbody.isKinematic != value)
         {
             boxRigidbody.isKinematic = value;
         }
     }
 
-    public void StartPush()
+    public void StartAction()
     {
         // Called from PlayerBoxInteraction script
-        isPushing = true;
-        SetBoxKinematic(false);
+        isGrabbing = true;
     }
 
-    public void StopPush()
+    public void StopAction()
     {
         // Called from PlayerBoxInteraction script
-        isPushing = false;
-        // Set the box to be kinematic when the push action is released
-        SetBoxKinematic(true);
+        isGrabbing = false;
     }
 }

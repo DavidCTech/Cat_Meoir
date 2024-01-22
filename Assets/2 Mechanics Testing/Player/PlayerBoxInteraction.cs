@@ -10,9 +10,8 @@ public class PlayerBoxInteraction : MonoBehaviour
     private InputAction boxPushAction;
     private PlayerInput playerInput;
 
-    public UnityEvent onStartPush;
-    public UnityEvent onStopPush;
-
+    public UnityEvent onStartAction;
+    public UnityEvent onStopAction;
 
     private void Start()
     {
@@ -20,8 +19,8 @@ public class PlayerBoxInteraction : MonoBehaviour
         if (playerInput != null)
         {
             boxPushAction = playerInput.actions["BoxPush"];
-            boxPushAction.started += ctx => StartPush();
-            boxPushAction.canceled += ctx => StopPush();
+            boxPushAction.started += ctx => StartAction();
+            boxPushAction.canceled += ctx => StopAction();
             boxPushAction.Enable();
         }
         else
@@ -32,27 +31,28 @@ public class PlayerBoxInteraction : MonoBehaviour
 
     private void Update()
     {
-        float pushValue = boxPushAction.ReadValue<float>();
+        float actionValue = boxPushAction.ReadValue<float>();
 
-        if (pushValue > 0.5f)
+        if (actionValue > 0.5f)
         {
-            StartPush();
+            StartAction();
         }
         else
         {
-            StopPush();
+            StopAction();
         }
     }
-    private void StartPush()
+
+    private void StartAction()
     {
-        // Broadcast the start push event to any listeners
-        onStartPush.Invoke();
+        // Broadcast the start action event to any listeners
+        onStartAction.Invoke();
     }
 
-    private void StopPush()
+    private void StopAction()
     {
-        // Broadcast the stop push event to any listeners
-        onStopPush.Invoke();
+        // Broadcast the stop action event to any listeners
+        onStopAction.Invoke();
     }
 
     private void OnDisable()
