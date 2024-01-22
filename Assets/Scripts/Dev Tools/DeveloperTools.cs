@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TestingScript : MonoBehaviour
+public class DeveloperTools : MonoBehaviour
 {
 
-    private static TestingScript instance;
+    private static DeveloperTools instance;
 
     private void Awake()
     {
