@@ -24,27 +24,42 @@ public class TestingScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             ReloadScene();
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             LoadSceneByName("Menu");
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            LoadSceneByName("Apartment");
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            LoadSceneByName("Bookstore");
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            LoadSceneByName("ShoeStore");
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
         {
             LoadSceneByName("VerticalSliceAlleyway");
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             LoadSceneByName("VerticalSlice");
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             LoadSceneByName("VerticalSliceRun");
         }
