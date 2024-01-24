@@ -148,7 +148,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
-        volumeSlider.value = PlayerPrefs.GetFloat("MVolume", 1f);
+        volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
         audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
@@ -198,7 +198,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
        isPaused = false;
        isOptionsPanelOpen = false;
        optionsPanel.SetActive(false);
-
+        sliderValue = volumeSlider.value;
        UnmuteAudio();
     }
 

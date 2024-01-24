@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public GameObject creditsPanel;
 
-    private Resolution[] resolutions;
+    Resolution[] resolutions;
 
     private List<Resolution> filteredResolutions;
 
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     void Start()
     {
-        volumeSlider.value = PlayerPrefs.GetFloat("MVolume", 1f);
+        volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
         audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
