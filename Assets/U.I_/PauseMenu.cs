@@ -57,6 +57,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     const string prefName = "optionsvalue";
     const string resName = "resolutionoption";
 
+    private float sliderValue;
 
     private void Awake()
     {
@@ -198,6 +199,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
        isOptionsPanelOpen = false;
        optionsPanel.SetActive(false);
 
+       UnmuteAudio();
     }
 
     void Pause()
@@ -205,6 +207,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        sliderValue = volumeSlider.value;
+        MuteAudio();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
 
@@ -222,6 +226,21 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    void MuteAudio()
+    {
+        if (audioMixer != null)
+        {
+            audioMixer.SetFloat("MyExposedParam", -80f);
+        }
+    }
+
+    void UnmuteAudio()
+    {
+        if (audioMixer != null)
+        {
+            audioMixer.SetFloat("MyExposedParam", Mathf.Log10(sliderValue) * 20);
+        }
+    }
 
     public void SetVolume(float sliderValue)
     {
