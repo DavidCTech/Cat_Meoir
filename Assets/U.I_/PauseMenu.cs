@@ -148,6 +148,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
+        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
         audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
 
@@ -252,6 +253,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void ChangeSensitivity(float value)
     {
+        PlayerPrefs.SetFloat("Sensitivity", value);
+        PlayerPrefs.Save();
         cineCam.m_XAxis.m_MaxSpeed = value;
     }
 

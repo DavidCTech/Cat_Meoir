@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour, ISelectHandler
 {
@@ -24,6 +25,11 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public GameObject optionsPanel;
 
     public GameObject creditsPanel;
+
+
+    public Slider sensitivitySlider;
+    public CinemachineFreeLook cineCam;
+    private CinemachineComposer composerX;
 
     Resolution[] resolutions;
 
@@ -76,6 +82,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     void Start()
     {
+        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
         audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
 
@@ -167,6 +174,14 @@ public class GameManager : MonoBehaviour, ISelectHandler
         audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
         audioMixer.SetFloat("MyExposedParam", Mathf.Log10(sliderValue) * 20);
     }
+
+    public void ChangeSensitivity(float value)
+    {
+        PlayerPrefs.SetFloat("Sensitivity", value);
+        PlayerPrefs.Save();
+        cineCam.m_XAxis.m_MaxSpeed = value;
+    }
+
 
     public void ChangeLevel (int value)
     {
