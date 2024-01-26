@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; 
+using UnityEngine.EventSystems;
+using UnityEngine.Events; 
 
 public class NPCSpeak : MonoBehaviour
 {
@@ -32,18 +32,54 @@ public class NPCSpeak : MonoBehaviour
     private List<GameObject> dialogChildren = new List<GameObject>();
     private NPCVariableChecker npcChecker;
     private AudioSource audioSource;
+    //this is for click skipping 
+    private bool currentlySpeaking = false;
+    private float skipTime; 
+    //this is for hold down skipping
+    public bool megaSkip; 
 
+
+    //delegate for the clicking skip
+    void OnEnable()
+    {
+        InteractionSkip.onSkipDel += SkipDialog;
+        InteractionSkip.onMegaSkip += MegaSkip;
+    }
+
+    void OnDisable()
+    {
+        InteractionSkip.onSkipDel -= SkipDialog;
+        InteractionSkip.onMegaSkip -= MegaSkip;
+    }
+
+    void MegaSkip()
+    {
+        megaSkip = true;
+        skipTime = 0f;
+    }
+
+    void SkipDialog()
+    {
+        if(currentlySpeaking == true)
+        {
+            skipTime = 0f; 
+        }
+    }
     private void Start()
     {
+
         // first it will get the npcVariable checker to see if you did the right combination first. 
         npcChecker = this.gameObject.GetComponent<NPCVariableChecker>();
-        audioSource = this.gameObject.GetComponent<AudioSource>(); 
+        audioSource = this.gameObject.GetComponent<AudioSource>();
+
+
     }
 
     //this is the general interact method that will be brought up,
     //currently it will always loop through the dialog beginning at start object. 
     public void Interact()
     {
+        megaSkip = false;  
         //freeze the player 
 
         // if the selected object about to be diaplayed is noted to be saved
@@ -82,6 +118,7 @@ public class NPCSpeak : MonoBehaviour
         {
             StartCoroutine(LoadAndProceed());
         }
+        
     }
 
 
@@ -213,10 +250,11 @@ public class NPCSpeak : MonoBehaviour
     // info 
     public void OptionSelected(DialogData selectedOption)
     {
+        
         optionSelected = true;
         startDialogObject = selectedOption;
         //this is the dialog action associated with the selected option 
-
+     
         DialogAction dialogAction = startDialogObject.gameObject.GetComponent<DialogAction>();
 
         if (dialogAction != null)
@@ -233,10 +271,11 @@ public class NPCSpeak : MonoBehaviour
     //length, and choice options
     IEnumerator displayDialog(DialogData selectedOption)
     {
+
         yield return null;
+        currentlySpeaking = true;
         //spawned button list is for object pooling to destroy it all
         //when object is selected 
-
 
         List<GameObject> spawnedButtons = new List<GameObject>();
         dialogCanvas.SetActive(true);
@@ -258,7 +297,26 @@ public class NPCSpeak : MonoBehaviour
             {
                 // if there is no choices - just make the text show up for the display time. 
                 dialogText.text = dialog.dialogText;
-                yield return new WaitForSeconds(dialog.dialogDisplayTime);
+                float startTime = Time.time;
+                float elapsedTime = 0f;
+
+                if(megaSkip == false)
+                {
+                    skipTime = dialog.dialogDisplayTime;
+                }
+                else
+                {
+                    skipTime = 0f; 
+                }
+
+
+                while (elapsedTime < skipTime)
+                {
+                    
+                    elapsedTime = Time.time - startTime;
+
+                    yield return null; 
+                }
             }
             else
             {
@@ -272,8 +330,9 @@ public class NPCSpeak : MonoBehaviour
                     dialogText.text = dialog.dialogText;
                     GameObject newButton = Instantiate(dialogOptionsPrefab, dialogOptionsParent);
                     spawnedButtons.Add(newButton);
-                    
+
                     // new buttons are then set up to have the option press ability
+                    Debug.Log("New Button made " + dialog.dialogText); 
                     newButton.GetComponent<UIDialogOption>().SetUp(this, option.followingDialog, option.choiceText);
                     //make a list of these button objects and feed it into UIDialogOption
                  
@@ -344,6 +403,8 @@ public class NPCSpeak : MonoBehaviour
         {
             Destroy(button);
         }
+
+        currentlySpeaking = false;
     }
 
 }

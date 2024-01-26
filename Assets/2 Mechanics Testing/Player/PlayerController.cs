@@ -125,6 +125,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""f96aa59c-b1ac-4aa3-827c-2f3def514409"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,17 +326,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4f702262-8cd4-42d1-9379-5f42d7ae7dc0"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c3639189-03be-401b-8621-935727dca319"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -457,6 +455,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""OpenPhotos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f702262-8cd4-42d1-9379-5f42d7ae7dc0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatVision"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2831336e-08cb-4cea-84a3-f12a2cb31183"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -499,6 +519,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_Vertical = m_Player.FindAction("Vertical", throwIfNotFound: true);
         m_Player_BoxPush = m_Player.FindAction("BoxPush", throwIfNotFound: true);
         m_Player_OpenPhotos = m_Player.FindAction("OpenPhotos", throwIfNotFound: true);
+        m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -571,6 +592,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Vertical;
     private readonly InputAction m_Player_BoxPush;
     private readonly InputAction m_Player_OpenPhotos;
+    private readonly InputAction m_Player_Skip;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -586,6 +608,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Vertical => m_Wrapper.m_Player_Vertical;
         public InputAction @BoxPush => m_Wrapper.m_Player_BoxPush;
         public InputAction @OpenPhotos => m_Wrapper.m_Player_OpenPhotos;
+        public InputAction @Skip => m_Wrapper.m_Player_Skip;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -628,6 +651,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @OpenPhotos.started += instance.OnOpenPhotos;
             @OpenPhotos.performed += instance.OnOpenPhotos;
             @OpenPhotos.canceled += instance.OnOpenPhotos;
+            @Skip.started += instance.OnSkip;
+            @Skip.performed += instance.OnSkip;
+            @Skip.canceled += instance.OnSkip;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -665,6 +691,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @OpenPhotos.started -= instance.OnOpenPhotos;
             @OpenPhotos.performed -= instance.OnOpenPhotos;
             @OpenPhotos.canceled -= instance.OnOpenPhotos;
+            @Skip.started -= instance.OnSkip;
+            @Skip.performed -= instance.OnSkip;
+            @Skip.canceled -= instance.OnSkip;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -713,5 +742,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnVertical(InputAction.CallbackContext context);
         void OnBoxPush(InputAction.CallbackContext context);
         void OnOpenPhotos(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }
