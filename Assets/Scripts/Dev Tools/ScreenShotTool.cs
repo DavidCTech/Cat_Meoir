@@ -9,7 +9,7 @@ public class ScreenShotTool : MonoBehaviour
     public string screenshotFolder = "Screenshots";
 
     // Specify the key to trigger the screenshot
-    public KeyCode screenshotKey = KeyCode.T;
+    public KeyCode screenshotKey = KeyCode.L;
 
     private void Awake()
     {

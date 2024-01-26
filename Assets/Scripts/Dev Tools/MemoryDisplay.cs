@@ -18,7 +18,7 @@ public class MemoryDisplay : MonoBehaviour
     void Update()
     {
         // Toggle memory display on/off with the G key
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             isMemoryDisplayActive = !isMemoryDisplayActive;
             memoryText.gameObject.SetActive(isMemoryDisplayActive);
