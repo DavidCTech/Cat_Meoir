@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerSave : MonoBehaviour
 {
 
     public GameObject loadingScreen;
     private string sceneName; 
+
     public void Saveplayer()
     {
         sceneName = SceneManager.GetActiveScene().name;
+       
         SaveSystem.SavePlayer(this.gameObject.transform, sceneName);
+       
     }
     public void LoadPlayer()
     {

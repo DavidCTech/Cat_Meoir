@@ -6,45 +6,30 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-    
-    //player data
+
     public static void SavePlayer(Transform playerTransform, string sceneName)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-
-
-        string path = Application.persistentDataPath + "/PlayerData_" + sceneName +".CatMeoir";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
+        string path = Application.persistentDataPath + "/PlayerData_" + sceneName + ".CatMeoir.json";
 
         PlayerData data = new PlayerData(playerTransform);
 
-        formatter.Serialize(stream, data);
-
-        stream.Close();
-
+        string jsonData = JsonUtility.ToJson(data);
+        File.WriteAllText(path, jsonData);
     }
+
     public static PlayerData LoadPlayer(string sceneName)
     {
-        string path = Application.persistentDataPath + "/PlayerData_" + sceneName + ".CatMeoir";
+        string path = Application.persistentDataPath + "/PlayerData_" + sceneName + ".json";
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
-
-            stream.Close();
+            string jsonData = File.ReadAllText(path);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(jsonData);
             return data;
-
         }
-
         else
         {
-           // Debug.LogError("Save File not found in " + path);
             return null;
         }
-
     }
 
     public static void DeletePlayer()
@@ -67,13 +52,8 @@ public static class SaveSystem
                 Debug.LogError($"Error deleting file {filePath}: {e.Message}");
             }
         }
-
-
     }
   
-
-
-
 
 
 
@@ -81,38 +61,24 @@ public static class SaveSystem
     //door data
     public static void SaveDoors(GameObject[] doors)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-
-
-        string path = Application.persistentDataPath + "/DoorData.CatMeoir";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-
+        string path = Application.persistentDataPath + "/DoorData.json";
         DoorData data = new DoorData(doors);
 
-        formatter.Serialize(stream, data);
-
-        stream.Close();
+        string jsonData = JsonUtility.ToJson(data);
+        File.WriteAllText(path, jsonData);
 
     }
     public static DoorData LoadDoors()
     {
-        string path = Application.persistentDataPath + "/DoorData.CatMeoir";
+        string path = Application.persistentDataPath + "/ClueData.json";
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            DoorData data = formatter.Deserialize(stream) as DoorData;
-
-            stream.Close();
+            string jsonData = File.ReadAllText(path);
+            DoorData data = JsonUtility.FromJson<DoorData>(jsonData);
             return data;
-
         }
-
         else
         {
-            //Debug.LogError("Save File not found in " + path);
             return null;
         }
 
@@ -120,7 +86,7 @@ public static class SaveSystem
 
     public static void DeleteDoors()
     {
-        string path = Application.persistentDataPath + "/DoorData.CatMeoir";
+        string path = Application.persistentDataPath + "/DoorData.json";
         if (File.Exists(path))
         {
             File.Delete(path);
@@ -135,52 +101,34 @@ public static class SaveSystem
     }
 
 
-
-
-
-    //Clue Data
     public static void SaveClues(List<PhotoScriptable> clues)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-
-
-        string path = Application.persistentDataPath + "/ClueData.CatMeoir";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-
+        string path = Application.persistentDataPath + "/ClueData.json";
         ClueData data = new ClueData(clues);
 
-        formatter.Serialize(stream, data);
-
-        stream.Close();
-
+        string jsonData = JsonUtility.ToJson(data);
+        File.WriteAllText(path, jsonData);
     }
+
     public static ClueData LoadClues()
     {
-        string path = Application.persistentDataPath + "/ClueData.CatMeoir";
+        string path = Application.persistentDataPath + "/ClueData.json";
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            ClueData data = formatter.Deserialize(stream) as ClueData;
-
-            stream.Close();
+            string jsonData = File.ReadAllText(path);
+            ClueData data = JsonUtility.FromJson<ClueData>(jsonData);
             return data;
-
         }
-
         else
         {
-            //Debug.LogError("Save File not found in " + path);
             return null;
         }
-
     }
+
 
     public static void DeleteClues()
     {
-        string path = Application.persistentDataPath + "/ClueData.CatMeoir";
+        string path = Application.persistentDataPath + "/ClueData.json";
         if (File.Exists(path))
         {
             File.Delete(path);
@@ -217,48 +165,32 @@ public static class SaveSystem
         }
     }
 
+
+    //save npc functions
     public static void SaveNPC(string npcName, List<GameObject> dialogList, DialogData selectedOption)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-
-
-        string path = Application.persistentDataPath + "/NPCData_" + npcName +".CatMeoir";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-
+        string path = Application.persistentDataPath + "/NPCData_" + npcName + ".json";
         NPCData data = new NPCData(dialogList, selectedOption);
 
-        formatter.Serialize(stream, data);
-        
-
-
-        stream.Close();
-
+        string jsonData = JsonUtility.ToJson(data);
+        File.WriteAllText(path, jsonData);
     }
+
     public static NPCData LoadNPC(string npcName)
     {
-        string path = Application.persistentDataPath + "/NPCData_" + npcName + ".CatMeoir";
+        string path = Application.persistentDataPath + "/NPCData_" + npcName + ".json";
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            NPCData data = formatter.Deserialize(stream) as NPCData;
-
-            stream.Close();
-            Debug.Log("data");
+            string jsonData = File.ReadAllText(path);
+            NPCData data = JsonUtility.FromJson<NPCData>(jsonData);
             return data;
-
         }
-
         else
         {
-            //Debug.LogError("Save File not found in " + path);
-            
             return null;
         }
-
     }
+
     public static void DeleteNPC()
     {
         string directoryPath = Application.persistentDataPath;
@@ -281,51 +213,34 @@ public static class SaveSystem
         }
     }
 
-
+    //cut save functions
     public static void SaveCuts(List<UICutSceneToggle> toggles)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-
-
-        string path = Application.persistentDataPath + "/CutData.CatMeoir";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-
+        string path = Application.persistentDataPath + "/CutData.json";
         CutData data = new CutData(toggles);
 
-        formatter.Serialize(stream, data);
-
-
-
-        stream.Close();
-
+        string jsonData = JsonUtility.ToJson(data);
+        File.WriteAllText(path, jsonData);
     }
+
     public static CutData LoadCuts()
     {
-        string path = Application.persistentDataPath + "/CutData.CatMeoir";
+        string path = Application.persistentDataPath + "/CutData.json";
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            CutData data = formatter.Deserialize(stream) as CutData;
-
-            stream.Close();
+            string jsonData = File.ReadAllText(path);
+            CutData data = JsonUtility.FromJson<CutData>(jsonData);
             return data;
-
         }
-
         else
         {
-           
             return null;
         }
-
     }
 
     public static void DeleteCuts()
     {
-        string path = Application.persistentDataPath + "/CutData.CatMeoir";
+        string path = Application.persistentDataPath + "/CutData.json";
         if (File.Exists(path))
         {
             File.Delete(path);

@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 using System.IO;
+
 
 //made with help from chat gpt and stack overflow
 public class ClueImagesSave : MonoBehaviour
@@ -17,7 +19,8 @@ public class ClueImagesSave : MonoBehaviour
     {
         photoManager = this.GetComponent<PhotoManager>(); 
     }
-
+ 
+    
     public void SaveClueImages()
     {
         
@@ -41,6 +44,9 @@ public class ClueImagesSave : MonoBehaviour
             File.WriteAllBytes(filePath, pngData);
         }
     }
+    
+
+   
 
     public Sprite LoadClueImages(int i)
     {
