@@ -48,7 +48,7 @@ public class DoorSaves : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogWarning($"doors[{i}] is null.");
+                        Debug.Log($"doors[{i}] is null.");
                     }
                 }
                 else
@@ -60,7 +60,7 @@ public class DoorSaves : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogWarning($"doors[{i}] is null.");
+                        Debug.Log($"doors[{i}] is null.");
                     }
                 }
             }
