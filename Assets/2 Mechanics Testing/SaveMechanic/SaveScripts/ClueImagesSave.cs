@@ -65,7 +65,7 @@ public class ClueImagesSave : MonoBehaviour
         string fileName = $"savedSprite_{i}.png";
         string filePath = Path.Combine(folderPath, fileName);
         byte[] pngData = File.ReadAllBytes(filePath);
-        Texture2D loadedTexture = new Texture2D(1080, 1080);
+        Texture2D loadedTexture = new Texture2D(1080, 1920);
         loadedTexture.LoadImage(pngData);
         return (loadedTexture);
     }

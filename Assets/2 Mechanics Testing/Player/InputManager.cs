@@ -64,7 +64,7 @@ public class InputManager : MonoBehaviour
     }
     public Vector2 GetMouseDelta()
     {
-        return playerControls.Player.Look.ReadValue<Vector2>();
+       return playerControls.Player.Look.ReadValue<Vector2>();
     }
   
 }

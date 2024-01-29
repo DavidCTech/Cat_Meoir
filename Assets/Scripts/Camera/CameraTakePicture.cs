@@ -22,13 +22,21 @@ public class CameraTakePicture : MonoBehaviour
     public float fovAngle;
     public LayerMask clueMask;
     public LayerMask obstructionMask;
-    [Header("Need a reference to the UI image that shows the last picture taken.")]
+    [Header("Need a reference to the UI that shows the last picture taken.")]
     public Image lastPhotoImage;
+    [Header("Reference to the animator for the UI.")]
+    public Animator photoAnim;
     [Header("Reference to the scene name info object that it uses to locate the clues.")]
     public SceneInfo sceneInfo;
     [Header("Reference to the sound script for picture taking. ")]
     public PlaySound playSound;
     public AudioClip audioClip; 
+    [Header("Reference to the light game Object for the picture. ")]
+    public GameObject light;
+    [Header("The time it takes to make the picture ")]
+    public float delayTime;
+    [Header("Delay of taking picture after pressing button( no delay feels good) ")]
+    public float delaySnap;
 
 
     private bool passBool;
@@ -42,7 +50,8 @@ public class CameraTakePicture : MonoBehaviour
     private string saveFolder = "CatMeoirSavedImages";
     private Texture2D passTexture;
     private string passDescription;
-    private string passSceneName; 
+    private string passSceneName;
+    private bool isTakingPicture; 
 
     private void Awake()
     {
@@ -75,35 +84,40 @@ public class CameraTakePicture : MonoBehaviour
     {
         // Set the camera's target texture to the Render Texture.
         //check if the camera is in first person 
-        if (captureCamera != null && renderTexture != null)
+        if (!isTakingPicture)
         {
-            if (cameraSwitch.isFirst)
+            if (captureCamera != null && renderTexture != null)
             {
-               if(!EventSystem.current.IsPointerOverGameObject())
-               {
-                    captureCamera.targetTexture = renderTexture;
-                    captureCamera.Render();
-                    
-                    
-                    //taking picture 
-                    StartCoroutine(TakeSnapshot(renderTexture));
-                    captureCamera.targetTexture = null;
+                if (cameraSwitch.isFirst)
+                {
+                    if (!EventSystem.current.IsPointerOverGameObject())
+                    {
+                        captureCamera.targetTexture = renderTexture;
+                        captureCamera.Render();
 
-               }
+
+                        AudioSnap();
+                        LightSnap();
+                        StartCoroutine(TakeSnapshot(renderTexture));
+                        captureCamera.targetTexture = null;
+
+
+
+                    }
+
+                }
 
             }
-
-        }
-        else
-        {
-            Debug.LogError("Script not on Camera or Render Texture not assigned!");
+            else
+            {
+                Debug.LogError("Script not on Camera or Render Texture not assigned!");
+            }
         }
 
     }
     //this method assigns a picture to the last photo taken placeholder
     private void AssignPicture(Sprite passedImage) 
-    { 
- 
+    {
         lastPhotoImage.sprite = passedImage;
    
     }
@@ -156,32 +170,61 @@ public class CameraTakePicture : MonoBehaviour
 
 
 
+    private void AudioSnap()
+    {
+        //making sound 
 
+
+        if (playSound != null && audioClip != null)
+        {
+            playSound.PutInClip(audioClip);
+        }
+        
+    }
+    private void LightSnap()
+    {
+        //this should also flash a light so insantiate the light and dim it coroutine - set active then have it have a timer to make it inactive on it with the routine 
+        // put the render texture in a coroutine or something 
+       
+        if (light != null)
+        {
+            light.SetActive(true);
+            
+        }
+    }
     
     public IEnumerator TakeSnapshot(RenderTexture renderTexture)
     {
-        yield return new WaitForEndOfFrame();
-
-        //making sound 
-        Debug.Log(playSound);
-        Debug.Log(audioClip);
-        if (playSound != null && audioClip != null)
-        {
-           
-            playSound.PutInClip(audioClip);
-        }
+        isTakingPicture = true;
+        yield return new WaitForSeconds(delaySnap);
 
         captureCamera.targetTexture = renderTexture;
+        
+
+        //ui texture stuff 
+        
         captureCamera.Render();
 
-        Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
+        Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA64, false);
+        //try to figure out the post processing done 
         RenderTexture.active = renderTexture;
+
         texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
         texture2D.Apply();
         RenderTexture.active = null;
         captureCamera.targetTexture = null;
+        
 
+
+
+        
+        //passing info 
         passSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f));
+        
+        //assigning the sprite to the texture 
+        AssignPicture(passSprite);
+
+
         passTexture = texture2D;
         passSceneName = "";
         if (sceneInfo != null)
@@ -193,10 +236,25 @@ public class CameraTakePicture : MonoBehaviour
         passDescription = "";
         passString = null;
         passBool = checkObject();
-        AssignPicture(passSprite);
+
+        //animate the camera picture 
+        if(photoAnim != null)
+        {
+            photoAnim.enabled = true; 
+            photoAnim.Play("PhotoBlack", -1, 0);
+            
+        }
+        
+
+
+        
         //photoManager.addPictureToList(passSprite, passBool, passString, passRender);
         photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription, passSceneName);
+        Invoke("OutCoroutine", delayTime);
 
     }
-
+    private void OutCoroutine()
+    {
+        isTakingPicture = false;
+    }
 }

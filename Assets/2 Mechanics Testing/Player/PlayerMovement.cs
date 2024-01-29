@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
     Transform cameraObject;
     Rigidbody rb;
+    public GameObject camTransform; //game object of cam transform  
 
     public float moveSpeed = 5;
     public float visionMoveSpeed = 1;
@@ -26,7 +27,10 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer; // The layer for the ground objects
 
     public bool isGrounded = true; // Indicates if the player is grounded
+    public bool isFirst = false;
+    public float controlSensitivity; 
     private PlayerVision playerVision;
+   
 
     //anim
     public Animator anim;
@@ -195,20 +199,41 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isFrozen)
         {
-            Vector3 targetDirection = Vector3.zero;
+            if (!isFirst)
+            {
+                Vector3 targetDirection = Vector3.zero;
 
-            targetDirection = cameraObject.forward * inputManager.vInput;
-            targetDirection = moveDirection + cameraObject.right * inputManager.hInput;
-            targetDirection.Normalize();
-            targetDirection.y = 0;
+                targetDirection = cameraObject.forward * inputManager.vInput;
+                targetDirection = moveDirection + cameraObject.right * inputManager.hInput;
+                targetDirection.Normalize();
+                targetDirection.y = 0;
 
-            if (targetDirection == Vector3.zero)
-                targetDirection = transform.forward;
+                if (targetDirection == Vector3.zero)
+                    targetDirection = transform.forward;
 
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-            Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            transform.rotation = playerRotation;
+                transform.rotation = playerRotation;
+            }
+            
+           
+        }
+        else
+        {
+            if (isFirst)
+            {
+                if(camTransform != null)
+                {
+                    
+                    float mouseX = inputManager.GetMouseDelta().x;
+
+                    // Rotate the object around its up axis (y-axis in world space) based on mouse input
+                    transform.Rotate(Vector3.up, mouseX * (rotationSpeed* controlSensitivity) * Time.deltaTime);
+                }
+            }
+            
+                
         }
     }
 }

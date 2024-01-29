@@ -82,6 +82,7 @@ public class CameraSwitch : MonoBehaviour
         if (playerMovement != null)
         {
             playerMovement.isFrozen = false;
+            playerMovement.isFirst = false;
         }
         else
         {
@@ -132,6 +133,7 @@ public class CameraSwitch : MonoBehaviour
         if (playerMovement != null)
         {
             playerMovement.isFrozen = true;
+            playerMovement.isFirst = true; 
         }
         else
         {

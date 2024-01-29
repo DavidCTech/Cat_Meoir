@@ -40,10 +40,10 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""name"": ""Look"",
                     ""type"": ""PassThrough"",
                     ""id"": ""1f6a9b6a-4fb6-4cd1-8885-6c18158c1556"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Interaction"",
@@ -348,10 +348,10 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b62ab5f9-fbc7-434c-b229-5a803c9561d6"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""fc45e439-ebd0-4ae6-b1a1-bbb46013a189"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -359,8 +359,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fc45e439-ebd0-4ae6-b1a1-bbb46013a189"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""3dad076a-11fb-4096-bbf2-4ccf8d369036"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

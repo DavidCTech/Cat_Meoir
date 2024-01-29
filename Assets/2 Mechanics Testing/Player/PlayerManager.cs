@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     PlayerMovement playerMovement;
 
 
+
     void Awake()
     {
         inputManager = GetComponent<InputManager>();

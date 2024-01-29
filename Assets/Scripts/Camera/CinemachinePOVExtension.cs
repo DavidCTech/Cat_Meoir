@@ -33,22 +33,27 @@ public class CinemachinePOVExtension : CinemachineExtension
             {
                 if (startingRotation == null)
                 {
-                    startingRotation = transform.localRotation.eulerAngles;
+                   // startingRotation = transform.localRotation.eulerAngles;
                 }
                 if( inputManager != null)
                 {
                     
                     Vector2 deltaInput = inputManager.GetMouseDelta();
 
-                    updatingRotation.x += deltaInput.x * controlSensitivity * Time.deltaTime;
+                    //updatingRotation.x += deltaInput.x * controlSensitivity * Time.deltaTime;
                     updatingRotation.y += deltaInput.y * controlSensitivity * Time.deltaTime;
 
-                    //Debug.Log("Updating rotationX: " + updatingRotation.x + "Updating RotationY: " + updatingRotation.y);
+                    //starting rotation for not 360
+                    /*
                     updatingRotation.y = Mathf.Clamp(updatingRotation.y, startingRotation.x-clampAngleUp, startingRotation.x + clampAngleUp);
                     updatingRotation.x = Mathf.Clamp(updatingRotation.x, startingRotation.y-clampAngleSide, startingRotation.y + clampAngleSide);
+                    */
                     // ^^^
+                    updatingRotation.y = Mathf.Clamp(updatingRotation.y,-clampAngleUp, clampAngleUp);
+                   // updatingRotation.x = Mathf.Clamp(updatingRotation.x,- clampAngleSide,  clampAngleSide);
 
-                    state.RawOrientation = Quaternion.Euler(-updatingRotation.y, updatingRotation.x, 0f);
+
+                    state.RawOrientation = Quaternion.Euler(-updatingRotation.y, state.RawOrientation.x, 0f);
 
 
                 }
