@@ -24,6 +24,22 @@ public class MapControl : MonoBehaviour
         {
             // Toggle the map UI's visibility
             playerMap.SetActive(!playerMap.activeSelf);
+            TimeScale();
+        }
+    }
+
+    void TimeScale()
+    {
+        // Check the current timescale and adjust it accordingly
+        if (Time.timeScale == 1.0f)
+        {
+            // If timescale is normal (1.0), slow down the game
+            Time.timeScale = 0.0f; // You can adjust this value as needed
+        }
+        else
+        {
+            // If timescale is not normal, set it back to normal
+            Time.timeScale = 1.0f;
         }
     }
 }
