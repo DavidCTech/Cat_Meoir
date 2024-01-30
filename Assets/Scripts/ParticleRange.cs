@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class ParticleRange : MonoBehaviour
 {
-    public ParticleSystem particleSystem; // Reference to your Particle System
+    private ParticleSystem particleSystemInstance; // Reference to the instantiated Particle System
+    public GameObject particlePrefab; // Reference to the Particle System prefab
     public float detectionRange = 5f;     // Range to trigger the particle effect
     public Transform player;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Ensure the particle system is not playing at the start
-        if (particleSystem.isPlaying)
+        // Instantiate the particle system prefab and attach it to the same GameObject
+        if (particlePrefab != null)
         {
-            particleSystem.Stop();
+            // Set the rotation to a 90-degree angle around the Y-axis
+            Quaternion initialRotation = Quaternion.Euler(-90f, 0f, 0f);
+            particleSystemInstance = Instantiate(particlePrefab, transform.position, initialRotation, transform).GetComponent<ParticleSystem>();
+            // Disable the emission by default
+            particleSystemInstance.Stop();
+        }
+        else
+        {
+            Debug.LogError("Particle Prefab is not assigned!");
         }
     }
 
@@ -25,18 +34,18 @@ public class ParticleRange : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) < detectionRange)
         {
             // If the particle system is not playing, start it
-            if (!particleSystem.isPlaying)
+            if (!particleSystemInstance.isPlaying)
             {
-                particleSystem.Play();
+                particleSystemInstance.Play();
                 Debug.Log("Particle System started.");
             }
         }
         else
         {
             // If the player is outside the range, stop the particle system
-            if (particleSystem.isPlaying)
+            if (particleSystemInstance.isPlaying)
             {
-                particleSystem.Stop();
+                particleSystemInstance.Stop();
                 Debug.Log("Particle System stopped.");
             }
         }
