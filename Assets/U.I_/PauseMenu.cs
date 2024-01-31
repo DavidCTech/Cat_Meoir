@@ -150,7 +150,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     {
         sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
-        audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
+       
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
