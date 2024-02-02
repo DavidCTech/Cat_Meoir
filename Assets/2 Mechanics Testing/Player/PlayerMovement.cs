@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     private float velocitySpeed;
     private float velocityUp;
 
+    ObjectGrabber objectGrabber;
+
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -47,6 +49,22 @@ public class PlayerMovement : MonoBehaviour
 
         // Set the reference to the PlayerVision script
         playerVision = GetComponent<PlayerVision>();
+
+        // Create an instance of ObjectGrabber and set up input action callbacks
+        objectGrabber = gameObject.AddComponent<ObjectGrabber>();
+
+        // Assuming you have a PlayerInput component attached to the player GameObject
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+
+        if (playerInput != null)
+        {
+            InputAction boxPushAction = playerInput.actions.FindAction("BoxPush");
+            if (boxPushAction != null)
+            {
+                boxPushAction.performed += objectGrabber.UpdateGrab;
+                boxPushAction.canceled += objectGrabber.UpdateGrab;
+            }
+        }
     }
     private float ClampValue(float inputValue, float minValue, float maxValue)
     {
