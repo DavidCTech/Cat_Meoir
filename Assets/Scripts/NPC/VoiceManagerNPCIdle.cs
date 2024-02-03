@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VoiceManagerNPC : MonoBehaviour
+public class VoiceManagerNPCIdle : MonoBehaviour
 {
     AudioSource soundSource;
     [SerializeField] AudioClip[] voiceClips;
