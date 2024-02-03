@@ -23,6 +23,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
     private CinemachineComposer composerX;
+    public Slider ySensitivitySlider;
 
 
     private bool isPaused;
@@ -148,7 +149,10 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
+        ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
+
         sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
+
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
        
 
@@ -199,7 +203,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
        isPaused = false;
        isOptionsPanelOpen = false;
        optionsPanel.SetActive(false);
-        sliderValue = volumeSlider.value;
+       sliderValue = volumeSlider.value;
        UnmuteAudio();
     }
 
@@ -256,6 +260,13 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         PlayerPrefs.SetFloat("Sensitivity", value);
         PlayerPrefs.Save();
         cineCam.m_XAxis.m_MaxSpeed = value;
+    }
+
+    public void ChangeYSensitivity(float value)
+    {
+        PlayerPrefs.SetFloat("ySensitivity", value);
+        PlayerPrefs.Save();
+        cineCam.m_YAxis.m_MaxSpeed = value;
     }
 
     public void ChangeLevel(int value)
