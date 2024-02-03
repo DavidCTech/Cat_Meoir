@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
     private CinemachineComposer composerX;
+    public Slider ySensitivitySlider;
 
     Resolution[] resolutions;
 
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
-        audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
+        ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
@@ -180,6 +181,13 @@ public class GameManager : MonoBehaviour, ISelectHandler
         PlayerPrefs.SetFloat("Sensitivity", value);
         PlayerPrefs.Save();
         cineCam.m_XAxis.m_MaxSpeed = value;
+    }
+
+    public void ChangeYSensitivity(float value)
+    {
+        PlayerPrefs.SetFloat("ySensitivity", value);
+        PlayerPrefs.Save();
+        cineCam.m_YAxis.m_MaxSpeed = value;
     }
 
 
