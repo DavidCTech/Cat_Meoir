@@ -46,7 +46,12 @@ public class NeutralNPC : MonoBehaviour
         currentState = NPCState.Idle;
         anim.SetBool("Idle", true);
         anim.SetBool("Walk", false);
+        Player = GameObject.FindGameObjectWithTag("Player");
 
+        if (Player != null)
+        {
+            player = Player.transform;
+        }
     }
 
     private void ProximityCheck()

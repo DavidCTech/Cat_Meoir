@@ -11,24 +11,24 @@ public class VoiceManager : MonoBehaviour
     [SerializeField] float voiceDelay = 10.0f; // Adjust in the inspector
 
     public GameObject policeVS;
-    public Human_AI voiceHuman;
+    public HostileNPC voiceHuman;
 
     private bool isPlayingAudio = false;
 
     void Start()
     {
-        voiceHuman = policeVS.GetComponent<Human_AI>();
+        voiceHuman = policeVS.GetComponent<HostileNPC>();
         soundSource = GetComponent<AudioSource>();
         StartCoroutine(SoundClips());
     }
 
     private void Update()
     {
-        if (voiceHuman._canSeePlayer == true && !isPlayingAudio)
+        if (voiceHuman.canSeePlayer == true && !isPlayingAudio)
         {
             StartCoroutine(SoundAware());
         }
-        else if (voiceHuman._canSeePlayer == false && voiceHuman.hasSeenPlayer == true && !isPlayingAudio)
+        else if (voiceHuman.canSeePlayer == false && voiceHuman.hasSeenPlayer == true && !isPlayingAudio)
         {
             StartCoroutine(SoundLost());
         }
