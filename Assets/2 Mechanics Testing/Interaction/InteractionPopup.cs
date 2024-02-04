@@ -45,7 +45,12 @@ public class InteractionPopup : MonoBehaviour
             }
             if (objectName == "Hide")
             {
+                ClimbUI climbUI = obj.GetComponent<ClimbUI>();
 
+                if (climbUI != null)
+                {
+                    climbUI.TurnOn(closePoint);
+                }
             }
             if (objectName == "Jump")
             {
