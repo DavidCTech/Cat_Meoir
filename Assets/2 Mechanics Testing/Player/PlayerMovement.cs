@@ -190,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
             jumpTimer += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }
+
         isJumping = false;
     }
 
@@ -233,6 +234,8 @@ public class PlayerMovement : MonoBehaviour
 
                 transform.rotation = playerRotation;
             }
+            
+           
         }
         else
         {
@@ -246,7 +249,9 @@ public class PlayerMovement : MonoBehaviour
                     // Rotate the object around its up axis (y-axis in world space) based on mouse input
                     transform.Rotate(Vector3.up, mouseX * (rotationSpeed* controlSensitivity) * Time.deltaTime);
                 }
-            }                           
+            }
+            
+                
         }
     }
 }
