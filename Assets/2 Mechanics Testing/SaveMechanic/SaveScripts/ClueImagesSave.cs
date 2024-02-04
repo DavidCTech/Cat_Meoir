@@ -23,8 +23,7 @@ public class ClueImagesSave : MonoBehaviour
     
     public void SaveClueImages()
     {
-        
-        // Create the folder if it doesn't exist
+     
         string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
         if (!Directory.Exists(folderPath))
         {

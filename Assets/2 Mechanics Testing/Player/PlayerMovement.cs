@@ -28,7 +28,9 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isGrounded = true; // Indicates if the player is grounded
     public bool isFirst = false;
-    public float controlSensitivity; 
+    public float mouseSpeedX;
+    public float controllerSpeedX;
+    private bool isController = false; 
     private PlayerVision playerVision;
    
 
@@ -65,6 +67,27 @@ public class PlayerMovement : MonoBehaviour
                 boxPushAction.canceled += objectGrabber.UpdateGrab;
             }
         }
+    }
+    private void OnEnable()
+    {
+        // Subscribe to events when the script is enabled
+        ControllerManager.OnControllerConnected += ControllerConnect;
+        ControllerManager.OnControllerDisconnected += ControllerDisconnect;
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from events when the script is disabled or destroyed
+        ControllerManager.OnControllerConnected -= ControllerConnect;
+        ControllerManager.OnControllerDisconnected -= ControllerDisconnect;
+    }
+    private void ControllerConnect()
+    {
+        isController = true; 
+    }
+    private void ControllerDisconnect()
+    {
+        isController = false; 
     }
     private float ClampValue(float inputValue, float minValue, float maxValue)
     {
@@ -137,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
     public void ManageAllMovement()
     {
         ManageMovement();
-        ManageRotation();
+       
     }
 
     public void OnSprint()
@@ -212,7 +235,10 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
     }
-
+    private void Update()
+    {
+        ManageRotation();
+    }
     private void ManageRotation()
     {
         if (!isFrozen)
@@ -243,11 +269,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 if(camTransform != null)
                 {
+                    //this part is for no controller - or basically just mouse based on comp-3 interactiv first person controller tutorial
                     
-                    float mouseX = inputManager.GetMouseDelta().x;
+                    if (!isController)
+                    {
 
-                    // Rotate the object around its up axis (y-axis in world space) based on mouse input
-                    transform.Rotate(Vector3.up, mouseX * (rotationSpeed* controlSensitivity) * Time.deltaTime);
+                        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSpeedX , 0);
+                    }
+                    else
+                    {
+                        transform.rotation *= Quaternion.Euler(0, inputManager.GetMouseDelta().x * controllerSpeedX, 0);
+                    }
+                    
+
+                    
                 }
             }
             
