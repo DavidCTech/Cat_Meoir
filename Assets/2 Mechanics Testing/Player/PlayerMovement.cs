@@ -112,7 +112,8 @@ public class PlayerMovement : MonoBehaviour
         {
             currentMoveSpeed = (playerVision.CurrentState == PlayerState.Normal) ? moveSpeed : visionMoveSpeed;
         }
-
+        //rotation 
+        ManageRotation();
         // Perform the ground check
         CheckGrounded();
 
@@ -235,10 +236,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
     }
-    private void Update()
-    {
-        ManageRotation();
-    }
+   
     private void ManageRotation()
     {
         if (!isFrozen)
@@ -263,30 +261,38 @@ public class PlayerMovement : MonoBehaviour
             
            
         }
-        else
+       
+    }
+    private void Update()
+    {
+        FirstPersonRotation();
+    }
+    private void FirstPersonRotation()
+    {
+         if(isFrozen)
         {
             if (isFirst)
             {
-                if(camTransform != null)
+                if (camTransform != null)
                 {
                     //this part is for no controller - or basically just mouse based on comp-3 interactiv first person controller tutorial
-                    
+
                     if (!isController)
                     {
 
-                        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSpeedX , 0);
+                        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSpeedX, 0);
                     }
                     else
                     {
                         transform.rotation *= Quaternion.Euler(0, inputManager.GetMouseDelta().x * controllerSpeedX, 0);
                     }
-                    
 
-                    
+
+
                 }
             }
-            
-                
+
+
         }
     }
 }
