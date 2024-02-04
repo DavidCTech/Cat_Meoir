@@ -800,7 +800,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 591017202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 764db8d3dc5f4504993870e28fe528c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a7b98b020256fc4a914120f8f165ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &902243891
@@ -1158,9 +1158,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1599708139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25be6d256c4dc4c4597bf375bd44abe6, type: 3}
+  m_Script: {fileID: 11500000, guid: c300b0447e6f1c8449d84710f34e1edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onStartAction:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1651629440
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,11 +1393,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1e-45
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2309829535898712726, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1459,11 +1465,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000033018132
+      value: -0.000000033018132
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000009697487
+      value: 0.000000009697487
       objectReference: {fileID: 0}
     - target: {fileID: 5395449185905672566, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1543,11 +1549,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7701999867838834851, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016509064
+      value: -0.000000016509064
       objectReference: {fileID: 0}
     - target: {fileID: 7701999867838834851, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000048487436
+      value: 0.0000000048487436
       objectReference: {fileID: 0}
     - target: {fileID: 7842286824755667504, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_RootOrder
@@ -1713,27 +1719,23 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128
-  _canSeePlayer: 0
-  _isChasingPlayer: 0
-  _IAmWaiting: 0
-  _randomWaitTime: 0
-  _randomWander: 0
-  _alwaysMoving: 0
-  _fleeFromPlayer: 0
+  canSeePlayer: 0
+  isChasingPlayer: 0
+  IAmWaiting: 0
+  randomWaitTime: 0
+  randomWander: 0
+  alwaysMoving: 0
+  fleeFromPlayer: 0
   hasSeenPlayer: 0
   wait_time: 0
-  _speed: 1
-  _walkRadius: 0
-  _FoVRadius: 90
-  _FoVAngle: 34
-  _proximityRadius: 2
-  _proximityAngle: 360
-  _waypoints:
-  - {fileID: 516588194}
-  - {fileID: 242884354}
-  - {fileID: 444968929}
-  - {fileID: 513830799}
-  _player: {fileID: 0}
+  speed: 0
+  walkRadius: 0
+  FoVRadius: 0
+  FoVAngle: 0
+  proximityRadius: 0
+  proximityAngle: 0
+  waypoints: []
+  player: {fileID: 0}
 --- !u!136 &2120813377
 CapsuleCollider:
   m_ObjectHideFlags: 0
