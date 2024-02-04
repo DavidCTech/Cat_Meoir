@@ -37,8 +37,8 @@ public class ClueImagesSave : MonoBehaviour
             Texture2D texture2D = photoManager.snapshots[i].texture;
             
 
-            byte[] pngData = texture2D.EncodeToPNG();
-            string fileName = $"savedSprite_{i}.png";
+            byte[] pngData = texture2D.EncodeToJPG();
+            string fileName = $"savedSprite_{i}.jpg";
             string filePath = Path.Combine(folderPath, fileName);
             File.WriteAllBytes(filePath, pngData);
         }
@@ -50,7 +50,7 @@ public class ClueImagesSave : MonoBehaviour
     public Sprite LoadClueImages(int i)
     {
         string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
-        string fileName = $"savedSprite_{i}.png";
+        string fileName = $"savedSprite_{i}.jpg";
         string filePath = Path.Combine(folderPath, fileName);
         byte[] pngData = File.ReadAllBytes(filePath);
         Texture2D loadedTexture = new Texture2D(1080, 1080);  
@@ -61,7 +61,7 @@ public class ClueImagesSave : MonoBehaviour
     public Texture2D LoadClueTexture(int i)
     {
         string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
-        string fileName = $"savedSprite_{i}.png";
+        string fileName = $"savedSprite_{i}.jpg";
         string filePath = Path.Combine(folderPath, fileName);
         byte[] pngData = File.ReadAllBytes(filePath);
         Texture2D loadedTexture = new Texture2D(1080, 1920);
