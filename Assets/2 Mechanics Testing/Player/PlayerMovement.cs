@@ -13,11 +13,14 @@ public class PlayerMovement : MonoBehaviour
     public GameObject camTransform; //game object of cam transform  
 
     public float moveSpeed = 5;
+    public float sprintSpeedIncrease = 4; 
     public float visionMoveSpeed = 1;
     private bool sprinting = false;
     public float rotationSpeed = 15;
     public bool isFrozen = false;
-    private float currentMoveSpeed;
+    public float acceleration = 0.08f; 
+    public float currentMoveSpeed = 5;
+    private float maxMoveSpeed; 
 
     public float gravity = 9.81f; // Default gravity value
     public float jumpForce = 1.0f; // Force applied when jumping
@@ -32,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public float controllerSpeedX;
     private bool isController = false; 
     private PlayerVision playerVision;
+
    
 
     //anim
@@ -47,7 +51,8 @@ public class PlayerMovement : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
-        currentMoveSpeed = moveSpeed;
+        // currentMoveSpeed = moveSpeed;
+        maxMoveSpeed = moveSpeed; 
 
         // Set the reference to the PlayerVision script
         playerVision = GetComponent<PlayerVision>();
@@ -110,7 +115,16 @@ public class PlayerMovement : MonoBehaviour
         // Adjust the currentMoveSpeed based on the player state from PlayerVision
         if (playerVision != null)
         {
-            currentMoveSpeed = (playerVision.CurrentState == PlayerState.Normal) ? moveSpeed : visionMoveSpeed;
+            if (playerVision.CurrentState == PlayerState.Normal)
+            {
+               // currentMoveSpeed = moveSpeed;
+                maxMoveSpeed = moveSpeed; 
+            }
+            else
+            {
+                //currentMoveSpeed = visionMoveSpeed;
+                maxMoveSpeed = visionMoveSpeed; 
+            }
         }
         //rotation 
         ManageRotation();
@@ -170,22 +184,25 @@ public class PlayerMovement : MonoBehaviour
 
         if (sprinting)
         {
-            moveSpeed = moveSpeed + 3;
+            moveSpeed = moveSpeed + sprintSpeedIncrease;
         }
         else
         {
-            moveSpeed = moveSpeed - 3;
+            moveSpeed = moveSpeed - sprintSpeedIncrease;
         }
     }
 
     public void ToggleVisionSpeed()
     {
-        currentMoveSpeed = visionMoveSpeed;
+        //currentMoveSpeed = visionMoveSpeed;
+
+        maxMoveSpeed = visionMoveSpeed; 
     }
 
     public void ToggleNormalSpeed()
     {
-        currentMoveSpeed = moveSpeed;
+        //currentMoveSpeed = moveSpeed;
+        maxMoveSpeed = moveSpeed; 
     }
 
     public bool IsGrounded()
@@ -226,6 +243,20 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = moveDirection + cameraObject.right * inputManager.hInput;
             moveDirection.Normalize();
             moveDirection.y = 0;
+            //muiltiply the current speed by an accelerator value 
+            //clamp the current move speed by the max speed 
+            if(currentMoveSpeed < maxMoveSpeed)
+            {
+                currentMoveSpeed = currentMoveSpeed + acceleration;
+            }
+            if(currentMoveSpeed > maxMoveSpeed)
+            {
+                currentMoveSpeed = currentMoveSpeed - acceleration; 
+            }
+            
+            
+            currentMoveSpeed = Mathf.Clamp(currentMoveSpeed, 0f, moveSpeed + sprintSpeedIncrease);
+
             moveDirection = moveDirection * currentMoveSpeed;
 
             Vector3 movementVelocity = moveDirection;
