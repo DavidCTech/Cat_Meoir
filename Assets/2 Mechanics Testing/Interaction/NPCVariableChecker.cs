@@ -22,7 +22,11 @@ public class NPCVariableChecker : MonoBehaviour
 
     void Awake()
     {
-        photoManager = gameManagerObject.GetComponent<PhotoManager>();
+        if(gameManagerObject != null)
+        {
+            photoManager = gameManagerObject.GetComponent<PhotoManager>();
+        }
+        
         npcSpeak = this.gameObject.GetComponent<NPCSpeak>();
     }
 

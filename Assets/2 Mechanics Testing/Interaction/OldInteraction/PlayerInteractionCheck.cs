@@ -47,9 +47,12 @@ public class PlayerInteractionCheck : MonoBehaviour
                     float distanceToTarget = Vector3.Distance(this.gameObject.transform.position, target.position);
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
-
+                        
                         targetObject = target.gameObject;
+                        //Debug.Log(targetObject);
+
                         passString = target.gameObject.tag;
+                        //Debug.Log(passString);
                       
                         if (target.gameObject.tag != "Untagged")
                         {
