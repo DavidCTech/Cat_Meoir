@@ -62,7 +62,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Awake()
     {
-        /*screenInt = PlayerPrefs.GetInt("togglestate");
+        screenInt = PlayerPrefs.GetInt("togglestate");
         if(screenInt == 1)
         {
             isFullScreen = true;
@@ -81,7 +81,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         dropdown.onValueChanged.AddListener(new UnityAction<int>(index =>
         {
             PlayerPrefs.SetInt(prefName, dropdown.value);
-        }));*/
+        }));
 
         playerControls = new PlayerController();
     }
@@ -149,14 +149,14 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
-        /*ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
+        ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
 
         sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
 
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
        
 
-        //dropdown.value = PlayerPrefs.GetInt(prefName, 3);
+        dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
         resolutions = Screen.resolutions;
 
@@ -185,7 +185,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         resolutionDropdown.value = PlayerPrefs.GetInt(resName, currentResolutionIndex);
         
-        resolutionDropdown.RefreshShownValue();*/
+        resolutionDropdown.RefreshShownValue();
 
     }
 
@@ -276,7 +276,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     }
 
 
-    /*public void SetFullscreen(bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
         if (isFullscreen == false)
@@ -288,7 +288,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
             isFullscreen = true;
             PlayerPrefs.SetInt("togglestate", 1);
         }
-    }*/
+    }
 
     public void LoadMenu()
     {
