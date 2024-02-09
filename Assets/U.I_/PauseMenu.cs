@@ -32,7 +32,11 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public TMP_Dropdown dropdown;
     private float scrollPosition = 1;
     public AudioMixer audioMixer;
+
     public Slider volumeSlider;
+    public Slider sfxSlider;
+    public Slider dialogueSlider;  
+
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
 
@@ -154,7 +158,10 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
 
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
-       
+
+        sfxSlider.value = PlayerPrefs.GetFloat("MSfx");
+
+        dialogueSlider.value = PlayerPrefs.GetFloat("MDialogue");
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
@@ -247,13 +254,30 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         }
     }
 
-    public void SetVolume(float sliderValue)
+    public void SetMaster(float sliderValue)
     {
         PlayerPrefs.SetFloat("MVolume", sliderValue);
         audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
         audioMixer.SetFloat("MyExposedParam", Mathf.Log10(sliderValue) * 20);
         Debug.Log(sliderValue);
     }
+
+    public void SetSFX(float sliderValue)
+    {
+        PlayerPrefs.SetFloat("MSfx", sliderValue);
+        audioMixer.SetFloat("MyExposedParam 2", PlayerPrefs.GetFloat("MSfx"));
+        audioMixer.SetFloat("MyExposedParam 2", Mathf.Log10(sliderValue) * 20);
+        Debug.Log(sliderValue);
+    }
+
+    public void SetDialogue(float sliderValue)
+    {
+        PlayerPrefs.SetFloat("MDialogue", sliderValue);
+        audioMixer.SetFloat("MyExposedParam 3", PlayerPrefs.GetFloat("MDialogue"));
+        audioMixer.SetFloat("MyExposedParam 3", Mathf.Log10(sliderValue) * 20);
+        Debug.Log(sliderValue);
+    }
+
 
     public void ChangeSensitivity(float value)
     {
