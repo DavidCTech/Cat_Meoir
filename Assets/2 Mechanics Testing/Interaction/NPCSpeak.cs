@@ -171,14 +171,7 @@ public class NPCSpeak : MonoBehaviour
                 }
 
             }
-            //this is for dialog actions- specific to the dialog object it is currently on. 
-            // this takes priority over everything 
-            DialogAction dialogAction = startDialogObject.gameObject.GetComponent<DialogAction>();
-
-            if (dialogAction != null)
-            {
-                dialogAction.Action();
-            }
+            
             //this true bool ends the load and progress coroutine while loop
             npcDataLoaded = true;
         }
@@ -236,10 +229,22 @@ public class NPCSpeak : MonoBehaviour
     public void NextDialogCheck(DialogData selectedOption)
     {
 
+
         if(selectedOption.nextDialog != null)
         {
             startDialogObject = selectedOption.nextDialog;
         }
+
+        //this is for dialog actions- specific to the dialog object it is currently on. 
+        // this takes priority over everything 
+        DialogAction dialogAction = selectedOption.gameObject.GetComponent<DialogAction>();
+
+        if (dialogAction != null)
+        {
+            dialogAction.Action();
+        }
+
+
         StartCoroutine(displayDialog(selectedOption));
 
 

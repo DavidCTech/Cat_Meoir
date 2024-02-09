@@ -31,7 +31,8 @@ public class ControllerManager : MonoBehaviour
             // No controllers are connected
             if (OnControllerDisconnected != null)
             {
-                Debug.Log("disconnected controller");
+               
+               
                 OnControllerDisconnected.Invoke();
             }
         }

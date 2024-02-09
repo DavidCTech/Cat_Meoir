@@ -165,7 +165,7 @@ public class ClueImageManager : MonoBehaviour
             {
 
                 imageData.description = description;
-                clueSpaceImage.GetComponent<Button>().onClick.Invoke();
+                clueSpace.GetComponent<Button>().onClick.Invoke();
              
                 return;
             }
