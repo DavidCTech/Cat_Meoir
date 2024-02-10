@@ -331,7 +331,7 @@ public class HostileNPC : MonoBehaviour
                 }
                 else
                 {
-                    if (navMeshAgent.remainingDistance < 2f && canSeePlayer == false)
+                    if (navMeshAgent.remainingDistance == 0f && canSeePlayer == false)
                     {
                         GoToNextPoint();
                     }
