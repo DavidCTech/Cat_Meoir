@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public float controllerSpeedX;
     private bool isController = false; 
     private PlayerVision playerVision;
+    private BoxMover boxMover;
 
    
 
@@ -62,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Assuming you have a PlayerInput component attached to the player GameObject
         PlayerInput playerInput = GetComponent<PlayerInput>();
+
+        boxMover = GetComponent<BoxMover>();
 
         if (playerInput != null)
         {
@@ -270,29 +273,29 @@ public class PlayerMovement : MonoBehaviour
    
     private void ManageRotation()
     {
-        if (!isFrozen)
+        if(!boxMover.isGrabbing)
         {
-            if (!isFirst)
+            if (!isFrozen)
             {
-                Vector3 targetDirection = Vector3.zero;
+                if (!isFirst)
+                {
+                    Vector3 targetDirection = Vector3.zero;
 
-                targetDirection = cameraObject.forward * inputManager.vInput;
-                targetDirection = moveDirection + cameraObject.right * inputManager.hInput;
-                targetDirection.Normalize();
-                targetDirection.y = 0;
+                    targetDirection = cameraObject.forward * inputManager.vInput;
+                    targetDirection = moveDirection + cameraObject.right * inputManager.hInput;
+                    targetDirection.Normalize();
+                    targetDirection.y = 0;
 
-                if (targetDirection == Vector3.zero)
-                    targetDirection = transform.forward;
+                    if (targetDirection == Vector3.zero)
+                        targetDirection = transform.forward;
 
-                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-                Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                    Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-                transform.rotation = playerRotation;
+                    transform.rotation = playerRotation;
+                }
             }
-            
-           
         }
-       
     }
     private void Update()
     {
