@@ -31,7 +31,7 @@ public class ClueImageManager : MonoBehaviour
     }
 
     //ChatGpt helped with the logic writing in this method for the foreach loops 
-    public void newImageClue(Sprite slotSprite, string slotName, string sceneName, string description)
+    public void newImageClue(Sprite slotSprite, string slotName, string sceneName, string description, bool isMain)
     {
         
         foreach (GameObject clueSpace in clueSpaces)
@@ -68,6 +68,14 @@ public class ClueImageManager : MonoBehaviour
                     clueSpaceImage.name = slotName;
                     clueSpaceImage.sprite = slotSprite;
                     imageData.description = description;
+                    if (isMain)
+                    {
+                        imageData.mainString = "Main Clue";
+                    }
+                    else
+                    {
+                        imageData.mainString = "Optional Clue";
+                    }
                     return;
                 }
             }
@@ -156,6 +164,7 @@ public class ClueImageManager : MonoBehaviour
     }
     public void UpdateDescription(string clueName, string description)
     {
+        
         foreach (GameObject clueSpace in clueSpaces)
         {
             Image clueSpaceImage = clueSpace.GetComponent<Image>();

@@ -7,5 +7,6 @@ public class ImageData : MonoBehaviour
     
     public string description;
     public string sceneName;
+    public string mainString; 
 
 }
