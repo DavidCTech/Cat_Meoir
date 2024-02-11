@@ -10,15 +10,16 @@ public class OnCollisionCheck : MonoBehaviour
     public List<string> clueNames = new List<string>();
     private List<string> cluesFound = new List<string>();
     private bool isAllCluesFound = false;
-    [Header("Get reference to Game Manager")]
-    public GameObject gameManagerObject;
+    [Header("Get reference to Photo Manager")]
+    public GameObject photoManagerObject;
     public List<GameObject> spawnObjects;
+    [Header("This is the ui for when you don't have all clues")]
     public GameObject uiPopUp; 
 
 
     void Awake()
     {
-        photoManager = gameManagerObject.GetComponent<PhotoManager>();
+        photoManager = photoManagerObject.GetComponent<PhotoManager>();
     }
     void OnTriggerEnter(Collider other)
     {
@@ -75,7 +76,11 @@ public class OnCollisionCheck : MonoBehaviour
 
         if (!isAllCluesFound)
         {
-            uiPopUp.SetActive(true);
+            if(uiPopUp != null)
+            {
+                uiPopUp.SetActive(true);
+            }
+            
         }
     }
 

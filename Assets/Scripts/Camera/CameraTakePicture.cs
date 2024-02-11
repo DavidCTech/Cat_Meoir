@@ -37,6 +37,8 @@ public class CameraTakePicture : MonoBehaviour
     public float delayTime;
     [Header("Delay of taking picture after pressing button( no delay feels good) ")]
     public float delaySnap;
+    [Header("This is the clue UI popup gameobj")]
+    public GameObject popUp; 
 
 
     private bool passBool;
@@ -51,6 +53,7 @@ public class CameraTakePicture : MonoBehaviour
     private Texture2D passTexture;
     private string passDescription;
     private string passSceneName;
+    private bool passMainBool; 
     private bool isTakingPicture; 
 
     private void Awake()
@@ -149,6 +152,10 @@ public class CameraTakePicture : MonoBehaviour
                         {
                             passDescription = target.gameObject.GetComponent<Description>().description;
                         }
+                        if(target.gameObject.GetComponent<MainBool>() != null)
+                        {
+                            passMainBool = target.gameObject.GetComponent<MainBool>().isMainClue; 
+                        }
                         if (target.gameObject.GetComponent<CutSceneClue>() != null)
                         {
                             target.gameObject.GetComponent<CutSceneClue>().CutScenePlay(); 
@@ -234,8 +241,21 @@ public class CameraTakePicture : MonoBehaviour
         
 
         passDescription = "";
+        passMainBool = false;
         passString = null;
         passBool = checkObject();
+
+
+
+
+        Debug.Log(passMainBool);
+        if(passMainBool == true)
+        {
+            //turn clue found ui on 
+            popUp.SetActive(true);
+            //turn off clue found ui
+            Invoke("ClueFoundUIOff", delayTime);
+        }
 
         //animate the camera picture 
         if(photoAnim != null)
@@ -246,12 +266,14 @@ public class CameraTakePicture : MonoBehaviour
         }
         
 
-
-        
         //photoManager.addPictureToList(passSprite, passBool, passString, passRender);
-        photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription, passSceneName);
+        photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription, passSceneName, passMainBool);
         Invoke("OutCoroutine", delayTime);
 
+    }
+    private void ClueFoundUIOff()
+    {
+        popUp.SetActive(false);
     }
     private void OutCoroutine()
     {

@@ -23,7 +23,7 @@ public class PhotoManager : MonoBehaviour
     }
 
 
-    public void addPictureToList(Sprite pictureSprite, bool isClue, string clueName, Texture2D texture, string description, string sceneName)
+    public void addPictureToList(Sprite pictureSprite, bool isClue, string clueName, Texture2D texture, string description, string sceneName, bool isMain)
     {
         PhotoScriptable snapshot = ScriptableObject.CreateInstance<PhotoScriptable>();
         snapshot.sprite = pictureSprite;
@@ -32,6 +32,7 @@ public class PhotoManager : MonoBehaviour
         snapshot.texture = texture;
         snapshot.description = description;
         snapshot.sceneName = sceneName;
+        snapshot.isMain = isMain;
         // snapshot.renderTexture = renderTexture; 
         // Update in clue image manager here if needed 
         canContinue = checkClueImages(clueName, snapshot);

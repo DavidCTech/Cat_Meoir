@@ -69,6 +69,9 @@ public class ClueSaves : MonoBehaviour
                 //set the location property 
                 newPhoto.sceneName = data.sceneList[i];
 
+                //set main bool property 
+                newPhoto.isMain = data.mainBoolList[i];
+
                 // Add the new PhotoScriptable to the snapshots list
                 photoManager.snapshots.Add(newPhoto);
             }

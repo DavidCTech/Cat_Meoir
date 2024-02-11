@@ -8,7 +8,8 @@ public class PhotoScriptable : ScriptableObject
     public string clueName;
     public Texture2D texture;
     public string description;
-    public string sceneName; 
+    public string sceneName;
+    public bool isMain; 
     //public RenderTexture renderTexture;
 
 }
