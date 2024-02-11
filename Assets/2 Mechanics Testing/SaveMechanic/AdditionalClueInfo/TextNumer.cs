@@ -21,10 +21,7 @@ public class TextNumer : MonoBehaviour
         
         optNumerInt = optNumerInt + 1;
     }
-    public void OnEnable()
-    {
-        GetNumer(); 
-    }
+
     public void GetNumer()
     {
         mainNumerInt = 0;

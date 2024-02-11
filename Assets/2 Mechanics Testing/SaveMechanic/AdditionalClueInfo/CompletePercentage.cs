@@ -14,6 +14,7 @@ public class CompletePercentage : MonoBehaviour
     private void OnEnable()
     {
         //this should work 
+        this.gameObject.GetComponent<TextNumer>().GetNumer();  
         completeText.text =  $"{GetPercentage().ToString("F0")}% Completed";
 
     }
@@ -36,18 +37,19 @@ public class CompletePercentage : MonoBehaviour
 
         double result; 
 
-        if(optDenomInt == 0 && optDenom.text != "")
+        if(optDenomInt == 0 || optDenom.text == "")
         {
             result = mainNumerInt / mainDenomInt;
             return result; 
         }
-
+        Debug.Log("pot denom " + optDenomInt);
         Fraction mainFraction = new Fraction(mainNumerInt, mainDenomInt);
         Fraction optFraction = new Fraction(optNumerInt, optDenomInt);
 
         // Combine fractions and get the result as a percentage
        
         result = CombineFractions(mainFraction, optFraction);
+        Debug.Log(optFraction);
         return result; 
 
     }
@@ -75,32 +77,13 @@ public class CompletePercentage : MonoBehaviour
     // CombineFractions method to calculate combined percentage
     private double CombineFractions(Fraction fraction1, Fraction fraction2)
     {
-        int commonDenominator = LCM(fraction1.Denominator, fraction2.Denominator);
-        int commonNumerator1 = fraction1.Numerator * (commonDenominator / fraction1.Denominator);
-        int commonNumerator2 = fraction2.Numerator * (commonDenominator / fraction2.Denominator);
-        int sumNumerators = commonNumerator1 + commonNumerator2;
+        int sumNumerators = fraction1.Numerator + fraction2.Numerator; 
+        int sumDenominators =fraction1.Denominator + fraction2.Denominator; 
 
-        Fraction combinedFraction = new Fraction(sumNumerators, commonDenominator);
+        Fraction combinedFraction = new Fraction(sumNumerators, sumDenominators);
         double combinedPercentage = combinedFraction.ToDouble() * 100;
 
         return combinedPercentage;
     }
 
-    // GCD method for greatest common divisor
-    private int GCD(int a, int b)
-    {
-        while (b != 0)
-        {
-            int temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
-    }
-
-    // LCM method for least common multiple
-    private int LCM(int a, int b)
-    {
-        return (a * b) / GCD(a, b);
-    }
 }
