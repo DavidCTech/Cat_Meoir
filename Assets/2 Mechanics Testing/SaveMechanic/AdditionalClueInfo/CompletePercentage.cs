@@ -9,21 +9,30 @@ public class CompletePercentage : MonoBehaviour
     public TextMeshProUGUI optDenom;
     public TextMeshProUGUI optNumer;
 
-    public TextMeshProUGUI completeText; 
+    public TextMeshProUGUI completeText;
+    public GameObject flashBackButton;
+
+    private int mainNumerInt;
+    private int mainDenomInt; 
 
     private void OnEnable()
     {
         //this should work 
         this.gameObject.GetComponent<TextNumer>().GetNumer();  
         completeText.text =  $"{GetPercentage().ToString("F0")}% Completed";
+        if( mainNumerInt == mainDenomInt)
+        {
+            flashBackButton.SetActive(true);
+        }
+
 
     }
     //chat gpt helped write this script 
     public double GetPercentage()
     {
         string mainCutDenom = mainDenom.text.Substring(1);
-        int mainDenomInt = int.Parse(mainCutDenom);
-        int mainNumerInt = int.Parse(mainNumer.text);
+        mainDenomInt = int.Parse(mainCutDenom);
+        mainNumerInt = int.Parse(mainNumer.text);
         int optDenomInt = 0;
         int optNumerInt = 0; 
 
@@ -42,7 +51,6 @@ public class CompletePercentage : MonoBehaviour
             result = mainNumerInt / mainDenomInt;
             return result; 
         }
-        Debug.Log("pot denom " + optDenomInt);
         Fraction mainFraction = new Fraction(mainNumerInt, mainDenomInt);
         Fraction optFraction = new Fraction(optNumerInt, optDenomInt);
 
