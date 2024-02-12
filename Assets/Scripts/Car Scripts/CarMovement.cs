@@ -3,9 +3,11 @@ using UnityEngine.AI;
 
 public class CarMovement : MonoBehaviour
 {
-    public Transform[] waypoints; // No need for an array, just reference the waypoints directly
+    public Transform[] waypoints;
     private int currentWaypointIndex = 0;
     private NavMeshAgent navMeshAgent;
+    public float detectionRadius = 5f; // Radius for detecting obstacles
+    public LayerMask obstacleLayer; // Layer mask for obstacles
 
     private void Start()
     {
@@ -17,29 +19,37 @@ public class CarMovement : MonoBehaviour
     {
         if (currentWaypointIndex < waypoints.Length)
         {
-            // Set the destination to the position of the current waypoint
             navMeshAgent.SetDestination(waypoints[currentWaypointIndex].position);
         }
     }
 
     private void Update()
     {
-        // Check if the car has reached its destination waypoint
         if (navMeshAgent.remainingDistance < 0.1f && !navMeshAgent.pathPending)
         {
             currentWaypointIndex++;
 
-            // Check if all waypoints have been reached
             if (currentWaypointIndex >= waypoints.Length)
             {
-                // All waypoints reached, destroy the car
                 Destroy(gameObject);
             }
             else
             {
-                // Set the next destination
                 SetDestination();
             }
+        }
+
+        // Check for obstacles in front of the car
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, detectionRadius, obstacleLayer))
+        {
+            // Slow down or stop the car
+            navMeshAgent.isStopped = true;
+        }
+        else
+        {
+            // Continue moving towards the destination
+            navMeshAgent.isStopped = false;
         }
     }
 }
