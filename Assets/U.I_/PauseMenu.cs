@@ -19,6 +19,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     //added in a ref to the photo menu UI
     public GameObject photoMenuUI; 
     public GameObject optionsPanel;
+    public GameObject audioPanel;
 
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
@@ -28,6 +29,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private bool isPaused;
     private bool isOptionsPanelOpen;
+    private bool isAudioPanelOpen;
+
     public RenderPipelineAsset[] qualityLevels;
     public TMP_Dropdown dropdown;
     private float scrollPosition = 1;
@@ -57,7 +60,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
-    public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton;
+    public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton;
 
     const string prefName = "optionsvalue";
     const string resName = "resolutionoption";
@@ -122,6 +125,26 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         isOptionsPanelOpen = true;
     }
 
+    void OpenAudioPanel()
+    {
+        isAudioPanelOpen = true;
+    }
+
+    public void ActivateAudioMenu()
+    {
+        audioPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(audioFirstButton);
+    }
+
+    public void DeactivateAudioMenu()
+    {
+        audioPanel.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(audioClosedButton);
+    }
+
     public void DeactivateMenu()
     {
         pauseMenuUI.SetActive(false);
@@ -148,6 +171,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     {
         pauseMenuUI.SetActive(true);
         optionsPanel.SetActive(false);
+        audioPanel.SetActive(false);
     }
 
 
@@ -209,7 +233,9 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
        Time.timeScale = 1f;
        isPaused = false;
        isOptionsPanelOpen = false;
+       isAudioPanelOpen = false;
        optionsPanel.SetActive(false);
+       audioPanel.SetActive(false);
        sliderValue = volumeSlider.value;
        UnmuteAudio();
     }
