@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public GameObject creditsPanel;
 
+    public GameObject audioPanel;
 
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
@@ -41,7 +42,12 @@ public class GameManager : MonoBehaviour, ISelectHandler
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
 
+    public ConfirmationPopup confirmationPopup;
+
     public Slider volumeSlider;
+    public Slider sfxSlider;
+    public Slider dialogueSlider;
+
     public Toggle fullScreenToggle;
     private int screenInt;
     public bool isFullScreen = false;
@@ -50,7 +56,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
-    public GameObject optionsFirstButton, optionsClosedButton, creditsFirstButton;
+    public GameObject optionsFirstButton, optionsClosedButton, creditsFirstButton, audioFirstButton, audioClosedButton;
 
     const string prefName = "optionsvalue";
     const string resName = "resolutionoption";
@@ -87,6 +93,12 @@ public class GameManager : MonoBehaviour, ISelectHandler
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
         ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
 
+        volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
+
+        sfxSlider.value = PlayerPrefs.GetFloat("MSfx");
+
+        dialogueSlider.value = PlayerPrefs.GetFloat("MDialogue");
+
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
         resolutions = Screen.resolutions;
@@ -119,6 +131,21 @@ public class GameManager : MonoBehaviour, ISelectHandler
         resolutionDropdown.RefreshShownValue();
     }
 
+
+    public void ActivateAudioMenu()
+    {
+        audioPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(audioFirstButton);
+    }
+
+    public void DeactivateAudioMenu()
+    {
+        audioPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(audioClosedButton);
+    }
 
     public void DeactivateMenu()
     {
@@ -153,7 +180,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         mainMenuPanel.SetActive(true);
         optionsPanel.SetActive(false);
-        creditsPanel.SetActive(false); 
+        creditsPanel.SetActive(false);
+        audioPanel.SetActive(false);
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -165,16 +193,44 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public void SetResolution (int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        confirmationPopup.ShowPopup("Do you Want to apply the new resoultion?");
+
+        if (confirmationPopup.UserConfirmed())
+        {
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        }
+        else
+        {
+            resolutions = Screen.resolutions;
+            currentRefreshRate = Screen.currentResolution.refreshRate;
+        }
     }
 
-
-    public void SetVolume (float sliderValue)
+   
+    public void SetMaster (float sliderValue)
     {
         PlayerPrefs.SetFloat("MVolume", sliderValue);
         audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
         audioMixer.SetFloat("MyExposedParam", Mathf.Log10(sliderValue) * 20);
     }
+
+    public void SetSFX(float sliderValue)
+    {
+        PlayerPrefs.SetFloat("MSfx", sliderValue);
+        audioMixer.SetFloat("MyExposedParam 2", PlayerPrefs.GetFloat("MSfx"));
+        audioMixer.SetFloat("MyExposedParam 2", Mathf.Log10(sliderValue) * 20);
+        Debug.Log(sliderValue);
+    }
+
+    public void SetDialogue(float sliderValue)
+    {
+        PlayerPrefs.SetFloat("MDialogue", sliderValue);
+        audioMixer.SetFloat("MyExposedParam 3", PlayerPrefs.GetFloat("MDialogue"));
+        audioMixer.SetFloat("MyExposedParam 3", Mathf.Log10(sliderValue) * 20);
+        Debug.Log(sliderValue);
+    }
+
 
     public void ChangeSensitivity(float value)
     {

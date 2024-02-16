@@ -17,6 +17,7 @@ public class ClueEventTrigger : MonoBehaviour
 
 
 
+
     public bool Check(PhotoManager photoManager)
     {
         foreach (PhotoScriptable snapshot in photoManager.snapshots)

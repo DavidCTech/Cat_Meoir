@@ -11,14 +11,25 @@ public class ClimbUI : MonoBehaviour
     public float up; 
     public void TurnOn(Vector3 closest)
     {
-        climbUI.transform.position = new Vector3(closest.x , closest.y + up, closest.z );
-        climbUI.SetActive(true);
+        if(climbUI != null)
+        {
+            climbUI.transform.position = new Vector3(closest.x, closest.y + up, closest.z);
+            climbUI.SetActive(true);
+        }
+        else
+        {
+            Debug.Log(this.gameObject + " Has no reference for a climbUI");
+        }
         
 
         Invoke("TurnOff", offTime);
     }
     public void TurnOff()
     {
-        climbUI.SetActive(false);
+        if(climbUI != null)
+        {
+            climbUI.SetActive(false);
+        }
+        
     }
 }

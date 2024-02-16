@@ -53,6 +53,9 @@ public class PhotoManager : MonoBehaviour
         }
 
     }
+
+
+
     public void PictureChecking()
     {
         //this method will go through all the scriptable objects list and then put them in the UI 
