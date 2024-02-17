@@ -6,10 +6,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
+    
 
     public static void SavePlayer(Transform playerTransform, string sceneName)
     {
-        string path = Application.persistentDataPath + "/PlayerData_" + sceneName + ".CatMeoir.json";
+        string defaultPath = Application.persistentDataPath;
+        string folderName = "AutoSave";
+
+        string path = Path.Combine(defaultPath, folderName);
+        string fileName = "/ PlayerData_" + sceneName + ".json"; 
+        path = Path.Combine(path, fileName);
 
         PlayerData data = new PlayerData(playerTransform);
 
@@ -19,7 +25,13 @@ public static class SaveSystem
 
     public static PlayerData LoadPlayer(string sceneName)
     {
-        string path = Application.persistentDataPath + "/PlayerData_" + sceneName + ".json";
+        string defaultPath = Application.persistentDataPath;
+        string folderName = "AutoSave";
+
+        string path = Path.Combine(defaultPath, folderName);
+        string fileName = ("/ PlayerData_" + sceneName + ".json"); 
+        path = Path.Combine(path, fileName);
+
         if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
@@ -32,10 +44,14 @@ public static class SaveSystem
         }
     }
 
-    public static void DeletePlayer()
+    public static void DeletePlayer(string slotName)
     {
-        string directoryPath = Application.persistentDataPath;
-        string searchPattern = "playerdata*";  // Remove the leading slash
+        string defaultPath = Application.persistentDataPath;
+        string folderName = slotName;
+
+        string directoryPath = Path.Combine(defaultPath, folderName);
+        
+        string searchPattern = "playerdata_*";  // Remove the leading slash
 
         // Combine the directory path and search pattern to create a platform-specific path
         string[] filesToDelete = Directory.GetFiles(directoryPath, searchPattern);

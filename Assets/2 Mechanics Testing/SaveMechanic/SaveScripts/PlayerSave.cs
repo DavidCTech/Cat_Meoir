@@ -9,6 +9,7 @@ public class PlayerSave : MonoBehaviour
 
     public GameObject loadingScreen;
     private string sceneName; 
+    
 
     public void Saveplayer()
     {
@@ -26,9 +27,9 @@ public class PlayerSave : MonoBehaviour
         StartCoroutine(LoadPlayerAsync());
        
     }
-    public void DeletePlayer()
+    public void DeletePlayer(string slotName)
     {
-        SaveSystem.DeletePlayer();
+        SaveSystem.DeletePlayer(slotName);
     }
 
     private IEnumerator LoadPlayerAsync()
