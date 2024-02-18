@@ -19,7 +19,7 @@ public class LoadFolder : MonoBehaviour
         {
             DateTime mostRecentTime = DateTime.MinValue;
             string mostRecentFile = string.Empty;
-
+            string sceneName = string.Empty; 
             foreach (string file in files)
             {
                 DateTime lastWriteTime = File.GetLastWriteTime(file);
@@ -33,9 +33,12 @@ public class LoadFolder : MonoBehaviour
             }
 
             //get the scene name from this file 
-            string sceneName = mostRecentFile.Substring("PlayerData_".Length);
+            sceneName = mostRecentFile.StartsWith("PlayerData_") ? mostRecentFile.Substring("PlayerData_".Length) : string.Empty;
             //load that scene 
-            SceneManager.LoadScene(sceneName);
+            if(sceneName.Length !=  0 ){
+                SceneManager.LoadScene(sceneName);
+
+            }
 
         }
     }

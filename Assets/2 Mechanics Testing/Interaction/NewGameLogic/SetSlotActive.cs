@@ -32,5 +32,29 @@ public class SetSlotActive : MonoBehaviour
 
         }
     }
+    public void CheckSlot()
+    {
+        string directoryPath = Application.persistentDataPath;
+        string folderName = "Slot" + slotNumber;
+
+        if (slotNumber == 0)
+        {
+            folderName = "AutoSave"; 
+        }
+        
+        string folderPath = Path.Combine(directoryPath, folderName);
+
+
+
+        if (Directory.Exists(folderPath))
+        {
+            string[] filesInSlot = Directory.GetFiles(folderPath);
+            if (filesInSlot.Length > 0)
+            {
+                dataButton.SetActive(true);
+            }
+
+        }
+    }
     
 }

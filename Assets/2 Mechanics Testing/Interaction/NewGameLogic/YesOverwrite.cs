@@ -11,6 +11,9 @@ public class YesOverwrite : MonoBehaviour
     {
         slotScript.RewriteAuto(); 
     }
+    public void SaveDown(){
+        slotScript.RewriteSlot();
+    }
 
   
 }

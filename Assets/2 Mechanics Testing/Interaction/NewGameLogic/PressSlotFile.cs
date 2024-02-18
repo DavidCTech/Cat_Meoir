@@ -36,6 +36,46 @@ public class PressSlotFile : MonoBehaviour
         }
         
     }
+    //if this slot file is being rewriteen by the data in auto save 
+    public void RewriteSlot()
+    {
+        string directoryPath = Application.persistentDataPath;
+        string slotFolderName = "Slot" + slotNumber;
+        string autoSaveFolderName = "AutoSave";
+
+        string slotFolderPath = Path.Combine(directoryPath, slotFolderName);
+        string autoSaveFolderPath = Path.Combine(directoryPath, autoSaveFolderName);
+
+        // Make sure the Auto Save folder exists
+        if (!Directory.Exists(autoSaveFolderPath))
+        {
+            Debug.LogWarning("AutoSave folder does not exist: " + autoSaveFolderPath);
+            return;
+        }
+
+        // Make sure the slot folder exists
+        if (!Directory.Exists(slotFolderPath))
+        {
+            Directory.CreateDirectory(slotFolderPath);
+        }
+
+        // Get all files in the Auto Save folder
+        string[] filesInAutoSave = Directory.GetFiles(autoSaveFolderPath);
+
+        foreach (string filePath in filesInAutoSave)
+        {
+            // Get the file name without the directory path
+            string fileName = Path.GetFileName(filePath);
+
+            // Construct the destination file path in the slot folder
+            string destinationFilePath = Path.Combine(slotFolderPath, fileName);
+
+            // Overwrite the file in the slot folder with the file from Auto Save
+            File.Copy(filePath, destinationFilePath, true);
+        }
+
+        Debug.Log("Slot " + slotNumber + " overwritten with data from AutoSave");
+    }
 
     //if this slot file is rewriting the data in the auto save 
     public void RewriteAuto()
