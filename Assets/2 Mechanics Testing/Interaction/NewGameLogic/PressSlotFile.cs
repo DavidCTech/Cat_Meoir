@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.IO;
@@ -61,9 +62,25 @@ public class PressSlotFile : MonoBehaviour
 
         // Get all files in the Auto Save folder
         string[] filesInAutoSave = Directory.GetFiles(autoSaveFolderPath);
+        string[] filesInSlot = Directory.GetFiles(slotFolderPath);
+   
+        foreach ( string filePath in filesInSlot)
+        {
+            string fileName = Path.GetFileName(filePath);
+            string fileNameInAuto = Path.Combine(autoSaveFolderPath, fileName);
+            if(!File.Exists(fileNameInAuto))
+            {
+                File.Delete(filePath);
+            }
+
+
+        }
 
         foreach (string filePath in filesInAutoSave)
         {
+            //auto to slot- check if they dont contain something 
+           
+
             // Get the file name without the directory path
             string fileName = Path.GetFileName(filePath);
 
@@ -102,6 +119,19 @@ public class PressSlotFile : MonoBehaviour
 
         // Get all files in the slot folder
         string[] filesInSlot = Directory.GetFiles(slotFolderPath);
+        string[] filesInAuto = Directory.GetFiles(autoSaveFolderPath);
+        foreach ( string filePath in filesInAuto)
+        {
+            string fileName = Path.GetFileName(filePath);
+            string fileNameInSlot = Path.Combine(slotFolderPath, fileName);
+            if(!File.Exists(fileNameInSlot))
+            {
+                File.Delete(filePath);
+            }
+
+
+        }
+
 
         foreach (string filePath in filesInSlot)
         {

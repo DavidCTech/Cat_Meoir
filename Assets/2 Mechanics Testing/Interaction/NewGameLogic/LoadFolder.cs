@@ -23,19 +23,22 @@ public class LoadFolder : MonoBehaviour
             foreach (string file in files)
             {
                 DateTime lastWriteTime = File.GetLastWriteTime(file);
-
+                Debug.Log("file " + file);
+                string fileName = Path.GetFileName(file);
                 // Check if the file starts with "PlayerData_"
-                if (file.StartsWith("PlayerData_") && lastWriteTime > mostRecentTime)
+                if (fileName.StartsWith("PlayerData_") && lastWriteTime > mostRecentTime)
                 {
                     mostRecentTime = lastWriteTime;
-                    mostRecentFile = file;
+                    mostRecentFile = fileName;
                 }
             }
-
+            Debug.Log(mostRecentFile);
             //get the scene name from this file 
             sceneName = mostRecentFile.StartsWith("PlayerData_") ? mostRecentFile.Substring("PlayerData_".Length) : string.Empty;
+            sceneName = Path.GetFileNameWithoutExtension(sceneName);
             //load that scene 
             if(sceneName.Length !=  0 ){
+                Debug.Log(sceneName);
                 SceneManager.LoadScene(sceneName);
 
             }

@@ -13,10 +13,9 @@ public static class SaveSystem
         string defaultPath = Application.persistentDataPath;
         string folderName = "AutoSave";
 
-        string path = Path.Combine(defaultPath, folderName);
-        string fileName = "/ PlayerData_" + sceneName + ".json"; 
-        path = Path.Combine(path, fileName);
-
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "PlayerData_" + sceneName + ".json"; 
+        string path = Path.Combine(folderPath, fileName);
         PlayerData data = new PlayerData(playerTransform);
 
         string jsonData = JsonUtility.ToJson(data);
@@ -77,7 +76,17 @@ public static class SaveSystem
     //door data
     public static void SaveDoors(GameObject[] doors)
     {
-        string path = Application.persistentDataPath + "/DoorData.json";
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "DoorData.json"; 
+        string path = Path.Combine(folderPath, fileName);
+
+
+
+
         DoorData data = new DoorData(doors);
 
         string jsonData = JsonUtility.ToJson(data);
@@ -85,8 +94,14 @@ public static class SaveSystem
 
     }
     public static DoorData LoadDoors()
-    {
-        string path = Application.persistentDataPath + "/ClueData.json";
+    {   
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "DoorData.json"; 
+        string path = Path.Combine(folderPath, fileName);
         if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
@@ -102,7 +117,13 @@ public static class SaveSystem
 
     public static void DeleteDoors()
     {
-        string path = Application.persistentDataPath + "/DoorData.json";
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "DoorData.json"; 
+        string path = Path.Combine(folderPath, fileName);
         if (File.Exists(path))
         {
             File.Delete(path);
@@ -119,7 +140,13 @@ public static class SaveSystem
 
     public static void SaveClues(List<PhotoScriptable> clues)
     {
-        string path = Application.persistentDataPath + "/ClueData.json";
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "ClueData.json"; 
+        string path = Path.Combine(folderPath, fileName);
         ClueData data = new ClueData(clues);
 
         string jsonData = JsonUtility.ToJson(data);
@@ -128,7 +155,15 @@ public static class SaveSystem
 
     public static ClueData LoadClues()
     {
-        string path = Application.persistentDataPath + "/ClueData.json";
+        
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "ClueData.json"; 
+        string path = Path.Combine(folderPath, fileName);
+
         if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
@@ -144,7 +179,15 @@ public static class SaveSystem
 
     public static void DeleteClues()
     {
-        string path = Application.persistentDataPath + "/ClueData.json";
+        
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "ClueData.json"; 
+        string path = Path.Combine(folderPath, fileName);
+
         if (File.Exists(path))
         {
             File.Delete(path);
@@ -157,6 +200,9 @@ public static class SaveSystem
         }
 
     }
+
+
+    //save load and delete clue images will have to be taken care of differently 
     public static void DeleteClueImages()
     {
         string folderPath = Application.persistentDataPath + "/CatMeoirSavedImages";
@@ -185,7 +231,15 @@ public static class SaveSystem
     //save npc functions
     public static void SaveNPC(string npcName, List<GameObject> dialogList, DialogData selectedOption)
     {
-        string path = Application.persistentDataPath + "/NPCData_" + npcName + ".json";
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "NPCData_" + npcName + ".json"; 
+        string path = Path.Combine(folderPath, fileName);
+
+
         NPCData data = new NPCData(dialogList, selectedOption);
 
         string jsonData = JsonUtility.ToJson(data);
@@ -194,7 +248,14 @@ public static class SaveSystem
 
     public static NPCData LoadNPC(string npcName)
     {
-        string path = Application.persistentDataPath + "/NPCData_" + npcName + ".json";
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "NPCData_" + npcName + ".json"; 
+        string path = Path.Combine(folderPath, fileName);
+
         if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
@@ -209,7 +270,12 @@ public static class SaveSystem
 
     public static void DeleteNPC()
     {
-        string directoryPath = Application.persistentDataPath;
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string directoryPath = Path.Combine(defaultPath, folderName);
+       
         string searchPattern = "NPCData*";  
 
         // Combine the directory path and search pattern to create a platform-specific path
@@ -232,7 +298,15 @@ public static class SaveSystem
     //cut save functions
     public static void SaveCuts(List<UICutSceneToggle> toggles)
     {
-        string path = Application.persistentDataPath + "/CutData.json";
+
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "CutData.json"; 
+        string path = Path.Combine(folderPath, fileName);
+
         CutData data = new CutData(toggles);
 
         string jsonData = JsonUtility.ToJson(data);
@@ -241,7 +315,14 @@ public static class SaveSystem
 
     public static CutData LoadCuts()
     {
-        string path = Application.persistentDataPath + "/CutData.json";
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "CutData.json"; 
+        string path = Path.Combine(folderPath, fileName);
+
         if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
@@ -256,7 +337,14 @@ public static class SaveSystem
 
     public static void DeleteCuts()
     {
-        string path = Application.persistentDataPath + "/CutData.json";
+         string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "CutData.json"; 
+        string path = Path.Combine(folderPath, fileName);
+        
         if (File.Exists(path))
         {
             File.Delete(path);
