@@ -320,13 +320,8 @@ public class PlayerMovement : MonoBehaviour
                     {
                         transform.rotation *= Quaternion.Euler(0, inputManager.GetMouseDelta().x * controllerSpeedX, 0);
                     }
-
-
-
                 }
             }
-
-
         }
     }
 }
