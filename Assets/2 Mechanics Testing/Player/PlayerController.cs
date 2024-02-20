@@ -154,7 +154,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -165,7 +165,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -176,7 +176,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -187,7 +187,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -209,7 +209,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -220,7 +220,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -231,7 +231,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -242,7 +242,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -253,7 +253,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CatVision"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -264,7 +264,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""CatVision"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -275,7 +275,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -286,7 +286,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -297,7 +297,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Stealth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -308,7 +308,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Stealth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -319,7 +319,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -330,7 +330,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""MenuOpenClose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -341,7 +341,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""MenuOpenClose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -352,7 +352,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": ""AxisDeadzone"",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -363,7 +363,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -374,7 +374,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Vertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -385,7 +385,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Vertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -396,7 +396,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""MapOpenClose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -407,7 +407,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""MapOpenClose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -418,7 +418,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""BoxPush"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -429,7 +429,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""BoxPush"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -440,7 +440,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""OpenPhotos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -451,7 +451,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""OpenPhotos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -462,7 +462,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""CatVision"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -473,7 +473,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Skip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -489,6 +489,11 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 {
                     ""devicePath"": ""<Keyboard>"",
                     ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
                     ""isOR"": false
                 }
             ]

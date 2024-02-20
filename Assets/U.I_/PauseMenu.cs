@@ -17,9 +17,10 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public static bool GameIsPause = false;
     public GameObject pauseMenuUI;
     //added in a ref to the photo menu UI
-    public GameObject photoMenuUI; 
+    public GameObject photoMenuUI;
     public GameObject optionsPanel;
     public GameObject audioPanel;
+    //public GameObject rebindingUI;
 
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
@@ -38,7 +39,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public Slider volumeSlider;
     public Slider sfxSlider;
-    public Slider dialogueSlider;  
+    public Slider dialogueSlider;
 
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
@@ -70,7 +71,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     private void Awake()
     {
         screenInt = PlayerPrefs.GetInt("togglestate");
-        if(screenInt == 1)
+        if (screenInt == 1)
         {
             isFullScreen = true;
             fullScreenToggle.isOn = true;
@@ -121,7 +122,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     void OpenOptionsPanel()
     {
-       
+
         isOptionsPanelOpen = true;
     }
 
@@ -204,7 +205,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
             string resolutionOption = resolutions[i].width + "x" + resolutions[i].height + " " + resolutions[i].refreshRate + "Hz";
             options.Add(resolutionOption);
 
-            if (resolutions[i].width == Screen.width && 
+            if (resolutions[i].width == Screen.width &&
                 resolutions[i].height == Screen.height &&
                 resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
             {
@@ -215,7 +216,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         resolutionDropdown.AddOptions(options);
 
         resolutionDropdown.value = PlayerPrefs.GetInt(resName, currentResolutionIndex);
-        
+
         resolutionDropdown.RefreshShownValue();
 
     }
@@ -227,22 +228,24 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void Resume()
     {
-       //turned off the photo menu ui 
-       photoMenuUI.SetActive(false);
-       pauseMenuUI.SetActive(false);
-       Time.timeScale = 1f;
-       isPaused = false;
-       isOptionsPanelOpen = false;
-       isAudioPanelOpen = false;
-       optionsPanel.SetActive(false);
-       audioPanel.SetActive(false);
-       sliderValue = volumeSlider.value;
-       UnmuteAudio();
+        //turned off the photo menu ui 
+        photoMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        //rebindingUI.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
+        isOptionsPanelOpen = false;
+        isAudioPanelOpen = false;
+        optionsPanel.SetActive(false);
+        audioPanel.SetActive(false);
+        sliderValue = volumeSlider.value;
+        UnmuteAudio();
     }
 
     void Pause()
     {
         pauseMenuUI.SetActive(true);
+        //rebindingUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
         sliderValue = volumeSlider.value;
@@ -254,7 +257,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-            
+
     }
 
 
