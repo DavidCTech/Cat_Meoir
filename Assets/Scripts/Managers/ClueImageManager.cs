@@ -37,8 +37,8 @@ public class ClueImageManager : MonoBehaviour
         foreach (GameObject clueSpace in clueSpaces)
         {
             Image clueSpaceImage = clueSpace.GetComponent<Image>();
-            ImageData imageData = clueSpace.GetComponent<ImageData>(); 
-            
+            ImageData imageData = clueSpace.GetComponent<ImageData>();
+
             if(imageData.sceneName == sceneName)
             {
                 //get the clueSpace component of photodata

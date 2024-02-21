@@ -14,6 +14,7 @@ public class ScentTrail : MonoBehaviour
         // Set the destination for the NavMeshAgent
         if(navMeshAgent != null)
         {
+            Debug.Log("Scent set Destination");
             navMeshAgent.SetDestination(destination.position);
         }
         else

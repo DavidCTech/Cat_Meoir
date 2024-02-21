@@ -55,6 +55,7 @@ public class CameraTakePicture : MonoBehaviour
     private Texture2D passTexture;
     private string passDescription;
     private string passSceneName;
+    private string boolString; //because bools can not be null
     private bool passMainBool;
     private bool isTakingPicture;
 
@@ -160,6 +161,7 @@ public class CameraTakePicture : MonoBehaviour
                         }
                         if (target.gameObject.GetComponent<MainBool>() != null)
                         {
+                            boolString = "not null"; 
                             passMainBool = target.gameObject.GetComponent<MainBool>().isMainClue;
                         }
                         if (target.gameObject.GetComponent<CutSceneClue>() != null)
@@ -247,7 +249,7 @@ public class CameraTakePicture : MonoBehaviour
 
 
         passDescription = "";
-        passMainBool = false;
+        
         passString = null;
         passBool = checkObject();
 
@@ -255,18 +257,22 @@ public class CameraTakePicture : MonoBehaviour
 
 
         Debug.Log(passMainBool);
-        if (passMainBool == true)
+        if(boolString != null)
         {
-            //turn clue found ui on 
-            popUp.SetActive(true);
-            //turn off clue found ui
-            Invoke("ClueFoundUIOff", delayTime);
-        }
+            if (passMainBool == true)
+            {
+                //turn clue found ui on 
+                popUp.SetActive(true);
+                //turn off clue found ui
+                Invoke("ClueFoundUIOff", delayTime);
+            }
 
-        if (passMainBool == false)
-        {
-            optionalPopUp.SetActive(true);
+            if (passMainBool == false)
+            {
+                optionalPopUp.SetActive(true);
+            }
         }
+       
         //animate the camera picture 
         if (photoAnim != null)
         {
