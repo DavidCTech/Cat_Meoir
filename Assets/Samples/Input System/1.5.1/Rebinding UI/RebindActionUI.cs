@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 ////TODO: localization support
 
@@ -55,7 +56,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// <summary>
         /// Text component that receives the name of the action. Optional.
         /// </summary>
-        public Text actionLabel
+        public TextMeshProUGUI actionLabel
         {
             get => m_ActionLabel;
             set
@@ -69,7 +70,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// Text component that receives the display string of the binding. Can be <c>null</c> in which
         /// case the component entirely relies on <see cref="updateBindingUIEvent"/>.
         /// </summary>
-        public Text bindingText
+        public TextMeshProUGUI bindingText
         {
             get => m_BindingText;
             set
@@ -84,7 +85,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// </summary>
         /// <seealso cref="startRebindEvent"/>
         /// <seealso cref="rebindOverlay"/>
-        public Text rebindPrompt
+        public TextMeshProUGUI rebindPrompt
         {
             get => m_RebindText;
             set => m_RebindText = value;
@@ -252,6 +253,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             }
         }
 
+        private string pathBeforeThisRebind;
+
         private void PerformInteractiveRebind(InputAction action, int bindingIndex, bool allCompositeParts = false)
         {
             m_RebindOperation?.Cancel(); // Will null out m_RebindOperation.
@@ -264,8 +267,15 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             action.Disable();
 
+            pathBeforeThisRebind = action.bindings[bindingIndex].effectivePath;
+
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
+            .WithCancelingThrough("<Keyboard>/escape")
+            .WithControlsExcluding("<Gamepad>/leftStick/x")
+            .WithControlsExcluding("<Gamepad>/leftStick/y")
+            .WithControlsExcluding("<Gamepad>/rightStick/x")
+            .WithControlsExcluding("<Gamepad>/rightStick/x")
                 .OnCancel(
                     operation =>
                     {
@@ -280,6 +290,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     {
                         m_RebindOverlay?.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
+
+                        CheckAndSwapDuplicates(action, bindingIndex, pathBeforeThisRebind);
+
                         UpdateBindingDisplay();
                         CleanUp();
 
@@ -319,6 +332,48 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
             m_RebindOperation.Start();
+        }
+
+        private void CheckAndSwapDuplicates(InputAction action, int bindingIndex, string pathBeforeRebind)
+        {
+            InputBinding currentBinding = action.bindings[bindingIndex];
+            bool canBreak = false;
+
+            foreach (InputAction otherAction in action.actionMap)
+            {
+                if (canBreak)
+                    break;
+
+                int otherBindingIndex = -1;
+
+                if (otherAction != action)
+                {
+                    foreach (InputBinding otherBinding in otherAction.bindings)
+                    {
+                        otherBindingIndex++;
+                        if (otherBinding.effectivePath == currentBinding.effectivePath)
+                        {
+                            otherAction.ApplyBindingOverride(otherBindingIndex, pathBeforeRebind);
+                            canBreak = true;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (InputBinding otherBinding in otherAction.bindings)
+                    {
+                        otherBindingIndex++;
+                        if (otherBinding.isPartOfComposite && otherBindingIndex != bindingIndex)
+                        {
+                            if (otherBinding.effectivePath == currentBinding.effectivePath)
+                            {
+                                otherAction.ApplyBindingOverride(otherBindingIndex, pathBeforeRebind);
+                                canBreak = true;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void Start()
@@ -389,11 +444,11 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         [Tooltip("Text label that will receive the name of the action. Optional. Set to None to have the "
             + "rebind UI not show a label for the action.")]
         [SerializeField]
-        private Text m_ActionLabel;
+        private TextMeshProUGUI m_ActionLabel;
 
         [Tooltip("Text label that will receive the current, formatted binding string.")]
         [SerializeField]
-        private Text m_BindingText;
+        private TextMeshProUGUI m_BindingText;
 
         [Tooltip("Optional UI that will be shown while a rebind is in progress.")]
         [SerializeField]
@@ -401,7 +456,10 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
         [Tooltip("Optional text label that will be updated with prompt for user input.")]
         [SerializeField]
-        private Text m_RebindText;
+        private TextMeshProUGUI m_RebindText;
+
+        public bool overrideActionLabel;
+        [SerializeField] private string actionLabelString;
 
         [Tooltip("Event that is triggered when the way the binding is display should be updated. This allows displaying "
             + "bindings in custom ways, e.g. using images instead of text.")]
@@ -438,7 +496,15 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (m_ActionLabel != null)
             {
                 var action = m_Action?.action;
-                m_ActionLabel.text = action != null ? action.name : string.Empty;
+
+                if (overrideActionLabel)
+                {
+                    m_ActionLabel.text = actionLabelString;
+                }
+                else
+                {
+                    m_ActionLabel.text = action != null ? action.name : string.Empty;
+                }
             }
         }
 

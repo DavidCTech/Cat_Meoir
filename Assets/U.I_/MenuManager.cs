@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public AudioMixer audioMixer;
 
     public GameObject mainMenuPanel;
+    public GameObject controlsPanel;
 
     public GameObject optionsPanel;
 
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     private List<Resolution> filteredResolutions;
 
-   [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private TMP_Dropdown resolutionDropdown;
 
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
-    public GameObject optionsFirstButton, optionsClosedButton, creditsFirstButton, audioFirstButton, audioClosedButton;
+    public GameObject controlsButton, optionsFirstButton, optionsClosedButton, creditsFirstButton, audioFirstButton, audioClosedButton;
 
     const string prefName = "optionsvalue";
     const string resName = "resolutionoption";
@@ -154,6 +155,20 @@ public class GameManager : MonoBehaviour, ISelectHandler
         mainMenuPanel.SetActive(false);
     }
 
+    public void ActivateControlsMenu()
+    {
+        controlsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+    }
+
+    public void DeactivateControlsMenu()
+    {
+        controlsPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+    }
+
     public void ActivateOptionsMenu()
     {
         optionsPanel.SetActive(true);
@@ -192,7 +207,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     }
 
 
-    public void SetResolution (int resolutionIndex)
+    public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
 
@@ -213,7 +228,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     }
 
 
-    public void SetMaster (float sliderValue)
+    public void SetMaster(float sliderValue)
     {
         PlayerPrefs.SetFloat("MVolume", sliderValue);
         audioMixer.SetFloat("MyExposedParam", PlayerPrefs.GetFloat("MVolume"));
@@ -252,14 +267,14 @@ public class GameManager : MonoBehaviour, ISelectHandler
     }
 
 
-    public void ChangeLevel (int value)
+    public void ChangeLevel(int value)
     {
         QualitySettings.SetQualityLevel(value);
         QualitySettings.renderPipeline = qualityLevels[value];
     }
 
 
-    public void SetFullscreen (bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
 

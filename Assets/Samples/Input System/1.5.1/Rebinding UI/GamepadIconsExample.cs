@@ -105,6 +105,11 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     case "rightStick": return rightStick;
                     case "leftStickPress": return leftStickPress;
                     case "rightStickPress": return rightStickPress;
+                    case "leftStick/up": return leftStick;
+                    case "leftStick/right": return leftStick;
+                    case "leftStick/down": return leftStick;
+                    case "leftStick/left": return leftStick;
+
                 }
                 return null;
             }
