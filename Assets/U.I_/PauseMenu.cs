@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public GameObject photoMenuUI;
     public GameObject optionsPanel;
     public GameObject audioPanel;
-    //public GameObject rebindingUI;
+    public GameObject rebindingUI;
 
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
