@@ -11,10 +11,10 @@ public class CameraTakePicture : MonoBehaviour
 {
     //this script goes on the camera 
     [Header("Reference to a RenderTexture- any not in use in asset folder.")]
-    public RenderTexture renderTexture; 
+    public RenderTexture renderTexture;
 
     [Header("Reference to the PhotoManager Script(look on a Photo manager GameObj)")]
-    public PhotoManager photoManager; 
+    public PhotoManager photoManager;
 
     [Header("Camera AI Settings")]
     [Tooltip("The layers it looks for + angle of sight")]
@@ -30,7 +30,7 @@ public class CameraTakePicture : MonoBehaviour
     public SceneInfo sceneInfo;
     [Header("Reference to the sound script for picture taking. ")]
     public PlaySound playSound;
-    public AudioClip audioClip; 
+    public AudioClip audioClip;
     [Header("Reference to the light game Object for the picture. ")]
     public GameObject light;
     [Header("The time it takes to make the picture ")]
@@ -38,7 +38,7 @@ public class CameraTakePicture : MonoBehaviour
     [Header("Delay of taking picture after pressing button( no delay feels good) ")]
     public float delaySnap;
     [Header("This is the clue UI popup gameobj")]
-    public GameObject popUp; 
+    public GameObject popUp;
 
 
     private bool passBool;
@@ -48,13 +48,13 @@ public class CameraTakePicture : MonoBehaviour
     private int locationName = 0; //int that will be the name string for the non clue images in order to organize them 
     private CameraSwitch cameraSwitch;
     private CameraController cameraControls;
-    private int i = 0; 
+    private int i = 0;
     private string saveFolder = "CatMeoirSavedImages";
     private Texture2D passTexture;
     private string passDescription;
     private string passSceneName;
-    private bool passMainBool; 
-    private bool isTakingPicture; 
+    private bool passMainBool;
+    private bool isTakingPicture;
 
     private void Awake()
     {
@@ -69,6 +69,10 @@ public class CameraTakePicture : MonoBehaviour
             cameraControls = new CameraController();
 
         }
+
+        var rebinds = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(rebinds))
+            cameraControls.asset.LoadBindingOverridesFromJson(rebinds);
 
         // makes a subscription to the catmemory zoom 
         cameraControls.Camera.CatMemorySnap.performed += OnCatMemorySnap;
@@ -119,22 +123,22 @@ public class CameraTakePicture : MonoBehaviour
 
     }
     //this method assigns a picture to the last photo taken placeholder
-    private void AssignPicture(Sprite passedImage) 
+    private void AssignPicture(Sprite passedImage)
     {
         lastPhotoImage.sprite = passedImage;
-   
+
     }
 
     //checks if the object is a clue ( Chat GPT Helped fix scripting issues here )
     private bool checkObject()
     {
         passString = locationName.ToString();
-        locationName++; 
+        locationName++;
         Collider[] rangeChecks = Physics.OverlapSphere(this.gameObject.transform.position, fovRadius, clueMask);
 
         if (rangeChecks.Length != 0)
         {
-            bool anyObjectInFOV = false; 
+            bool anyObjectInFOV = false;
 
             for (int i = 0; i < rangeChecks.Length; i++)
             {
@@ -146,23 +150,23 @@ public class CameraTakePicture : MonoBehaviour
                     float distanceToTarget = Vector3.Distance(this.gameObject.transform.position, target.position);
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
-                        locationName--; 
+                        locationName--;
                         passString = target.gameObject.name;
-                        if(target.gameObject.GetComponent<Description>() != null)
+                        if (target.gameObject.GetComponent<Description>() != null)
                         {
                             passDescription = target.gameObject.GetComponent<Description>().description;
                         }
-                        if(target.gameObject.GetComponent<MainBool>() != null)
+                        if (target.gameObject.GetComponent<MainBool>() != null)
                         {
-                            passMainBool = target.gameObject.GetComponent<MainBool>().isMainClue; 
+                            passMainBool = target.gameObject.GetComponent<MainBool>().isMainClue;
                         }
                         if (target.gameObject.GetComponent<CutSceneClue>() != null)
                         {
-                            target.gameObject.GetComponent<CutSceneClue>().CutScenePlay(); 
+                            target.gameObject.GetComponent<CutSceneClue>().CutScenePlay();
                         }
 
-                        anyObjectInFOV = true;  
-                                               
+                        anyObjectInFOV = true;
+
                     }
                 }
             }
@@ -186,30 +190,30 @@ public class CameraTakePicture : MonoBehaviour
         {
             playSound.PutInClip(audioClip);
         }
-        
+
     }
     private void LightSnap()
     {
         //this should also flash a light so insantiate the light and dim it coroutine - set active then have it have a timer to make it inactive on it with the routine 
         // put the render texture in a coroutine or something 
-       
+
         if (light != null)
         {
             light.SetActive(true);
-            
+
         }
     }
-    
+
     public IEnumerator TakeSnapshot(RenderTexture renderTexture)
     {
         isTakingPicture = true;
         yield return new WaitForSeconds(delaySnap);
 
         captureCamera.targetTexture = renderTexture;
-        
+
 
         //ui texture stuff 
-        
+
         captureCamera.Render();
 
         Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA64, false);
@@ -220,14 +224,14 @@ public class CameraTakePicture : MonoBehaviour
         texture2D.Apply();
         RenderTexture.active = null;
         captureCamera.targetTexture = null;
-        
 
 
 
-        
+
+
         //passing info 
         passSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f));
-        
+
         //assigning the sprite to the texture 
         AssignPicture(passSprite);
 
@@ -236,9 +240,9 @@ public class CameraTakePicture : MonoBehaviour
         passSceneName = "";
         if (sceneInfo != null)
         {
-            passSceneName = sceneInfo.sceneInfo; 
+            passSceneName = sceneInfo.sceneInfo;
         }
-        
+
 
         passDescription = "";
         passMainBool = false;
@@ -249,7 +253,7 @@ public class CameraTakePicture : MonoBehaviour
 
 
         Debug.Log(passMainBool);
-        if(passMainBool == true)
+        if (passMainBool == true)
         {
             //turn clue found ui on 
             popUp.SetActive(true);
@@ -258,13 +262,13 @@ public class CameraTakePicture : MonoBehaviour
         }
 
         //animate the camera picture 
-        if(photoAnim != null)
+        if (photoAnim != null)
         {
-            photoAnim.enabled = true; 
+            photoAnim.enabled = true;
             photoAnim.Play("PhotoBlack", -1, 0);
-            
+
         }
-        
+
 
         //photoManager.addPictureToList(passSprite, passBool, passString, passRender);
         photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription, passSceneName, passMainBool);
@@ -278,5 +282,21 @@ public class CameraTakePicture : MonoBehaviour
     private void OutCoroutine()
     {
         isTakingPicture = false;
+    }
+
+    public void ActionsResetAndLoad()
+    {
+        //takes off the subscription to prevent memory leaks 
+        cameraControls.Camera.CatMemorySnap.performed -= OnCatMemorySnap;
+        cameraControls.Camera.CatMemorySnap.Disable();
+
+        cameraControls = new CameraController();
+
+        var rebinds = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(rebinds))
+            cameraControls.asset.LoadBindingOverridesFromJson(rebinds);
+
+        cameraControls.Camera.CatMemorySnap.performed += OnCatMemorySnap;
+        cameraControls.Camera.CatMemorySnap.Enable();
     }
 }

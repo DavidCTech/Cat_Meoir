@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
-    public GameObject controlsButton, optionsFirstButton, optionsClosedButton, creditsFirstButton, audioFirstButton, audioClosedButton;
+    public GameObject controlsButton, controlsBackButton, optionsFirstButton, optionsClosedButton, creditsFirstButton, audioFirstButton, audioClosedButton;
 
     const string prefName = "optionsvalue";
     const string resName = "resolutionoption";
@@ -159,14 +159,14 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         controlsPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        EventSystem.current.SetSelectedGameObject(controlsBackButton);
     }
 
     public void DeactivateControlsMenu()
     {
         controlsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        EventSystem.current.SetSelectedGameObject(controlsButton);
     }
 
     public void ActivateOptionsMenu()

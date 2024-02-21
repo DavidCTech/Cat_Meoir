@@ -12,7 +12,7 @@ public class CameraSwitch : MonoBehaviour
     public CinemachineVirtualCameraBase firstPersonCamera;
     [Header("Need a reference to the playermovement to freeze during switch.")]
     public PlayerMovement playerMovement;
-   
+
     [Header("Need a reference to the CinemachinePOVExtension on cam first person.")]
     public CinemachinePOVExtension cinemachinePOXExtension;
     [HideInInspector]
@@ -27,7 +27,7 @@ public class CameraSwitch : MonoBehaviour
         cameraControls = new CameraController();
         //need ref to game object player to get interaction check to ensure you cant switch while interacting 
         player = playerMovement.gameObject;
-        playerInteraction = player.GetComponent<PlayerInteractionCheck>(); 
+        playerInteraction = player.GetComponent<PlayerInteractionCheck>();
 
     }
     private void OnEnable()
@@ -37,6 +37,10 @@ public class CameraSwitch : MonoBehaviour
             cameraControls = new CameraController();
 
         }
+
+        var rebinds = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(rebinds))
+            cameraControls.asset.LoadBindingOverridesFromJson(rebinds);
 
         // makes a subscription to the catmemory zoom 
         cameraControls.Camera.CatMemoryZoom.performed += OnCatMemoryZoom;
@@ -74,7 +78,7 @@ public class CameraSwitch : MonoBehaviour
             }
 
         }
-        
+
     }
 
     void EnableThirdPersonCamera()
@@ -133,7 +137,7 @@ public class CameraSwitch : MonoBehaviour
         if (playerMovement != null)
         {
             playerMovement.isFrozen = true;
-            playerMovement.isFirst = true; 
+            playerMovement.isFirst = true;
         }
         else
         {
@@ -154,5 +158,21 @@ public class CameraSwitch : MonoBehaviour
         // Adjust the culling mask to exclude the "Clue" layer (assuming "Clue" is on a specific layer)
         Camera mainCamera = GetComponent<Camera>();
         mainCamera.cullingMask |= (1 << 8);
+    }
+
+    public void ActionsResetAndLoad()
+    {
+        //takes off the subscription to prevent memory leaks 
+        cameraControls.Camera.CatMemoryZoom.performed -= OnCatMemoryZoom;
+        cameraControls.Camera.CatMemoryZoom.Disable();
+
+        cameraControls = new CameraController();
+
+        var rebinds = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(rebinds))
+            cameraControls.asset.LoadBindingOverridesFromJson(rebinds);
+
+        cameraControls.Camera.CatMemoryZoom.performed += OnCatMemoryZoom;
+        cameraControls.Camera.CatMemoryZoom.Enable();
     }
 }

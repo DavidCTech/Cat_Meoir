@@ -7,6 +7,7 @@ public class MySaveLoadRebind : MonoBehaviour
 {
     public InputActionAsset actions;
     public InputManager inputPlayer;
+    public OpenPhotos inputPlayerPhoto;
 
     public void OnEnable()
     {
@@ -23,6 +24,11 @@ public class MySaveLoadRebind : MonoBehaviour
         if (inputPlayer != null)
         {
             inputPlayer.ActionsResetAndLoad();
+        }
+
+        if (inputPlayerPhoto != null)
+        {
+            inputPlayerPhoto.ActionsResetAndLoad();
         }
 
     }
