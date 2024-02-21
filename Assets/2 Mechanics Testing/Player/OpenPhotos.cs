@@ -47,7 +47,7 @@ public class OpenPhotos : MonoBehaviour
 
     public void ActionsResetAndLoad()
     {
-        playerControls.Player.OpenPhotos.performed -= OnOpenPhoto;
+        /*playerControls.Player.OpenPhotos.performed -= OnOpenPhoto;
         playerControls.Player.OpenPhotos.Disable();
 
         playerControls = new PlayerController();
@@ -57,6 +57,6 @@ public class OpenPhotos : MonoBehaviour
             playerControls.asset.LoadBindingOverridesFromJson(rebinds);
 
         playerControls.Player.OpenPhotos.performed += OnOpenPhoto;
-        playerControls.Player.OpenPhotos.Enable();
+        playerControls.Player.OpenPhotos.Enable();*/
     }
 }
