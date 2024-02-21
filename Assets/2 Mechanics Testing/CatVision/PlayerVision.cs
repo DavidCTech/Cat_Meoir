@@ -137,6 +137,10 @@ public class PlayerVision : MonoBehaviour
                         //add the object to the list so that it can be reverted later without using any search functions 
                         clues.Add(targetObject);
                     }
+                    else
+                    {
+                        ScentTrail(targetObject);
+                    }
                 }
             }
         }
@@ -163,6 +167,7 @@ public class PlayerVision : MonoBehaviour
         if (!clues.Contains(target))
         {
             GameObject spawnedObject = Instantiate(scentParticle, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            Debug.Log("Scent particle" + scentParticle);
            
             particles.Add(spawnedObject);
             spawnedObject.SetActive(true);

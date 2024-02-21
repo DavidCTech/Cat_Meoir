@@ -37,8 +37,10 @@ public class CameraTakePicture : MonoBehaviour
     public float delayTime;
     [Header("Delay of taking picture after pressing button( no delay feels good) ")]
     public float delaySnap;
-    [Header("This is the clue UI popup gameobj")]
+    [Header("This is the clue UI main popup gameobj")]
     public GameObject popUp;
+    [Header("This is the clue UI optional popup gameobj")]
+    public GameObject optionalPopUp;
 
 
     private bool passBool;
@@ -261,6 +263,10 @@ public class CameraTakePicture : MonoBehaviour
             Invoke("ClueFoundUIOff", delayTime);
         }
 
+        else
+        {
+            optionalPopUp.SetActive(true);
+        }
         //animate the camera picture 
         if (photoAnim != null)
         {
