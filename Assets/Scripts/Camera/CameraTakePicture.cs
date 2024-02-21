@@ -263,7 +263,7 @@ public class CameraTakePicture : MonoBehaviour
             Invoke("ClueFoundUIOff", delayTime);
         }
 
-        else
+        if (passMainBool == false)
         {
             optionalPopUp.SetActive(true);
         }
