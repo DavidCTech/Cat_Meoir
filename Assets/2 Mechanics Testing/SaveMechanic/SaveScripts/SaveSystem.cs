@@ -205,7 +205,13 @@ public static class SaveSystem
     //save load and delete clue images will have to be taken care of differently 
     public static void DeleteClueImages()
     {
-        string folderPath = Application.persistentDataPath + "/CatMeoirSavedImages";
+        string defaultPath = Application.persistentDataPath;
+        string folderName = "AutoSave";
+
+        string firstFolderPath = Path.Combine(defaultPath, folderName);
+        string secondFolderName = "CatMeoirSavedImages";
+        string folderPath = Path.Combine(firstFolderPath, secondFolderName);
+
 
         if (Directory.Exists(folderPath))
         {
@@ -221,10 +227,7 @@ public static class SaveSystem
 
             Debug.Log("All files in the folder have been deleted.");
         }
-        else
-        {
-            //Debug.LogError("Folder not found: " + folderPath);
-        }
+        
     }
 
 

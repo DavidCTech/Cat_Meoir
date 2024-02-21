@@ -23,11 +23,17 @@ public class ClueImagesSave : MonoBehaviour
     
     public void SaveClueImages()
     {
-     
-        string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
-        if (!Directory.Exists(folderPath))
+
+        string defaultPath = Application.persistentDataPath;
+        string folderName = "AutoSave";
+
+        string firstFolderPath = Path.Combine(defaultPath, folderName);
+        string secondFolderName = "CatMeoirSavedImages";
+        string secondFolderPath = Path.Combine(firstFolderPath, secondFolderName);
+        
+        if (!Directory.Exists(secondFolderPath))
         {
-            Directory.CreateDirectory(folderPath);
+            Directory.CreateDirectory(secondFolderPath);
         }
 
         for (int i = 0; i < photoManager.snapshots.Count; i++)
@@ -39,7 +45,7 @@ public class ClueImagesSave : MonoBehaviour
 
             byte[] pngData = texture2D.EncodeToJPG();
             string fileName = $"savedSprite_{i}.jpg";
-            string filePath = Path.Combine(folderPath, fileName);
+            string filePath = Path.Combine(secondFolderPath, fileName);
             File.WriteAllBytes(filePath, pngData);
         }
     }
@@ -49,9 +55,14 @@ public class ClueImagesSave : MonoBehaviour
 
     public Sprite LoadClueImages(int i)
     {
-        string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
+        string defaultPath = Application.persistentDataPath;
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
         string fileName = $"savedSprite_{i}.jpg";
         string filePath = Path.Combine(folderPath, fileName);
+
+      
         byte[] pngData = File.ReadAllBytes(filePath);
         Texture2D loadedTexture = new Texture2D(1080, 1080);  
         loadedTexture.LoadImage(pngData);
@@ -60,9 +71,13 @@ public class ClueImagesSave : MonoBehaviour
     }
     public Texture2D LoadClueTexture(int i)
     {
-        string folderPath = Path.Combine(Application.persistentDataPath, saveFolder);
+        string defaultPath = Application.persistentDataPath;
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
         string fileName = $"savedSprite_{i}.jpg";
         string filePath = Path.Combine(folderPath, fileName);
+
         byte[] pngData = File.ReadAllBytes(filePath);
         Texture2D loadedTexture = new Texture2D(1080, 1920);
         loadedTexture.LoadImage(pngData);
