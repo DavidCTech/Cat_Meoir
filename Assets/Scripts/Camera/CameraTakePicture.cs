@@ -55,7 +55,7 @@ public class CameraTakePicture : MonoBehaviour
     private Texture2D passTexture;
     private string passDescription;
     private string passSceneName;
-    private string boolString; //because bools can not be null
+    private bool isClue; //because bools can not be null
     private bool passMainBool;
     private bool isTakingPicture;
 
@@ -135,6 +135,7 @@ public class CameraTakePicture : MonoBehaviour
     //checks if the object is a clue ( Chat GPT Helped fix scripting issues here )
     private bool checkObject()
     {
+        isClue = false; 
         passString = locationName.ToString();
         locationName++;
         Collider[] rangeChecks = Physics.OverlapSphere(this.gameObject.transform.position, fovRadius, clueMask);
@@ -161,7 +162,7 @@ public class CameraTakePicture : MonoBehaviour
                         }
                         if (target.gameObject.GetComponent<MainBool>() != null)
                         {
-                            boolString = "not null"; 
+                            isClue = true; 
                             passMainBool = target.gameObject.GetComponent<MainBool>().isMainClue;
                         }
                         if (target.gameObject.GetComponent<CutSceneClue>() != null)
@@ -257,7 +258,7 @@ public class CameraTakePicture : MonoBehaviour
 
 
         Debug.Log(passMainBool);
-        if(boolString != null)
+        if(isClue)
         {
             if (passMainBool == true)
             {
