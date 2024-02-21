@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
 
+    public GameObject confirmationPopupPanel;
+
     public ConfirmationPopup confirmationPopup;
 
     public Slider volumeSlider;
@@ -194,6 +196,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         Resolution resolution = resolutions[resolutionIndex];
 
+        confirmationPopupPanel.SetActive(true);
+
         confirmationPopup.ShowPopup("Do you Want to apply the new resoultion?");
 
         if (confirmationPopup.UserConfirmed())
@@ -204,10 +208,11 @@ public class GameManager : MonoBehaviour, ISelectHandler
         {
             resolutions = Screen.resolutions;
             currentRefreshRate = Screen.currentResolution.refreshRate;
+
         }
     }
 
-   
+
     public void SetMaster (float sliderValue)
     {
         PlayerPrefs.SetFloat("MVolume", sliderValue);
