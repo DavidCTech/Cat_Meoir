@@ -7,12 +7,9 @@ using UnityEngine.InputSystem;
 public class InteractionSkip : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     //Script made with unity forum help and chat gpt 
-    [Range(1.0f, 10.0f)]
-    public float seconds = 1.0f;
-    [Range(1.0f, 10.0f)]
-    public float secondsTwo = 1.0f;
-    [Range(1.0f, 10.0f)]
-    public float secondsThree = 1.0f;
+    private float seconds = 1.0f;
+    private float secondsTwo = 2.0f;
+    private float secondsThree = 3.0f;
     public UnityEvent noSeconds;
     public UnityEvent onPressedOverSeconds;
     public UnityEvent onPressedOverSecondsTwo;

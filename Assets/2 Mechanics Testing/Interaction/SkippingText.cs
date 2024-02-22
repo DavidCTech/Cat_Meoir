@@ -11,6 +11,7 @@ public class SkippingText : MonoBehaviour
     void Start()
     {
         textComponent = GetComponent<TextMeshProUGUI>();
+       
     }
 
     public void ChangeText(string text)
@@ -18,6 +19,10 @@ public class SkippingText : MonoBehaviour
         if (textComponent != null)
         {
             textComponent.text = text;
+        }
+        else
+        {
+            Debug.Log("text null");
         }
     }
 }
