@@ -11,15 +11,15 @@ public class MySaveLoadCamera : MonoBehaviour
 
     public void OnEnable()
     {
-        var rebinds = PlayerPrefs.GetString("rebindsCam");
-        if (!string.IsNullOrEmpty(rebinds))
-            actions.LoadBindingOverridesFromJson(rebinds);
+        var rebindsCam = PlayerPrefs.GetString("rebindsCam");
+        if (!string.IsNullOrEmpty(rebindsCam))
+            actions.LoadBindingOverridesFromJson(rebindsCam);
     }
 
     public void OnDisable()
     {
-        var rebinds = actions.SaveBindingOverridesAsJson();
-        PlayerPrefs.SetString("rebindsCam", rebinds);
+        var rebindsCam = actions.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("rebindsCam", rebindsCam);
 
         if (inputCameraSwitch != null)
         {

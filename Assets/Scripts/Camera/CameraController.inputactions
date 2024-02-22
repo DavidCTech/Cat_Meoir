@@ -31,7 +31,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard;KeyboardCam",
                     "action": "CatMemoryZoom",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -42,7 +42,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamepadCam",
                     "action": "CatMemoryZoom",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -53,7 +53,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardCam",
                     "action": "CatMemorySnap",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -64,7 +64,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardCam;GamepadCam",
                     "action": "CatMemorySnap",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -72,5 +72,33 @@
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "KeyboardCam",
+            "bindingGroup": "KeyboardCam",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "GamepadCam",
+            "bindingGroup": "GamepadCam",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

@@ -53,7 +53,7 @@ public partial class @CameraController: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard;KeyboardCam"",
                     ""action"": ""CatMemoryZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -64,7 +64,7 @@ public partial class @CameraController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamepadCam"",
                     ""action"": ""CatMemoryZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -75,7 +75,7 @@ public partial class @CameraController: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardCam"",
                     ""action"": ""CatMemorySnap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -86,7 +86,7 @@ public partial class @CameraController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardCam;GamepadCam"",
                     ""action"": ""CatMemorySnap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -94,7 +94,35 @@ public partial class @CameraController: IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""KeyboardCam"",
+            ""bindingGroup"": ""KeyboardCam"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""GamepadCam"",
+            ""bindingGroup"": ""GamepadCam"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
@@ -211,6 +239,24 @@ public partial class @CameraController: IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+    private int m_KeyboardCamSchemeIndex = -1;
+    public InputControlScheme KeyboardCamScheme
+    {
+        get
+        {
+            if (m_KeyboardCamSchemeIndex == -1) m_KeyboardCamSchemeIndex = asset.FindControlSchemeIndex("KeyboardCam");
+            return asset.controlSchemes[m_KeyboardCamSchemeIndex];
+        }
+    }
+    private int m_GamepadCamSchemeIndex = -1;
+    public InputControlScheme GamepadCamScheme
+    {
+        get
+        {
+            if (m_GamepadCamSchemeIndex == -1) m_GamepadCamSchemeIndex = asset.FindControlSchemeIndex("GamepadCam");
+            return asset.controlSchemes[m_GamepadCamSchemeIndex];
+        }
+    }
     public interface ICameraActions
     {
         void OnCatMemoryZoom(InputAction.CallbackContext context);

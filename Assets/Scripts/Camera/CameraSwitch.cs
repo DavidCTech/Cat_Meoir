@@ -38,9 +38,9 @@ public class CameraSwitch : MonoBehaviour
 
         }
 
-        var rebinds = PlayerPrefs.GetString("rebinds");
-        if (!string.IsNullOrEmpty(rebinds))
-            cameraControls.asset.LoadBindingOverridesFromJson(rebinds);
+        var rebindsCam = PlayerPrefs.GetString("rebindsCam");
+        if (!string.IsNullOrEmpty(rebindsCam))
+            cameraControls.asset.LoadBindingOverridesFromJson(rebindsCam);
 
         // makes a subscription to the catmemory zoom 
         cameraControls.Camera.CatMemoryZoom.performed += OnCatMemoryZoom;
@@ -168,9 +168,9 @@ public class CameraSwitch : MonoBehaviour
 
         cameraControls = new CameraController();
 
-        var rebinds = PlayerPrefs.GetString("rebinds");
-        if (!string.IsNullOrEmpty(rebinds))
-            cameraControls.asset.LoadBindingOverridesFromJson(rebinds);
+        var rebindsCam = PlayerPrefs.GetString("rebindsCam");
+        if (!string.IsNullOrEmpty(rebindsCam))
+            cameraControls.asset.LoadBindingOverridesFromJson(rebindsCam);
 
         cameraControls.Camera.CatMemoryZoom.performed += OnCatMemoryZoom;
         cameraControls.Camera.CatMemoryZoom.Enable();

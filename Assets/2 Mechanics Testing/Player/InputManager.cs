@@ -88,5 +88,7 @@ public class InputManager : MonoBehaviour
         playerControls.Player.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
 
         playerControls.Enable();
+
+        Debug.Log("Calling This Function");
     }
 }
