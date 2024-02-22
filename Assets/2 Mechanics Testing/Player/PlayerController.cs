@@ -51,7 +51,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""id"": ""a2a9ea02-4d41-4fbd-97ff-e46afc58d6ad"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Hold(duration=0.5,pressPoint=0.5)"",
                     ""initialStateCheck"": true
                 },
                 {
@@ -130,6 +130,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""name"": ""Skip"",
                     ""type"": ""Button"",
                     ""id"": ""f96aa59c-b1ac-4aa3-827c-2f3def514409"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Test Path"",
+                    ""type"": ""Button"",
+                    ""id"": ""d52c7f48-b369-46d3-a57d-b7b6e59cb70a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -215,9 +224,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
-                    ""id"": ""1629cfea-4c20-4700-a1b1-58b8b39a9509"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""name"": ""left"",
+                    ""id"": ""88af2c69-9ec5-45b0-9380-a24226578d98"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -226,9 +235,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
-                    ""id"": ""88af2c69-9ec5-45b0-9380-a24226578d98"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""name"": ""down"",
+                    ""id"": ""1629cfea-4c20-4700-a1b1-58b8b39a9509"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -271,22 +280,22 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""da5215e2-eda7-41fc-8cea-a5f2d2c09e5a"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""e82c5094-7dca-46ce-932c-3985eaed5f8a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e82c5094-7dca-46ce-932c-3985eaed5f8a"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""id"": ""6e894f29-e727-432d-8147-b248453caffa"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -305,7 +314,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""309997a1-f961-4edc-a1f8-3c18fa9b1f4a"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -320,6 +329,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a0983f1-7798-4c73-b08e-4463b77e588b"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -426,7 +446,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""934be5bb-5199-4718-af29-3869d9604140"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -458,17 +478,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4f702262-8cd4-42d1-9379-5f42d7ae7dc0"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""CatVision"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2831336e-08cb-4cea-84a3-f12a2cb31183"",
                     ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
@@ -477,6 +486,50 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Skip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ad0f0d6-46d6-4a4c-b6e9-52a4e3f67edb"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Test Path"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""50f46c22-bc70-4f05-90b1-2602c71641b0"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Test Path"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cce436fc-1072-4098-9a27-4c24e3db540d"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Test Path"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9324cdea-52d2-4fd1-813f-ab77c8aac923"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Test Path"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -525,6 +578,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_BoxPush = m_Player.FindAction("BoxPush", throwIfNotFound: true);
         m_Player_OpenPhotos = m_Player.FindAction("OpenPhotos", throwIfNotFound: true);
         m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
+        m_Player_TestPath = m_Player.FindAction("Test Path", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -598,6 +652,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_BoxPush;
     private readonly InputAction m_Player_OpenPhotos;
     private readonly InputAction m_Player_Skip;
+    private readonly InputAction m_Player_TestPath;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -614,6 +669,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @BoxPush => m_Wrapper.m_Player_BoxPush;
         public InputAction @OpenPhotos => m_Wrapper.m_Player_OpenPhotos;
         public InputAction @Skip => m_Wrapper.m_Player_Skip;
+        public InputAction @TestPath => m_Wrapper.m_Player_TestPath;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -659,6 +715,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Skip.started += instance.OnSkip;
             @Skip.performed += instance.OnSkip;
             @Skip.canceled += instance.OnSkip;
+            @TestPath.started += instance.OnTestPath;
+            @TestPath.performed += instance.OnTestPath;
+            @TestPath.canceled += instance.OnTestPath;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -699,6 +758,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Skip.started -= instance.OnSkip;
             @Skip.performed -= instance.OnSkip;
             @Skip.canceled -= instance.OnSkip;
+            @TestPath.started -= instance.OnTestPath;
+            @TestPath.performed -= instance.OnTestPath;
+            @TestPath.canceled -= instance.OnTestPath;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -748,5 +810,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnBoxPush(InputAction.CallbackContext context);
         void OnOpenPhotos(InputAction.CallbackContext context);
         void OnSkip(InputAction.CallbackContext context);
+        void OnTestPath(InputAction.CallbackContext context);
     }
 }

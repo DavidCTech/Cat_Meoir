@@ -14,15 +14,14 @@ public class OpenPhotos : MonoBehaviour
         if (playerControls == null)
         {
             playerControls = new PlayerController();
-
         }
+
+        var rebindsPhoto = PlayerPrefs.GetString("rebindPhoto");
+        if (!string.IsNullOrEmpty(rebindsPhoto))
+            playerControls.asset.LoadBindingOverridesFromJson(rebindsPhoto);
 
         playerControls.Player.OpenPhotos.performed += OnOpenPhoto;
         playerControls.Player.OpenPhotos.Enable();
-
-        var rebinds = PlayerPrefs.GetString("rebinds");
-        if (!string.IsNullOrEmpty(rebinds))
-            playerControls.asset.LoadBindingOverridesFromJson(rebinds);
     }
 
     private void OnDisable()
@@ -47,16 +46,16 @@ public class OpenPhotos : MonoBehaviour
 
     public void ActionsResetAndLoad()
     {
-        /*playerControls.Player.OpenPhotos.performed -= OnOpenPhoto;
+        playerControls.Player.OpenPhotos.performed -= OnOpenPhoto;
         playerControls.Player.OpenPhotos.Disable();
 
         playerControls = new PlayerController();
 
-        var rebinds = PlayerPrefs.GetString("rebinds");
-        if (!string.IsNullOrEmpty(rebinds))
-            playerControls.asset.LoadBindingOverridesFromJson(rebinds);
+        var rebindsPhoto = PlayerPrefs.GetString("rebindPhoto");
+        if (!string.IsNullOrEmpty(rebindsPhoto))
+            playerControls.asset.LoadBindingOverridesFromJson(rebindsPhoto);
 
         playerControls.Player.OpenPhotos.performed += OnOpenPhoto;
-        playerControls.Player.OpenPhotos.Enable();*/
+        playerControls.Player.OpenPhotos.Enable();
     }
 }

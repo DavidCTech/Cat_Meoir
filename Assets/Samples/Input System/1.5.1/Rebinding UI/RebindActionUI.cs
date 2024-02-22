@@ -276,6 +276,13 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             .WithControlsExcluding("<Gamepad>/leftStick/y")
             .WithControlsExcluding("<Gamepad>/rightStick/x")
             .WithControlsExcluding("<Gamepad>/rightStick/x")
+            .WithControlsExcluding("<Gamepad>/rightStick/down")
+            .WithControlsExcluding("<Gamepad>/rightStick/up")
+            .WithControlsExcluding("<Gamepad>/rightStick/left")
+            .WithControlsExcluding("<Gamepad>/rightStick/right")
+            .WithControlsExcluding("<Gamepad>/start")
+            .WithControlsExcluding("<Gamepad>/rightStick")
+            .WithControlsExcluding("<Mouse>/delta")
                 .OnCancel(
                     operation =>
                     {

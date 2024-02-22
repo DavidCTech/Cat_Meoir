@@ -55,6 +55,7 @@ public class CameraTakePicture : MonoBehaviour
     private Texture2D passTexture;
     private string passDescription;
     private string passSceneName;
+    private bool isClue; //because bools can not be null
     private bool passMainBool;
     private bool isTakingPicture;
 
@@ -72,9 +73,9 @@ public class CameraTakePicture : MonoBehaviour
 
         }
 
-        var rebinds = PlayerPrefs.GetString("rebinds");
-        if (!string.IsNullOrEmpty(rebinds))
-            cameraControls.asset.LoadBindingOverridesFromJson(rebinds);
+        var rebindsCam = PlayerPrefs.GetString("rebindsCam");
+        if (!string.IsNullOrEmpty(rebindsCam))
+            cameraControls.asset.LoadBindingOverridesFromJson(rebindsCam);
 
         // makes a subscription to the catmemory zoom 
         cameraControls.Camera.CatMemorySnap.performed += OnCatMemorySnap;
@@ -134,6 +135,7 @@ public class CameraTakePicture : MonoBehaviour
     //checks if the object is a clue ( Chat GPT Helped fix scripting issues here )
     private bool checkObject()
     {
+        isClue = false;
         passString = locationName.ToString();
         locationName++;
         Collider[] rangeChecks = Physics.OverlapSphere(this.gameObject.transform.position, fovRadius, clueMask);
@@ -160,6 +162,7 @@ public class CameraTakePicture : MonoBehaviour
                         }
                         if (target.gameObject.GetComponent<MainBool>() != null)
                         {
+                            isClue = true;
                             passMainBool = target.gameObject.GetComponent<MainBool>().isMainClue;
                         }
                         if (target.gameObject.GetComponent<CutSceneClue>() != null)
@@ -247,7 +250,7 @@ public class CameraTakePicture : MonoBehaviour
 
 
         passDescription = "";
-        passMainBool = false;
+
         passString = null;
         passBool = checkObject();
 
@@ -255,18 +258,22 @@ public class CameraTakePicture : MonoBehaviour
 
 
         Debug.Log(passMainBool);
-        if (passMainBool == true)
+        if (isClue)
         {
-            //turn clue found ui on 
-            popUp.SetActive(true);
-            //turn off clue found ui
-            Invoke("ClueFoundUIOff", delayTime);
+            if (passMainBool == true)
+            {
+                //turn clue found ui on 
+                popUp.SetActive(true);
+                //turn off clue found ui
+                Invoke("ClueFoundUIOff", delayTime);
+            }
+
+            if (passMainBool == false)
+            {
+                optionalPopUp.SetActive(true);
+            }
         }
 
-        if (passMainBool == false)
-        {
-            optionalPopUp.SetActive(true);
-        }
         //animate the camera picture 
         if (photoAnim != null)
         {
@@ -298,9 +305,9 @@ public class CameraTakePicture : MonoBehaviour
 
         cameraControls = new CameraController();
 
-        var rebinds = PlayerPrefs.GetString("rebinds");
-        if (!string.IsNullOrEmpty(rebinds))
-            cameraControls.asset.LoadBindingOverridesFromJson(rebinds);
+        var rebindsCam = PlayerPrefs.GetString("rebindsCam");
+        if (!string.IsNullOrEmpty(rebindsCam))
+            cameraControls.asset.LoadBindingOverridesFromJson(rebindsCam);
 
         cameraControls.Camera.CatMemorySnap.performed += OnCatMemorySnap;
         cameraControls.Camera.CatMemorySnap.Enable();

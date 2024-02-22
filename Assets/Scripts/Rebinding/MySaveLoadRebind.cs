@@ -14,12 +14,19 @@ public class MySaveLoadRebind : MonoBehaviour
         var rebinds = PlayerPrefs.GetString("rebinds");
         if (!string.IsNullOrEmpty(rebinds))
             actions.LoadBindingOverridesFromJson(rebinds);
+
+        var rebindsPhoto = PlayerPrefs.GetString("rebindPhoto");
+        if (!string.IsNullOrEmpty(rebindsPhoto))
+            actions.LoadBindingOverridesFromJson(rebindsPhoto);
     }
 
     public void OnDisable()
     {
         var rebinds = actions.SaveBindingOverridesAsJson();
         PlayerPrefs.SetString("rebinds", rebinds);
+
+        var rebindsPhoto = actions.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("rebindPhoto", rebindsPhoto);
 
         if (inputPlayer != null)
         {
