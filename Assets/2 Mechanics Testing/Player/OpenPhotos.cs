@@ -57,7 +57,5 @@ public class OpenPhotos : MonoBehaviour
 
         playerControls.Player.OpenPhotos.performed += OnOpenPhoto;
         playerControls.Player.OpenPhotos.Enable();
-
-        Debug.Log("Calling This Function");
     }
 }
