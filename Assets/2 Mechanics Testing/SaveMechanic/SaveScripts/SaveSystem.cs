@@ -14,6 +14,11 @@ public static class SaveSystem
         string folderName = "AutoSave";
 
         string folderPath = Path.Combine(defaultPath, folderName);
+
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
         string fileName = "PlayerData_" + sceneName + ".json"; 
         string path = Path.Combine(folderPath, fileName);
         PlayerData data = new PlayerData(playerTransform);
@@ -81,6 +86,10 @@ public static class SaveSystem
         string folderName = "AutoSave";
 
         string folderPath = Path.Combine(defaultPath, folderName);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
         string fileName = "DoorData.json"; 
         string path = Path.Combine(folderPath, fileName);
 
@@ -145,6 +154,10 @@ public static class SaveSystem
         string folderName = "AutoSave";
 
         string folderPath = Path.Combine(defaultPath, folderName);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
         string fileName = "ClueData.json"; 
         string path = Path.Combine(folderPath, fileName);
         ClueData data = new ClueData(clues);
@@ -239,6 +252,10 @@ public static class SaveSystem
         string folderName = "AutoSave";
 
         string folderPath = Path.Combine(defaultPath, folderName);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
         string fileName = "NPCData_" + npcName + ".json"; 
         string path = Path.Combine(folderPath, fileName);
 
@@ -256,6 +273,10 @@ public static class SaveSystem
         string folderName = "AutoSave";
 
         string folderPath = Path.Combine(defaultPath, folderName);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
         string fileName = "NPCData_" + npcName + ".json"; 
         string path = Path.Combine(folderPath, fileName);
 
@@ -307,6 +328,10 @@ public static class SaveSystem
         string folderName = "AutoSave";
 
         string folderPath = Path.Combine(defaultPath, folderName);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
         string fileName = "CutData.json"; 
         string path = Path.Combine(folderPath, fileName);
 
