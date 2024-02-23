@@ -38,10 +38,13 @@ public class OnHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (!goUp)
             {
                 buttonRectTransform.anchoredPosition = initialPosition + new Vector2(hoverTranslation, 0);
+
+                
             }
             else
             {
                 buttonRectTransform.anchoredPosition = initialPosition + new Vector2(0, hoverTranslation);
+                Debug.Log("Hover Translation" + hoverTranslation);
             }
         }
        
@@ -55,10 +58,13 @@ public class OnHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (!goUp)
             {
                 buttonRectTransform.anchoredPosition = initialPosition + new Vector2(exitTranslation, 0);
+
+
             }
             else
             {
                 buttonRectTransform.anchoredPosition = initialPosition + new Vector2(0, exitTranslation);
+                Debug.Log("Exit Translation" + exitTranslation);
             }
         }
         
