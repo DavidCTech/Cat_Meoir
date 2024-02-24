@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using static NeutralNPC;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerInteractionCheck : MonoBehaviour
@@ -20,9 +21,14 @@ public class PlayerInteractionCheck : MonoBehaviour
     public bool isHiding;
     public bool isInteracting; 
     [HideInInspector]
-    public Vector3 closestPoint = new Vector3(); 
+    public Vector3 closestPoint = new Vector3();
 
+    private Swipe swipeScript;
 
+    private void Start()
+    {
+        swipeScript = FindObjectOfType<Swipe>();
+    }
 
     public string CheckObject()
     {
@@ -74,6 +80,8 @@ public class PlayerInteractionCheck : MonoBehaviour
     {
         return targetObject; 
     }
+
+
     public void OnInteraction()
     {
        
@@ -113,12 +121,15 @@ public class PlayerInteractionCheck : MonoBehaviour
                     //Debug.Log("should have");
                     targetObject.GetComponent<DoorOpener>().CheckDoorUnlock();
                 }
+                if(!isInteracting)
+                {
+                    swipeScript.Swiping();
+                }
                 else
                 {
                     //reference the meow code
                 }
             }
-            
         }
         else
         {
@@ -126,6 +137,4 @@ public class PlayerInteractionCheck : MonoBehaviour
         }
         
     }
-
-   
 }
