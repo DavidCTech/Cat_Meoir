@@ -69,6 +69,10 @@ public class HostileNPC : MonoBehaviour
     //change for visual feedback
     private NavMeshAgent navMeshAgent;
 
+    private GameObject spawnedObject; // Reference to the recently spawned object
+    private bool objectSpawned = false; // Flag to track if the object has been spawned
+
+
 
 
     // Start is called before the first frame update
@@ -287,7 +291,38 @@ public class HostileNPC : MonoBehaviour
         }
     }
 
+    private void SetDestinationToSpawnLocation()
+    {
+        // Check if NavMeshAgent component is present
+        if (navMeshAgent == null)
+        {
+            Debug.LogError("NavMeshAgent component not found on NPC GameObject.");
+            return;
+        }
 
+        // Set NPC's destination to the position of the spawned object
+        navMeshAgent.SetDestination(spawnedObject.transform.position);
+    }
+
+    private void FixedUpdate()
+    {
+        // Check if the object has been spawned and if not, look for it
+        if (!objectSpawned)
+        {
+            spawnedObject = GameObject.FindWithTag("Distraction"); // Change "YourSpawnedObjectTag" to the tag of your spawned object
+
+            // If the object is found, set the destination and flag that the object is spawned
+            if (spawnedObject != null)
+            {
+                SetDestinationToSpawnLocation();
+                objectSpawned = true;
+            }
+        }
+        else
+        {
+            objectSpawned = false;
+        }
+    }
 
     // Update is called once per frame
     private void Update()
