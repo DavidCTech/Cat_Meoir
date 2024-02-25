@@ -9,21 +9,40 @@ public class GoodBoySpawner : MonoBehaviour
 
     private bool isEnabled = false;
 
+    public AudioClip soundClip;
+    private AudioSource audioSource;
+
+
     void Start()
     {
         StartCoroutine(EnableObjectAfterDelay());
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     IEnumerator EnableObjectAfterDelay()
     {
         yield return new WaitForSeconds(timeToEnable);
         EnableObject();
-        Destroy(gameObject); // Destroy the script's GameObject
+        PlaySoundAndDestroy();
     }
 
     void EnableObject()
     {
         goodBoy.SetActive(true);
         isEnabled = true;
+    }
+
+    void PlaySoundAndDestroy()
+    {
+        if (soundClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(soundClip);
+            Destroy(gameObject, soundClip.length);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
