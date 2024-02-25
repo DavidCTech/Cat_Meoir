@@ -13,11 +13,13 @@ public class AutoSaver : MonoBehaviour
     void Start()
     {
         //invoke the autosave featre every 10 minutes 
-        InvokeRepeating("AutoSave", 0f, 30f);   
+        InvokeRepeating("AutoSave", 0f, 600f);
+
     }
 
     public void AutoSave()
     {
+        Debug.Log("autoSaving");
         Save.Invoke(); 
 
     }

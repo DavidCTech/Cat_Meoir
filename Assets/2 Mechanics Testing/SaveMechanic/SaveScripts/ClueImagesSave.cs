@@ -58,7 +58,9 @@ public class ClueImagesSave : MonoBehaviour
         string defaultPath = Application.persistentDataPath;
         string folderName = "AutoSave";
 
-        string folderPath = Path.Combine(defaultPath, folderName);
+        string firstFolderPath = Path.Combine(defaultPath, folderName);
+        string imageFolderName = "CatMeoirSavedImages"; 
+        string folderPath = Path.Combine(firstFolderPath, imageFolderName);
         string fileName = $"savedSprite_{i}.jpg";
         string filePath = Path.Combine(folderPath, fileName);
 
@@ -74,7 +76,9 @@ public class ClueImagesSave : MonoBehaviour
         string defaultPath = Application.persistentDataPath;
         string folderName = "AutoSave";
 
-        string folderPath = Path.Combine(defaultPath, folderName);
+        string firstFolderPath = Path.Combine(defaultPath, folderName);
+        string imageFolderName = "CatMeoirSavedImages";
+        string folderPath = Path.Combine(firstFolderPath, imageFolderName);
         string fileName = $"savedSprite_{i}.jpg";
         string filePath = Path.Combine(folderPath, fileName);
 

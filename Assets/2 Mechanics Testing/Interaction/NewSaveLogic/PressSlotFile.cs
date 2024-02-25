@@ -14,7 +14,6 @@ public class PressSlotFile : MonoBehaviour
     // Start is called before the first frame update
     public void ShowOverWrite()
     {
-        Debug.Log("click");
         string directoryPath = Application.persistentDataPath;
         string folderName = "Slot" + slotNumber;
         string folderPath = Path.Combine(directoryPath, folderName);
@@ -29,15 +28,13 @@ public class PressSlotFile : MonoBehaviour
             {
                 //give this script to the overwrite Yes 
                 loadYes.GetComponent<YesOverwrite>().slotScript = this;
-                //show overwrite 
-                Debug.Log("this");
+                
                 overWrite.SetActive(true);
                 
             }
         }
         
     }
-    //if this slot file is being rewriteen by the data in auto save 
     public void RewriteSlot()
     {
         string directoryPath = Application.persistentDataPath;
@@ -60,38 +57,56 @@ public class PressSlotFile : MonoBehaviour
             Directory.CreateDirectory(slotFolderPath);
         }
 
-        // Get all files in the Auto Save folder
-        string[] filesInAutoSave = Directory.GetFiles(autoSaveFolderPath);
+        // Get all files and directories in the Auto Save folder
+        string[] itemsInAutoSave = Directory.GetFileSystemEntries(autoSaveFolderPath);
         string[] filesInSlot = Directory.GetFiles(slotFolderPath);
-   
-        foreach ( string filePath in filesInSlot)
+
+        foreach (string filePath in filesInSlot)
         {
             string fileName = Path.GetFileName(filePath);
-            string fileNameInAuto = Path.Combine(autoSaveFolderPath, fileName);
-            if(!File.Exists(fileNameInAuto))
+            string filePathInAuto = Path.Combine(autoSaveFolderPath, fileName);
+
+            // Check if the file in the slot exists in Auto Save
+            if (!File.Exists(filePathInAuto))
             {
                 File.Delete(filePath);
             }
-
-
         }
 
-        foreach (string filePath in filesInAutoSave)
+        foreach (string itemPath in itemsInAutoSave)
         {
-            //auto to slot- check if they dont contain something 
-           
+            string itemName = Path.GetFileName(itemPath);
+            string destinationPath = Path.Combine(slotFolderPath, itemName);
 
-            // Get the file name without the directory path
-            string fileName = Path.GetFileName(filePath);
+            if (Directory.Exists(itemPath))
+            {
+                // It's a directory, copy it recursively
+                CopyDirectory(itemPath, destinationPath);
+            }
+            else
+            {
+                // It's a file, copy it
+                File.Copy(itemPath, destinationPath, true);
+            }
+        }
+    }
 
-            // Construct the destination file path in the slot folder
-            string destinationFilePath = Path.Combine(slotFolderPath, fileName);
+    // Helper method to copy directories recursively
+    private void CopyDirectory(string sourceDir, string destinationDir)
+    {
+        Directory.CreateDirectory(destinationDir);
 
-            // Overwrite the file in the slot folder with the file from Auto Save
-            File.Copy(filePath, destinationFilePath, true);
+        foreach (string file in Directory.GetFiles(sourceDir))
+        {
+            string dest = Path.Combine(destinationDir, Path.GetFileName(file));
+            File.Copy(file, dest, true);
         }
 
-        Debug.Log("Slot " + slotNumber + " overwritten with data from AutoSave");
+        foreach (string folder in Directory.GetDirectories(sourceDir))
+        {
+            string dest = Path.Combine(destinationDir, Path.GetFileName(folder));
+            CopyDirectory(folder, dest);
+        }
     }
 
     //if this slot file is rewriting the data in the auto save 
@@ -104,7 +119,7 @@ public class PressSlotFile : MonoBehaviour
         string slotFolderPath = Path.Combine(directoryPath, slotFolderName);
         string autoSaveFolderPath = Path.Combine(directoryPath, autoSaveFolderName);
 
-        // Make sure the slot folder exists
+        // Make sure the Slot folder exists
         if (!Directory.Exists(slotFolderPath))
         {
             Debug.LogWarning("Slot folder does not exist: " + slotFolderPath);
@@ -114,24 +129,25 @@ public class PressSlotFile : MonoBehaviour
         // Make sure the Auto Save folder exists
         if (!Directory.Exists(autoSaveFolderPath))
         {
-            Directory.CreateDirectory(autoSaveFolderPath);
+            Debug.LogWarning("AutoSave folder does not exist: " + autoSaveFolderPath);
+            return;
         }
 
-        // Get all files in the slot folder
+        // Get all files in the Auto Save folder
+        string[] filesInAutoSave = Directory.GetFiles(autoSaveFolderPath);
         string[] filesInSlot = Directory.GetFiles(slotFolderPath);
-        string[] filesInAuto = Directory.GetFiles(autoSaveFolderPath);
-        foreach ( string filePath in filesInAuto)
+
+        foreach (string filePath in filesInAutoSave)
         {
             string fileName = Path.GetFileName(filePath);
-            string fileNameInSlot = Path.Combine(slotFolderPath, fileName);
-            if(!File.Exists(fileNameInSlot))
+            string filePathInSlot = Path.Combine(slotFolderPath, fileName);
+
+            // Check if the file in Auto Save exists in the Slot folder
+            if (!File.Exists(filePathInSlot))
             {
                 File.Delete(filePath);
             }
-
-
         }
-
 
         foreach (string filePath in filesInSlot)
         {
@@ -141,10 +157,8 @@ public class PressSlotFile : MonoBehaviour
             // Construct the destination file path in the Auto Save folder
             string destinationFilePath = Path.Combine(autoSaveFolderPath, fileName);
 
-            // Overwrite the file in Auto Save with the file from the slot folder
+            // Overwrite the file in Auto Save with the file from the Slot folder
             File.Copy(filePath, destinationFilePath, true);
         }
-
-        Debug.Log("Auto save overwritten with data from slot " + slotNumber);
     }
 }
