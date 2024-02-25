@@ -138,6 +138,9 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public void ActivateAudioMenu()
     {
         audioPanel.SetActive(true);
+        optionsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
+        controlsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(audioFirstButton);
     }
@@ -158,6 +161,9 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public void ActivateControlsMenu()
     {
         controlsPanel.SetActive(true);
+        audioPanel.SetActive(false);
+        optionsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(controlsBackButton);
     }
@@ -165,6 +171,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public void DeactivateControlsMenu()
     {
         controlsPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(controlsButton);
     }
@@ -172,6 +179,9 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public void ActivateOptionsMenu()
     {
         optionsPanel.SetActive(true);
+        audioPanel.SetActive(false);
+        controlsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
@@ -180,15 +190,17 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         optionsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
-        creditsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
     }
 
     public void ActivateCreditsPanel()
     {
-        optionsPanel.SetActive(false);
+        
         creditsPanel.SetActive(true);
+        optionsPanel.SetActive(false);
+        audioPanel.SetActive(false);
+        controlsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(creditsFirstButton);
     }
@@ -199,6 +211,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
         audioPanel.SetActive(false);
+        controlsPanel.SetActive(false);
     }
 
     public void OnSelect(BaseEventData eventData)
