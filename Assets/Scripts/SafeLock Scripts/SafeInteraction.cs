@@ -7,17 +7,28 @@ public class SafeInteraction : MonoBehaviour
     public Transform dialTransform; // Reference to the transform of the lock dial
     public GameObject closedSafeModel; // Reference to the closed safe model
     public GameObject openSafeModel; // Reference to the open safe model
-    public float lockRotationSpeed = 5f; // Speed of dial rotation during minigame
     public float rotationSpeed = 50f; // Speed of dial rotation based on input
-    public float rotationThreshold = 90f; // Rotation angle threshold to unlock the safe
 
+    [SerializeField]
+    private int[] unlockPositions = new int[3]; // Array to hold the unlock positions as integers
+
+    private float[] unlockPositionsFloat; // Array to hold the unlock positions as floats
     private bool minigameActive = false;
     private bool safeUnlocked = false; // Track if the safe is unlocked
+
+    private int rotationIndex = 0; // Track the current rotation position index
 
     private void Start()
     {
         // Start minigame
         minigameActive = true;
+
+        // Convert integer unlock positions to floats
+        unlockPositionsFloat = new float[unlockPositions.Length];
+        for (int i = 0; i < unlockPositions.Length; i++)
+        {
+            unlockPositionsFloat[i] = (float)unlockPositions[i];
+        }
     }
 
     private void Update()
@@ -27,11 +38,22 @@ public class SafeInteraction : MonoBehaviour
             // Rotate the dial
             RotateDial();
 
-            // Check if the dial rotation angle reaches the threshold
-            if (dialTransform.localRotation.eulerAngles.z >= rotationThreshold)
+            // Check if the dial rotation matches the current unlock position
+            if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - unlockPositionsFloat[rotationIndex]) < 1f)
             {
-                // Open the safe
-                SafeUnlocked();
+                // Move to the next unlock position
+                rotationIndex++;
+
+                // If reached the last unlock position, unlock the safe
+                if (rotationIndex >= unlockPositionsFloat.Length)
+                {
+                    SafeUnlocked();
+                }
+                else
+                {
+                    // Debug message when reaching each unlock position
+                    Debug.Log("Dial reached position " + (rotationIndex + 1));
+                }
             }
         }
     }
