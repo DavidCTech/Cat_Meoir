@@ -242,7 +242,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         UnmuteAudio();
     }
 
-    void Pause()
+    public void Pause()
     {
         pauseMenuUI.SetActive(true);
         //rebindingUI.SetActive(true);

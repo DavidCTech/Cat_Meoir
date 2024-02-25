@@ -18,8 +18,6 @@ public class PressSlotFile : MonoBehaviour
         string folderName = "Slot" + slotNumber;
         string folderPath = Path.Combine(directoryPath, folderName);
 
-       
-
         //search in the persistent data path for the folder name and look for the files in that folder
         if (Directory.Exists(folderPath))
         {
@@ -51,44 +49,16 @@ public class PressSlotFile : MonoBehaviour
             return;
         }
 
-        // Make sure the slot folder exists
-        if (!Directory.Exists(slotFolderPath))
+        // Remove the existing slot folder and recreate it
+        if (Directory.Exists(slotFolderPath))
         {
-            Directory.CreateDirectory(slotFolderPath);
+            Directory.Delete(slotFolderPath, true);
         }
 
-        // Get all files and directories in the Auto Save folder
-        string[] itemsInAutoSave = Directory.GetFileSystemEntries(autoSaveFolderPath);
-        string[] filesInSlot = Directory.GetFiles(slotFolderPath);
+        Directory.CreateDirectory(slotFolderPath);
 
-        foreach (string filePath in filesInSlot)
-        {
-            string fileName = Path.GetFileName(filePath);
-            string filePathInAuto = Path.Combine(autoSaveFolderPath, fileName);
-
-            // Check if the file in the slot exists in Auto Save
-            if (!File.Exists(filePathInAuto))
-            {
-                File.Delete(filePath);
-            }
-        }
-
-        foreach (string itemPath in itemsInAutoSave)
-        {
-            string itemName = Path.GetFileName(itemPath);
-            string destinationPath = Path.Combine(slotFolderPath, itemName);
-
-            if (Directory.Exists(itemPath))
-            {
-                // It's a directory, copy it recursively
-                CopyDirectory(itemPath, destinationPath);
-            }
-            else
-            {
-                // It's a file, copy it
-                File.Copy(itemPath, destinationPath, true);
-            }
-        }
+        // Copy the contents of Auto Save to the slot folder
+        CopyDirectory(autoSaveFolderPath, slotFolderPath);
     }
 
     // Helper method to copy directories recursively
@@ -126,39 +96,17 @@ public class PressSlotFile : MonoBehaviour
             return;
         }
 
-        // Make sure the Auto Save folder exists
-        if (!Directory.Exists(autoSaveFolderPath))
+        // Remove the existing slot folder and recreate it
+        if (Directory.Exists(autoSaveFolderPath))
         {
-            Debug.LogWarning("AutoSave folder does not exist: " + autoSaveFolderPath);
-            return;
+            Directory.Delete(autoSaveFolderPath, true);
         }
 
-        // Get all files in the Auto Save folder
-        string[] filesInAutoSave = Directory.GetFiles(autoSaveFolderPath);
-        string[] filesInSlot = Directory.GetFiles(slotFolderPath);
+        Directory.CreateDirectory(autoSaveFolderPath);
 
-        foreach (string filePath in filesInAutoSave)
-        {
-            string fileName = Path.GetFileName(filePath);
-            string filePathInSlot = Path.Combine(slotFolderPath, fileName);
+        // Copy the contents of Auto Save to the slot folder
+        CopyDirectory(slotFolderPath, autoSaveFolderPath);
 
-            // Check if the file in Auto Save exists in the Slot folder
-            if (!File.Exists(filePathInSlot))
-            {
-                File.Delete(filePath);
-            }
-        }
-
-        foreach (string filePath in filesInSlot)
-        {
-            // Get the file name without the directory path
-            string fileName = Path.GetFileName(filePath);
-
-            // Construct the destination file path in the Auto Save folder
-            string destinationFilePath = Path.Combine(autoSaveFolderPath, fileName);
-
-            // Overwrite the file in Auto Save with the file from the Slot folder
-            File.Copy(filePath, destinationFilePath, true);
-        }
+        Debug.Log("Auto rewrite complete");
     }
 }

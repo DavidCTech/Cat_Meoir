@@ -6,14 +6,15 @@ using UnityEngine.Events;
 public class AutoSaver : MonoBehaviour
 {
 
-    public UnityEvent Save; 
-
-
+    public UnityEvent Save;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         //invoke the autosave featre every 10 minutes 
-        InvokeRepeating("AutoSave", 0f, 600f);
+        
+        InvokeRepeating("AutoSave", 0f, 10f);
+        
+        
 
     }
 

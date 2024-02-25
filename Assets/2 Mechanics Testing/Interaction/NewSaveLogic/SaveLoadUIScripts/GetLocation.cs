@@ -60,7 +60,6 @@ public class GetLocation : MonoBehaviour
             foreach (string file in files)
             {
                 DateTime lastWriteTime = File.GetLastWriteTime(file);
-                Debug.Log("file " + file);
                 string fileName = Path.GetFileName(file);
                 // Check if the file starts with "PlayerData_"
                 if (fileName.StartsWith("PlayerData_") && lastWriteTime > mostRecentTime)
@@ -69,7 +68,6 @@ public class GetLocation : MonoBehaviour
                     mostRecentFile = fileName;
                 }
             }
-            Debug.Log(mostRecentFile);
             //get the scene name from this file 
             sceneName = mostRecentFile.StartsWith("PlayerData_") ? mostRecentFile.Substring("PlayerData_".Length) : string.Empty;
             sceneName = Path.GetFileNameWithoutExtension(sceneName);

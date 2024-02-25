@@ -8,6 +8,7 @@ public class LoadFolder : MonoBehaviour
 {
     public void LoadEverything()
     {
+        Debug.Log("starting load");
         string directoryPath = Application.persistentDataPath;
         string folderName = "AutoSave";
 
@@ -23,7 +24,7 @@ public class LoadFolder : MonoBehaviour
             foreach (string file in files)
             {
                 DateTime lastWriteTime = File.GetLastWriteTime(file);
-                Debug.Log("file " + file);
+                Debug.Log("this file " + file);
                 string fileName = Path.GetFileName(file);
                 // Check if the file starts with "PlayerData_"
                 if (fileName.StartsWith("PlayerData_") && lastWriteTime > mostRecentTime)
@@ -32,7 +33,7 @@ public class LoadFolder : MonoBehaviour
                     mostRecentFile = fileName;
                 }
             }
-            Debug.Log(mostRecentFile);
+            Debug.Log("Most recent file: " + mostRecentFile);
             //get the scene name from this file 
             sceneName = mostRecentFile.StartsWith("PlayerData_") ? mostRecentFile.Substring("PlayerData_".Length) : string.Empty;
             sceneName = Path.GetFileNameWithoutExtension(sceneName);
@@ -44,6 +45,7 @@ public class LoadFolder : MonoBehaviour
             }
 
         }
+        Debug.Log("Finished Load");
     }
 
     
