@@ -7,6 +7,7 @@ public class SafeInteraction : MonoBehaviour
     public Transform dialTransform; // Reference to the transform of the lock dial
     public GameObject closedSafeModel; // Reference to the closed safe model
     public GameObject openSafeModel; // Reference to the open safe model
+    public Camera safeCamera; // Reference to the safe camera
     public float rotationSpeed = 50f; // Speed of dial rotation based on input
 
     [SerializeField]
@@ -20,8 +21,8 @@ public class SafeInteraction : MonoBehaviour
 
     private void Start()
     {
-        // Start minigame
-        minigameActive = true;
+        // Initially deactivate the SafeInteraction script
+        enabled = false;
 
         // Convert integer unlock positions to floats
         unlockPositionsFloat = new float[unlockPositions.Length];
@@ -85,5 +86,33 @@ public class SafeInteraction : MonoBehaviour
 
         // Disable minigame
         minigameActive = false;
+
+        // Deactivate the safe camera
+        safeCamera.gameObject.SetActive(false);
+
+        // Switch back to the player's main camera
+        // Assuming the player has a Camera component attached to it
+        Camera.main.gameObject.SetActive(true);
+
+        // Enable player movement
+        // Assuming the player has a PlayerMovement script attached to it
+        GetComponent<PlayerMovement>().enabled = true;
+    }
+
+    // Method to start the safe interaction
+    public void StartInteraction()
+    {
+        minigameActive = true;
+        enabled = true; // Activate the SafeInteraction script
+
+        // Deactivate the player's main camera
+        Camera.main.gameObject.SetActive(false);
+
+        // Activate the safe camera
+        safeCamera.gameObject.SetActive(true);
+
+        // Disable player movement
+        // Assuming the player has a PlayerMovement script attached to it
+        GetComponent<PlayerMovement>().enabled = false;
     }
 }
