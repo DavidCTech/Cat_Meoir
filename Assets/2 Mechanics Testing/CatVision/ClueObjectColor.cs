@@ -10,26 +10,38 @@ public class ClueObjectColor : MonoBehaviour
     public Color visionColor = Color.yellow;
 
     private Renderer objectRenderer;
-    private Color originalColor;
-    //start assigns the rendering and color
+    private Color[] originalColors;
     private bool isInVisionMode = false;
 
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
-        originalColor = objectRenderer.material.color;
+        originalColors = new Color[objectRenderer.materials.Length];
+
+        // Store original colors
+        for (int i = 0; i < originalColors.Length; i++)
+        {
+            originalColors[i] = objectRenderer.materials[i].color;
+        }
+
+        // Initially hide the object
+        SetVisibility(false);
     }
 
     public void SetInVisionMode(bool inVisionMode)
     {
         isInVisionMode = inVisionMode;
 
-        // If not in vision mode, revert to the original color
-        if (!isInVisionMode)
+        if (isInVisionMode)
+        {
+            ColorChange();
+        }
+        else
         {
             ColorRevert();
         }
     }
+
     public void ActivateColor()
     {
         isInVisionMode = true;
@@ -42,27 +54,32 @@ public class ClueObjectColor : MonoBehaviour
         ColorRevert();
     }
 
-    // Modify ColorChange to check for both vision mode and range
     public void ColorChange()
     {
-        if (isInVisionMode)
+        // Change color for all materials
+        for (int i = 0; i < objectRenderer.materials.Length; i++)
         {
-            objectRenderer.material.color = visionColor;
+            objectRenderer.materials[i].color = visionColor;
         }
+
+        // Show the object
+        SetVisibility(true);
     }
-    //method for reverting the color
+
     public void ColorRevert()
     {
-        objectRenderer.material.color = originalColor;
+        // Revert colors for all materials
+        for (int i = 0; i < objectRenderer.materials.Length; i++)
+        {
+            objectRenderer.materials[i].color = originalColors[i];
+        }
+
+        // Hide the object
+        SetVisibility(false);
     }
 
-
-    private IEnumerator ChangeColorAfterFrame()
+    private void SetVisibility(bool visible)
     {
-        // Wait for one frame to ensure that the layer mask is updated
-        yield return null;
-
-        // Change the object's color to the vision color
-        objectRenderer.material.color = visionColor;
+        objectRenderer.enabled = visible;
     }
 }
