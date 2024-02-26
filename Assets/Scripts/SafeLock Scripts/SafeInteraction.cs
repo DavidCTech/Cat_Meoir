@@ -8,6 +8,7 @@ public class SafeInteraction : MonoBehaviour
     public GameObject closedSafeModel; // Reference to the closed safe model
     public GameObject openSafeModel; // Reference to the open safe model
     public Camera safeCamera; // Reference to the safe camera
+    public GameObject dialGameObject; // Reference to the dial GameObject
     public float rotationSpeed = 50f; // Speed of dial rotation based on input
 
     [SerializeField]
@@ -19,16 +20,32 @@ public class SafeInteraction : MonoBehaviour
 
     private int rotationIndex = 0; // Track the current rotation position index
 
+    public PlayerMovement playerMovementScript; // Reference to the player's movement script
+    public PlayerManager playerManagerScript; // Reference to the player manager script
+    public Camera mainCamera; // Reference to the main camera
+
     private void Start()
     {
-        // Initially deactivate the SafeInteraction script
-        enabled = false;
-
         // Convert integer unlock positions to floats
         unlockPositionsFloat = new float[unlockPositions.Length];
         for (int i = 0; i < unlockPositions.Length; i++)
         {
             unlockPositionsFloat[i] = (float)unlockPositions[i];
+        }
+
+        if (playerMovementScript == null)
+        {
+            Debug.LogError("PlayerMovement script reference not set.");
+        }
+
+        if (mainCamera == null)
+        {
+            Debug.LogError("Main camera reference not set.");
+        }
+
+        if (playerManagerScript == null)
+        {
+            Debug.LogError("PlayerManager script reference not set.");
         }
     }
 
@@ -90,13 +107,37 @@ public class SafeInteraction : MonoBehaviour
         // Deactivate the safe camera
         safeCamera.gameObject.SetActive(false);
 
-        // Switch back to the player's main camera
-        // Assuming the player has a Camera component attached to it
-        Camera.main.gameObject.SetActive(true);
+        // Deactivate the dial GameObject
+        dialGameObject.SetActive(false);
+
+        // Activate the player's main camera
+        if (mainCamera != null)
+        {
+            mainCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Main camera reference not set.");
+        }
 
         // Enable player movement
-        // Assuming the player has a PlayerMovement script attached to it
-        GetComponent<PlayerMovement>().enabled = true;
+        if (playerMovementScript != null)
+        {
+            playerMovementScript.enabled = true;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerMovement script reference not set.");
+        }
+        // Enable player manager
+        if (playerManagerScript != null)
+        {
+            playerManagerScript.enabled = true;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerManager script reference not set.");
+        }
     }
 
     // Method to start the safe interaction
@@ -105,14 +146,79 @@ public class SafeInteraction : MonoBehaviour
         minigameActive = true;
         enabled = true; // Activate the SafeInteraction script
 
+        // Activate the dial GameObject
+        dialGameObject.SetActive(true);
+
         // Deactivate the player's main camera
-        Camera.main.gameObject.SetActive(false);
+        if (mainCamera != null)
+        {
+            mainCamera.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Main camera reference not set.");
+        }
 
         // Activate the safe camera
         safeCamera.gameObject.SetActive(true);
 
         // Disable player movement
-        // Assuming the player has a PlayerMovement script attached to it
-        GetComponent<PlayerMovement>().enabled = false;
+        if (playerMovementScript != null)
+        {
+            playerMovementScript.enabled = false;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerMovement script reference not set.");
+        }
+        // Disable player manager
+        if (playerManagerScript != null)
+        {
+            playerManagerScript.enabled = false;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerManager script reference not set.");
+        }
+    }
+
+    // Method to exit the safe minigame
+    public void ExitMinigame()
+    {
+        // Reset any necessary variables or states
+        minigameActive = false;
+        enabled = false; // Deactivate the SafeInteraction script
+        dialGameObject.SetActive(false); // Deactivate the dial GameObject
+
+        // Deactivate the safe camera
+        safeCamera.gameObject.SetActive(false);
+
+        // Activate the player's main camera
+        if (mainCamera != null)
+        {
+            mainCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Main camera reference not set.");
+        }
+
+        // Enable player movement
+        if (playerMovementScript != null)
+        {
+            playerMovementScript.enabled = true;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerMovement script reference not set.");
+        }
+        if (playerManagerScript != null)
+        {
+            playerManagerScript.enabled = true;
+        }
+        else
+        {
+            Debug.LogWarning("PlayerManager script reference not set.");
+        }
     }
 }

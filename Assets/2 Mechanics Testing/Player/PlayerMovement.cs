@@ -238,6 +238,7 @@ public class PlayerMovement : MonoBehaviour
         isJumping = false;
     }
 
+
     private void ManageMovement()
     {
         if (!isFrozen)
