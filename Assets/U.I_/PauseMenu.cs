@@ -61,7 +61,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
-    public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton;
+    public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton,
+    controlsBackButton;
 
     const string prefName = "optionsvalue";
     const string resName = "resolutionoption";
@@ -168,11 +169,35 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     }
 
+    public void ActivateControlsMenu()
+    {
+        rebindingUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(controlsBackButton);
+
+    }
+
+    public void DeactivateControlsMenu()
+    {
+        rebindingUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsClosedButton);
+
+    }
+
+    public void ChangeToControlBackButton()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(controlsBackButton);
+    }
+
     public void ActivateMenu()
     {
         pauseMenuUI.SetActive(true);
         optionsPanel.SetActive(false);
         audioPanel.SetActive(false);
+        rebindingUI.SetActive(false);
     }
 
 
@@ -231,7 +256,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         //turned off the photo menu ui 
         photoMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
-        //rebindingUI.SetActive(false);
+        rebindingUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         isOptionsPanelOpen = false;
@@ -245,7 +270,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
-        //rebindingUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
         sliderValue = volumeSlider.value;

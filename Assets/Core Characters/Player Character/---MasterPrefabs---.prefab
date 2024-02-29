@@ -101,7 +101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -328, y: 14}
+  m_AnchoredPosition: {x: -278, y: 14}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &214737598156468643
@@ -1126,6 +1126,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 3211103196015202952}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ChangeToControlBackButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9337,6 +9349,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3211103196015202952}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ChangeToControlBackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &773255418147545637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15037,6 +15061,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -196.44989
       objectReference: {fileID: 0}
+    - target: {fileID: 2627222025179937422, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3211103196015202952}
+    - target: {fileID: 2627222025179937422, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2772294869555535108, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -15149,6 +15181,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -82.14996
       objectReference: {fileID: 0}
+    - target: {fileID: 6118199562407612098, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 519.8665
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118199562407612098, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -429.36346
+      objectReference: {fileID: 0}
     - target: {fileID: 6264762693241309211, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -15257,6 +15297,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7427569170776669078, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 425
+      objectReference: {fileID: 0}
+    - target: {fileID: 7703273475748838468, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
     - target: {fileID: 7974455453337679298, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -15346,10 +15394,11 @@ PrefabInstance:
       value: -303.04636
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5229510270105957377, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7219082301041627586, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
-      insertIndex: 1
+      insertIndex: 0
       addedObject: {fileID: 29078160686270973}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
@@ -15361,6 +15410,11 @@ RectTransform:
 --- !u!1 &4913822818741818809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6939446180186797681, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
+  m_PrefabInstance: {fileID: 2629181174088016840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7090558939426282700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5051353852026060548, guid: e3cf904fefc16b84a85c05287f5aa184, type: 3}
   m_PrefabInstance: {fileID: 2629181174088016840}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2983037914680084051
@@ -21414,6 +21468,10 @@ PrefabInstance:
       propertyPath: sensitivitySlider
       value: 
       objectReference: {fileID: 930263810061865431}
+    - target: {fileID: 9152556915690698410, guid: c90022dce8fccc443985dd539311b075, type: 3}
+      propertyPath: controlsBackButton
+      value: 
+      objectReference: {fileID: 7090558939426282700}
     - target: {fileID: 9152556915690698410, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: optionsFirstButton
       value: 
