@@ -44,6 +44,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
 
+    private JustCruisingMode justCruisingMode;
+
     Resolution[] resolutions;
 
     private List<Resolution> filteredResolutions;
@@ -60,6 +62,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public PlayerController playerControls;
 
     public Toggle vSyncToggle;
+
+    public Toggle justCruisingModeToggle;
 
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton,
     controlsBackButton;
@@ -243,7 +247,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         resolutionDropdown.value = PlayerPrefs.GetInt(resName, currentResolutionIndex);
 
         resolutionDropdown.RefreshShownValue();
-
     }
 
     private void Update()
@@ -391,4 +394,22 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         }
     }
 
+   public void ToggleJustCruisingMode(bool isToggled)
+   {
+        Debug.Log("ToggleJustCruisingMode called. isToggled: " + isToggled);
+
+        JustCruisingMode[] objectsToToggle = FindObjectsOfType<JustCruisingMode>(); 
+
+        foreach (JustCruisingMode objScript in objectsToToggle)
+        {
+            objScript.ToggleObject(isToggled);
+        }
+        
+   }
+
+   
+
 }
+
+
+
