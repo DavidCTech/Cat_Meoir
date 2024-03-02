@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SafeInteraction : MonoBehaviour
 {
@@ -17,12 +18,20 @@ public class SafeInteraction : MonoBehaviour
     private float[] unlockPositionsFloat; // Array to hold the unlock positions as floats
     private bool minigameActive = false;
     private bool safeUnlocked = false; // Track if the safe is unlocked
+    private bool safeAlreadyUnlocked = false; // Track if the safe has already been unlocked
+
+    private enum TurnDirection { None, Left, Right }
+
+    private TurnDirection lastTurnDirection = TurnDirection.None;
+    private TurnDirection[] expectedTurnSequence = { TurnDirection.Right, TurnDirection.Left, TurnDirection.Right };
+    private int currentExpectedTurnIndex = 0;
 
     private int rotationIndex = 0; // Track the current rotation position index
 
     public PlayerMovement playerMovementScript; // Reference to the player's movement script
     public PlayerManager playerManagerScript; // Reference to the player manager script
     public Camera mainCamera; // Reference to the main camera
+
 
     private void Start()
     {
@@ -53,38 +62,51 @@ public class SafeInteraction : MonoBehaviour
     {
         if (minigameActive && !safeUnlocked)
         {
-            // Rotate the dial
             RotateDial();
 
-            // Check if the dial rotation matches the current unlock position
-            if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - unlockPositionsFloat[rotationIndex]) < 1f)
+            // Check if the dial rotation matches the current unlock position and direction
+            if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - unlockPositionsFloat[currentExpectedTurnIndex]) < 1f &&
+                lastTurnDirection == expectedTurnSequence[currentExpectedTurnIndex])
             {
-                // Move to the next unlock position
-                rotationIndex++;
+                currentExpectedTurnIndex++;
+                lastTurnDirection = TurnDirection.None; // Reset last turn direction
 
-                // If reached the last unlock position, unlock the safe
-                if (rotationIndex >= unlockPositionsFloat.Length)
+                if (currentExpectedTurnIndex >= expectedTurnSequence.Length)
                 {
                     SafeUnlocked();
                 }
                 else
                 {
-                    // Debug message when reaching each unlock position
-                    Debug.Log("Dial reached position " + (rotationIndex + 1));
+                    Debug.Log("Correct turn. Next expected turn: " + expectedTurnSequence[currentExpectedTurnIndex]);
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ExitMinigame();
             }
         }
     }
 
     private void RotateDial()
     {
-        // Get the input value for horizontal axis
         float input = Input.GetAxis("Horizontal");
 
-        // Calculate the rotation amount based on the input value
-        float rotationAmount = input * rotationSpeed * Time.deltaTime;
+        // Determine the direction of the turn
+        TurnDirection currentTurnDirection = TurnDirection.None;
+        if (input > 0)
+        {
+            currentTurnDirection = TurnDirection.Right;
+        }
+        else if (input < 0)
+        {
+            currentTurnDirection = TurnDirection.Left;
+        }
 
-        // Apply rotation to the dial around the z-axis
+        // Update last turn direction
+        lastTurnDirection = currentTurnDirection;
+
+        float rotationAmount = input * rotationSpeed * Time.deltaTime;
         dialTransform.Rotate(Vector3.forward, rotationAmount);
     }
 
@@ -100,6 +122,9 @@ public class SafeInteraction : MonoBehaviour
 
         // Set the safe as unlocked
         safeUnlocked = true;
+
+        // Set the flag to indicate the safe has been unlocked
+        safeAlreadyUnlocked = true;
 
         // Disable minigame
         minigameActive = false;
@@ -143,42 +168,46 @@ public class SafeInteraction : MonoBehaviour
     // Method to start the safe interaction
     public void StartInteraction()
     {
-        minigameActive = true;
-        enabled = true; // Activate the SafeInteraction script
+        // Check if the safe has already been unlocked
+        if (!safeAlreadyUnlocked)
+        {
+            minigameActive = true;
+            enabled = true; // Activate the SafeInteraction script
 
-        // Activate the dial GameObject
-        dialGameObject.SetActive(true);
+            // Activate the dial GameObject
+            dialGameObject.SetActive(true);
 
-        // Deactivate the player's main camera
-        if (mainCamera != null)
-        {
-            mainCamera.gameObject.SetActive(false);
-        }
-        else
-        {
-            Debug.LogWarning("Main camera reference not set.");
-        }
+            // Deactivate the player's main camera
+            if (mainCamera != null)
+            {
+                mainCamera.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.LogWarning("Main camera reference not set.");
+            }
 
-        // Activate the safe camera
-        safeCamera.gameObject.SetActive(true);
+            // Activate the safe camera
+            safeCamera.gameObject.SetActive(true);
 
-        // Disable player movement
-        if (playerMovementScript != null)
-        {
-            playerMovementScript.enabled = false;
-        }
-        else
-        {
-            Debug.LogWarning("PlayerMovement script reference not set.");
-        }
-        // Disable player manager
-        if (playerManagerScript != null)
-        {
-            playerManagerScript.enabled = false;
-        }
-        else
-        {
-            Debug.LogWarning("PlayerManager script reference not set.");
+            // Disable player movement
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = false;
+            }
+            else
+            {
+                Debug.LogWarning("PlayerMovement script reference not set.");
+            }
+            // Disable player manager
+            if (playerManagerScript != null)
+            {
+                playerManagerScript.enabled = false;
+            }
+            else
+            {
+                Debug.LogWarning("PlayerManager script reference not set.");
+            }
         }
     }
 
@@ -212,6 +241,8 @@ public class SafeInteraction : MonoBehaviour
         {
             Debug.LogWarning("PlayerMovement script reference not set.");
         }
+
+        // Enable player manager
         if (playerManagerScript != null)
         {
             playerManagerScript.enabled = true;
@@ -220,5 +251,10 @@ public class SafeInteraction : MonoBehaviour
         {
             Debug.LogWarning("PlayerManager script reference not set.");
         }
+    }
+
+    public bool IsSafeUnlocked()
+    {
+        return safeAlreadyUnlocked;
     }
 }

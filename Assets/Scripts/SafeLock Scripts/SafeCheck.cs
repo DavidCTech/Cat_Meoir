@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SafeCheck : MonoBehaviour
 {
@@ -58,7 +59,10 @@ public class SafeCheck : MonoBehaviour
 
     void StartSafeInteraction()
     {
-        // Start the safe interaction
-        safeInteraction.StartInteraction();
+        // Start the safe interaction if the safe is not already unlocked
+        if (!safeInteraction.IsSafeUnlocked())
+        {
+            safeInteraction.StartInteraction();
+        }
     }
 }
