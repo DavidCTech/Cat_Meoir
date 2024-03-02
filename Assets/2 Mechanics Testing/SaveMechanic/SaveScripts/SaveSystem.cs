@@ -179,12 +179,14 @@ public static class SaveSystem
 
         if (File.Exists(path))
         {
+            Debug.Log(path + "Does exist?");
             string jsonData = File.ReadAllText(path);
             ClueData data = JsonUtility.FromJson<ClueData>(jsonData);
             return data;
         }
         else
         {
+            Debug.Log(path + "Does not exist");
             return null;
         }
     }

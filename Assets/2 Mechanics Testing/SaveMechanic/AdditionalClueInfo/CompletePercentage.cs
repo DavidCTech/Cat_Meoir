@@ -57,7 +57,6 @@ public class CompletePercentage : MonoBehaviour
         // Combine fractions and get the result as a percentage
        
         result = CombineFractions(mainFraction, optFraction);
-        Debug.Log(optFraction);
         return result; 
 
     }

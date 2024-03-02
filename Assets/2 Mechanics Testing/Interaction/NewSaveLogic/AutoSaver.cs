@@ -20,7 +20,6 @@ public class AutoSaver : MonoBehaviour
 
     public void AutoSave()
     {
-        Debug.Log("autoSaving");
         Save.Invoke(); 
 
     }
