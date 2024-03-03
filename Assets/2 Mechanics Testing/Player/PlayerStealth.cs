@@ -13,9 +13,10 @@ public class PlayerStealth : MonoBehaviour
     //stealth should be in another script
     private bool isStealth = false;
     public bool isStealthed = false;
- 
 
-    //Hiding Start
+    public float timer = 1f;
+    public float StealthState = 0f;
+
     public void Hide(GameObject hidingSpot, PlayerInteractionCheck playerInteractionCheck)
     {
         Debug.Log(hidingSpot.transform.position);
@@ -40,7 +41,17 @@ public class PlayerStealth : MonoBehaviour
 
     }
 
+    IEnumerator StealthTransitionTimer()
+    {
+        yield return new WaitForSeconds(timer);
+        StealthState = 1f;
+    }
 
+    IEnumerator ReverseTransitionTimer()
+    {
+        yield return new WaitForSeconds(timer);
+        StealthState = 0f;
+    }
 
     //onstealth should be in another script..
     public void OnStealth()
@@ -50,13 +61,13 @@ public class PlayerStealth : MonoBehaviour
 
         if (isStealth)
         {
-           
             isStealthed = true;
+            StartCoroutine(StealthTransitionTimer());
         }
         else
         {
-
             isStealthed = false;
+            StartCoroutine(ReverseTransitionTimer());
         }
     }
 }
