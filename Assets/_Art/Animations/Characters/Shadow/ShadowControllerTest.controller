@@ -22,6 +22,53 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 880, y: 300, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 925040678106778694}
+--- !u!206 &-2915730541980251054
+BlendTree:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BlendTree
+  m_Childs:
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: ee7640e926e9a7e4d8e1eb202a25bab5, type: 2}
+    m_Threshold: 0
+    m_Position: {x: 0.5, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelocitySpeed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 77e97fb2972a3d94184cd7d68bdab07c, type: 2}
+    m_Threshold: 0.22222224
+    m_Position: {x: 1, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelocitySpeed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: d8742622aa1b8974c931c6e857edfa45, type: 2}
+    m_Threshold: 0.44444448
+    m_Position: {x: 1, y: 0.5}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelocitySpeed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: e854c1e514ee1fb43839b682f448ab31, type: 2}
+    m_Threshold: 0.6666667
+    m_Position: {x: 1, y: 0.6}
+    m_TimeScale: 1.5
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelocitySpeed
+    m_Mirror: 0
+  m_BlendParameter: StealthTransition
+  m_BlendParameterY: VelocitySpeed
+  m_MinThreshold: 0
+  m_MaxThreshold: 0.6666667
+  m_UseAutomaticThresholds: 1
+  m_NormalizedBlendValues: 0
+  m_BlendType: 2
 --- !u!206 &-748188901740056588
 BlendTree:
   m_ObjectHideFlags: 1
@@ -39,25 +86,41 @@ BlendTree:
     m_DirectBlendParameter: VelocitySpeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a67958c4b1397c54195a530be01bb998, type: 2}
-    m_Threshold: 0.33333334
-    m_Position: {x: 0, y: 0.1}
+    m_Motion: {fileID: 7400000, guid: 371f343a5ca4b1e4984e83afc4657866, type: 2}
+    m_Threshold: 0.2
+    m_Position: {x: 0.5, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: VelocitySpeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 73fbe30e005f7f641b813b6e1373999d, type: 2}
-    m_Threshold: 0.6666667
+    m_Motion: {fileID: 7400000, guid: e854c1e514ee1fb43839b682f448ab31, type: 2}
+    m_Threshold: 0.4
+    m_Position: {x: 0.65, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelocitySpeed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: b9c626a361416ea4a9f2cf026129e6d8, type: 2}
+    m_Threshold: 0.6
     m_Position: {x: 0.7, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: VelocitySpeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 371f343a5ca4b1e4984e83afc4657866, type: 2}
+    m_Motion: {fileID: 7400000, guid: a67958c4b1397c54195a530be01bb998, type: 2}
+    m_Threshold: 0.8
+    m_Position: {x: 0, y: 0.1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: VelocitySpeed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -2915730541980251054}
     m_Threshold: 1
-    m_Position: {x: 0.6, y: 0}
+    m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: VelocitySpeed
@@ -83,37 +146,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Sprinting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Jumping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: VelocitySpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: VelocityUp
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: AnimSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: StealthTransition
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
