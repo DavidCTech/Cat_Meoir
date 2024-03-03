@@ -38,14 +38,30 @@ public class AccessibilityManager : MonoBehaviour
 
     void Start()
     {
-        if (highContrastInt == 1)
+        if (PlayerPrefs.HasKey("HighContrastState"))
         {
-            highContrastToggle.isOn = true;
-            isUsingHighContrastMode = true;
+            if (highContrastInt == 1)
+            {
+                highContrastToggle.isOn = true;
+                isUsingHighContrastMode = true;
+            }
+            else
+            {
+                highContrastToggle.isOn = false;
+            }
         }
-        else
+
+        if (PlayerPrefs.HasKey("CvHighContrastState"))
         {
-            highContrastToggle.isOn = false;
+            if (cvHighContrastInt == 1)
+            {
+                cvHighContrastToggle.isOn = true;
+                isUsingCvHighContrastMode = true;
+            }
+            else
+            {
+                cvHighContrastToggle.isOn = false;
+            }
         }
     }
 
@@ -61,19 +77,31 @@ public class AccessibilityManager : MonoBehaviour
         if (!isUsingHighContrastMode)
         {
             PlayerPrefs.SetInt("HighContrastState", 0);
-            Debug.Log("Turning High Contrast Mode Off");
+            //Debug.Log("Turning High Contrast Mode Off");
         }
         else
         {
             PlayerPrefs.SetInt("HighContrastState", 1);
             isUsingHighContrastMode = true;
-            Debug.Log("Turning High Contrast Mode On");
+            //Debug.Log("Turning High Contrast Mode On");
         }
     }
 
     public void SetCvHighContrastMode(bool isUsingCvHighContrastMode)
     {
+        cvHighContrastToggle.isOn = isUsingCvHighContrastMode;
 
+        if (!isUsingCvHighContrastMode)
+        {
+            PlayerPrefs.SetInt("CvHighContrastState", 0);
+            //Debug.Log("Turning CV High Contrast Mode Off");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("CvHighContrastState", 1);
+            isUsingCvHighContrastMode = true;
+            //Debug.Log("Turning CV High Contrast Mode On");
+        }
     }
 
     public void SetJournalColorblindMode(bool isUsingJournalCb)

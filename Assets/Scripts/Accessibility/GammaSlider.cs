@@ -5,52 +5,66 @@ using UnityEngine.UI;
 
 public class GammaSlider : MonoBehaviour
 {
+    [Header("Gamma Slider and Panel Variables")]
     public Slider gammaSlider;
-
     public Image pawPrintPanelImage;
     public Image gammaPanel;
 
-    void Start()
+    void Awake()
     {
         if (PlayerPrefs.HasKey("GammaValue"))
         {
             gammaSlider.value = PlayerPrefs.GetFloat("GammaValue");
-            Color color = pawPrintPanelImage.color;
-            color.a = gammaSlider.value;
-            pawPrintPanelImage.color = color;
 
-            Color gammaColor = gammaPanel.color;
-            color.a = gammaSlider.value;
-            gammaPanel.color = color;
+            if (pawPrintPanelImage != null)
+            {
+                Color color = pawPrintPanelImage.color;
+                color.a = gammaSlider.value;
+                pawPrintPanelImage.color = color;
+            }
+
+            if (gammaPanel != null)
+            {
+                Color gammaColor = gammaPanel.color;
+                gammaColor.a = gammaSlider.value;
+                gammaPanel.color = gammaColor;
+            }
         }
         else
         {
-            Color color = pawPrintPanelImage.color;
-            color.a = 0f;
-            pawPrintPanelImage.color = color;
+            if (pawPrintPanelImage != null)
+            {
+                Color color = pawPrintPanelImage.color;
+                color.a = 0f;
+                pawPrintPanelImage.color = color;
+            }
 
-            Color gammaColor = gammaPanel.color;
-            color.a = 0f;
-            gammaPanel.color = color;
+            if (gammaPanel != null)
+            {
+                Color gammaColor = gammaPanel.color;
+                gammaColor.a = 0f;
+                gammaPanel.color = gammaColor;
+            }
         }
-    }
-
-    void Update()
-    {
-
     }
 
     public void AdjustGammaSlider(float gamma)
     {
         Mathf.Clamp(0f, 0.9f, gamma);
         PlayerPrefs.SetFloat("GammaValue", gamma);
-        Color color = pawPrintPanelImage.color;
-        color.a = gamma;
-        pawPrintPanelImage.color = color;
 
-        Color gammaColor = gammaPanel.color;
-        color.a = gamma;
-        gammaPanel.color = color;
+        if (pawPrintPanelImage != null)
+        {
+            Color color = pawPrintPanelImage.color;
+            color.a = gamma;
+            pawPrintPanelImage.color = color;
+        }
 
+        if (gammaPanel != null)
+        {
+            Color gammaColor = gammaPanel.color;
+            gammaColor.a = gamma;
+            gammaPanel.color = gammaColor;
+        }
     }
 }

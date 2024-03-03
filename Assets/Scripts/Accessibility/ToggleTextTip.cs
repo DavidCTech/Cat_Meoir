@@ -13,11 +13,16 @@ public class ToggleTextTip : MonoBehaviour
 
     void Start()
     {
-
+        accessibilityTipText.gameObject.SetActive(false);
     }
 
     public void OnPointerEnter(BaseEventData baseEventData)
     {
+        if (!accessibilityTipText.gameObject.activeInHierarchy)
+        {
+            accessibilityTipText.gameObject.SetActive(true);
+        }
+
         ChangeText();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(this.gameObject);

@@ -10,12 +10,6 @@ public class OpenGammaPanel : MonoBehaviour
     public CanvasGroup gammaOverlayPanel;
     public GameObject gammaButton, gammaBackButton;
 
-
-    void Start()
-    {
-
-    }
-
     public void OpenPanel()
     {
         gammaPanel.alpha = 1;
@@ -33,6 +27,6 @@ public class OpenGammaPanel : MonoBehaviour
         gammaPanel.blocksRaycasts = false;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(gammaButton);
-        gammaOverlayPanel.alpha = 0;
+        //gammaOverlayPanel.alpha = 1;
     }
 }

@@ -18,6 +18,8 @@ public class SliderEventTrigger : MonoBehaviour
     public void OnPointerEnter(BaseEventData baseEventData)
     {
         sliderTipText.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(this.gameObject);
     }
 
     public void OnPointerExit(BaseEventData baseEventData)
