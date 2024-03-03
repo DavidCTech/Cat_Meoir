@@ -38,6 +38,7 @@ public class ClueSaves : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
+        Debug.Log("Clue load async");
         if (loadingScreen != null)
         {
             loadingScreen.SetActive(false);
@@ -46,17 +47,22 @@ public class ClueSaves : MonoBehaviour
         // Clear the existing snapshots
         photoManager.snapshots.Clear();
        
-        
+        if(data == null)
+        {
+            Debug.Log("clue data null");
+        }
 
         if (data != null)
         {
             // Iterate through the loaded clue names and create new PhotoScriptable objects
             for (int i = 0; i < data.clueList.Length; i++)
             {
+                Debug.Log("huhh");
                 // Create a new PhotoScriptable object
                 PhotoScriptable newPhoto = ScriptableObject.CreateInstance<PhotoScriptable>();
                 newPhoto.sprite = this.gameObject.GetComponent<ClueImagesSave>().LoadClueImages(i);
                 newPhoto.texture = this.gameObject.GetComponent<ClueImagesSave>().LoadClueTexture(i);
+                Debug.Log(newPhoto.sprite + " Sprite " + newPhoto.texture + " Texture");
                 // Set the clue name
                 newPhoto.clueName = data.clueList[i];
 

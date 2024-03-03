@@ -69,8 +69,10 @@ public class ClueImagesSave : MonoBehaviour
         Texture2D loadedTexture = new Texture2D(1080, 1080);  
         loadedTexture.LoadImage(pngData);
         Sprite loadedSprite = Sprite.Create(loadedTexture, new Rect(0, 0, loadedTexture.width, loadedTexture.height), new Vector2(0.5f, 0.5f));
+        
         return (loadedSprite);
     }
+
     public Texture2D LoadClueTexture(int i)
     {
         string defaultPath = Application.persistentDataPath;
