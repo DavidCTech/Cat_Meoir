@@ -5,6 +5,7 @@ using UnityEngine;
 public class Swipe : MonoBehaviour
 {
     public float swipeForce = 3f;
+    public float swipeActivate = 0.3f; //How long the swipe will last
     public float swipeDuration = 0.5f; //How long the swipe will last
 
 
@@ -24,8 +25,9 @@ public class Swipe : MonoBehaviour
         }
     }
 
-    public void EnableCollider()
+    public IEnumerator EnableCollider()
     {
+        yield return new WaitForSeconds(swipeActivate);
         if (swipeHitBox != null)
         {
             swipeHitBox.enabled = true;
@@ -37,8 +39,10 @@ public class Swipe : MonoBehaviour
     public void Swiping()
     {
         // Enable the collider
-        EnableCollider();
         anim.SetBool("Swipe", true);
+        StartCoroutine(EnableCollider());
+        //EnableCollider();
+        //anim.SetBool("Swipe", true);
     }
     public IEnumerator DisableColliderAfterDuration()
     {
@@ -48,7 +52,6 @@ public class Swipe : MonoBehaviour
         swipeHitBox.enabled = false;
         isSwiping = false;
         anim.SetBool("Swipe", false);
-
     }
 
     private void OnTriggerEnter(Collider other)
