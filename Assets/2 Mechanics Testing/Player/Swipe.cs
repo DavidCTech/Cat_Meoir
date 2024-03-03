@@ -14,11 +14,12 @@ public class Swipe : MonoBehaviour
 
     public Animator anim;
 
+    public BoxMover boxMover;
+
 
     private void Start()
     {
         swipeHitBox = GetComponent<BoxCollider>();
-
         if (swipeHitBox != null)
         {
             swipeHitBox.enabled = false;
@@ -39,8 +40,12 @@ public class Swipe : MonoBehaviour
     public void Swiping()
     {
         // Enable the collider
-        anim.SetBool("Swipe", true);
-        StartCoroutine(EnableCollider());
+        if(!boxMover.isGrabbing)
+        {
+            anim.SetBool("Swipe", true);
+            StartCoroutine(EnableCollider());
+        }
+        
         //EnableCollider();
         //anim.SetBool("Swipe", true);
     }
