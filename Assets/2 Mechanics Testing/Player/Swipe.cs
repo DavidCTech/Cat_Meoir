@@ -11,6 +11,9 @@ public class Swipe : MonoBehaviour
     private BoxCollider swipeHitBox; 
     public bool isSwiping = false;
 
+    public Animator anim;
+
+
     private void Start()
     {
         swipeHitBox = GetComponent<BoxCollider>();
@@ -35,14 +38,17 @@ public class Swipe : MonoBehaviour
     {
         // Enable the collider
         EnableCollider();
+        anim.SetBool("Swipe", true);
     }
-    private IEnumerator DisableColliderAfterDuration()
+    public IEnumerator DisableColliderAfterDuration()
     {
         yield return new WaitForSeconds(swipeDuration);
 
         // Disable the collider after the swipe duration
         swipeHitBox.enabled = false;
         isSwiping = false;
+        anim.SetBool("Swipe", false);
+
     }
 
     private void OnTriggerEnter(Collider other)
