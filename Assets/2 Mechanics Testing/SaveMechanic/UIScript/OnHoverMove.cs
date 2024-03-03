@@ -57,13 +57,13 @@ public class OnHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             if (!goUp)
             {
-                buttonRectTransform.anchoredPosition = initialPosition + new Vector2(exitTranslation, 0);
+                buttonRectTransform.anchoredPosition = initialPosition ;
 
 
             }
             else
             {
-                buttonRectTransform.anchoredPosition = initialPosition + new Vector2(0, exitTranslation);
+                buttonRectTransform.anchoredPosition = initialPosition ;
                 Debug.Log("Exit Translation" + exitTranslation);
             }
         }
