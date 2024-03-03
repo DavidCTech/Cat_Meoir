@@ -13,11 +13,12 @@ public class PlayerMovement : MonoBehaviour
     public GameObject camTransform; //game object of cam transform  
 
     public float moveSpeed = 5;
+    public float defaultSpeed = 5; 
     public float sprintSpeedIncrease = 4;
-    private float currentSpeedIncrease; 
+    public float sneakSpeed = 3; 
     public float sneakSpeedIncrease = 1; 
     public float visionMoveSpeed = 1;
-    private bool sprinting = false;
+    public bool sprinting = false;
     public float rotationSpeed = 15;
     public bool isFrozen = false;
     public float acceleration = 0.08f; 
@@ -191,25 +192,30 @@ public class PlayerMovement : MonoBehaviour
     public void OnSprint()
     {
         sprinting = !sprinting;
-        currentSpeedIncrease = sprintSpeedIncrease; 
 
-        if (sprinting)
+        if (playerStealth.isStealth)
         {
-            if (playerStealth.isStealth)
+            if (!sprinting)
             {
-                currentSpeedIncrease = sneakSpeedIncrease; 
+                moveSpeed = sneakSpeed;
             }
-            
-            moveSpeed = moveSpeed + currentSpeedIncrease;
+            else
+            {
+                moveSpeed = sneakSpeed + sneakSpeedIncrease; 
+            }
+                     
         }
         else
         {
-            if (playerStealth.isStealth)
+            if (!sprinting)
             {
-                currentSpeedIncrease = sneakSpeedIncrease;
+                moveSpeed = defaultSpeed;
             }
-           
-             moveSpeed = moveSpeed - currentSpeedIncrease;
+            else
+            {
+                moveSpeed = defaultSpeed+ sprintSpeedIncrease;
+            }
+
         }
     }
 
