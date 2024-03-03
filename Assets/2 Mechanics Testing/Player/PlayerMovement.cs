@@ -266,6 +266,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 movementVelocity = moveDirection;
             rb.velocity = new Vector3(movementVelocity.x, rb.velocity.y, movementVelocity.z);
         }
+        //freeze player? 
         else
         {
             rb.velocity = Vector3.zero;

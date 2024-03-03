@@ -43,37 +43,53 @@ public class PlayerStealth : MonoBehaviour
 
     }
 
-    IEnumerator StealthTransitionTimer()
+    public void StealthTransitionTimer()
     {
-        yield return new WaitForSeconds(timer);
-        StealthState = 1f;
-        anim.SetFloat("StealthTransition", StealthState);
+        
+        
+        if (StealthState < 1)
+        {
+            StealthState = StealthState + 0.01f;
+        }
+        else
+        {
+            StealthState = 1f;
+        }
 
     }
 
-    IEnumerator ReverseTransitionTimer()
+    public void ReverseTransitionTimer()
     {
-        yield return new WaitForSeconds(timer);
-        StealthState = 0f;
-        anim.SetFloat("StealthTransition", StealthState);
+       
+        if (StealthState > 0)
+        {
+            StealthState = StealthState - 0.01f;
+        }
+        else
+        {
+            StealthState = 0f;
+        }
 
+    }
+    public void Update()
+    {
+        if (isStealth)
+        {
+            isStealthed = true;
+            StealthTransitionTimer();
+        }
+        else
+        {
+            isStealthed = false;
+            ReverseTransitionTimer();
+        }
+
+        anim.SetFloat("StealthTransition", StealthState);
     }
 
     //onstealth should be in another script..
     public void OnStealth()
     {
         isStealth = !isStealth;
-
-
-        if (isStealth)
-        {
-            isStealthed = true;
-            StartCoroutine(StealthTransitionTimer());
-        }
-        else
-        {
-            isStealthed = false;
-            StartCoroutine(ReverseTransitionTimer());
-        }
     }
 }
