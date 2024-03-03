@@ -10,6 +10,9 @@ public class BoxMover : MonoBehaviour
     private Quaternion initialRotation;
     public bool isGrabbing = false;
 
+    public Animator anim;
+
+
     void OnEnable()
     {
         InputAction boxPushAction = GetComponent<PlayerInput>().actions["BoxPush"];
@@ -38,6 +41,7 @@ public class BoxMover : MonoBehaviour
 
             // Lock the rotation of the box to the initial rotation
             currentBox.transform.rotation = initialRotation;
+            anim.SetBool("Pushing", true);
         }
     }
 
@@ -54,6 +58,8 @@ public class BoxMover : MonoBehaviour
     void ReleaseBox()
     {
         isGrabbing = false;
+        anim.SetBool("Pushing", false);
+
     }
 
     bool isCollidingWithBox()
