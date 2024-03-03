@@ -13489,7 +13489,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5281037562553037814, guid: d82115b660a614c4d9e70d3f7f4bc5fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1765469992}
+    - targetCorrespondingSourceObject: {fileID: 5281037562553037814, guid: d82115b660a614c4d9e70d3f7f4bc5fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1765469991}
   m_SourcePrefab: {fileID: 100100000, guid: d82115b660a614c4d9e70d3f7f4bc5fc, type: 3}
 --- !u!1001 &650997160
 PrefabInstance:
@@ -34349,6 +34355,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e27e96078c1eea64da4ec0c30c56115d, type: 3}
   m_PrefabInstance: {fileID: 1763832029}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1765469989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5281037562553037814, guid: d82115b660a614c4d9e70d3f7f4bc5fc, type: 3}
+  m_PrefabInstance: {fileID: 649699504}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1765469991
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765469989}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.4096437, y: 4.548882, z: 6.957721}
+  m_Center: {x: 0.08998679, y: 3.7847261, z: -0.008633091}
+--- !u!114 &1765469992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765469989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6330978bdbaf145bc19fe462966bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbUI: {fileID: 1394126989}
+  offTime: 1
+  up: 0.2
 --- !u!1 &1769173170
 GameObject:
   m_ObjectHideFlags: 0
@@ -37137,7 +37184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.030953612
+      value: -0.03095361
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
@@ -37145,7 +37192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1840772983060291137, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0020681503
+      value: 0.00206815
       objectReference: {fileID: 0}
     - target: {fileID: 2982700110720403315, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_IsActive
@@ -37189,15 +37236,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.04199358
+      value: -0.041993584
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.06660684
+      value: 0.066606775
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.002805782
+      value: 0.0028057792
       objectReference: {fileID: 0}
     - target: {fileID: 4097115946983195056, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_XAxis.m_MaxSpeed
@@ -37313,15 +37360,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7989898857487313609, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.041993577
+      value: -0.04199358
       objectReference: {fileID: 0}
     - target: {fileID: 7989898857487313609, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.06660682
+      value: 0.06660678
       objectReference: {fileID: 0}
     - target: {fileID: 7989898857487313609, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.002805781
+      value: 0.0028057797
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
