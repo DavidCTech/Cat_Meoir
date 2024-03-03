@@ -9,9 +9,11 @@ public class PlayerStealth : MonoBehaviour
  
   
     public Vector3 playerOriginalPosition;
+    public PlayerMovement playerMovement;
+    public float sneakSpeedDecrease; 
 
     //stealth should be in another script
-    private bool isStealth = false;
+    public bool isStealth = false;
     public bool isStealthed = false;
 
     public float timer = 1f;
@@ -90,6 +92,18 @@ public class PlayerStealth : MonoBehaviour
     //onstealth should be in another script..
     public void OnStealth()
     {
+
         isStealth = !isStealth;
+
+        if (isStealth)
+        {
+            playerMovement.moveSpeed = playerMovement.moveSpeed - sneakSpeedDecrease;
+        }
+        else
+        {
+            playerMovement.moveSpeed = playerMovement.moveSpeed + sneakSpeedDecrease;
+        }
+
+
     }
 }
