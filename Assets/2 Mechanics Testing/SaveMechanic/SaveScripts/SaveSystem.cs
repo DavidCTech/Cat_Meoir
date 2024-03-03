@@ -322,7 +322,9 @@ public static class SaveSystem
     }
 
     //cut save functions
-    public static void SaveCuts(List<UICutSceneToggle> toggles)
+    // this is just for the previous specific data
+    // public static void SaveCuts(List<UICutSceneToggle> toggles)
+    public static void SaveCuts(List<GameObject> buttons)
     {
 
         string defaultPath = Application.persistentDataPath;
@@ -337,7 +339,7 @@ public static class SaveSystem
         string fileName = "CutData.json"; 
         string path = Path.Combine(folderPath, fileName);
 
-        CutData data = new CutData(toggles);
+        CutData data = new CutData(buttons);
 
         string jsonData = JsonUtility.ToJson(data);
         File.WriteAllText(path, jsonData);

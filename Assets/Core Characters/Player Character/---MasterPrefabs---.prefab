@@ -2117,16 +2117,16 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6023613469393211816}
-        m_TargetAssemblyTypeName: OnHoverMove, Assembly-CSharp
-        m_MethodName: OutTab
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 8190099053500166623}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -3947,7 +3947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clueNames:
-  - Key
+  - 'Shoe print '
   cluesFound: []
   gameManagerObject: {fileID: 4853515133595528036}
   clueRight:
@@ -7241,6 +7241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2448439856312883554}
+  - component: {fileID: 6127556226161472997}
   m_Layer: 0
   m_Name: CutScenes
   m_TagString: Untagged
@@ -7264,6 +7265,23 @@ Transform:
   m_Father: {fileID: 6180230016536307444}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6127556226161472997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5812206166818136927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b6e21ac7aabe94083080b79d3e91cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutSceneButtons:
+  - {fileID: 1846353548006820716}
+  - {fileID: 2277274176781571362}
+  - {fileID: 2317022660829600762}
+  - {fileID: 4353936620232087251}
 --- !u!1 &5908512392540616066
 GameObject:
   m_ObjectHideFlags: 0
@@ -15644,23 +15662,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 401013248928953941}
+      objectReference: {fileID: 4706201191604267230}
     - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TriggerActions
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CutSceneActions, Assembly-CSharp
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -15709,10 +15731,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1573981194898156646, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 401013248928953941}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
 --- !u!224 &281912132202955915 stripped
 RectTransform:
@@ -15734,21 +15753,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1573981194898156646, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
   m_PrefabInstance: {fileID: 3007188246451141301}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &401013248928953941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4353936620232087251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f82be56889ca50b479f1b26ad2147c04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggers:
-  - {fileID: 8611906651953687364}
-  photoManager: {fileID: 5095627263255918025}
 --- !u!1 &5042269058977381140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7800816443086930337, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
@@ -25458,6 +25462,11 @@ MonoBehaviour:
   triggers:
   - {fileID: 8611906651953687364}
   photoManager: {fileID: 5095627263255918025}
+--- !u!1 &2277274176781571362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7324558543855273654, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
+  m_PrefabInstance: {fileID: 8808073285405741972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2314646879844386682 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6495256015240484078, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
