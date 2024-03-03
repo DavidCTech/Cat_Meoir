@@ -17,6 +17,9 @@ public class PlayerStealth : MonoBehaviour
     public float timer = 1f;
     public float StealthState = 0f;
 
+    public Animator anim;
+
+
     public void Hide(GameObject hidingSpot, PlayerInteractionCheck playerInteractionCheck)
     {
         Debug.Log(hidingSpot.transform.position);
@@ -28,7 +31,6 @@ public class PlayerStealth : MonoBehaviour
 
 
     }
-
 
     public void UnHide(PlayerInteractionCheck playerInteractionCheck)
     {
@@ -45,12 +47,16 @@ public class PlayerStealth : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
         StealthState = 1f;
+        anim.SetFloat("StealthTransition", StealthState);
+
     }
 
     IEnumerator ReverseTransitionTimer()
     {
         yield return new WaitForSeconds(timer);
         StealthState = 0f;
+        anim.SetFloat("StealthTransition", StealthState);
+
     }
 
     //onstealth should be in another script..
