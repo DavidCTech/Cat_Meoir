@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     private BoxMover boxMover;
 
 
-   
 
     //anim
     public Animator anim;
@@ -263,6 +262,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+
+
+    private float timePassValue = 0f;
+    private bool canSit; 
+
+    private void SitDelay()
+    {
+        if(!canSit)
+        canSit = true; 
+    }
     private void ManageMovement()
     {
         if (!isFrozen)
@@ -270,6 +279,30 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = cameraObject.forward * inputManager.vInput;
             moveDirection = moveDirection + cameraObject.right * inputManager.hInput;
             moveDirection.Normalize();
+
+            if (moveDirection == Vector3.zero)
+            {
+                Invoke("SitDelay", 10f); 
+                if (canSit)
+                {
+                    timePassValue = timePassValue + 0.01f; 
+                    if(timePassValue > 1f)
+                    {
+                        timePassValue = 1f; 
+                    }
+                
+                    anim.SetFloat("TimePass", timePassValue);
+                }
+
+                
+                
+            }
+            else
+            {
+                canSit = false; 
+                anim.SetFloat("TimePass", 0f);
+                timePassValue = 0f; 
+            }
             moveDirection.y = 0;
             //muiltiply the current speed by an accelerator value 
             //clamp the current move speed by the max speed 
