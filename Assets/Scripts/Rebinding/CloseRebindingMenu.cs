@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CloseRebindingMenu : MonoBehaviour
 {
-    public GameObject accessibilityMenu, rebindingMenu, rebindingCancelMenu;
+    public CanvasGroup accessibilityCanvasGroup, rebindingCanvasGroup;
+    public GameObject rebindingCancelMenu;
 
     void Start()
     {
@@ -19,12 +22,17 @@ public class CloseRebindingMenu : MonoBehaviour
 
         if (keyboard != null)
         {
-            if (keyboard.escapeKey.wasPressedThisFrame)
+            if (keyboard.backspaceKey.wasPressedThisFrame)
             {
-                if (!rebindingCancelMenu.activeInHierarchy && rebindingMenu.activeInHierarchy)
+                if (!rebindingCancelMenu.activeInHierarchy && accessibilityCanvasGroup.gameObject.activeInHierarchy)
                 {
-                    rebindingMenu.SetActive(false);
-                    accessibilityMenu.SetActive(true);
+                    rebindingCanvasGroup.alpha = 0;
+                    rebindingCanvasGroup.interactable = false;
+                    rebindingCanvasGroup.blocksRaycasts = false;
+
+                    accessibilityCanvasGroup.alpha = 1;
+                    accessibilityCanvasGroup.interactable = true;
+                    accessibilityCanvasGroup.blocksRaycasts = true;
                 }
             }
         }
@@ -33,13 +41,17 @@ public class CloseRebindingMenu : MonoBehaviour
         {
             if (gamepad.buttonEast.wasPressedThisFrame)
             {
-                if (!rebindingCancelMenu.activeInHierarchy && rebindingMenu.activeInHierarchy)
+                if (!rebindingCancelMenu.activeInHierarchy && accessibilityCanvasGroup.gameObject.activeInHierarchy)
                 {
-                    rebindingMenu.SetActive(false);
-                    accessibilityMenu.SetActive(true);
+                    rebindingCanvasGroup.alpha = 0;
+                    rebindingCanvasGroup.interactable = false;
+                    rebindingCanvasGroup.blocksRaycasts = false;
+
+                    accessibilityCanvasGroup.alpha = 1;
+                    accessibilityCanvasGroup.interactable = true;
+                    accessibilityCanvasGroup.blocksRaycasts = true;
                 }
             }
         }
-
     }
 }

@@ -62,6 +62,71 @@ public class AccessibilityManager : MonoBehaviour
             {
                 cvHighContrastToggle.isOn = false;
             }
+
+            if (PlayerPrefs.HasKey("JournalCbState"))
+            {
+                if (journalCbInt == 1)
+                {
+                    journalColorblindToggle.isOn = true;
+                    isUsingJournalCb = true;
+                }
+                else
+                {
+                    journalColorblindToggle.isOn = false;
+                }
+            }
+
+            if (PlayerPrefs.HasKey("CameraFlashState"))
+            {
+                if (cameraFlashInt == 1)
+                {
+                    cameraFlashToggle.isOn = true;
+                    isCameraFlashDisabled = true;
+                }
+                else
+                {
+                    cameraFlashToggle.isOn = false;
+                }
+            }
+
+            if (PlayerPrefs.HasKey("SkipSafePuzzleState"))
+            {
+                if (skipSafePuzzleInt == 1)
+                {
+                    skipSafePuzzleToggle.isOn = true;
+                    isSkippingSafePuzzles = true;
+                }
+                else
+                {
+                    skipSafePuzzleToggle.isOn = false;
+                }
+            }
+
+            if (PlayerPrefs.HasKey("ArialDialogueState"))
+            {
+                if (arialDialogueInt == 1)
+                {
+                    arialDialogueFontToggle.isOn = true;
+                    isUsingArialFont = true;
+                }
+                else
+                {
+                    arialDialogueFontToggle.isOn = false;
+                }
+            }
+
+            if (PlayerPrefs.HasKey("VisualIndicatorsState"))
+            {
+                if (visualIndicatorsInt == 1)
+                {
+                    visualIndicatorsToggle.isOn = true;
+                    isUsingVisualIndicators = true;
+                }
+                else
+                {
+                    visualIndicatorsToggle.isOn = false;
+                }
+            }
         }
     }
 
@@ -106,26 +171,89 @@ public class AccessibilityManager : MonoBehaviour
 
     public void SetJournalColorblindMode(bool isUsingJournalCb)
     {
+        journalColorblindToggle.isOn = isUsingJournalCb;
 
+        if (!isUsingJournalCb)
+        {
+            PlayerPrefs.SetInt("JournalCbState", 0);
+            //Debug.Log("Turning Journal Colorblind Mode Off");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("JournalCbState", 1);
+            isUsingJournalCb = true;
+            //Debug.Log("Turning Journal Colorblind Mode On");
+        }
     }
 
     public void SetCameraFlashMode(bool isCameraFlashDisabled)
     {
+        cameraFlashToggle.isOn = isCameraFlashDisabled;
 
+        if (!isCameraFlashDisabled)
+        {
+            PlayerPrefs.SetInt("CameraFlashState", 0);
+            //Debug.Log("Turning Journal Colorblind Mode Off");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("CameraFlashState", 1);
+            isCameraFlashDisabled = true;
+            //Debug.Log("Turning Journal Colorblind Mode On");
+        }
     }
 
     public void SetSkippingSafePuzzleMode(bool isSkippingSafePuzzles)
     {
+        skipSafePuzzleToggle.isOn = isSkippingSafePuzzles;
 
+        if (!isSkippingSafePuzzles)
+        {
+            PlayerPrefs.SetInt("SkipSafePuzzleState", 0);
+            //Debug.Log("Turning Journal Colorblind Mode Off");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("SkipSafePuzzleState", 1);
+            isSkippingSafePuzzles = true;
+            //Debug.Log("Turning Journal Colorblind Mode On");
+        }
     }
 
     public void SetArialDialogueMode(bool isUsingArialFont)
     {
+        arialDialogueFontToggle.isOn = isUsingArialFont;
 
+        if (!isUsingArialFont)
+        {
+            PlayerPrefs.SetInt("ArialDialogueState", 0);
+            //Debug.Log("Turning Journal Colorblind Mode Off");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("ArialDialogueState", 1);
+            isUsingArialFont = true;
+            //Debug.Log("Turning Journal Colorblind Mode On");
+        }
     }
 
     public void SetVisualIndicatorsMode(bool isUsingVisualIndicators)
     {
+        visualIndicatorsToggle.isOn = isUsingVisualIndicators;
+    }
 
+    public void ApplySettings()
+    {
+        if (!visualIndicatorsToggle.isOn)
+        {
+            PlayerPrefs.SetInt("VisualIndicatorsState", 0);
+            Debug.Log("Turning Visual Indicators Mode Off");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("VisualIndicatorsState", 1);
+            isUsingVisualIndicators = true;
+            Debug.Log("Turning Visual Indicators Mode On");
+        }
     }
 }
