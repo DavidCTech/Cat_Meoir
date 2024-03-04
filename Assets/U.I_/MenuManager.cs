@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public AudioMixer audioMixer;
 
     public GameObject mainMenuPanel;
-    public GameObject controlsPanel;
+    public CanvasGroup controlsPanel;
 
     public GameObject optionsPanel;
 
@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         audioPanel.SetActive(true);
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
-        controlsPanel.SetActive(false);
+        TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(audioFirstButton);
     }
@@ -161,6 +161,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         audioPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+        TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(audioClosedButton);
     }
@@ -172,7 +173,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public void ActivateControlsMenu()
     {
-        controlsPanel.SetActive(true);
+        TurnControlsCanvasOn();
         audioPanel.SetActive(false);
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
@@ -182,7 +183,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public void DeactivateControlsMenu()
     {
-        controlsPanel.SetActive(false);
+        TurnControlsCanvasOff();
         mainMenuPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(controlsButton);
@@ -193,14 +194,14 @@ public class GameManager : MonoBehaviour, ISelectHandler
         optionsPanel.SetActive(true);
         UpdateResolutionDropdownOptions();
         audioPanel.SetActive(false);
-        controlsPanel.SetActive(false);
+        TurnControlsCanvasOff();
         creditsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
 
     public void DeactivateOptionsMenu()
-    { 
+    {
         Debug.Log("Close Options Menu pressed");
 
         // Save changes if "Apply Changes" was pressed
@@ -222,6 +223,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         }
 
         optionsPanel.SetActive(false);
+        TurnControlsCanvasOff();
         mainMenuPanel.SetActive(true);
 
         int savedResolutionIndex = PlayerPrefs.GetInt(resName, currentResolutionIndex);
@@ -234,11 +236,11 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public void ActivateCreditsPanel()
     {
-        
+
         creditsPanel.SetActive(true);
         optionsPanel.SetActive(false);
         audioPanel.SetActive(false);
-        controlsPanel.SetActive(false);
+        TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(creditsFirstButton);
     }
@@ -249,7 +251,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
         audioPanel.SetActive(false);
-        controlsPanel.SetActive(false);
+        TurnControlsCanvasOff();
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -257,8 +259,19 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     }
 
+    public void TurnControlsCanvasOn()
+    {
+        controlsPanel.alpha = 1;
+        controlsPanel.interactable = true;
+        controlsPanel.blocksRaycasts = true;
+    }
 
-    
+    public void TurnControlsCanvasOff()
+    {
+        controlsPanel.alpha = 0;
+        controlsPanel.interactable = false;
+        controlsPanel.blocksRaycasts = false;
+    }
 
     public void ApplyResolutionChanges()
     {
@@ -272,7 +285,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
         Debug.Log("Apply Changes pressed");
 
-        
+
 
         // Save the selected resolution index only if shouldApplyChanges is true
         if (shouldApplyChanges)
@@ -322,9 +335,9 @@ public class GameManager : MonoBehaviour, ISelectHandler
         if (!IsResolutionEqual(currentResolution, previousResolution))
         {
             UpdateResolutionDropdownOptions();
-            
+
         }
-        
+
     }
     private void UpdateResolutionDropdownOptions()
     {
@@ -345,7 +358,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         resolutionDropdown.value = selectedResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        
+
         string selectedResolutionText = options[selectedResolutionIndex];
 
         TextMeshProUGUI dropdownLabel = resolutionDropdown.GetComponentInChildren<TextMeshProUGUI>();

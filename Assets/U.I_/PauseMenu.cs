@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public GameObject photoMenuUI;
     public GameObject optionsPanel;
     public GameObject audioPanel;
-    public GameObject rebindingUI;
+    public CanvasGroup controlsPanel;
 
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
@@ -113,6 +113,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void OnMenuOpenClose(InputAction.CallbackContext context)
     {
         Debug.Log("Pause");
+
         if (!isPaused && !isOptionsPanelOpen)
         {
             Pause();
@@ -120,14 +121,12 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         else if (isPaused || isOptionsPanelOpen)
         {
-
             Resume();
         }
     }
 
     void OpenOptionsPanel()
     {
-
         isOptionsPanelOpen = true;
     }
 
@@ -139,6 +138,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ActivateAudioMenu()
     {
         audioPanel.SetActive(true);
+        TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(audioFirstButton);
     }
@@ -147,6 +147,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     {
         audioPanel.SetActive(false);
         pauseMenuUI.SetActive(true);
+        TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(audioClosedButton);
     }
@@ -159,14 +160,15 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ActivateOptionsMenu()
     {
         optionsPanel.SetActive(true);
+        TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
-
     }
 
     public void DeactivateOptionsMenu()
     {
         optionsPanel.SetActive(false);
+        TurnControlsCanvasOff();
         pauseMenuUI.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
@@ -175,7 +177,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void ActivateControlsMenu()
     {
-        rebindingUI.SetActive(true);
+        TurnControlsCanvasOn();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(controlsBackButton);
 
@@ -183,7 +185,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void DeactivateControlsMenu()
     {
-        rebindingUI.SetActive(false);
+        TurnControlsCanvasOff();
         pauseMenuUI.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
@@ -201,9 +203,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         pauseMenuUI.SetActive(true);
         optionsPanel.SetActive(false);
         audioPanel.SetActive(false);
-        rebindingUI.SetActive(false);
+        DeactivateControlsMenu();
     }
-
 
     private void Start()
     {
@@ -259,7 +260,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         //turned off the photo menu ui 
         photoMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
-        rebindingUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         isOptionsPanelOpen = false;
@@ -268,6 +268,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         audioPanel.SetActive(false);
         sliderValue = volumeSlider.value;
         UnmuteAudio();
+        controlsPanel.gameObject.SetActive(false);
     }
 
     public void Pause()
@@ -279,7 +280,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         MuteAudio();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
-
+        controlsPanel.gameObject.SetActive(true);
+        TurnControlsCanvasOff();
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -287,6 +289,25 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     }
 
+    public void TurnControlsCanvasOn()
+    {
+        if (controlsPanel.alpha == 0)
+        {
+            controlsPanel.alpha = 1;
+            controlsPanel.interactable = true;
+            controlsPanel.blocksRaycasts = true;
+        }
+    }
+
+    public void TurnControlsCanvasOff()
+    {
+        if (controlsPanel.alpha == 1)
+        {
+            controlsPanel.alpha = 0;
+            controlsPanel.interactable = false;
+            controlsPanel.blocksRaycasts = false;
+        }
+    }
 
     public void SetResolution(int resolutionIndex)
     {
@@ -394,21 +415,18 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         }
     }
 
-   public void ToggleJustCruisingMode(bool isToggled)
-   {
+    public void ToggleJustCruisingMode(bool isToggled)
+    {
         Debug.Log("ToggleJustCruisingMode called. isToggled: " + isToggled);
 
-        JustCruisingMode[] objectsToToggle = FindObjectsOfType<JustCruisingMode>(); 
+        JustCruisingMode[] objectsToToggle = FindObjectsOfType<JustCruisingMode>();
 
         foreach (JustCruisingMode objScript in objectsToToggle)
         {
             objScript.ToggleObject(isToggled);
         }
-        
-   }
 
-   
-
+    }
 }
 
 
