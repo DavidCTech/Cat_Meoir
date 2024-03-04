@@ -11,13 +11,13 @@ public class AccessibilityManager : MonoBehaviour
 
     [Header("Accessibility Toggles")]
     public Toggle highContrastToggle;
-    public Toggle cvHighContrastToggle, journalColorblindToggle, cameraFlashToggle, skipSafePuzzleToggle,
+    public Toggle cvHighContrastToggle, journalColorblindToggle, cameraFlashToggle,
     arialDialogueFontToggle, visualIndicatorsToggle;
 
     private bool isUsingHighContrastMode = false, isUsingCvHighContrastMode, isUsingJournalCb, isCameraFlashDisabled,
-    isSkippingSafePuzzles, isUsingArialFont, isUsingVisualIndicators;
+    isUsingArialFont, isUsingVisualIndicators;
 
-    private int highContrastInt, cvHighContrastInt, journalCbInt, cameraFlashInt, skipSafePuzzleInt, arialDialogueInt,
+    private int highContrastInt, cvHighContrastInt, journalCbInt, cameraFlashInt, arialDialogueInt,
     visualIndicatorsInt;
 
     void Awake()
@@ -31,7 +31,6 @@ public class AccessibilityManager : MonoBehaviour
         cvHighContrastInt = PlayerPrefs.GetInt("CvHighContrastState");
         journalCbInt = PlayerPrefs.GetInt("JournalCbState");
         cameraFlashInt = PlayerPrefs.GetInt("CameraFlashState");
-        skipSafePuzzleInt = PlayerPrefs.GetInt("SkipSafePuzzleState");
         arialDialogueInt = PlayerPrefs.GetInt("ArialDialogueState");
         visualIndicatorsInt = PlayerPrefs.GetInt("VisualIndicatorsState");
     }
@@ -86,19 +85,6 @@ public class AccessibilityManager : MonoBehaviour
                 else
                 {
                     cameraFlashToggle.isOn = false;
-                }
-            }
-
-            if (PlayerPrefs.HasKey("SkipSafePuzzleState"))
-            {
-                if (skipSafePuzzleInt == 1)
-                {
-                    skipSafePuzzleToggle.isOn = true;
-                    isSkippingSafePuzzles = true;
-                }
-                else
-                {
-                    skipSafePuzzleToggle.isOn = false;
                 }
             }
 
@@ -199,23 +185,6 @@ public class AccessibilityManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("CameraFlashState", 1);
             isCameraFlashDisabled = true;
-            //Debug.Log("Turning Journal Colorblind Mode On");
-        }
-    }
-
-    public void SetSkippingSafePuzzleMode(bool isSkippingSafePuzzles)
-    {
-        skipSafePuzzleToggle.isOn = isSkippingSafePuzzles;
-
-        if (!isSkippingSafePuzzles)
-        {
-            PlayerPrefs.SetInt("SkipSafePuzzleState", 0);
-            //Debug.Log("Turning Journal Colorblind Mode Off");
-        }
-        else
-        {
-            PlayerPrefs.SetInt("SkipSafePuzzleState", 1);
-            isSkippingSafePuzzles = true;
             //Debug.Log("Turning Journal Colorblind Mode On");
         }
     }
