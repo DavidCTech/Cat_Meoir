@@ -100,6 +100,9 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
         ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");

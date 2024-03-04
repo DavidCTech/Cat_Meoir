@@ -178,6 +178,9 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ActivateControlsMenu()
     {
         TurnControlsCanvasOn();
+        pauseMenuUI.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(controlsBackButton);
 
@@ -268,6 +271,12 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         audioPanel.SetActive(false);
         sliderValue = volumeSlider.value;
         UnmuteAudio();
+
+        if (controlsPanel.alpha == 1)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         controlsPanel.gameObject.SetActive(false);
     }
 
