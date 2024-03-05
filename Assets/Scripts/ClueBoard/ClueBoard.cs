@@ -25,7 +25,7 @@ public class ClueBoard : MonoBehaviour
         }
     }
 
-    private void ActivateClueBoard()
+    public void ActivateClueBoard()
     {
         isClueBoardActive = true;
         clueBoardUI.SetActive(true);
@@ -36,7 +36,7 @@ public class ClueBoard : MonoBehaviour
         DisplayImagesOnSlots();
     }
 
-    private void DeactivateClueBoard()
+    public void DeactivateClueBoard()
     {
         isClueBoardActive = false;
         playerCamera.SetActive(true);
