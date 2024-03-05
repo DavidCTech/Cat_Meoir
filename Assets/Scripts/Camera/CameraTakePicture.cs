@@ -285,9 +285,13 @@ public class CameraTakePicture : MonoBehaviour
 
         //photoManager.addPictureToList(passSprite, passBool, passString, passRender);
         photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription, passSceneName, passMainBool);
+        //save this data 
+        photoManager.GetComponent<ClueSaves>().SaveClues(); 
         Invoke("OutCoroutine", delayTime);
 
     }
+    
+
     private void ClueFoundUIOff()
     {
         popUp.SetActive(false);

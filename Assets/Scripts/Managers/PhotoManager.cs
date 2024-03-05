@@ -104,8 +104,11 @@ public class PhotoManager : MonoBehaviour
     public void deletePicture(PhotoScriptable snapshot)
     {
         snapshots.Remove(snapshot);
-        
-        
+        //save the current state and load it? 
+        this.gameObject.GetComponent<ClueSaves>().SaveClues();
+        this.gameObject.GetComponent<ClueSaves>().LoadClues();
+
+
     }
     public void ClearList()
     {
