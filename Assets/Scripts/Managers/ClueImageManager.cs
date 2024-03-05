@@ -138,6 +138,7 @@ public class ClueImageManager : MonoBehaviour
                     failSpace.name = null;
                     break; // Break out of the outer loop since the item has been processed
                 }
+               
             }
                     
 

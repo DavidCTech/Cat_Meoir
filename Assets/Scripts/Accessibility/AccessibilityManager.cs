@@ -33,16 +33,18 @@ public class AccessibilityManager : MonoBehaviour
         cameraFlashInt = PlayerPrefs.GetInt("CameraFlashState");
         arialDialogueInt = PlayerPrefs.GetInt("ArialDialogueState");
         visualIndicatorsInt = PlayerPrefs.GetInt("VisualIndicatorsState");
-    }
 
-    void Start()
-    {
         if (PlayerPrefs.HasKey("HighContrastState"))
         {
             if (highContrastInt == 1)
             {
                 highContrastToggle.isOn = true;
                 isUsingHighContrastMode = true;
+
+                if (FindObjectOfType<HighContrastManager>() != null)
+                {
+                    HighContrastManager.instance.SwapMaterials();
+                }
             }
             else
             {
@@ -116,11 +118,6 @@ public class AccessibilityManager : MonoBehaviour
         }
     }
 
-    /*void Update()
-    {
-
-    }*/
-
     public void SetHighContrastMode(bool isUsingHighContrastMode)
     {
         highContrastToggle.isOn = isUsingHighContrastMode;
@@ -134,6 +131,11 @@ public class AccessibilityManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighContrastState", 1);
             isUsingHighContrastMode = true;
+
+            if (FindObjectOfType<HighContrastManager>() != null)
+            {
+                HighContrastManager.instance.SwapMaterials();
+            }
             //Debug.Log("Turning High Contrast Mode On");
         }
     }
