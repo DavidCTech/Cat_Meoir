@@ -11,20 +11,7 @@ public class SafeCheck : MonoBehaviour
 
     private bool isNearSafe = false; // Track if the player is near the safe
 
-    void OnEnable()
-    {
-        // Subscribe to the "Interaction" input action
-        InputAction InteractionAction = GetComponent<PlayerInput>().actions["Interaction"];
-        InteractionAction.performed += HandleInteraction;
-    }
-
-    void OnDisable()
-    {
-        // Unsubscribe from the "Interaction" input action
-        InputAction InteractionAction = GetComponent<PlayerInput>().actions["Interaction"];
-    }
-
-    void HandleInteraction(InputAction.CallbackContext context)
+    public void HandleInteraction()
     {
         // Check for player input to interact with the safe
         if (isNearSafe)
@@ -78,4 +65,12 @@ public class SafeCheck : MonoBehaviour
             safeInteraction.StartInteraction();
         }
     }
+
+    // Add this method to handle exiting the minigame
+    public void ExitMinigame()
+    {
+        // Call ExitMinigame method of SafeInteraction script
+        safeInteraction.ExitMinigame();
+    }
+
 }

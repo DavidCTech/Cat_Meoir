@@ -19,6 +19,7 @@ public class SafeInteraction : MonoBehaviour
     private bool minigameActive = false;
     private bool safeUnlocked = false; // Track if the safe is unlocked
     private bool safeAlreadyUnlocked = false; // Track if the safe has already been unlocked
+    public GameObject objectToActivateOnUnlock; // Object to activate when the safe unlocks (optional)
 
     private enum TurnDirection { None, Left, Right }
 
@@ -143,6 +144,12 @@ public class SafeInteraction : MonoBehaviour
         else
         {
             Debug.LogWarning("Main camera reference not set.");
+        }
+
+        // Activate the specified object if it's assigned
+        if (objectToActivateOnUnlock != null)
+        {
+            objectToActivateOnUnlock.SetActive(true);
         }
 
         // Enable player movement
