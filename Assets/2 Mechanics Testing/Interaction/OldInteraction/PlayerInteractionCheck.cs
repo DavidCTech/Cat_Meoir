@@ -121,7 +121,12 @@ public class PlayerInteractionCheck : MonoBehaviour
                     //Debug.Log("should have");
                     targetObject.GetComponent<DoorOpener>().CheckDoorUnlock();
                 }
-                if(!isInteracting)
+                if (objectName == "Safe")
+                {
+                    this.gameObject.GetComponent<SafeCheck>().StartSafeInteraction();
+                    //reference the Safe code
+                }
+                if (!isInteracting)
                 {
                     swipeScript.Swiping();
                 }
@@ -134,7 +139,6 @@ public class PlayerInteractionCheck : MonoBehaviour
         else
         {
             this.gameObject.GetComponent<PlayerStealth>().UnHide(this);
-        }
-        
+        }  
     }
 }

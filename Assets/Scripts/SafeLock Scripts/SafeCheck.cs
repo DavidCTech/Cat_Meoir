@@ -11,10 +11,23 @@ public class SafeCheck : MonoBehaviour
 
     private bool isNearSafe = false; // Track if the player is near the safe
 
-    void Update()
+    void OnEnable()
+    {
+        // Subscribe to the "Interaction" input action
+        InputAction InteractionAction = GetComponent<PlayerInput>().actions["Interaction"];
+        InteractionAction.performed += HandleInteraction;
+    }
+
+    void OnDisable()
+    {
+        // Unsubscribe from the "Interaction" input action
+        InputAction InteractionAction = GetComponent<PlayerInput>().actions["Interaction"];
+    }
+
+    void HandleInteraction(InputAction.CallbackContext context)
     {
         // Check for player input to interact with the safe
-        if (isNearSafe && Input.GetKeyDown(KeyCode.E))
+        if (isNearSafe)
         {
             // Start the safe interaction
             StartSafeInteraction();
@@ -57,7 +70,7 @@ public class SafeCheck : MonoBehaviour
         }
     }
 
-    void StartSafeInteraction()
+    public void StartSafeInteraction()
     {
         // Start the safe interaction if the safe is not already unlocked
         if (!safeInteraction.IsSafeUnlocked())
