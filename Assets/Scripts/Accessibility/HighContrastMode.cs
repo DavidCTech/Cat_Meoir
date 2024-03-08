@@ -10,6 +10,7 @@ public class HighContrastMode : MonoBehaviour
 
     void Start()
     {
+        //
         rendererComponent = GetComponent<SkinnedMeshRenderer>();
 
         if (rendererComponent != null)

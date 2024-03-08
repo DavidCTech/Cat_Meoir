@@ -48,6 +48,7 @@ public class AccessibilityManager : MonoBehaviour
             }
             else
             {
+                //
                 highContrastToggle.isOn = false;
             }
         }

@@ -13,6 +13,7 @@ public class HighContrastManager : MonoBehaviour
     {
         if (instance == null)
         {
+            //
             instance = this;
         }
 
