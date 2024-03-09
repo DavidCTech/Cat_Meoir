@@ -101,12 +101,15 @@ public class PhotoManager : MonoBehaviour
 
     }
 
+    //delete picture 
     public void deletePicture(PhotoScriptable snapshot)
     {
+        Debug.Log("deleting the snapshot: " + snapshot);
+        //remove the snapshot from the list 
         snapshots.Remove(snapshot);
         //save the current state and load it? 
         this.gameObject.GetComponent<ClueSaves>().SaveClues();
-        this.gameObject.GetComponent<ClueSaves>().LoadClues();
+        //this.gameObject.GetComponent<ClueSaves>().LoadClues();
 
 
     }
@@ -115,6 +118,7 @@ public class PhotoManager : MonoBehaviour
         snapshots.Clear(); 
     }
 
+    //turns off the text for full images
     public void StopFullShow()
     {
         if (imagesFullText != null)

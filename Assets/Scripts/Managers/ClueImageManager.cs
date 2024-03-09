@@ -98,15 +98,20 @@ public class ClueImageManager : MonoBehaviour
         }
         return false;
     }
+
+
+
     public void turnToNull(Image imageToNull)
     {
         foreach (Image failSpace in failSpaces)
         {
-           
+           //if the fail space name is the image to null name 
             if (failSpace.name == imageToNull.name)
             {
+                //and doesn't have the name image 
                 if (!failSpace.name.Contains("Image"))
                 {
+                    Debug.Log("image to null:" + imageToNull.name);
                     //take the failSpace name and compare it with a bunch of photo manager scriptable list 
                     // when there's a match, delete that one in the list and then reorganize the list 
 
@@ -114,8 +119,11 @@ public class ClueImageManager : MonoBehaviour
                     {
                         if (photoManager.snapshots[i] != null)
                         {
+                           
                             if (photoManager.snapshots[i].clueName == imageToNull.name)
                             {
+                                //if photo manager clue name is the image to null name? 
+                                Debug.Log("delete the picture " + photoManager.snapshots[i].clueName);
 
                                 photoManager.deletePicture(photoManager.snapshots[i]);
                                 break; // Break out of the loop once the item is removed
@@ -128,7 +136,7 @@ public class ClueImageManager : MonoBehaviour
                         }
 
                     }
-
+                    //dealing with the failspace info 
                     failSpace.sprite = null;
                     if (initialColor != null)
                     {
@@ -136,6 +144,16 @@ public class ClueImageManager : MonoBehaviour
                     }
 
                     failSpace.name = null;
+
+                    //dealing with the sprite info 
+                 
+                    imageToNull.sprite = null;
+                    if (initialColor != null)
+                    {
+                        imageToNull.color = initialColor;
+                    }
+
+                    imageToNull.name = null;
                     break; // Break out of the outer loop since the item has been processed
                 }
                
