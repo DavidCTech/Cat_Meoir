@@ -64,6 +64,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public Toggle vSyncToggle;
 
     public Toggle justCruisingModeToggle;
+    public JustCruisingModeManager justCruisingModeManager;
 
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton,
     controlsBackButton;
@@ -251,6 +252,15 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         resolutionDropdown.value = PlayerPrefs.GetInt(resName, currentResolutionIndex);
 
         resolutionDropdown.RefreshShownValue();
+
+       
+        if (justCruisingModeToggle != null)
+        {
+           
+            justCruisingModeToggle.onValueChanged.AddListener(ToggleJustCruisingMode);
+        }
+
+
     }
 
     private void Update()
@@ -426,15 +436,14 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void ToggleJustCruisingMode(bool isToggled)
     {
-        Debug.Log("ToggleJustCruisingMode called. isToggled: " + isToggled);
-
-        JustCruisingMode[] objectsToToggle = FindObjectsOfType<JustCruisingMode>();
-
-        foreach (JustCruisingMode objScript in objectsToToggle)
+        if (justCruisingModeManager != null)
         {
-            objScript.ToggleObject(isToggled);
+            justCruisingModeManager.ToggleObjects(isToggled);
         }
-
+        else
+        {
+            Debug.LogError("justCruisingModeManager reference is null. Check references in the Unity Editor.");
+        }
     }
 }
 
