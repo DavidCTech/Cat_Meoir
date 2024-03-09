@@ -12,7 +12,7 @@ public class OnCollisionHonk : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-        if (sceneName == "VerticalSliceAlleyway")
+        if (sceneName == "NewHubWorld")
         {
             if (other.gameObject.tag == "Player")
             {
