@@ -22,7 +22,7 @@ public class NeutralNPC_CP : MonoBehaviour
     public Transform centrePoint;
 
     public LayerMask targetMask;
-    public LayerMask obstructionMask;
+    //public LayerMask obstructionMask;
 
     public float timer = 0f;
     public float duration = 15f; // Adjust the duration as needed
@@ -65,7 +65,6 @@ public class NeutralNPC_CP : MonoBehaviour
             Transform target = rangeChecks[0].transform;
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-            // Assuming no obstruction check and no consideration of FOV
             interested = distanceToTarget <= _proximityRadius;
         }
     }
