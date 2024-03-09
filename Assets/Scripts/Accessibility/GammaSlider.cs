@@ -9,9 +9,11 @@ public class GammaSlider : MonoBehaviour
     public Slider gammaSlider;
     public Image pawPrintPanelImage;
     public Image gammaPanel;
+    public CanvasGroup gammaPanelCanvas;
 
     void Awake()
     {
+
         if (PlayerPrefs.HasKey("GammaValue"))
         {
             gammaSlider.value = PlayerPrefs.GetFloat("GammaValue");
@@ -28,6 +30,7 @@ public class GammaSlider : MonoBehaviour
                 Color gammaColor = gammaPanel.color;
                 gammaColor.a = gammaSlider.value;
                 gammaPanel.color = gammaColor;
+                gammaPanelCanvas.alpha = 1;
             }
         }
         else
@@ -44,6 +47,7 @@ public class GammaSlider : MonoBehaviour
                 Color gammaColor = gammaPanel.color;
                 gammaColor.a = 0f;
                 gammaPanel.color = gammaColor;
+                gammaPanelCanvas.alpha = 0;
             }
         }
     }

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class OpenGammaPanel : MonoBehaviour
 {
     public CanvasGroup gammaPanel;
-    public CanvasGroup gammaOverlayPanel;
     public GameObject gammaButton, gammaBackButton;
 
     public void OpenPanel()
@@ -17,7 +16,6 @@ public class OpenGammaPanel : MonoBehaviour
         gammaPanel.blocksRaycasts = true;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(gammaBackButton);
-        gammaOverlayPanel.alpha = 0;
     }
 
     public void ClosePanel()
@@ -27,6 +25,5 @@ public class OpenGammaPanel : MonoBehaviour
         gammaPanel.blocksRaycasts = false;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(gammaButton);
-        //gammaOverlayPanel.alpha = 1;
     }
 }

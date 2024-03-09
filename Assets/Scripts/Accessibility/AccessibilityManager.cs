@@ -33,7 +33,10 @@ public class AccessibilityManager : MonoBehaviour
         cameraFlashInt = PlayerPrefs.GetInt("CameraFlashState");
         arialDialogueInt = PlayerPrefs.GetInt("ArialDialogueState");
         visualIndicatorsInt = PlayerPrefs.GetInt("VisualIndicatorsState");
+    }
 
+    void Start()
+    {
         if (PlayerPrefs.HasKey("HighContrastState"))
         {
             if (highContrastInt == 1)
@@ -48,8 +51,12 @@ public class AccessibilityManager : MonoBehaviour
             }
             else
             {
-                //
                 highContrastToggle.isOn = false;
+
+                if (FindObjectOfType<HighContrastManager>() != null)
+                {
+                    HighContrastManager.instance.SwapMaterials();
+                }
             }
         }
 
@@ -59,62 +66,76 @@ public class AccessibilityManager : MonoBehaviour
             {
                 cvHighContrastToggle.isOn = true;
                 isUsingCvHighContrastMode = true;
+                if (FindObjectOfType<HighContrastManager>() != null)
+                {
+                    if (HighContrastManager.instance.isUsingCatVision)
+                    {
+                        HighContrastManager.instance.SwapMaterialsInCatVision();
+                    }
+                }
             }
             else
             {
                 cvHighContrastToggle.isOn = false;
-            }
-
-            if (PlayerPrefs.HasKey("JournalCbState"))
-            {
-                if (journalCbInt == 1)
+                if (FindObjectOfType<HighContrastManager>() != null)
                 {
-                    journalColorblindToggle.isOn = true;
-                    isUsingJournalCb = true;
-                }
-                else
-                {
-                    journalColorblindToggle.isOn = false;
+                    if (HighContrastManager.instance.isUsingCatVision)
+                    {
+                        HighContrastManager.instance.SwapMaterialsInCatVision();
+                    }
                 }
             }
+        }
 
-            if (PlayerPrefs.HasKey("CameraFlashState"))
+        if (PlayerPrefs.HasKey("JournalCbState"))
+        {
+            if (journalCbInt == 1)
             {
-                if (cameraFlashInt == 1)
-                {
-                    cameraFlashToggle.isOn = true;
-                    isCameraFlashDisabled = true;
-                }
-                else
-                {
-                    cameraFlashToggle.isOn = false;
-                }
+                journalColorblindToggle.isOn = true;
+                isUsingJournalCb = true;
             }
-
-            if (PlayerPrefs.HasKey("ArialDialogueState"))
+            else
             {
-                if (arialDialogueInt == 1)
-                {
-                    arialDialogueFontToggle.isOn = true;
-                    isUsingArialFont = true;
-                }
-                else
-                {
-                    arialDialogueFontToggle.isOn = false;
-                }
+                journalColorblindToggle.isOn = false;
             }
+        }
 
-            if (PlayerPrefs.HasKey("VisualIndicatorsState"))
+        if (PlayerPrefs.HasKey("CameraFlashState"))
+        {
+            if (cameraFlashInt == 1)
             {
-                if (visualIndicatorsInt == 1)
-                {
-                    visualIndicatorsToggle.isOn = true;
-                    isUsingVisualIndicators = true;
-                }
-                else
-                {
-                    visualIndicatorsToggle.isOn = false;
-                }
+                cameraFlashToggle.isOn = true;
+                isCameraFlashDisabled = true;
+            }
+            else
+            {
+                cameraFlashToggle.isOn = false;
+            }
+        }
+
+        if (PlayerPrefs.HasKey("ArialDialogueState"))
+        {
+            if (arialDialogueInt == 1)
+            {
+                arialDialogueFontToggle.isOn = true;
+                isUsingArialFont = true;
+            }
+            else
+            {
+                arialDialogueFontToggle.isOn = false;
+            }
+        }
+
+        if (PlayerPrefs.HasKey("VisualIndicatorsState"))
+        {
+            if (visualIndicatorsInt == 1)
+            {
+                visualIndicatorsToggle.isOn = true;
+                isUsingVisualIndicators = true;
+            }
+            else
+            {
+                visualIndicatorsToggle.isOn = false;
             }
         }
     }
@@ -122,40 +143,11 @@ public class AccessibilityManager : MonoBehaviour
     public void SetHighContrastMode(bool isUsingHighContrastMode)
     {
         highContrastToggle.isOn = isUsingHighContrastMode;
-
-        if (!isUsingHighContrastMode)
-        {
-            PlayerPrefs.SetInt("HighContrastState", 0);
-            //Debug.Log("Turning High Contrast Mode Off");
-        }
-        else
-        {
-            PlayerPrefs.SetInt("HighContrastState", 1);
-            isUsingHighContrastMode = true;
-
-            if (FindObjectOfType<HighContrastManager>() != null)
-            {
-                HighContrastManager.instance.SwapMaterials();
-            }
-            //Debug.Log("Turning High Contrast Mode On");
-        }
     }
 
     public void SetCvHighContrastMode(bool isUsingCvHighContrastMode)
     {
         cvHighContrastToggle.isOn = isUsingCvHighContrastMode;
-
-        if (!isUsingCvHighContrastMode)
-        {
-            PlayerPrefs.SetInt("CvHighContrastState", 0);
-            //Debug.Log("Turning CV High Contrast Mode Off");
-        }
-        else
-        {
-            PlayerPrefs.SetInt("CvHighContrastState", 1);
-            isUsingCvHighContrastMode = true;
-            //Debug.Log("Turning CV High Contrast Mode On");
-        }
     }
 
     public void SetJournalColorblindMode(bool isUsingJournalCb)
@@ -216,6 +208,54 @@ public class AccessibilityManager : MonoBehaviour
 
     public void ApplySettings()
     {
+        if (!highContrastToggle.isOn)
+        {
+            PlayerPrefs.SetInt("HighContrastState", 0);
+
+            if (FindObjectOfType<HighContrastManager>() != null)
+            {
+                HighContrastManager.instance.SwapMaterials();
+            }
+            //Debug.Log("Turning High Contrast Mode Off");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("HighContrastState", 1);
+            isUsingHighContrastMode = true;
+
+            if (FindObjectOfType<HighContrastManager>() != null)
+            {
+                HighContrastManager.instance.SwapMaterials();
+            }
+            //Debug.Log("Turning High Contrast Mode On");
+        }
+
+        if (!cvHighContrastToggle.isOn)
+        {
+            PlayerPrefs.SetInt("CvHighContrastState", 0);
+            if (FindObjectOfType<HighContrastManager>() != null)
+            {
+                if (HighContrastManager.instance.isUsingCatVision)
+                {
+                    HighContrastManager.instance.SwapMaterialsInCatVision();
+                }
+            }
+            //Debug.Log("Turning Journal Colorblind Mode Off");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("CvHighContrastState", 1);
+            if (FindObjectOfType<HighContrastManager>() != null)
+            {
+                if (HighContrastManager.instance.isUsingCatVision)
+                {
+                    HighContrastManager.instance.SwapMaterialsInCatVision();
+                }
+            }
+            isUsingHighContrastMode = true;
+            //Debug.Log("Turning Journal Colorblind Mode On");
+        }
+
         if (!visualIndicatorsToggle.isOn)
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 0);
