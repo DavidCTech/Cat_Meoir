@@ -25,7 +25,12 @@ public class OnHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
     void OnDisable()
     {
-        
+        if(initialPosition == null)
+        {
+            initialPosition = buttonRectTransform.anchoredPosition;
+
+        }
+
         buttonRectTransform.anchoredPosition = initialPosition;
     }
    

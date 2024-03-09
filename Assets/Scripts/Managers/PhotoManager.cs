@@ -109,6 +109,7 @@ public class PhotoManager : MonoBehaviour
         snapshots.Remove(snapshot);
         //save the current state and load it? 
         this.gameObject.GetComponent<ClueSaves>().SaveClues();
+        //loading clues while this is going on will break the delete function 
         //this.gameObject.GetComponent<ClueSaves>().LoadClues();
 
 
