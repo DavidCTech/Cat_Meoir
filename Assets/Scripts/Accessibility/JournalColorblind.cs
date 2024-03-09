@@ -7,9 +7,6 @@ using UnityEngine.InputSystem;
 
 public class JournalColorblind : MonoBehaviour
 {
-    public InputActionAsset playerInput;
-    private InputAction catVision;
-
     public Material newMaterial;
     private Material[] originalMaterials;
     public GameObject[] objectsToSwap;
@@ -30,25 +27,6 @@ public class JournalColorblind : MonoBehaviour
     {
         StoreOriginalMaterials();
         StoreOriginalColors();
-    }
-
-    public void OnEnable()
-    {
-        playerInput.Enable();
-
-        catVision = playerInput.FindAction("CatVision");
-        catVision.performed += CatVision;
-    }
-    public void OnDisable()
-    {
-        playerInput.Disable();
-        catVision.performed -= CatVision;
-    }
-
-    public void CatVision(InputAction.CallbackContext context)
-    {
-        Debug.Log("Is Using Cat Vision");
-        SwapMaterials();
     }
 
     public void StoreOriginalMaterials()

@@ -14,6 +14,7 @@ public class HighContrastManager : MonoBehaviour
 
     void Awake()
     {
+        //Make script an instance
         if (instance == null)
         {
             instance = this;
@@ -39,8 +40,8 @@ public class HighContrastManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("CvHighContrastState"))
         {
+            isUsingCatVision = !isUsingCatVision;
             SwapMaterialsInCatVision();
-            Debug.Log("Swapping Materials in Cat Vision");
         }
 
         if (FindObjectOfType<BookstorePosters>() != null)
@@ -62,7 +63,6 @@ public class HighContrastManager : MonoBehaviour
 
     public void SwapMaterialsInCatVision()
     {
-        isUsingCatVision = !isUsingCatVision;
         foreach (HighContrastMode script in highContrastScripts)
         {
             script.SwapMaterialsInCatVision();

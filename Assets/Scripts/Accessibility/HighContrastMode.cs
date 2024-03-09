@@ -52,6 +52,8 @@ public class HighContrastMode : MonoBehaviour
     {
         if (AccessibilityManager.instance.cvHighContrastToggle.isOn && HighContrastManager.instance.isUsingCatVision)
         {
+            this.gameObject.layer = LayerMask.NameToLayer(layerToSwitchName);
+
             Material[] newMaterials = new Material[originalMaterials.Length];
 
             for (int i = 0; i < newMaterials.Length; i++)
@@ -60,18 +62,19 @@ public class HighContrastMode : MonoBehaviour
             }
             rendererComponent.materials = newMaterials;
 
-            this.gameObject.layer = LayerMask.NameToLayer(layerToSwitchName);
+            Debug.Log("Swapping Out Materials");
         }
-        else if (!AccessibilityManager.instance.cvHighContrastToggle.isOn || !HighContrastManager.instance.isUsingCatVision)
+        else
         {
+            this.gameObject.layer = LayerMask.NameToLayer(defaultLayerName);
             rendererComponent.materials = originalMaterials;
 
-            this.gameObject.layer = LayerMask.NameToLayer(defaultLayerName);
-        }
+            if (AccessibilityManager.instance.highContrastToggle.isOn && !HighContrastManager.instance.isUsingCatVision)
+            {
+                SwapMaterials();
+                Debug.Log("Swapping Out Materials to Normal If");
+            }
 
-        if (AccessibilityManager.instance.highContrastToggle.isOn && this.gameObject.layer == LayerMask.NameToLayer(defaultLayerName))
-        {
-            SwapMaterials();
         }
     }
 }

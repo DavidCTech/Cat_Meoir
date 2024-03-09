@@ -20,6 +20,7 @@ public class BookstorePosters : MonoBehaviour
 
     private bool isSwapped = false;
 
+    //Make script an instance
     void Awake()
     {
         if (instance == null)

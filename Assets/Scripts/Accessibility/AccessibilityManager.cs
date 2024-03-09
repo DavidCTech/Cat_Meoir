@@ -22,6 +22,7 @@ public class AccessibilityManager : MonoBehaviour
 
     void Awake()
     {
+        //Make script an instance
         if (instance == null)
         {
             instance = this;
@@ -66,24 +67,10 @@ public class AccessibilityManager : MonoBehaviour
             {
                 cvHighContrastToggle.isOn = true;
                 isUsingCvHighContrastMode = true;
-                if (FindObjectOfType<HighContrastManager>() != null)
-                {
-                    if (HighContrastManager.instance.isUsingCatVision)
-                    {
-                        HighContrastManager.instance.SwapMaterialsInCatVision();
-                    }
-                }
             }
             else
             {
                 cvHighContrastToggle.isOn = false;
-                if (FindObjectOfType<HighContrastManager>() != null)
-                {
-                    if (HighContrastManager.instance.isUsingCatVision)
-                    {
-                        HighContrastManager.instance.SwapMaterialsInCatVision();
-                    }
-                }
             }
         }
 
