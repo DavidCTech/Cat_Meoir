@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NeutralNPC : MonoBehaviour
+public class NeutralNPC_CP : MonoBehaviour
 {
     public enum NPCState
     {

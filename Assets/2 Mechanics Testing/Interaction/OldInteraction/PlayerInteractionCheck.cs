@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using static NeutralNPC;
+using static NeutralNPC_CP;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerInteractionCheck : MonoBehaviour
