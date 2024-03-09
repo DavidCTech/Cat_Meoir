@@ -20,7 +20,10 @@ public class GetCaseNum : MonoBehaviour
             slotScript = overwriteScript.slotScript;
             slot = slotScript.slotNumber;
         }
-
+        if(overwriteScript == null)
+        {
+            slot = 0;
+        }
        if(slot == 0)
         {
             textObj.text= "Auto Save";
