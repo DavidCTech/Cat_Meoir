@@ -33,6 +33,8 @@ public class SafeInteraction : MonoBehaviour
     public PlayerManager playerManagerScript; // Reference to the player manager script
     public Camera mainCamera; // Reference to the main camera
 
+    private bool isInteracting = false; // Track if the player is currently interacting with the safe
+
 
     private void Start()
     {
@@ -80,11 +82,6 @@ public class SafeInteraction : MonoBehaviour
                 {
                     Debug.Log("Correct turn. Next expected turn: " + expectedTurnSequence[currentExpectedTurnIndex]);
                 }
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ExitMinigame();
             }
         }
     }
@@ -180,6 +177,7 @@ public class SafeInteraction : MonoBehaviour
         {
             minigameActive = true;
             enabled = true; // Activate the SafeInteraction script
+            isInteracting = true; // Set the flag to indicate that the player is now interacting with the safe
 
             // Activate the dial GameObject
             dialGameObject.SetActive(true);
@@ -221,6 +219,13 @@ public class SafeInteraction : MonoBehaviour
     // Method to exit the safe minigame
     public void ExitMinigame()
     {
+        // Exit the safe interaction if currently interacting
+        if (isInteracting)
+        {
+            isInteracting = false; // Reset the flag to indicate that the player has stopped interacting with the safe
+            return; // Skip further processing to maintain the interaction state
+        }
+
         // Reset any necessary variables or states
         minigameActive = false;
         enabled = false; // Deactivate the SafeInteraction script
@@ -263,5 +268,10 @@ public class SafeInteraction : MonoBehaviour
     public bool IsSafeUnlocked()
     {
         return safeAlreadyUnlocked;
+    }
+
+    public bool IsMinigameActive()
+    {
+        return minigameActive;
     }
 }

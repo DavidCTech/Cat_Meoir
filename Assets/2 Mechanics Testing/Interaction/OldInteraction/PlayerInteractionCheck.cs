@@ -123,8 +123,24 @@ public class PlayerInteractionCheck : MonoBehaviour
                 }
                 if (objectName == "Safe")
                 {
-                    this.gameObject.GetComponent<SafeCheck>().StartSafeInteraction();
-                    //reference the Safe code
+                    SafeInteraction safeInteraction = targetObject.GetComponent<SafeInteraction>();
+                    if (safeInteraction != null)
+                    {
+                        if (safeInteraction.IsMinigameActive())
+                        {
+                            // Exit the minigame
+                            safeInteraction.ExitMinigame();
+                        }
+                        else
+                        {
+                            // Start safe interaction
+                            safeInteraction.StartInteraction();
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("SafeInteraction component not found on the Safe object.");
+                    }
                 }
                 if (!isInteracting)
                 {

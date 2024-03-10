@@ -10,14 +10,15 @@ public class SafeCheck : MonoBehaviour
     public PlayerManager playerManager; // Reference to the PlayerManager script
 
     private bool isNearSafe = false; // Track if the player is near the safe
+    private bool isInteractingWithSafe = false; // Track if the player is currently interacting with the safe
 
     public void HandleInteraction()
     {
         // Check for player input to interact with the safe
         if (isNearSafe)
         {
-            // Start the safe interaction
-            StartSafeInteraction();
+            // Toggle the safe interaction
+            ToggleSafeInteraction();
         }
     }
 
@@ -57,20 +58,33 @@ public class SafeCheck : MonoBehaviour
         }
     }
 
+    public void ToggleSafeInteraction()
+    {
+        // Toggle the interaction with the safe
+        if (isInteractingWithSafe)
+        {
+            ExitSafeInteraction();
+        }
+        else
+        {
+            StartSafeInteraction();
+        }
+    }
+
     public void StartSafeInteraction()
     {
         // Start the safe interaction if the safe is not already unlocked
         if (!safeInteraction.IsSafeUnlocked())
         {
+            isInteractingWithSafe = true; // Set the flag to indicate that the player is now interacting with the safe
             safeInteraction.StartInteraction();
         }
     }
 
-    // Add this method to handle exiting the minigame
-    public void ExitMinigame()
+    public void ExitSafeInteraction()
     {
-        // Call ExitMinigame method of SafeInteraction script
+        // Exit the safe interaction
+        isInteractingWithSafe = false; // Reset the flag to indicate that the player has stopped interacting with the safe
         safeInteraction.ExitMinigame();
     }
-
 }
