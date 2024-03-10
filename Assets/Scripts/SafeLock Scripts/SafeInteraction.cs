@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class SafeInteraction : MonoBehaviour
 {
@@ -35,7 +37,8 @@ public class SafeInteraction : MonoBehaviour
 
     private bool isInteracting = false; // Track if the player is currently interacting with the safe
 
-
+    public TMP_Text instructionsText; // Reference to the TextMeshProUGUI component for instructions
+    
     private void Start()
     {
         // Convert integer unlock positions to floats
@@ -58,6 +61,11 @@ public class SafeInteraction : MonoBehaviour
         if (playerManagerScript == null)
         {
             Debug.LogError("PlayerManager script reference not set.");
+        }
+
+        if (instructionsText == null)
+        {
+            Debug.LogError("Instructions Text reference not set.");
         }
     }
 
@@ -167,6 +175,16 @@ public class SafeInteraction : MonoBehaviour
         {
             Debug.LogWarning("PlayerManager script reference not set.");
         }
+
+        // Hide instructions text
+        if (instructionsText != null)
+        {
+            instructionsText.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Instructions Text reference not set.");
+        }
     }
 
     // Method to start the safe interaction
@@ -212,6 +230,15 @@ public class SafeInteraction : MonoBehaviour
             else
             {
                 Debug.LogWarning("PlayerManager script reference not set.");
+            }
+            // Display instructions text
+            if (instructionsText != null)
+            {
+                instructionsText.gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("Instructions Text reference not set.");
             }
         }
     }
@@ -262,6 +289,15 @@ public class SafeInteraction : MonoBehaviour
         else
         {
             Debug.LogWarning("PlayerManager script reference not set.");
+        }
+        // Hide instructions text
+        if (instructionsText != null)
+        {
+            instructionsText.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Instructions Text reference not set.");
         }
     }
 
