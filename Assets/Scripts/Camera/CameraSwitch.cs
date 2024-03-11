@@ -81,6 +81,7 @@ public class CameraSwitch : MonoBehaviour
 
     }
 
+
     void EnableThirdPersonCamera()
     {
         if (playerMovement != null)

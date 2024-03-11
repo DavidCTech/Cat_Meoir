@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     //anim
     public Animator anim;
+    private float idleTime = 30f;
+    private float timer;
 
     private float velocitySpeed;
     private float velocityUp;
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        timer = idleTime;
         inputManager = GetComponent<InputManager>();
         rb = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
@@ -140,9 +143,20 @@ public class PlayerMovement : MonoBehaviour
         ManageRotation();
         // Perform the ground check
         CheckGrounded();
+        //move player relative to slopes 
+        RaycastHit hit;
+        float raycastDistance = 2f;
+        float smoothness = 10f; 
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance))
+        {
+            // Access hit.normal to get the surface normal
+            Vector3 groundNormal = hit.normal;
+        }
+        Vector3 newUp = Vector3.Slerp(transform.up, hit.normal, Time.deltaTime * smoothness);
+        transform.rotation = Quaternion.FromToRotation(transform.up, newUp) * transform.rotation;
 
         //anim work 
-        if(anim != null)
+        if (anim != null)
         {
             float velocitySpeedValue = ClampValue(rb.velocity.magnitude, 0f, moveSpeed + 3f); 
             float velocityUpValue = ClampValue(Mathf.Abs(rb.velocity.y), 0f, 0.1f);
@@ -263,15 +277,13 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
+    /*
     private float timePassValue = 0f;
-    private bool canSit; 
+    private bool canSit;
+    */
+  
 
-    private void SitDelay()
-    {
-        if(!canSit)
-        canSit = true; 
-    }
+
     private void ManageMovement()
     {
         if (!isFrozen)
@@ -279,34 +291,12 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = cameraObject.forward * inputManager.vInput;
             moveDirection = moveDirection + cameraObject.right * inputManager.hInput;
             moveDirection.Normalize();
-
-            if (moveDirection == Vector3.zero)
-            {
-                Invoke("SitDelay", 10f); 
-                if (canSit)
-                {
-                    timePassValue = timePassValue + 0.01f; 
-                    if(timePassValue > 1f)
-                    {
-                        timePassValue = 1f; 
-                    }
-                
-                    anim.SetFloat("TimePass", timePassValue);
-                }
-
-                
-                
-            }
-            else
-            {
-                canSit = false; 
-                anim.SetFloat("TimePass", 0f);
-                timePassValue = 0f; 
-            }
             moveDirection.y = 0;
+           
+
             //muiltiply the current speed by an accelerator value 
             //clamp the current move speed by the max speed 
-            if(currentMoveSpeed < maxMoveSpeed)
+            if (currentMoveSpeed < maxMoveSpeed)
             {
                 currentMoveSpeed = currentMoveSpeed + acceleration;
             }
@@ -322,6 +312,21 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 movementVelocity = moveDirection;
             rb.velocity = new Vector3(movementVelocity.x, rb.velocity.y, movementVelocity.z);
+
+            if (rb.velocity != Vector3.zero)
+            {
+                anim.SetFloat("TimePass", 0f);
+                timer = idleTime;
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+
+                if (timer <= 0f)
+                {
+                    SitDown();
+                }
+            }
         }
         //freeze player? 
         else
@@ -329,7 +334,13 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
     }
-   
+    private void SitDown()
+    {
+        anim.SetFloat("TimePass", 1f);
+
+        timer = idleTime;
+    }
+
     private void ManageRotation()
     {
         if(!boxMover.isGrabbing)

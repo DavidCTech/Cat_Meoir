@@ -99,6 +99,7 @@ public class PlayerClimb : MonoBehaviour
         {
             anim.SetFloat("AnimSpeed", 1f);
         }
+        anim.SetBool("Jumping", isClimbing);
         
         if(elaspedTime >= duration)
         {

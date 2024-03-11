@@ -57,12 +57,10 @@ public class ClueSaves : MonoBehaviour
             // Iterate through the loaded clue names and create new PhotoScriptable objects
             for (int i = 0; i < data.clueList.Length; i++)
             {
-                Debug.Log("huhh");
                 // Create a new PhotoScriptable object
                 PhotoScriptable newPhoto = ScriptableObject.CreateInstance<PhotoScriptable>();
                 newPhoto.sprite = this.gameObject.GetComponent<ClueImagesSave>().LoadClueImages(i);
                 newPhoto.texture = this.gameObject.GetComponent<ClueImagesSave>().LoadClueTexture(i);
-                Debug.Log(newPhoto.sprite + " Sprite " + newPhoto.texture + " Texture");
                 // Set the clue name
                 newPhoto.clueName = data.clueList[i];
 
