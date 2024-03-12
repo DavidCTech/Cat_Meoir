@@ -23,6 +23,9 @@ public class SafeInteraction : MonoBehaviour
     private bool safeAlreadyUnlocked = false; // Track if the safe has already been unlocked
     public GameObject objectToActivateOnUnlock; // Object to activate when the safe unlocks (optional)
 
+    public AudioSource audioSource; // Reference to the AudioSource component
+    public AudioClip unlockSound; // Audio clip to play when reaching a position
+
     private enum TurnDirection { None, Left, Right }
 
     private TurnDirection lastTurnDirection = TurnDirection.None;
@@ -67,6 +70,18 @@ public class SafeInteraction : MonoBehaviour
         {
             Debug.LogError("Instructions Text reference not set.");
         }
+
+        // Check if AudioSource is assigned
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource reference not set.");
+        }
+
+        // Check if AudioClip is assigned
+        if (unlockSound == null)
+        {
+            Debug.LogError("Unlock Sound reference not set.");
+        }
     }
 
     private void Update()
@@ -79,6 +94,9 @@ public class SafeInteraction : MonoBehaviour
             if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - unlockPositionsFloat[currentExpectedTurnIndex]) < 1f &&
                 lastTurnDirection == expectedTurnSequence[currentExpectedTurnIndex])
             {
+                // Play unlock sound
+                PlayUnlockSound();
+
                 currentExpectedTurnIndex++;
                 lastTurnDirection = TurnDirection.None; // Reset last turn direction
 
@@ -94,6 +112,14 @@ public class SafeInteraction : MonoBehaviour
         }
     }
 
+    // Method to play the unlock sound
+    private void PlayUnlockSound()
+    {
+        if (audioSource != null && unlockSound != null)
+        {
+            audioSource.PlayOneShot(unlockSound);
+        }
+    }
     private void RotateDial()
     {
         float input = Input.GetAxis("Horizontal");
