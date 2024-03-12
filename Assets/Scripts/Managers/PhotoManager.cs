@@ -11,8 +11,7 @@ public class PhotoManager : MonoBehaviour
     public GameObject imagesFullText;
     [Header("You do not need to ref anything, this is just nice info.")]
     public List<PhotoScriptable> snapshots = new List<PhotoScriptable>();
-    public List<ClueEventTrigger> triggers = new List<ClueEventTrigger>(); 
-
+    public List<ClueEventTrigger> triggers = new List<ClueEventTrigger>();
 
     private bool canContinue;
     private ClueImageManager clueImageManager;
@@ -47,10 +46,11 @@ public class PhotoManager : MonoBehaviour
         {
             if (triggers[i].Check(this))
             {
-                // If the condition is true, remove the trigger from the list
-                triggers.RemoveAt(i);
+                triggers[i].DisableActive(); 
             }
         }
+
+       
 
     }
 

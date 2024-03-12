@@ -146,6 +146,13 @@ public class ClueImageManager : MonoBehaviour
                     failSpace.name = null;
 
                     //dealing with the sprite info 
+                    ImageData imageData = failSpace.gameObject.GetComponent<ImageData>();
+                    if(imageData != null)
+                    {
+                        imageData.description = "";
+                        imageData.mainString = "";
+                    }
+                    
                  
                     imageToNull.sprite = null;
                     if (initialColor != null)
@@ -161,6 +168,73 @@ public class ClueImageManager : MonoBehaviour
                     
 
         }
+        foreach (GameObject clueSpaceObj in clueSpaces)
+        {
+            Image clueSpace = clueSpaceObj.GetComponent<Image>(); 
+            //if the fail space name is the image to null name 
+            if (clueSpace.name == imageToNull.name)
+            {
+                //and doesn't have the name image 
+                if (!clueSpace.name.Contains("Image"))
+                {
+                    Debug.Log("image to null:" + imageToNull.name);
+                    //take the failSpace name and compare it with a bunch of photo manager scriptable list 
+                    // when there's a match, delete that one in the list and then reorganize the list 
+
+                    for (int i = 0; i < photoManager.snapshots.Count; i++)
+                    {
+                        if (photoManager.snapshots[i] != null)
+                        {
+
+                            if (photoManager.snapshots[i].clueName == imageToNull.name)
+                            {
+                                //if photo manager clue name is the image to null name? 
+                                Debug.Log("delete the picture " + photoManager.snapshots[i].clueName);
+
+                                photoManager.deletePicture(photoManager.snapshots[i]);
+                                break; // Break out of the loop once the item is removed
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("there was an issue here Screenshot this debug message ");
+                            break;
+                        }
+
+                    }
+                    //dealing with the failspace info 
+                    clueSpace.sprite = null;
+                    if (initialColor != null)
+                    {
+                        clueSpace.color = initialColor;
+                    }
+
+                    clueSpace.name = null;
+
+                    //dealing with the sprite info 
+                    ImageData imageData = clueSpace.gameObject.GetComponent<ImageData>();
+                    if (imageData != null)
+                    {
+                        imageData.description = "";
+                        imageData.mainString = "";
+                    }
+
+
+                    imageToNull.sprite = null;
+                    if (initialColor != null)
+                    {
+                        imageToNull.color = initialColor;
+                    }
+
+                    imageToNull.name = null;
+                    break; // Break out of the outer loop since the item has been processed
+                }
+
+            }
+        }
+
+
+        
 
     }
     public void NullAll()

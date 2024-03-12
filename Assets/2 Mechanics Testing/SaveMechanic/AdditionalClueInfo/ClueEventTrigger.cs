@@ -13,55 +13,68 @@ public class ClueEventTrigger : MonoBehaviour
     [Header("Get reference to Game Manager")]
     public GameObject gameManagerObject;
     public UnityEvent clueRight;
+    public bool isActive = true; 
 
 
 
 
-
+    public void DisableActive()
+    {
+        isActive = false; 
+    }
     public bool Check(PhotoManager photoManager)
     {
-        foreach (PhotoScriptable snapshot in photoManager.snapshots)
+        if (isActive)
         {
-            if (snapshot.isClue)
+            cluesFound.Clear();
+            foreach (PhotoScriptable snapshot in photoManager.snapshots)
             {
-                if (!cluesFound.Contains(snapshot.clueName))
+                if (snapshot.isClue)
                 {
-                    cluesFound.Add(snapshot.clueName);
+                    if (!cluesFound.Contains(snapshot.clueName))
+                    {
+                        cluesFound.Add(snapshot.clueName);
+                    }
+
+
                 }
-
-
             }
-        }
-        foreach (PhotoScriptable snapshot in photoManager.snapshots)
-        {
-            if (snapshot.isClue)
+            foreach (PhotoScriptable snapshot in photoManager.snapshots)
             {
-                string snapshotClueName = snapshot.clueName;
-                isAllCluesFound = false;
+                if (snapshot.isClue)
+                {
+                    string snapshotClueName = snapshot.clueName;
+                    isAllCluesFound = false;
+                }
             }
-        }
 
-        // Check if all level designer clues are present in player's clues
-        isAllCluesFound = true;
-        foreach (string clueName in clueNames)
-        {
-            if (!cluesFound.Contains(clueName))
+            // Check if all level designer clues are present in player's clues
+            isAllCluesFound = true;
+            foreach (string clueName in clueNames)
             {
-                isAllCluesFound = false;
-                break;
+                if (!cluesFound.Contains(clueName))
+                {
+                    isAllCluesFound = false;
+                    break;
 
-                // No need to check further if one clue is missing
+                    // No need to check further if one clue is missing
+                }
             }
-        }
-        if (isAllCluesFound)
-        {
-            
-            clueRight.Invoke();
-            return true;
+            if (isAllCluesFound)
+            {
+
+                clueRight.Invoke();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
             return false; 
         }
+        
     }
 }
