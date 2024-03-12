@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public Slider volumeSlider;
     public Slider sfxSlider;
     public Slider dialogueSlider;
+    public Slider musicSlider;
 
     public Toggle fullScreenToggle;
     private int screenInt;
@@ -69,6 +70,12 @@ public class GameManager : MonoBehaviour, ISelectHandler
     const string resName = "resolutionoption";
 
     private bool shouldApplyChanges = true;
+
+    private JustCruisingMode justCruisingMode;
+    public Toggle justCruisingModeToggle;
+    public JustCruisingModeManager justCruisingModeManager;
+
+
 
     private void Awake()
     {
@@ -106,6 +113,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
         sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
         ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
+
+        musicSlider.value = PlayerPrefs.GetFloat("MMusic");
 
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
 
@@ -147,6 +156,14 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
         resolutionDropdown.RefreshShownValue();
         UpdateResolutionDropdownOptions();
+
+
+        if (justCruisingModeToggle != null)
+        {
+
+            justCruisingModeToggle.onValueChanged.AddListener(ToggleJustCruisingMode);
+        }
+
     }
 
 
@@ -406,6 +423,13 @@ public class GameManager : MonoBehaviour, ISelectHandler
         Debug.Log(sliderValue);
     }
 
+    public void SetMusic(float sliderValue)
+    {
+        PlayerPrefs.SetFloat("MMusic", sliderValue);
+        audioMixer.SetFloat("MyExposedParam 1", PlayerPrefs.GetFloat("MMusic"));
+        audioMixer.SetFloat("MyExposedParam 1", Mathf.Log10(sliderValue) * 20);
+        Debug.Log(sliderValue);
+    }
 
     public void ChangeSensitivity(float value)
     {
@@ -457,6 +481,18 @@ public class GameManager : MonoBehaviour, ISelectHandler
         }
     }
 
+
+    public void ToggleJustCruisingMode(bool isToggled)
+    {
+        if (justCruisingModeManager != null)
+        {
+            justCruisingModeManager.ToggleObjects(isToggled);
+        }
+        else
+        {
+            Debug.LogError("justCruisingModeManager reference is null. Check references in the Unity Editor.");
+        }
+    }
 
     public void QuitGame()
     {
