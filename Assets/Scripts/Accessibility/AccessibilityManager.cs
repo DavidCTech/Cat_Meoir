@@ -119,10 +119,13 @@ public class AccessibilityManager : MonoBehaviour
             {
                 visualIndicatorsToggle.isOn = true;
                 isUsingVisualIndicators = true;
+                VisualIndicators.instance.visualIndicatorsBG.SetActive(true);
+                VisualIndicators.instance.visualIndicatorsTextObject.SetActive(false);
             }
             else
             {
                 visualIndicatorsToggle.isOn = false;
+                VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
             }
         }
     }
@@ -246,12 +249,15 @@ public class AccessibilityManager : MonoBehaviour
         if (!visualIndicatorsToggle.isOn)
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 0);
+            VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
             Debug.Log("Turning Visual Indicators Mode Off");
         }
         else
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 1);
             isUsingVisualIndicators = true;
+            VisualIndicators.instance.visualIndicatorsBG.SetActive(true);
+            VisualIndicators.instance.visualIndicatorsTextObject.SetActive(false);
             Debug.Log("Turning Visual Indicators Mode On");
         }
     }
