@@ -17,16 +17,21 @@ public class CutSceneManager : MonoBehaviour
         {
             for (int i = 0; i < data.boolChecks.Length; i++)
             {
-                if (data.boolChecks[i] == true)
+                if (i < triggers.Count) 
                 {
-                    Debug.Log("bool checks is true?");
-                    triggers[i].isActive= true;
-                    //you also want to set the associated cut scene to disable, so you can call the on enable event for this object 
-                    
+                    if (data.boolChecks[i] == true)
+                    {
+                        Debug.Log("bool checks is true?");
+                        triggers[i].isActive = true;
+                    }
+                    else
+                    {
+                        triggers[i].isActive = false;
+                    }
                 }
                 else
                 {
-                    triggers[i].isActive = false;
+                    Debug.LogWarning("Index " + i + " is out of bounds for triggers.");
                 }
             }
         }
