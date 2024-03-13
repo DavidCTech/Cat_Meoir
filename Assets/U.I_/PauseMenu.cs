@@ -41,16 +41,21 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public Slider sfxSlider;
     public Slider dialogueSlider;
 
-    private int currentResolutionIndex = 0;
-    private float currentRefreshRate;
-
     private JustCruisingMode justCruisingMode;
+    public Button applyChangesButton;
 
     Resolution[] resolutions;
 
     private List<Resolution> filteredResolutions;
 
     [SerializeField] private TMP_Dropdown resolutionDropdown;
+
+    private Resolution previousResolution;
+
+    private int currentResolutionIndex = 0;
+    private float currentRefreshRate;
+
+    private bool shouldApplyChanges = true;
 
     public float scrollSpeed = 0.1f;
 
@@ -97,6 +102,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
             PlayerPrefs.SetInt(prefName, dropdown.value);
         }));
 
+        applyChangesButton.onClick.AddListener(ApplyResolutionChanges);
         playerControls = new PlayerController();
     }
     public void OnEnable()
@@ -161,6 +167,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ActivateOptionsMenu()
     {
         optionsPanel.SetActive(true);
+        UpdateResolutionDropdownOptions();
         TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
@@ -168,12 +175,36 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public void DeactivateOptionsMenu()
     {
+        Debug.Log("Close Options Menu pressed");
+
+        // Save changes if "Apply Changes" was pressed
+        if (shouldApplyChanges)
+        {
+            // Save the selected resolution index
+            int selectedResolutionIndex = resolutionDropdown.value;
+            PlayerPrefs.SetInt(resName, selectedResolutionIndex);
+            PlayerPrefs.Save();
+            Debug.Log("Changes saved");
+
+            // Reset the flag
+            shouldApplyChanges = false;
+        }
+        else
+        {
+            // Revert to the previous resolution if "Apply Changes" was not pressed
+            RevertToPreviousResolution();
+        }
+
         optionsPanel.SetActive(false);
         TurnControlsCanvasOff();
         pauseMenuUI.SetActive(true);
+
+        int savedResolutionIndex = PlayerPrefs.GetInt(resName, currentResolutionIndex);
+        resolutionDropdown.value = savedResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
-
     }
 
     public void ActivateControlsMenu()
@@ -224,6 +255,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
+        previousResolution = Screen.currentResolution;
+
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
@@ -249,11 +282,15 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         resolutionDropdown.AddOptions(options);
 
-        resolutionDropdown.value = PlayerPrefs.GetInt(resName, currentResolutionIndex);
+        int savedResolutionIndex = PlayerPrefs.GetInt(resName, currentResolutionIndex);
+        resolutionDropdown.value = savedResolutionIndex;
 
         resolutionDropdown.RefreshShownValue();
+        UpdateResolutionDropdownOptions();
 
-       
+
+
+
         if (justCruisingModeToggle != null)
         {
            
@@ -328,10 +365,112 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         }
     }
 
-    public void SetResolution(int resolutionIndex)
+    public void ApplyResolutionChanges()
     {
+        int selectedResolutionIndex = resolutionDropdown.value;
+        previousResolution = resolutions[selectedResolutionIndex];
+
+        SetResolution(selectedResolutionIndex);
+
+        UpdateResolutionDropdownOptions();
+        shouldApplyChanges = true;
+
+        Debug.Log("Apply Changes pressed");
+
+
+
+        // Save the selected resolution index only if shouldApplyChanges is true
+        if (shouldApplyChanges)
+        {
+            PlayerPrefs.SetInt(resName, selectedResolutionIndex);
+            PlayerPrefs.Save();
+        }
+    }
+
+
+    private void SetResolution(int resolutionIndex)
+    {
+        Debug.Log("Setting resolution to index: " + resolutionIndex);
+
+        // Save the selected resolution index
+        PlayerPrefs.SetInt(resName, resolutionIndex);
+        PlayerPrefs.Save();
+
+        // Debug logs to check PlayerPrefs values
+        Debug.Log("PlayerPrefs " + resName + " after save: " + PlayerPrefs.GetInt(resName));
+
+        // Apply the resolution
         Resolution resolution = resolutions[resolutionIndex];
+        Debug.Log("Applying resolution: " + resolution.width + "x" + resolution.height + " " + resolution.refreshRate + "Hz");
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    private bool IsResolutionEqual(Resolution resolution1, Resolution resolution2)
+    {
+        return resolution1.width == resolution2.width &&
+               resolution1.height == resolution2.height &&
+               resolution1.refreshRate == resolution2.refreshRate;
+    }
+
+
+    public void RevertToPreviousResolution()
+    {
+        Resolution currentResolution = Screen.currentResolution;
+
+        Screen.SetResolution(previousResolution.width, previousResolution.height, Screen.fullScreen);
+
+        Debug.Log("Reverting to previous resolution");
+
+        // Log additional information if needed
+        Debug.Log("Previous resolution: " + previousResolution);
+
+        // Check if resolution changed before updating dropdown
+        if (!IsResolutionEqual(currentResolution, previousResolution))
+        {
+            UpdateResolutionDropdownOptions();
+
+        }
+
+    }
+    private void UpdateResolutionDropdownOptions()
+    {
+        Debug.Log("Updating dropdown options");
+        // Your code to update resolution options in the dropdown goes here
+        List<string> options = new List<string>();
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string resolutionOption = resolutions[i].width + "x" + resolutions[i].height + " " + resolutions[i].refreshRate + "Hz";
+            options.Add(resolutionOption);
+        }
+
+        resolutionDropdown.ClearOptions();
+        resolutionDropdown.AddOptions(options);
+
+        int selectedResolutionIndex = Mathf.Clamp(PlayerPrefs.GetInt(resName, 0), 0, resolutions.Length - 1);
+
+        resolutionDropdown.value = selectedResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+
+
+        string selectedResolutionText = options[selectedResolutionIndex];
+
+        TextMeshProUGUI dropdownLabel = resolutionDropdown.GetComponentInChildren<TextMeshProUGUI>();
+        if (dropdownLabel != null)
+        {
+            dropdownLabel.text = selectedResolutionText;
+            Debug.Log("Current Label Text: " + dropdownLabel.text);
+
+            // Update the label text
+            dropdownLabel.text = selectedResolutionText;
+
+            // Log the updated text
+            Debug.Log("Updated Label Text: " + dropdownLabel.text);
+
+        }
+        else
+        {
+            Debug.LogError("TextMeshProUGUI component not found in the TMPro dropdown.");
+        }
     }
 
     void MuteAudio()
