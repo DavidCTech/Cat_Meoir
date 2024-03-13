@@ -10,6 +10,7 @@ using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using UnityEngine.Events;
+using System;
 
 
 public class PauseMenu : MonoBehaviour, ISelectHandler
@@ -44,7 +45,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     private JustCruisingMode justCruisingMode;
     public Button applyChangesButton;
 
-    Resolution[] resolutions;
+    private Resolution[] resolutions;
 
     private List<Resolution> filteredResolutions;
 
@@ -167,7 +168,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ActivateOptionsMenu()
     {
         optionsPanel.SetActive(true);
-        UpdateResolutionDropdownOptions();
+        UpdateResolutionDropdownOptions(); 
         TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
@@ -177,7 +178,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     {
         Debug.Log("Close Options Menu pressed");
 
-        // Save changes if "Apply Changes" was pressed
         if (shouldApplyChanges)
         {
             // Save the selected resolution index
@@ -193,14 +193,13 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         {
             // Revert to the previous resolution if "Apply Changes" was not pressed
             RevertToPreviousResolution();
+            UpdateResolutionDropdownOptions();
         }
 
         optionsPanel.SetActive(false);
         TurnControlsCanvasOff();
         pauseMenuUI.SetActive(true);
 
-        int savedResolutionIndex = PlayerPrefs.GetInt(resName, currentResolutionIndex);
-        resolutionDropdown.value = savedResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
         EventSystem.current.SetSelectedGameObject(null);
@@ -288,16 +287,11 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         resolutionDropdown.RefreshShownValue();
         UpdateResolutionDropdownOptions();
 
-
-
-
         if (justCruisingModeToggle != null)
         {
            
             justCruisingModeToggle.onValueChanged.AddListener(ToggleJustCruisingMode);
         }
-
-
     }
 
     private void Update()
@@ -372,21 +366,19 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         SetResolution(selectedResolutionIndex);
 
-        UpdateResolutionDropdownOptions();
-        shouldApplyChanges = true;
-
         Debug.Log("Apply Changes pressed");
 
-
+        // Update the dropdown options regardless of whether changes are applied or not
+        UpdateResolutionDropdownOptions();
 
         // Save the selected resolution index only if shouldApplyChanges is true
         if (shouldApplyChanges)
         {
             PlayerPrefs.SetInt(resName, selectedResolutionIndex);
             PlayerPrefs.Save();
+            shouldApplyChanges = false; // Reset the flag after saving changes
         }
     }
-
 
     private void SetResolution(int resolutionIndex)
     {
@@ -403,6 +395,17 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         Resolution resolution = resolutions[resolutionIndex];
         Debug.Log("Applying resolution: " + resolution.width + "x" + resolution.height + " " + resolution.refreshRate + "Hz");
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        TextMeshProUGUI dropdownLabel = resolutionDropdown.GetComponentInChildren<TextMeshProUGUI>();
+        if (dropdownLabel != null)
+        {
+            dropdownLabel.text = resolutionDropdown.options[resolutionIndex].text;
+        }
+        else
+        {
+            Debug.LogError("TextMeshProUGUI component not found in the TMPro dropdown.");
+        }
+
     }
 
     private bool IsResolutionEqual(Resolution resolution1, Resolution resolution2)
@@ -435,6 +438,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     private void UpdateResolutionDropdownOptions()
     {
         Debug.Log("Updating dropdown options");
+
         // Your code to update resolution options in the dropdown goes here
         List<string> options = new List<string>();
         for (int i = 0; i < resolutions.Length; i++)
@@ -446,32 +450,32 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
 
+        // Ensure that the selected resolution index is within the bounds
         int selectedResolutionIndex = Mathf.Clamp(PlayerPrefs.GetInt(resName, 0), 0, resolutions.Length - 1);
 
+        // Set the dropdown value to the selected resolution index
         resolutionDropdown.value = selectedResolutionIndex;
+
+        // Refresh the shown value
         resolutionDropdown.RefreshShownValue();
 
-
-        string selectedResolutionText = options[selectedResolutionIndex];
-
-        TextMeshProUGUI dropdownLabel = resolutionDropdown.GetComponentInChildren<TextMeshProUGUI>();
-        if (dropdownLabel != null)
+        if (shouldApplyChanges)
         {
-            dropdownLabel.text = selectedResolutionText;
-            Debug.Log("Current Label Text: " + dropdownLabel.text);
-
-            // Update the label text
-            dropdownLabel.text = selectedResolutionText;
-
-            // Log the updated text
-            Debug.Log("Updated Label Text: " + dropdownLabel.text);
-
+            TextMeshProUGUI dropdownLabel = resolutionDropdown.GetComponentInChildren<TextMeshProUGUI>();
+            if (dropdownLabel != null)
+            {
+                dropdownLabel.text = options[selectedResolutionIndex];
+                Debug.Log("Updated Label Text: " + dropdownLabel.text);
+            }
+            else
+            {
+                Debug.LogError("TextMeshProUGUI component not found in the TMPro dropdown.");
+            }
         }
-        else
-        {
-            Debug.LogError("TextMeshProUGUI component not found in the TMPro dropdown.");
-        }
+
     }
+
+  
 
     void MuteAudio()
     {
