@@ -179,7 +179,6 @@ public static class SaveSystem
 
         if (File.Exists(path))
         {
-            Debug.Log(path + "Does exist?");
             string jsonData = File.ReadAllText(path);
             ClueData data = JsonUtility.FromJson<ClueData>(jsonData);
             return data;
@@ -324,7 +323,7 @@ public static class SaveSystem
     //cut save functions
     // this is just for the previous specific data
     // public static void SaveCuts(List<UICutSceneToggle> toggles)
-    public static void SaveCuts(List<GameObject> buttons)
+    public static void SaveCuts(List<ClueEventTrigger> triggers)
     {
 
         string defaultPath = Application.persistentDataPath;
@@ -339,7 +338,7 @@ public static class SaveSystem
         string fileName = "CutData.json"; 
         string path = Path.Combine(folderPath, fileName);
 
-        CutData data = new CutData(buttons);
+        CutData data = new CutData(triggers);
 
         string jsonData = JsonUtility.ToJson(data);
         File.WriteAllText(path, jsonData);

@@ -38,7 +38,6 @@ public class ClueSaves : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        Debug.Log("Clue load async");
         if (loadingScreen != null)
         {
             loadingScreen.SetActive(false);

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CutSceneManager : MonoBehaviour
 {
-    public List<GameObject> cutSceneButtons = new List<GameObject>();
+
+    public List<ClueEventTrigger> triggers = new List<ClueEventTrigger>();
 
 
     public void LoadCuts()
     {
+        Debug.Log("loading cuts");
         CutData data = SaveSystem.LoadCuts();
 
         if (data != null)
@@ -17,19 +19,27 @@ public class CutSceneManager : MonoBehaviour
             {
                 if (data.boolChecks[i] == true)
                 {
-                    cutSceneButtons[i].SetActive(true);
+                    Debug.Log("bool checks is true?");
+                    triggers[i].isActive= true;
+                    //you also want to set the associated cut scene to disable, so you can call the on enable event for this object 
+                    
                 }
                 else
                 {
-                    cutSceneButtons[i].SetActive(false);
+                    triggers[i].isActive = false;
                 }
             }
+        }
+        else
+        {
+            Debug.Log("data null");
         }
     }
 
     public void SaveCuts()
     {
-        SaveSystem.SaveCuts(cutSceneButtons);
+        Debug.Log("saving cuts");
+        SaveSystem.SaveCuts(triggers);
     }
     public void DeleteCuts()
     {

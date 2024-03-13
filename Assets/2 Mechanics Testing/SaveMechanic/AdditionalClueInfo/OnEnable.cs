@@ -8,7 +8,7 @@ public class EnableDisableEvents : MonoBehaviour
     public UnityEvent onEnableEvent;
     public UnityEvent onDisableEvent;
 
-    void OnEnable()
+    public void OnEnable()
     {
         if (onEnableEvent != null)
         {
@@ -16,7 +16,7 @@ public class EnableDisableEvents : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    public void OnDisable()
     {
         if (onDisableEvent != null)
         {

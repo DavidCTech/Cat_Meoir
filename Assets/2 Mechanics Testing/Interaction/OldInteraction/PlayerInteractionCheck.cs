@@ -51,7 +51,7 @@ public class PlayerInteractionCheck : MonoBehaviour
         for (int i = 0; i < rangeChecks.Length; i++)
         {
 
-            Debug.Log("Debug Log for range Checks : " + rangeChecks[i].transform.gameObject);
+            //Debug.Log("Debug Log for range Checks : " + rangeChecks[i].transform.gameObject);
         }
 
         targetObject = null; 
@@ -69,8 +69,8 @@ public class PlayerInteractionCheck : MonoBehaviour
                 Vector3 directionToTarget = (closestPoint - this.gameObject.transform.position).normalized;
                 if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2)
                 {
-                    Debug.Log("Angle: " + Vector3.Angle(transform.forward, directionToTarget));
-                    Debug.Log("fovAngle / 2: " + fovAngle / 2);
+                    //Debug.Log("Angle: " + Vector3.Angle(transform.forward, directionToTarget));
+                    //Debug.Log("fovAngle / 2: " + fovAngle / 2);
                     float distanceToTarget = Vector3.Distance(this.gameObject.transform.position, closestPoint);
                     
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))

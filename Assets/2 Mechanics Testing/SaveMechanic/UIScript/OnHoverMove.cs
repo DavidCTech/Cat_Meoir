@@ -30,7 +30,10 @@ public class OnHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             initialPosition = buttonRectTransform.anchoredPosition;
 
         }
-
+        if(buttonRectTransform == null)
+        {
+            buttonRectTransform = GetComponent<RectTransform>();
+        }
         buttonRectTransform.anchoredPosition = initialPosition;
     }
    
@@ -49,7 +52,6 @@ public class OnHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             else
             {
                 buttonRectTransform.anchoredPosition = initialPosition + new Vector2(0, hoverTranslation);
-                Debug.Log("Hover Translation" + hoverTranslation);
             }
         }
        
@@ -69,7 +71,6 @@ public class OnHoverMove : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             else
             {
                 buttonRectTransform.anchoredPosition = initialPosition ;
-                Debug.Log("Exit Translation" + exitTranslation);
             }
         }
         
