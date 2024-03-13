@@ -119,8 +119,7 @@ public class AccessibilityManager : MonoBehaviour
             {
                 visualIndicatorsToggle.isOn = true;
                 isUsingVisualIndicators = true;
-                VisualIndicators.instance.visualIndicatorsBG.SetActive(true);
-                VisualIndicators.instance.visualIndicatorsTextObject.SetActive(false);
+                VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
             }
             else
             {
@@ -256,8 +255,15 @@ public class AccessibilityManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 1);
             isUsingVisualIndicators = true;
-            VisualIndicators.instance.visualIndicatorsBG.SetActive(true);
-            VisualIndicators.instance.visualIndicatorsTextObject.SetActive(false);
+
+            if (FindAnyObjectByType<VisualIndicators>() != null)
+            {
+                if (!VisualIndicators.instance.visualIndicatorsBG.activeInHierarchy)
+                {
+                    VisualIndicators.instance.visualIndicatorsBG.SetActive(true);
+                }
+            }
+
             Debug.Log("Turning Visual Indicators Mode On");
         }
     }

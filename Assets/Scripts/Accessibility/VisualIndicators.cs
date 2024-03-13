@@ -24,11 +24,6 @@ public class VisualIndicators : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
-
     public void OnEnable()
     {
         playerInputs.Enable();
@@ -53,61 +48,67 @@ public class VisualIndicators : MonoBehaviour
     {
         Debug.Log("Cat Vision Mode Visual Indicator");
         isInCatVision = !isInCatVision;
-        VisualIndicatorMode("Cat Vision On");
+        VisualIndicatorCatVision("Cat Vision On");
     }
 
     public void SprintingMode(InputAction.CallbackContext context)
     {
         Debug.Log("Sprinting Mode Visual Indicator");
         isSprinting = !isSprinting;
-        VisualIndicatorMode("Sprinting On");
+        VisualIndicatorSprinting("Sprinting On");
     }
 
     public void StealthMode(InputAction.CallbackContext context)
     {
         Debug.Log("Stealth Mode Visual Indicator");
         isInStealth = !isInStealth;
-        VisualIndicatorMode("Stealth On");
+        VisualIndicatorStealth("Stealth On");
     }
 
-    public void VisualIndicatorMode(string visualText)
+    public void VisualIndicatorCatVision(string visualText)
     {
         if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
         {
             if (isInCatVision)
             {
                 visualIndicatorsBG.SetActive(true);
-                visualIndicatorsTextObject.SetActive(true);
                 visualIndicatorsText.text = visualText.ToString();
             }
             else
             {
                 visualIndicatorsBG.SetActive(false);
-                visualIndicatorsTextObject.SetActive(false);
             }
+        }
+    }
 
+    public void VisualIndicatorSprinting(string visualText)
+    {
+        if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
+        {
             if (isSprinting)
             {
                 visualIndicatorsBG.SetActive(true);
-                visualIndicatorsTextObject.SetActive(true);
                 visualIndicatorsText.text = visualText.ToString();
             }
             else
             {
                 visualIndicatorsBG.SetActive(false);
-                visualIndicatorsTextObject.SetActive(false);
             }
+        }
+    }
 
+    public void VisualIndicatorStealth(string visualText)
+    {
+        if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
+        {
             if (isInStealth)
             {
                 visualIndicatorsBG.SetActive(true);
-                visualIndicatorsTextObject.SetActive(true);
                 visualIndicatorsText.text = visualText.ToString();
             }
             else
             {
                 visualIndicatorsBG.SetActive(false);
-                visualIndicatorsTextObject.SetActive(false);
             }
         }
     }
