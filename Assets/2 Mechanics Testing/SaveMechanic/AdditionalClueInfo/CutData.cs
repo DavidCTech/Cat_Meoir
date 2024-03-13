@@ -13,14 +13,18 @@ public class CutData
         boolChecks = new bool[logicObject.Count];
         for (int i = 0; i < logicObject.Count; i++)
         {
-            if (logicObject[i].isActive)
+            if(logicObject[i] != null)
             {
-                boolChecks[i] = true; 
+                if (logicObject[i].isActive)
+                {
+                    boolChecks[i] = true;
+                }
+                else
+                {
+                    boolChecks[i] = false;
+                }
             }
-            else
-            {
-                boolChecks[i] = false;
-            }
+            
 
         }
     }
