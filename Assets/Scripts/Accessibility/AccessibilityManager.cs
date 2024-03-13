@@ -261,6 +261,7 @@ public class AccessibilityManager : MonoBehaviour
                 if (!VisualIndicators.instance.visualIndicatorsBG.activeInHierarchy)
                 {
                     VisualIndicators.instance.visualIndicatorsBG.SetActive(true);
+                    VisualIndicators.instance.visualIndicatorsText.text = "Visual Indicators On";
                 }
             }
 

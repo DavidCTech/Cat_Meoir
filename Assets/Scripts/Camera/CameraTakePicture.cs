@@ -201,11 +201,16 @@ public class CameraTakePicture : MonoBehaviour
     {
         //this should also flash a light so insantiate the light and dim it coroutine - set active then have it have a timer to make it inactive on it with the routine 
         // put the render texture in a coroutine or something 
-
-        if (light != null)
+        if (FindAnyObjectByType<AccessibilityManager>() != null)
         {
-            light.SetActive(true);
+            if (!AccessibilityManager.instance.cameraFlashToggle.isOn)
+            {
+                if (light != null)
+                {
+                    light.SetActive(true);
 
+                }
+            }
         }
     }
 
@@ -286,11 +291,11 @@ public class CameraTakePicture : MonoBehaviour
         //photoManager.addPictureToList(passSprite, passBool, passString, passRender);
         photoManager.addPictureToList(passSprite, passBool, passString, passTexture, passDescription, passSceneName, passMainBool);
         //save this data 
-        photoManager.GetComponent<ClueSaves>().SaveClues(); 
+        photoManager.GetComponent<ClueSaves>().SaveClues();
         Invoke("OutCoroutine", delayTime);
 
     }
-    
+
 
     private void ClueFoundUIOff()
     {
