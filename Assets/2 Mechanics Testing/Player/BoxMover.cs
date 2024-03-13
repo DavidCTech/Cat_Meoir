@@ -9,6 +9,7 @@ public class BoxMover : MonoBehaviour
     private Vector3 offset;
     private Quaternion initialRotation;
     public bool isGrabbing = false;
+    private bool isPushingBox = false;
 
     public Animator anim;
 
@@ -42,6 +43,14 @@ public class BoxMover : MonoBehaviour
             // Lock the rotation of the box to the initial rotation
             currentBox.transform.rotation = initialRotation;
             anim.SetBool("Pushing", true);
+
+            //Will Make More Optimized Later
+
+            if (FindAnyObjectByType<VisualIndicators>() != null && !isPushingBox)
+            {
+                VisualIndicators.instance.PushingMode();
+                isPushingBox = true;
+            }
         }
     }
 
@@ -60,6 +69,12 @@ public class BoxMover : MonoBehaviour
         isGrabbing = false;
         anim.SetBool("Pushing", false);
 
+        //Will Make More Optimized Later
+        if (FindAnyObjectByType<VisualIndicators>() != null && isPushingBox)
+        {
+            VisualIndicators.instance.PushingMode();
+            isPushingBox = false;
+        }
     }
 
     bool isCollidingWithBox()

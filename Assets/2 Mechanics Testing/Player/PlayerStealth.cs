@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerStealth : MonoBehaviour
 {
     public float verticalOffset; // later change this to a gameobject reference on the hide location from a script you take in 
- 
-  
+
+
     public Vector3 playerOriginalPosition;
     public PlayerMovement playerMovement;
 
@@ -20,17 +20,20 @@ public class PlayerStealth : MonoBehaviour
 
     public Animator anim;
 
-
     public void Hide(GameObject hidingSpot, PlayerInteractionCheck playerInteractionCheck)
     {
         Debug.Log(hidingSpot.transform.position);
         playerOriginalPosition = transform.position;
-        this.gameObject.GetComponent<Rigidbody>().isKinematic = true; 
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         transform.position = hidingSpot.transform.position + new Vector3(0f, verticalOffset, 0f);
         playerInteractionCheck.isHiding = true;
         this.gameObject.GetComponent<PlayerMovement>().isFrozen = true;
 
-
+        //Will Make More Optimized Later
+        if (FindAnyObjectByType<VisualIndicators>() != null)
+        {
+            VisualIndicators.instance.HidingMode();
+        }
     }
 
     public void UnHide(PlayerInteractionCheck playerInteractionCheck)
@@ -42,12 +45,18 @@ public class PlayerStealth : MonoBehaviour
         this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         this.gameObject.GetComponent<PlayerMovement>().isFrozen = false;
 
+        //Will Make More Optimized Later
+        if (FindAnyObjectByType<VisualIndicators>() != null)
+        {
+            VisualIndicators.instance.HidingMode();
+        }
+
     }
 
     public void StealthTransitionTimer()
     {
-        
-        
+
+
         if (StealthState < 1)
         {
             StealthState = StealthState + 0.01f;
@@ -61,7 +70,7 @@ public class PlayerStealth : MonoBehaviour
 
     public void ReverseTransitionTimer()
     {
-       
+
         if (StealthState > 0)
         {
             StealthState = StealthState - 0.01f;
