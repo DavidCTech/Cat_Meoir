@@ -33,7 +33,7 @@ public static class SaveSystem
         string folderName = "AutoSave";
 
         string path = Path.Combine(defaultPath, folderName);
-        string fileName = ("/ PlayerData_" + sceneName + ".json"); 
+        string fileName = ("PlayerData_" + sceneName + ".json"); 
         path = Path.Combine(path, fileName);
 
         if (File.Exists(path))

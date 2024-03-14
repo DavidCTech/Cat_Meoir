@@ -47,6 +47,7 @@ public class PlayerSave : MonoBehaviour
         {
             Vector3 newPosition = new Vector3(data.playerX, data.playerY, data.playerZ);
             this.gameObject.transform.position = newPosition;
+            Debug.Log("Player Data: " + newPosition);
         }
         else
         {
