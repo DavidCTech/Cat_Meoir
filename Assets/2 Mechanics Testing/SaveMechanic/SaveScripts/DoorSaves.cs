@@ -38,29 +38,32 @@ public class DoorSaves : MonoBehaviour
             boolList = data.boolList;
             for (int i = 0; i < doors.Length; i++)
             {
-                // Check if the corresponding bool value is true (active)
-                if (boolList[i])
+                if (i < boolList.Length)
                 {
-                    // Set the GameObject to be active
-                    if (doors[i] != null)
+                    // Check if the corresponding bool value is true (active)
+                    if (boolList[i])
                     {
-                        doors[i].SetActive(true);
+                        // Set the GameObject to be active
+                        if (doors[i] != null)
+                        {
+                            doors[i].SetActive(true);
+                        }
+                        else
+                        {
+                            Debug.Log($"doors[{i}] is null.");
+                        }
                     }
                     else
                     {
-                        Debug.Log($"doors[{i}] is null.");
-                    }
-                }
-                else
-                {
-                    // Set the GameObject to be inactive
-                    if (doors[i] != null)
-                    {
-                        doors[i].SetActive(false);
-                    }
-                    else
-                    {
-                        Debug.Log($"doors[{i}] is null.");
+                        // Set the GameObject to be inactive
+                        if (doors[i] != null)
+                        {
+                            doors[i].SetActive(false);
+                        }
+                        else
+                        {
+                            Debug.Log($"doors[{i}] is null.");
+                        }
                     }
                 }
             }

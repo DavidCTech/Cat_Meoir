@@ -6,22 +6,21 @@ using UnityEngine;
 public class DoorOpener : MonoBehaviour
 {
     // Place on locked Game Object!
-    private PhotoManager photoManager;
     [Header("Write the name of the Game Object of the clue your looking for")]
     public List<string> clueNames = new List<string>();
     private List<string> cluesFound = new List<string>(); 
     private bool isAllCluesFound = false;
-    [Header("Get reference to Game Manager")]
-    public GameObject gameManagerObject; 
+    [Header("Get reference to photo manager")]
+    public PhotoManager photoManager;
+    [Header("Toggle if you want it to turn on instead")]
+    public bool turnOn; 
 
 
-    void Awake()
-    {
-           photoManager = gameManagerObject.GetComponent<PhotoManager>();
-    }
+  
 
     public void CheckDoorUnlock()
     {
+      
         foreach (PhotoScriptable snapshot in photoManager.snapshots)
         {
             if (snapshot.isClue)
@@ -60,7 +59,15 @@ public class DoorOpener : MonoBehaviour
         }
         if (isAllCluesFound)
         {
-            this.gameObject.SetActive(false);
+            if (!turnOn)
+            {
+                this.gameObject.SetActive(false);
+            }
+            else
+            {
+                this.gameObject.SetActive(true);
+            }
+           
         }
     }
 }
