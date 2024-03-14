@@ -4008,7 +4008,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  isActive: 0
+  isActive: 1
 --- !u!1 &2634107561338204543
 GameObject:
   m_ObjectHideFlags: 0
@@ -7355,9 +7355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d56bf28328efd48a509158254926e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clueNames:
-  - 'Shoe print '
-  - Key
+  clueNames: []
   cluesFound: []
   gameManagerObject: {fileID: 4853515133595528036}
   clueRight:
@@ -11925,7 +11923,7 @@ MonoBehaviour:
   triggers:
   - {fileID: 8611906651953687364}
   - {fileID: 1542729470302036105}
-  - {fileID: 0}
+  - {fileID: 4326851269073914714}
 --- !u!1 &5908512392540616066
 GameObject:
   m_ObjectHideFlags: 0
@@ -29965,7 +29963,7 @@ PrefabInstance:
     - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4706201191604267230}
+      objectReference: {fileID: 8063939392138063023}
     - target: {fileID: 4664562806393068785, guid: 8e8709175064bfa4895c143bdddb0290, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -30093,7 +30091,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onEnableEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4326851269073914714}
+        m_TargetAssemblyTypeName: ClueEventTrigger, Assembly-CSharp
+        m_MethodName: DisableActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -33516,7 +33526,7 @@ PrefabInstance:
     - target: {fileID: 3949414562894145647, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5419780409955432010}
+      objectReference: {fileID: 4706201191604267230}
     - target: {fileID: 3949414562894145647, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -34522,7 +34532,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onEnableEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8611906651953687364}
+        m_TargetAssemblyTypeName: ClueEventTrigger, Assembly-CSharp
+        m_MethodName: DisableActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls: []
