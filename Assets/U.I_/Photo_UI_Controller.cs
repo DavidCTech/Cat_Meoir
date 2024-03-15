@@ -2,49 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Photo_UI_Controller : MonoBehaviour
 {
-    public GameObject photoFirstButton, photoSecondButton, photoThirdButton, photoFourthButton;
-    public GameObject page1;
-    public GameObject page2;
-    public GameObject page3;
-    public GameObject funPictures;
+    public GameObject photoFirstButton, cluesFirstButton, mapFirstButton;
+    public GameObject Photo_UI;
+    public GameObject Photos_Panel;
+    public GameObject Clues_Panel;
+    public GameObject Map_Panel;
+    public PlayerController playerControls;
 
-    public void ActivatePage1()
+    private void Awake()
     {
-        page1.SetActive(true);
-        page2.SetActive(false);
-        page3.SetActive(false);
+        playerControls = new PlayerController();
+    }
+
+    public void OnEnable()
+    {
+        playerControls.Enable();
+        playerControls.Player.OpenPhotos.performed += ctx => OnOpenPhotos();
+    }
+
+    public void OnDisable()
+    {
+        playerControls.Disable();
+        playerControls.Player.OpenPhotos.performed -= ctx => OnOpenPhotos();
+    }
+
+    public void OnOpenPhotos()
+    {
+        ActivatePhotos();
+    }
+
+
+    public void ActivatePhotos()
+    {
+        Photos_Panel.SetActive(true);
+        Clues_Panel.SetActive(false);
+        Map_Panel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(photoFirstButton);
     }
 
-    public void ActivatePage2()
+    public void ActivateClues()
     {
-        page1.SetActive(false);
-        page2.SetActive(true);
-        page3.SetActive(false);
+        Photos_Panel.SetActive(false);
+        Clues_Panel.SetActive(true);
+        Map_Panel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(photoSecondButton);
+        EventSystem.current.SetSelectedGameObject(cluesFirstButton);
     }
 
-    public void ActivatePage3()
+    public void ActivateMap()
     {
-        page1.SetActive(false);
-        page2.SetActive(false);
-        page3.SetActive(true);
+        Photos_Panel.SetActive(false);
+        Clues_Panel.SetActive(false);
+        Map_Panel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(photoThirdButton);
+        EventSystem.current.SetSelectedGameObject(mapFirstButton);
     }
 
-    public void ActivateFunPictures()
-    {
-        page1.SetActive(false);
-        page2.SetActive(false);
-        page3.SetActive(false);
-        funPictures.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(photoFourthButton);
-    }
 }
