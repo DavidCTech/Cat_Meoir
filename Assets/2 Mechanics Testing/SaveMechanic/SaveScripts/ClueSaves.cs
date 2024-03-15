@@ -6,7 +6,10 @@ public class ClueSaves : MonoBehaviour
 {
     // game object photo manager 
     private PhotoManager photoManager;
-    public GameObject loadingScreen; 
+    public GameObject loadingScreen;
+
+
+    private bool isLoading= false; 
 
     private void Start()
     {
@@ -14,9 +17,13 @@ public class ClueSaves : MonoBehaviour
     }
     public void SaveClues()
     {
-        photoManager = this.gameObject.GetComponent<PhotoManager>();
-        this.gameObject.GetComponent<ClueImagesSave>().SaveClueImages();
-        SaveSystem.SaveClues(photoManager.snapshots);
+        if (!isLoading)
+        {
+            photoManager = this.gameObject.GetComponent<PhotoManager>();
+            this.gameObject.GetComponent<ClueImagesSave>().SaveClueImages();
+            SaveSystem.SaveClues(photoManager.snapshots);
+            Debug.Log("saved Clues");
+        }
     }
     public void DeleteClues()
     {
@@ -25,18 +32,20 @@ public class ClueSaves : MonoBehaviour
     }
     public void LoadClues()
     {
+        isLoading = true; 
         if (loadingScreen != null)
         {
             loadingScreen.SetActive(true);
         }
         StartCoroutine(LoadClueAsync());
+        Debug.Log("loaded Clues");
 
     }
 
     // logic made with chat gpt help 
     private IEnumerator LoadClueAsync()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         if (loadingScreen != null)
         {
@@ -45,8 +54,8 @@ public class ClueSaves : MonoBehaviour
         ClueData data = SaveSystem.LoadClues();
         // Clear the existing snapshots
         photoManager.snapshots.Clear();
-       
-        if(data == null)
+        Debug.Log("snapshot clear ");
+        if (data == null)
         {
             Debug.Log("clue data null");
         }
@@ -77,14 +86,18 @@ public class ClueSaves : MonoBehaviour
 
                 // Add the new PhotoScriptable to the snapshots list
                 photoManager.snapshots.Add(newPhoto);
+                Debug.Log("photo name: " + data.isClueArray[i]);
             }
             photoManager.PictureChecking();
         }
+       
         else
         {
             // put the failed to load gemaobject UI On 
             
             
         }
+        isLoading = false;
+        SaveClues();
     }
 }

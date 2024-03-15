@@ -62,7 +62,7 @@ public class DoorSaves : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log($"doors[{i}] is null.");
+                           
                         }
                     }
                 }

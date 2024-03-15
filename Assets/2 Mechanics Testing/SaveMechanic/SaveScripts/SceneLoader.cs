@@ -11,11 +11,14 @@ public class SceneLoader : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("loading");
         onEnableEvent.Invoke();
     }
 
     public void LoadScene(string sceneName)
     {
+      
+
         SceneManager.LoadScene(sceneName);
     }
 }
