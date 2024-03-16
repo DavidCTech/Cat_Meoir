@@ -9,14 +9,7 @@ public class ClueBoardManager : MonoBehaviour
 
     public List<string> cluesFound = new List<string>();
 
-
-    public void Start()
-    {
-        photoManager = GameObject.FindObjectOfType<PhotoManager>();
-
-    }
-
-    public void Update()
+    private void OnEnable()
     {
         ClueBoardCheck();
     }

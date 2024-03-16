@@ -11,17 +11,15 @@ public class OptionalClueCheck : MonoBehaviour
 
     public TMP_Text clueNameText;
     public TMP_Text clueDescriptionText;
+    public Image clueImage;
+
 
     public ClueBoardManager clueBoardManager;
     public bool noMatchFound = true;
 
-    void Start()
+    private void OnEnable()
     {
-        // Find ClueBoardManager reference once at the start
-        clueBoardManager = FindObjectOfType<ClueBoardManager>();
-
-        // Call InformationCheck when the script starts
-        InformationCheck();
+        InformationCheck(); 
     }
 
     public void InformationCheck()
@@ -29,18 +27,18 @@ public class OptionalClueCheck : MonoBehaviour
         // Reset noMatchFound to true at the start of each check
         bool noMatchFound = true;
 
-        Debug.Log("Clues Found: " + string.Join(", ", clueBoardManager.cluesFound));
+        //Debug.Log("Clues Found: " + string.Join(", ", clueBoardManager.cluesFound));
 
         foreach (string foundClue in clueBoardManager.cluesFound)
         {
-            Debug.Log("Found Clue: " + foundClue);
-            Debug.Log("Clue Name: " + clueName);
+            //Debug.Log("Found Clue: " + foundClue);
+            //Debug.Log("Clue Name: " + clueName);
 
             if (foundClue == clueName)
             {
                 // If a match is found, set the flag to false and exit the loop
                 noMatchFound = false;
-                Debug.Log("False ");
+                //Debug.Log("False ");
                 break;
             }
         }
@@ -48,8 +46,13 @@ public class OptionalClueCheck : MonoBehaviour
         // If no match is found, set the text
         if (noMatchFound)
         {
-            clueNameText.text = "Bro";
+            clueNameText.text = "???";
             clueDescriptionText.text = "???";
+            clueImage.gameObject.SetActive(false); // Disable the image
+        }
+        else
+        {
+            clueImage.gameObject.SetActive(true); // Enable the image if a match is found
         }
     }
 }
