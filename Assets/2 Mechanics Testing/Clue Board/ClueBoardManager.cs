@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class ClueBoardManager : MonoBehaviour
 {
@@ -9,10 +11,14 @@ public class ClueBoardManager : MonoBehaviour
 
     public List<string> cluesFound = new List<string>();
 
+
+
+
     private void OnEnable()
     {
         ClueBoardCheck();
     }
+
 
     public void ClueBoardCheck()
     {

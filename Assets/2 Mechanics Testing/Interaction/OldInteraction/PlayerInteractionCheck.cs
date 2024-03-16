@@ -172,6 +172,11 @@ public class PlayerInteractionCheck : MonoBehaviour
                     //Debug.Log("should have");
                     targetObject.GetComponent<DoorOpener>().CheckDoorUnlock();
                 }
+                if (objectName == "ClueBoard")
+                {
+                    //Debug.Log("should have");
+                    targetObject.GetComponent<ClueBoardOpener>().EnterOrExitClueBoard();
+                }
                 if (objectName == "Safe")
                 {
                     SafeInteraction safeInteraction = targetObject.GetComponent<SafeInteraction>();
