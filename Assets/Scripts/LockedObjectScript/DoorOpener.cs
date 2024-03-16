@@ -67,7 +67,11 @@ public class DoorOpener : MonoBehaviour
             {
                 this.gameObject.SetActive(true);
             }
-           
+
+        }
+        else
+        {
+            Debug.Log("not all clues found.");
         }
     }
 }
