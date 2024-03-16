@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public Slider volumeSlider;
     public Slider sfxSlider;
     public Slider dialogueSlider;
+    public Slider musicSlider;
 
     private JustCruisingMode justCruisingMode;
     public Button applyChangesButton;
@@ -251,6 +252,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         sfxSlider.value = PlayerPrefs.GetFloat("MSfx");
 
         dialogueSlider.value = PlayerPrefs.GetFloat("MDialogue");
+
+        musicSlider.value = PlayerPrefs.GetFloat("MMusic");
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
@@ -514,6 +517,14 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         PlayerPrefs.SetFloat("MDialogue", sliderValue);
         audioMixer.SetFloat("MyExposedParam 3", PlayerPrefs.GetFloat("MDialogue"));
         audioMixer.SetFloat("MyExposedParam 3", Mathf.Log10(sliderValue) * 20);
+        Debug.Log(sliderValue);
+    }
+
+    public void SetMusic(float sliderValue)
+    {
+        PlayerPrefs.SetFloat("MMusic", sliderValue);
+        audioMixer.SetFloat("MyExposedParam 1", PlayerPrefs.GetFloat("MMusic"));
+        audioMixer.SetFloat("MyExposedParam 1", Mathf.Log10(sliderValue) * 20);
         Debug.Log(sliderValue);
     }
 
