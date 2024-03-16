@@ -21,6 +21,7 @@ public class DoorOpener : MonoBehaviour
     public void CheckDoorUnlock()
     {
         Debug.Log("door opender for: " + this.gameObject.name);
+       
         foreach (PhotoScriptable snapshot in photoManager.snapshots)
         {
             if (snapshot.isClue)
@@ -49,6 +50,7 @@ public class DoorOpener : MonoBehaviour
         {
             if (!cluesFound.Contains(clueName))
             {
+                Debug.Log("missing clue: " + clueName);
                 isAllCluesFound = false;
                 break;
                 
