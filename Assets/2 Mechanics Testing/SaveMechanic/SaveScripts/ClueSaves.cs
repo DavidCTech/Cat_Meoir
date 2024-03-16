@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ClueSaves : MonoBehaviour
 {
     // game object photo manager 
     private PhotoManager photoManager;
     public GameObject loadingScreen;
-
+    [Header("Put in events you want after load.")]
+    public UnityEvent afterLoadEvent;
 
     private bool isLoading= false; 
 
@@ -25,6 +27,13 @@ public class ClueSaves : MonoBehaviour
             Debug.Log("saved Clues");
         }
     }
+    public void loadEvents()
+    {
+        if (!isLoading)
+        {
+            afterLoadEvent.Invoke();
+        }
+    }
     public void DeleteClues()
     {
         SaveSystem.DeleteClues();
@@ -38,7 +47,6 @@ public class ClueSaves : MonoBehaviour
             loadingScreen.SetActive(true);
         }
         StartCoroutine(LoadClueAsync());
-        Debug.Log("loaded Clues");
 
     }
 
@@ -54,7 +62,6 @@ public class ClueSaves : MonoBehaviour
         ClueData data = SaveSystem.LoadClues();
         // Clear the existing snapshots
         photoManager.snapshots.Clear();
-        Debug.Log("snapshot clear ");
         if (data == null)
         {
             Debug.Log("clue data null");
@@ -97,7 +104,11 @@ public class ClueSaves : MonoBehaviour
             
             
         }
+
         isLoading = false;
+        
         SaveClues();
+        loadEvents();
+
     }
 }
