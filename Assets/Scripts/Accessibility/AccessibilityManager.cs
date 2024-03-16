@@ -85,7 +85,6 @@ public class AccessibilityManager : MonoBehaviour
             else
             {
                 journalColorblindToggle.isOn = false;
-                JournalColorblind.instance.SwapColors();
             }
         }
 
