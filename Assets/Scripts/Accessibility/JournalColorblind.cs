@@ -4,111 +4,77 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class JournalColorblind : MonoBehaviour
 {
-    public Material newMaterial;
-    private Material[] originalMaterials;
-    public GameObject[] objectsToSwap;
+    public static JournalColorblind instance;
 
-    public Color newColor;
+    public Image[] images;
+    public Color[] colorsToSwap;
     private Color[] originalColors;
-    public Image[] imagesToSwap;
-    public TextMeshProUGUI[] textsToSwap;
 
-    private bool isSwapped = false;
+    public TextMeshProUGUI[] textsToSwap;
+    public Color[] originalTextColors;
+    public Color textColorToSwap;
+
+    public bool isSwapped = false;
 
     void Awake()
     {
-
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     void Start()
     {
-        StoreOriginalMaterials();
         StoreOriginalColors();
-    }
-
-    public void StoreOriginalMaterials()
-    {
-        originalMaterials = new Material[objectsToSwap.Length];
-
-        for (int i = 0; i < objectsToSwap.Length; i++)
-        {
-            Renderer renderer = objectsToSwap[i].GetComponent<Renderer>();
-
-            if (renderer != null)
-            {
-                originalMaterials[i] = renderer.sharedMaterial;
-            }
-        }
     }
 
     public void StoreOriginalColors()
     {
-        originalColors = new Color[imagesToSwap.Length + textsToSwap.Length];
+        originalColors = new Color[images.Length];
+        originalTextColors = new Color[textsToSwap.Length];
 
-        for (int i = 0; i < imagesToSwap.Length; i++)
+        for (int i = 0; i < images.Length; i++)
         {
-            originalColors[i] = imagesToSwap[i].color;
+            originalColors[i] = images[i].color;
         }
 
         for (int i = 0; i < textsToSwap.Length; i++)
         {
-            originalColors[i + imagesToSwap.Length] = textsToSwap[i].color;
+            originalTextColors[i] = textsToSwap[i].color;
         }
     }
 
-    public void SwapMaterials()
+    public void SwapColors()
     {
         if (!isSwapped)
         {
-            foreach (GameObject gameObject in objectsToSwap)
+            for (int i = 0; i < images.Length; i++)
             {
-                Renderer renderer = gameObject.GetComponent<Renderer>();
-
-                if (renderer != null)
-                {
-                    renderer.material = newMaterial;
-                }
+                images[i].color = colorsToSwap[i];
             }
 
-            foreach (Image image in imagesToSwap)
+            for (int i = 0; i < textsToSwap.Length; i++)
             {
-                image.color = newColor;
-            }
-
-            foreach (TextMeshProUGUI text in textsToSwap)
-            {
-                text.color = newColor;
+                textsToSwap[i].color = textColorToSwap;
             }
 
             isSwapped = true;
         }
         else
         {
-            for (int i = 0; i < objectsToSwap.Length; i++)
+            for (int i = 0; i < images.Length; i++)
             {
-                Renderer renderer = objectsToSwap[i].GetComponent<Renderer>();
-
-                if (renderer != null && originalMaterials[i] != null)
-                {
-                    renderer.material = originalMaterials[i];
-                }
+                images[i].color = originalColors[i];
             }
 
-            int index = 0;
-
-            foreach (Image image in imagesToSwap)
+            for (int i = 0; i < textsToSwap.Length; i++)
             {
-                image.color = originalColors[index];
-                index++;
-            }
-
-            foreach (TextMeshProUGUI text in textsToSwap)
-            {
-                text.color = originalColors[index];
-                index++;
+                textsToSwap[i].color = originalTextColors[i];
             }
 
             isSwapped = false;

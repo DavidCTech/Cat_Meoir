@@ -79,11 +79,13 @@ public class AccessibilityManager : MonoBehaviour
             if (journalCbInt == 1)
             {
                 journalColorblindToggle.isOn = true;
+                JournalColorblind.instance.SwapColors();
                 isUsingJournalCb = true;
             }
             else
             {
                 journalColorblindToggle.isOn = false;
+                JournalColorblind.instance.SwapColors();
             }
         }
 
@@ -142,35 +144,11 @@ public class AccessibilityManager : MonoBehaviour
     public void SetJournalColorblindMode(bool isUsingJournalCb)
     {
         journalColorblindToggle.isOn = isUsingJournalCb;
-
-        if (!isUsingJournalCb)
-        {
-            PlayerPrefs.SetInt("JournalCbState", 0);
-            //Debug.Log("Turning Journal Colorblind Mode Off");
-        }
-        else
-        {
-            PlayerPrefs.SetInt("JournalCbState", 1);
-            isUsingJournalCb = true;
-            //Debug.Log("Turning Journal Colorblind Mode On");
-        }
     }
 
     public void SetCameraFlashMode(bool isCameraFlashDisabled)
     {
         cameraFlashToggle.isOn = isCameraFlashDisabled;
-
-        if (!isCameraFlashDisabled)
-        {
-            PlayerPrefs.SetInt("CameraFlashState", 0);
-            //Debug.Log("Turning Journal Colorblind Mode Off");
-        }
-        else
-        {
-            PlayerPrefs.SetInt("CameraFlashState", 1);
-            isCameraFlashDisabled = true;
-            //Debug.Log("Turning Journal Colorblind Mode On");
-        }
     }
 
     public void SetArialDialogueMode(bool isUsingArialFont)
@@ -205,7 +183,6 @@ public class AccessibilityManager : MonoBehaviour
             {
                 HighContrastManager.instance.SwapMaterials();
             }
-            //Debug.Log("Turning High Contrast Mode Off");
         }
         else
         {
@@ -216,7 +193,6 @@ public class AccessibilityManager : MonoBehaviour
             {
                 HighContrastManager.instance.SwapMaterials();
             }
-            //Debug.Log("Turning High Contrast Mode On");
         }
 
         if (!cvHighContrastToggle.isOn)
@@ -229,7 +205,6 @@ public class AccessibilityManager : MonoBehaviour
                     HighContrastManager.instance.SwapMaterialsInCatVision();
                 }
             }
-            //Debug.Log("Turning Journal Colorblind Mode Off");
         }
         else
         {
@@ -242,14 +217,34 @@ public class AccessibilityManager : MonoBehaviour
                 }
             }
             isUsingHighContrastMode = true;
-            //Debug.Log("Turning Journal Colorblind Mode On");
+        }
+
+        if (!journalColorblindToggle.isOn)
+        {
+            PlayerPrefs.SetInt("JournalCbState", 0);
+            JournalColorblind.instance.SwapColors();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("JournalCbState", 1);
+            JournalColorblind.instance.SwapColors();
+            isUsingJournalCb = true;
+        }
+
+        if (!cameraFlashToggle.isOn)
+        {
+            PlayerPrefs.SetInt("CameraFlashState", 0);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("CameraFlashState", 1);
+            isCameraFlashDisabled = true;
         }
 
         if (!visualIndicatorsToggle.isOn)
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 0);
             VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
-            Debug.Log("Turning Visual Indicators Mode Off");
         }
         else
         {
@@ -264,8 +259,6 @@ public class AccessibilityManager : MonoBehaviour
                     VisualIndicators.instance.visualIndicatorsText.text = "Visual Indicators On";
                 }
             }
-
-            Debug.Log("Turning Visual Indicators Mode On");
         }
     }
 }
