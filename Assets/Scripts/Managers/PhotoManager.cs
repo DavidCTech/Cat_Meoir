@@ -12,10 +12,12 @@ public class PhotoManager : MonoBehaviour
     [Header("You do not need to ref anything, this is just nice info.")]
     public List<PhotoScriptable> snapshots = new List<PhotoScriptable>();
     public List<ClueEventTrigger> triggers = new List<ClueEventTrigger>();
-    public CutSceneManager cutManager; 
+    public CutSceneManager cutManager;
+    public FlashBackManager flashManager; 
 
     private bool canContinue;
     private ClueImageManager clueImageManager;
+    
 
     void Awake()
     {
@@ -56,7 +58,10 @@ public class PhotoManager : MonoBehaviour
             cutManager.SaveCuts();
 
         }
-
+        if(flashManager != null)
+        {
+            flashManager.SaveButton(); 
+        }
 
 
     }

@@ -388,10 +388,73 @@ public static class SaveSystem
         }
 
     }
+    public static void SaveButton(List<GameObject> buttons)
+    {
+
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        string fileName = "ButtonData.json";
+        string path = Path.Combine(folderPath, fileName);
+
+        ButtonData data = new ButtonData(buttons);
+
+        string jsonData = JsonUtility.ToJson(data);
+        File.WriteAllText(path, jsonData);
+    }
+
+    public static ButtonData LoadButton()
+    {
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "ButtonData.json";
+        string path = Path.Combine(folderPath, fileName);
+
+        if (File.Exists(path))
+        {
+            string jsonData = File.ReadAllText(path);
+            ButtonData data = JsonUtility.FromJson<ButtonData>(jsonData);
+            return data;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static void DeleteButton()
+    {
+        string defaultPath = Application.persistentDataPath;
+
+        string folderName = "AutoSave";
+
+        string folderPath = Path.Combine(defaultPath, folderName);
+        string fileName = "ButtonData.json";
+        string path = Path.Combine(folderPath, fileName);
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
+        else
+        {
+            //Debug.LogError("Save File not found in " + path);
+
+        }
+    }
 
 
-
-}
+ }
 
 
 
