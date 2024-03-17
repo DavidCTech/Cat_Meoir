@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using System.Collections.Generic;
 
 public class CompletePercentage : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class CompletePercentage : MonoBehaviour
     public TextMeshProUGUI optNumer;
 
     public TextMeshProUGUI completeText;
-    public GameObject flashBackButton;
+    public List<GameObject> flashBackButtons;
 
     private int mainNumerInt;
     private int mainDenomInt; 
@@ -22,7 +23,14 @@ public class CompletePercentage : MonoBehaviour
         completeText.text =  $"{GetPercentage().ToString("F0")}% Completed";
         if( mainNumerInt == mainDenomInt)
         {
-            flashBackButton.SetActive(true);
+            if(flashBackButtons.Count > 0)
+            {
+                foreach (GameObject button in flashBackButtons)
+                {
+                    button.SetActive(true);
+                }
+            }
+            
         }
 
 
