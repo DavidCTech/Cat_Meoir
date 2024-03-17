@@ -12,6 +12,7 @@ public class PhotoManager : MonoBehaviour
     [Header("You do not need to ref anything, this is just nice info.")]
     public List<PhotoScriptable> snapshots = new List<PhotoScriptable>();
     public List<ClueEventTrigger> triggers = new List<ClueEventTrigger>();
+    public CutSceneManager cutManager; 
 
     private bool canContinue;
     private ClueImageManager clueImageManager;
@@ -49,8 +50,14 @@ public class PhotoManager : MonoBehaviour
                 triggers[i].DisableActive(); 
             }
         }
+        //save your cut scene data 
+        if(cutManager!= null)
+        {
+            cutManager.SaveCuts();
 
-       
+        }
+
+
 
     }
 
