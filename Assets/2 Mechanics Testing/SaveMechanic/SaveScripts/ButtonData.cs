@@ -15,14 +15,20 @@ public class ButtonData
 
         for (int i = 0; i < buttons.Count; i++)
         {
-            if (buttons[i] == true)
+            FlashBackActive activeScript = buttons[i].GetComponent<FlashBackActive>(); 
+            if(activeScript != null)
             {
-                boolChecks[i] = true;
+                Debug.Log("button data " + activeScript.isActive);
+                if (activeScript.isActive == true)
+                {
+                    boolChecks[i] = true;
+                }
+                else
+                {
+                    boolChecks[i] = false;
+                }
             }
-            else
-            {
-                boolChecks[i] = false;
-            }
+            
         }
 
 

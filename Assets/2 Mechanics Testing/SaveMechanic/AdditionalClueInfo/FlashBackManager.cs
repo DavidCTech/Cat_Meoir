@@ -18,11 +18,22 @@ public class FlashBackManager : MonoBehaviour
             {
                 if(data.boolChecks[i] == true)
                 {
-                    flashButtons[i].SetActive(true);
+                    FlashBackActive activeScript = flashButtons[i].GetComponent<FlashBackActive>();
+                    if (activeScript != null)
+                    {
+                        activeScript.isActive = true;
+                        flashButtons[i].SetActive(true); 
+                    }
                 }
                 else
                 {
-                    flashButtons[i].SetActive(false);
+                    FlashBackActive activeScript = flashButtons[i].GetComponent<FlashBackActive>();
+                    if (activeScript != null)
+                    {
+                        activeScript.isActive = false;
+
+                        flashButtons[i].SetActive(false);
+                    }
                 }
             }
         }
