@@ -79,12 +79,15 @@ public class AccessibilityManager : MonoBehaviour
             if (journalCbInt == 1)
             {
                 journalColorblindToggle.isOn = true;
+                JournalColorblind.instance.isSwapped = true;
                 JournalColorblind.instance.SwapColors();
                 isUsingJournalCb = true;
             }
             else
             {
                 journalColorblindToggle.isOn = false;
+                JournalColorblind.instance.isSwapped = false;
+                JournalColorblind.instance.SwapColors();
             }
         }
 
@@ -120,12 +123,19 @@ public class AccessibilityManager : MonoBehaviour
             {
                 visualIndicatorsToggle.isOn = true;
                 isUsingVisualIndicators = true;
-                VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+                if (FindAnyObjectByType<VisualIndicators>() != null)
+                {
+                    VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+                }
             }
             else
             {
                 visualIndicatorsToggle.isOn = false;
-                VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+
+                if (FindAnyObjectByType<VisualIndicators>() != null)
+                {
+                    VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+                }
             }
         }
     }
@@ -221,11 +231,13 @@ public class AccessibilityManager : MonoBehaviour
         if (!journalColorblindToggle.isOn)
         {
             PlayerPrefs.SetInt("JournalCbState", 0);
+            JournalColorblind.instance.isSwapped = false;
             JournalColorblind.instance.SwapColors();
         }
         else
         {
             PlayerPrefs.SetInt("JournalCbState", 1);
+            JournalColorblind.instance.isSwapped = true;
             JournalColorblind.instance.SwapColors();
             isUsingJournalCb = true;
         }

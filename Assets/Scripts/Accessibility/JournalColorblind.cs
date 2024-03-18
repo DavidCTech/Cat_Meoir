@@ -51,11 +51,18 @@ public class JournalColorblind : MonoBehaviour
 
     public void SwapColors()
     {
-        if (!isSwapped)
+        if (isSwapped)
         {
             for (int i = 0; i < images.Length; i++)
             {
-                images[i].color = colorsToSwap[i];
+                if (i < 11)
+                {
+                    images[i].color = colorsToSwap[i];
+                }
+                else if (images[i].sprite == null)
+                {
+                    images[i].color = colorsToSwap[i];
+                }
             }
 
             for (int i = 0; i < textsToSwap.Length; i++)
@@ -63,13 +70,20 @@ public class JournalColorblind : MonoBehaviour
                 textsToSwap[i].color = textColorToSwap;
             }
 
-            isSwapped = true;
+            isSwapped = false;
         }
-        else
+        else if (!isSwapped)
         {
             for (int i = 0; i < images.Length; i++)
             {
-                images[i].color = originalColors[i];
+                if (i < 11)
+                {
+                    images[i].color = originalColors[i];
+                }
+                else if (images[i].sprite == null)
+                {
+                    images[i].color = originalColors[i];
+                }
             }
 
             for (int i = 0; i < textsToSwap.Length; i++)
@@ -77,7 +91,7 @@ public class JournalColorblind : MonoBehaviour
                 textsToSwap[i].color = originalTextColors[i];
             }
 
-            isSwapped = false;
+            isSwapped = true;
         }
     }
 }

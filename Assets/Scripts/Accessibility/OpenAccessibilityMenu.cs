@@ -8,7 +8,7 @@ public class OpenAccessibilityMenu : MonoBehaviour
 {
     public CanvasGroup accessibilityMenu;
     public CanvasGroup gammaPanel;
-    public GameObject highContrastToggle;
+    public GameObject highContrastToggle, buttonWhenClosed;
 
     void Update()
     {
@@ -47,5 +47,33 @@ public class OpenAccessibilityMenu : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OpenTheAccessibilityMenu()
+    {
+        if (accessibilityMenu.alpha == 0)
+        {
+            accessibilityMenu.alpha = 1;
+            accessibilityMenu.interactable = true;
+            accessibilityMenu.blocksRaycasts = true;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(highContrastToggle);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            if (gammaPanel.alpha == 1)
+            {
+                gammaPanel.alpha = 0;
+            }
+        }
+    }
+
+    public void CloseTheAccessibilityMenu()
+    {
+        accessibilityMenu.alpha = 0;
+        accessibilityMenu.interactable = false;
+        accessibilityMenu.blocksRaycasts = false;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(buttonWhenClosed);
     }
 }

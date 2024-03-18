@@ -212,6 +212,13 @@ public class CameraTakePicture : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if (light != null)
+            {
+                light.SetActive(true);
+            }
+        }
     }
 
     public IEnumerator TakeSnapshot(RenderTexture renderTexture)

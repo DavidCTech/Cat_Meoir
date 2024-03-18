@@ -79,52 +79,54 @@ public class PostProcessingToggles : MonoBehaviour
     public void SetFilmGrainMode(bool isUsingFilmGrain)
     {
         filmGrainToggle.isOn = isUsingFilmGrain;
+    }
 
+    public void SetMotionBlurMode(bool isUsingMotionBlur)
+    {
+        motionBlurToggle.isOn = isUsingMotionBlur;
+    }
+
+    public void ApplyFilmGrainSettings()
+    {
         if (!postProcessingVolume.profile.TryGet(out filmGrain))
         {
             Debug.Log("Film Grain effect not found in the Post Processing Volume.");
             return;
         }
 
-        if (!isUsingFilmGrain)
+        if (!filmGrainToggle.isOn)
         {
             PlayerPrefs.SetInt("FilmGrainState", 0);
             filmGrain.active = false;
             isUsingFilmGrain = false;
-            Debug.Log("Turning Film Grain Off");
         }
         else
         {
             PlayerPrefs.SetInt("FilmGrainState", 1);
             filmGrain.active = true;
             isUsingFilmGrain = true;
-            Debug.Log("Turning Film Grain On");
         }
     }
 
-    public void SetMotionBlurMode(bool isUsingMotionBlur)
+    public void ApplyMotionBlurSettings()
     {
-        motionBlurToggle.isOn = isUsingMotionBlur;
-
         if (!postProcessingVolume.profile.TryGet(out motionBlur))
         {
             Debug.Log("Motion Blur effect not found in the Post Processing Volume.");
             return;
         }
 
-        if (!isUsingMotionBlur)
+        if (!motionBlurToggle.isOn)
         {
             PlayerPrefs.SetInt("MotionBlurState", 0);
             motionBlur.active = false;
             isUsingMotionBlur = false;
-            Debug.Log("Turning Motion Blur Off");
         }
         else
         {
             PlayerPrefs.SetInt("MotionBlurState", 1);
             motionBlur.active = true;
             isUsingMotionBlur = true;
-            Debug.Log("Turning Motion Blur On");
         }
     }
 }
