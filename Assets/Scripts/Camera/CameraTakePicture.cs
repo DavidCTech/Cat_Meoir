@@ -59,11 +59,15 @@ public class CameraTakePicture : MonoBehaviour
     private bool passMainBool;
     private bool isTakingPicture;
 
+    private AccessibilityManager accessibilityManager;
+
     private void Awake()
     {
         captureCamera = this.gameObject.GetComponent<Camera>();
         cameraSwitch = this.gameObject.GetComponent<CameraSwitch>();
         cameraControls = new CameraController();
+
+        accessibilityManager = FindAnyObjectByType<AccessibilityManager>();
     }
     private void OnEnable()
     {
@@ -201,14 +205,13 @@ public class CameraTakePicture : MonoBehaviour
     {
         //this should also flash a light so insantiate the light and dim it coroutine - set active then have it have a timer to make it inactive on it with the routine 
         // put the render texture in a coroutine or something 
-        if (FindAnyObjectByType<AccessibilityManager>() != null)
+        if (accessibilityManager != null)
         {
             if (!AccessibilityManager.instance.cameraFlashToggle.isOn)
             {
                 if (light != null)
                 {
                     light.SetActive(true);
-
                 }
             }
         }

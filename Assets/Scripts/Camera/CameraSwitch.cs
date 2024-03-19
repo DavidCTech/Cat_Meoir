@@ -28,7 +28,6 @@ public class CameraSwitch : MonoBehaviour
         //need ref to game object player to get interaction check to ensure you cant switch while interacting 
         player = playerMovement.gameObject;
         playerInteraction = player.GetComponent<PlayerInteractionCheck>();
-
     }
     private void OnEnable()
     {

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using Unity.VisualScripting;
 
 public class JournalColorblind : MonoBehaviour
 {
@@ -17,6 +15,8 @@ public class JournalColorblind : MonoBehaviour
     public TextMeshProUGUI[] textsToSwap;
     public Color[] originalTextColors;
     public Color textColorToSwap;
+
+    public Color defaultImageColor;
 
     public bool isSwapped = false;
 
@@ -49,6 +49,14 @@ public class JournalColorblind : MonoBehaviour
         }
     }
 
+    public void TurnToOriginal(Image image)
+    {
+        if (!AccessibilityManager.instance.journalColorblindToggle.isOn)
+        {
+            image.color = defaultImageColor;
+        }
+    }
+
     public void SwapColors()
     {
         if (isSwapped)
@@ -69,8 +77,6 @@ public class JournalColorblind : MonoBehaviour
             {
                 textsToSwap[i].color = textColorToSwap;
             }
-
-            isSwapped = false;
         }
         else if (!isSwapped)
         {
@@ -90,8 +96,6 @@ public class JournalColorblind : MonoBehaviour
             {
                 textsToSwap[i].color = originalTextColors[i];
             }
-
-            isSwapped = true;
         }
     }
 }

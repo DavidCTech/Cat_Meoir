@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Rendering.PostProcessing;
 
 public class PostProcessingToggles : MonoBehaviour
 {
     public Volume postProcessingVolume;
 
     private FilmGrain filmGrain;
-    private UnityEngine.Rendering.Universal.MotionBlur motionBlur;
+    private MotionBlur motionBlur;
 
     [Header("Accessibility Toggles")]
     public Toggle filmGrainToggle;

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class AccessibilityManager : MonoBehaviour
@@ -20,6 +18,10 @@ public class AccessibilityManager : MonoBehaviour
     private int highContrastInt, cvHighContrastInt, journalCbInt, cameraFlashInt, arialDialogueInt,
     visualIndicatorsInt;
 
+    private HighContrastManager highContrastManager;
+    private JournalColorblind journalColorblind;
+    private VisualIndicators visualIndicators;
+
     void Awake()
     {
         //Make script an instance
@@ -34,6 +36,10 @@ public class AccessibilityManager : MonoBehaviour
         cameraFlashInt = PlayerPrefs.GetInt("CameraFlashState");
         arialDialogueInt = PlayerPrefs.GetInt("ArialDialogueState");
         visualIndicatorsInt = PlayerPrefs.GetInt("VisualIndicatorsState");
+
+        highContrastManager = FindAnyObjectByType<HighContrastManager>();
+        journalColorblind = FindAnyObjectByType<JournalColorblind>();
+        visualIndicators = FindAnyObjectByType<VisualIndicators>();
     }
 
     void Start()
@@ -45,7 +51,7 @@ public class AccessibilityManager : MonoBehaviour
                 highContrastToggle.isOn = true;
                 isUsingHighContrastMode = true;
 
-                if (FindObjectOfType<HighContrastManager>() != null)
+                if (highContrastManager != null)
                 {
                     HighContrastManager.instance.SwapMaterials();
                 }
@@ -54,7 +60,7 @@ public class AccessibilityManager : MonoBehaviour
             {
                 highContrastToggle.isOn = false;
 
-                if (FindObjectOfType<HighContrastManager>() != null)
+                if (highContrastManager != null)
                 {
                     HighContrastManager.instance.SwapMaterials();
                 }
@@ -79,15 +85,23 @@ public class AccessibilityManager : MonoBehaviour
             if (journalCbInt == 1)
             {
                 journalColorblindToggle.isOn = true;
-                JournalColorblind.instance.isSwapped = true;
-                JournalColorblind.instance.SwapColors();
+
+                if (journalColorblind != null)
+                {
+                    JournalColorblind.instance.isSwapped = true;
+                    JournalColorblind.instance.SwapColors();
+                }
                 isUsingJournalCb = true;
             }
             else
             {
                 journalColorblindToggle.isOn = false;
-                JournalColorblind.instance.isSwapped = false;
-                JournalColorblind.instance.SwapColors();
+
+                if (journalColorblind != null)
+                {
+                    JournalColorblind.instance.isSwapped = false;
+                    JournalColorblind.instance.SwapColors();
+                }
             }
         }
 
@@ -123,7 +137,8 @@ public class AccessibilityManager : MonoBehaviour
             {
                 visualIndicatorsToggle.isOn = true;
                 isUsingVisualIndicators = true;
-                if (FindAnyObjectByType<VisualIndicators>() != null)
+
+                if (visualIndicators != null)
                 {
                     VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
                 }
@@ -132,7 +147,7 @@ public class AccessibilityManager : MonoBehaviour
             {
                 visualIndicatorsToggle.isOn = false;
 
-                if (FindAnyObjectByType<VisualIndicators>() != null)
+                if (visualIndicators != null)
                 {
                     VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
                 }
@@ -188,9 +203,9 @@ public class AccessibilityManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighContrastState", 0);
 
-            if (FindObjectOfType<HighContrastManager>() != null)
+            if (highContrastManager != null)
             {
-                HighContrastManager.instance.SwapMaterials();
+                highContrastManager.SwapMaterials();
             }
         }
         else
@@ -198,16 +213,17 @@ public class AccessibilityManager : MonoBehaviour
             PlayerPrefs.SetInt("HighContrastState", 1);
             isUsingHighContrastMode = true;
 
-            if (FindObjectOfType<HighContrastManager>() != null)
+            if (highContrastManager != null)
             {
-                HighContrastManager.instance.SwapMaterials();
+                highContrastManager.SwapMaterials();
             }
         }
 
         if (!cvHighContrastToggle.isOn)
         {
             PlayerPrefs.SetInt("CvHighContrastState", 0);
-            if (FindObjectOfType<HighContrastManager>() != null)
+
+            if (highContrastManager != null)
             {
                 if (HighContrastManager.instance.isUsingCatVision)
                 {
@@ -218,7 +234,8 @@ public class AccessibilityManager : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("CvHighContrastState", 1);
-            if (FindObjectOfType<HighContrastManager>() != null)
+
+            if (highContrastManager != null)
             {
                 if (HighContrastManager.instance.isUsingCatVision)
                 {
@@ -231,14 +248,22 @@ public class AccessibilityManager : MonoBehaviour
         if (!journalColorblindToggle.isOn)
         {
             PlayerPrefs.SetInt("JournalCbState", 0);
-            JournalColorblind.instance.isSwapped = false;
-            JournalColorblind.instance.SwapColors();
+
+            if (journalColorblind != null)
+            {
+                JournalColorblind.instance.isSwapped = false;
+                JournalColorblind.instance.SwapColors();
+            }
         }
         else
         {
             PlayerPrefs.SetInt("JournalCbState", 1);
-            JournalColorblind.instance.isSwapped = true;
-            JournalColorblind.instance.SwapColors();
+
+            if (journalColorblind != null)
+            {
+                JournalColorblind.instance.isSwapped = true;
+                JournalColorblind.instance.SwapColors();
+            }
             isUsingJournalCb = true;
         }
 
@@ -255,14 +280,16 @@ public class AccessibilityManager : MonoBehaviour
         if (!visualIndicatorsToggle.isOn)
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 0);
-            VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+
+            if (visualIndicators != null)
+                VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
         }
         else
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 1);
             isUsingVisualIndicators = true;
 
-            if (FindAnyObjectByType<VisualIndicators>() != null)
+            if (visualIndicators != null)
             {
                 if (!VisualIndicators.instance.visualIndicatorsBG.activeInHierarchy)
                 {

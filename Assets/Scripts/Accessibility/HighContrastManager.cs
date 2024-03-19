@@ -12,6 +12,8 @@ public class HighContrastManager : MonoBehaviour
     public HighContrastMode[] highContrastScripts;
     public bool isUsingCatVision = false;
 
+    private SwappableObjects swappableObjects;
+
     void Awake()
     {
         //Make script an instance
@@ -21,6 +23,7 @@ public class HighContrastManager : MonoBehaviour
         }
 
         highContrastScripts = FindObjectsOfType<HighContrastMode>();
+        swappableObjects = FindFirstObjectByType<SwappableObjects>();
     }
 
     public void OnEnable()
@@ -44,9 +47,9 @@ public class HighContrastManager : MonoBehaviour
             SwapMaterialsInCatVision();
         }
 
-        if (FindObjectOfType<BookstorePosters>() != null)
+        if (swappableObjects != null)
         {
-            BookstorePosters.instance.SwapMaterials();
+            SwappableObjects.instance.SwapMaterials();
         }
     }
 
