@@ -21,7 +21,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public GameObject photoMenuUI;
     public GameObject optionsPanel;
     public GameObject audioPanel;
-    public CanvasGroup controlsPanel;
 
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
@@ -73,13 +72,18 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public Toggle justCruisingModeToggle;
     public JustCruisingModeManager justCruisingModeManager;
 
-    public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton,
-    controlsBackButton;
+    public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton;
 
     const string prefName = "optionsvalue";
     const string resName = "resolutionoption";
 
     private float sliderValue;
+
+    [Header("Peyton's Stuff")]
+    public CanvasGroup accessibilityMenu;
+    public CanvasGroup rebindingMenu;
+    public CanvasGroup gammaMenu;
+    public GameObject controlsBackButton;
 
     private void Awake()
     {
@@ -147,7 +151,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ActivateAudioMenu()
     {
         audioPanel.SetActive(true);
-        TurnControlsCanvasOff();
+        DeactivateRebindingMenu();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(audioFirstButton);
     }
@@ -156,7 +160,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     {
         audioPanel.SetActive(false);
         pauseMenuUI.SetActive(true);
-        TurnControlsCanvasOff();
+        DeactivateRebindingMenu();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(audioClosedButton);
     }
@@ -169,8 +173,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ActivateOptionsMenu()
     {
         optionsPanel.SetActive(true);
-        UpdateResolutionDropdownOptions(); 
-        TurnControlsCanvasOff();
+        UpdateResolutionDropdownOptions();
+        DeactivateRebindingMenu();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
@@ -198,33 +202,30 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         }
 
         optionsPanel.SetActive(false);
-        TurnControlsCanvasOff();
         pauseMenuUI.SetActive(true);
-
         resolutionDropdown.RefreshShownValue();
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
     }
 
+    //Peyton's Functions
     public void ActivateControlsMenu()
     {
-        TurnControlsCanvasOn();
+        ActivateRebindingMenu();
         pauseMenuUI.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(controlsBackButton);
-
     }
 
     public void DeactivateControlsMenu()
     {
-        TurnControlsCanvasOff();
+        DeactivateRebindingMenu();
         pauseMenuUI.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
-
     }
 
     public void ChangeToControlBackButton()
@@ -233,12 +234,53 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         EventSystem.current.SetSelectedGameObject(controlsBackButton);
     }
 
+    public void ActivateRebindingMenu()
+    {
+        if (rebindingMenu.alpha == 0)
+        {
+            rebindingMenu.alpha = 1;
+            rebindingMenu.interactable = true;
+            rebindingMenu.blocksRaycasts = true;
+        }
+    }
+
+    public void DeactivateRebindingMenu()
+    {
+        if (rebindingMenu.alpha == 1)
+        {
+            rebindingMenu.alpha = 0;
+            rebindingMenu.interactable = false;
+            rebindingMenu.blocksRaycasts = false;
+        }
+    }
+
+    public void DeactivateAccessibilityMenu()
+    {
+        if (accessibilityMenu.alpha == 1)
+        {
+            accessibilityMenu.alpha = 0;
+            accessibilityMenu.interactable = false;
+            accessibilityMenu.blocksRaycasts = false;
+        }
+    }
+
+    public void DeactivateGammaMenu()
+    {
+        if (gammaMenu.alpha == 1)
+        {
+            gammaMenu.alpha = 0;
+            gammaMenu.interactable = false;
+            gammaMenu.blocksRaycasts = false;
+        }
+    }
+
     public void ActivateMenu()
     {
         pauseMenuUI.SetActive(true);
         optionsPanel.SetActive(false);
         audioPanel.SetActive(false);
         DeactivateControlsMenu();
+        DeactivateAccessibilityMenu();
     }
 
     private void Start()
@@ -292,7 +334,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         if (justCruisingModeToggle != null)
         {
-           
+
             justCruisingModeToggle.onValueChanged.AddListener(ToggleJustCruisingMode);
         }
     }
@@ -316,12 +358,14 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         sliderValue = volumeSlider.value;
         UnmuteAudio();
 
-        if (controlsPanel.alpha == 1)
+        if (rebindingMenu.alpha == 1)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-        controlsPanel.gameObject.SetActive(false);
+        DeactivateRebindingMenu();
+        DeactivateAccessibilityMenu();
+        DeactivateGammaMenu();
     }
 
     public void Pause()
@@ -333,33 +377,15 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         MuteAudio();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
-        controlsPanel.gameObject.SetActive(true);
-        TurnControlsCanvasOff();
+        rebindingMenu.gameObject.SetActive(true);
+        DeactivateRebindingMenu();
+        DeactivateAccessibilityMenu();
+        DeactivateGammaMenu();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
 
-    }
-
-    public void TurnControlsCanvasOn()
-    {
-        if (controlsPanel.alpha == 0)
-        {
-            controlsPanel.alpha = 1;
-            controlsPanel.interactable = true;
-            controlsPanel.blocksRaycasts = true;
-        }
-    }
-
-    public void TurnControlsCanvasOff()
-    {
-        if (controlsPanel.alpha == 1)
-        {
-            controlsPanel.alpha = 0;
-            controlsPanel.interactable = false;
-            controlsPanel.blocksRaycasts = false;
-        }
     }
 
     public void ApplyResolutionChanges()
@@ -478,7 +504,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     }
 
-  
+
 
     void MuteAudio()
     {
