@@ -12,7 +12,7 @@ public class OpenAccessibilityMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        /*if (Input.GetKeyDown(KeyCode.M))
         {
             if (accessibilityMenu.alpha == 0)
             {
@@ -46,7 +46,7 @@ public class OpenAccessibilityMenu : MonoBehaviour
                     gammaPanel.alpha = 1;
                 }
             }
-        }
+        }*/
     }
 
     public void OpenTheAccessibilityMenu()

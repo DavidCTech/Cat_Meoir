@@ -21,6 +21,7 @@ public class AccessibilityManager : MonoBehaviour
     private HighContrastManager highContrastManager;
     private JournalColorblind journalColorblind;
     private VisualIndicators visualIndicators;
+    public bool isInMainMenu;
 
     void Awake()
     {
@@ -281,20 +282,28 @@ public class AccessibilityManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 0);
 
-            if (visualIndicators != null)
-                VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+            if (!isInMainMenu)
+            {
+                if (visualIndicators != null)
+                {
+                    VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+                }
+            }
         }
         else
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 1);
             isUsingVisualIndicators = true;
 
-            if (visualIndicators != null)
+            if (!isInMainMenu)
             {
-                if (!VisualIndicators.instance.visualIndicatorsBG.activeInHierarchy)
+                if (visualIndicators != null)
                 {
-                    VisualIndicators.instance.visualIndicatorsBG.SetActive(true);
-                    VisualIndicators.instance.visualIndicatorsText.text = "Visual Indicators On";
+                    if (!VisualIndicators.instance.visualIndicatorsBG.activeInHierarchy)
+                    {
+                        VisualIndicators.instance.visualIndicatorsBG.SetActive(true);
+                        VisualIndicators.instance.visualIndicatorsText.text = "Visual Indicators On";
+                    }
                 }
             }
         }
