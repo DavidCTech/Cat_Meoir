@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class JustCruisingModeManager : MonoBehaviour
 {
-
     [SerializeField]
     private List<GameObject> objectsToToggle;
 
@@ -15,9 +14,11 @@ public class JustCruisingModeManager : MonoBehaviour
 
     public void ToggleObjects(bool isToggled)
     {
+        Debug.Log(isToggled);
+
         foreach (GameObject obj in objectsToToggle)
         {
-            obj.SetActive(!isToggled);
+            obj.SetActive(isToggled);
         }
     }
 }

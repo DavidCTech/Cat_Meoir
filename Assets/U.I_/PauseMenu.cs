@@ -42,7 +42,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public Slider dialogueSlider;
     public Slider musicSlider;
 
-    private JustCruisingMode justCruisingMode;
     public Button applyChangesButton;
 
     private Resolution[] resolutions;
@@ -69,9 +68,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
-    public Toggle justCruisingModeToggle;
-    public JustCruisingModeManager justCruisingModeManager;
-
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton;
 
     const string prefName = "optionsvalue";
@@ -84,6 +80,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public CanvasGroup rebindingMenu;
     public CanvasGroup gammaMenu;
     public GameObject controlsBackButton;
+    public GammaSlider gammaSlider;
 
     private void Awake()
     {
@@ -332,11 +329,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         resolutionDropdown.RefreshShownValue();
         UpdateResolutionDropdownOptions();
 
-        if (justCruisingModeToggle != null)
-        {
-
-            justCruisingModeToggle.onValueChanged.AddListener(ToggleJustCruisingMode);
-        }
+        gammaSlider = FindAnyObjectByType<GammaSlider>();
     }
 
     private void Update()
@@ -366,6 +359,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         DeactivateRebindingMenu();
         DeactivateAccessibilityMenu();
         DeactivateGammaMenu();
+        if (gammaSlider != null)
+            GammaSlider.instance.EnableGammaPanel();
     }
 
     public void Pause()
@@ -381,6 +376,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         DeactivateRebindingMenu();
         DeactivateAccessibilityMenu();
         DeactivateGammaMenu();
+        if (gammaSlider != null)
+            GammaSlider.instance.DisableGammaPanel();
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -611,18 +608,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         else
         {
             QualitySettings.vSyncCount = 0;
-        }
-    }
-
-    public void ToggleJustCruisingMode(bool isToggled)
-    {
-        if (justCruisingModeManager != null)
-        {
-            justCruisingModeManager.ToggleObjects(isToggled);
-        }
-        else
-        {
-            Debug.LogError("justCruisingModeManager reference is null. Check references in the Unity Editor.");
         }
     }
 }

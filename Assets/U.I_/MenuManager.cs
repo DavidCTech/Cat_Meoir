@@ -71,12 +71,6 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     private bool shouldApplyChanges = true;
 
-    private JustCruisingMode justCruisingMode;
-    public Toggle justCruisingModeToggle;
-    public JustCruisingModeManager justCruisingModeManager;
-
-
-
     private void Awake()
     {
         screenInt = PlayerPrefs.GetInt("togglestate");
@@ -156,13 +150,6 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
         resolutionDropdown.RefreshShownValue();
         UpdateResolutionDropdownOptions();
-
-
-        if (justCruisingModeToggle != null)
-        {
-
-            justCruisingModeToggle.onValueChanged.AddListener(ToggleJustCruisingMode);
-        }
 
     }
 
@@ -478,19 +465,6 @@ public class GameManager : MonoBehaviour, ISelectHandler
         else
         {
             QualitySettings.vSyncCount = 0;
-        }
-    }
-
-
-    public void ToggleJustCruisingMode(bool isToggled)
-    {
-        if (justCruisingModeManager != null)
-        {
-            justCruisingModeManager.ToggleObjects(isToggled);
-        }
-        else
-        {
-            Debug.LogError("justCruisingModeManager reference is null. Check references in the Unity Editor.");
         }
     }
 

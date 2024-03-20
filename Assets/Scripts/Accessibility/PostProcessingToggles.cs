@@ -20,13 +20,13 @@ public class PostProcessingToggles : MonoBehaviour
 
     private int filmGrainInt, motionBlurInt;
 
-    void Awake()
+    public void Awake()
     {
         filmGrainInt = PlayerPrefs.GetInt("FilmGrainState");
         motionBlurInt = PlayerPrefs.GetInt("MotionBlurState");
     }
 
-    void Start()
+    public void Start()
     {
         if (PlayerPrefs.HasKey("FilmGrainState"))
         {

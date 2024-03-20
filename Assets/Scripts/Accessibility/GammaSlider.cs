@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GammaSlider : MonoBehaviour
 {
+    public static GammaSlider instance;
+
     [Header("Gamma Slider and Panel Variables")]
     public Slider gammaSlider;
     public Image pawPrintPanelImage;
@@ -13,6 +15,10 @@ public class GammaSlider : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
 
         if (PlayerPrefs.HasKey("GammaValue"))
         {
@@ -70,5 +76,15 @@ public class GammaSlider : MonoBehaviour
             gammaColor.a = gamma;
             gammaPanel.color = gammaColor;
         }
+    }
+
+    public void EnableGammaPanel()
+    {
+        gammaPanelCanvas.alpha = 1;
+    }
+
+    public void DisableGammaPanel()
+    {
+        gammaPanelCanvas.alpha = 0;
     }
 }

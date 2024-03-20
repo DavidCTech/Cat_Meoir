@@ -10,20 +10,21 @@ public class AccessibilityManager : MonoBehaviour
     [Header("Accessibility Toggles")]
     public Toggle highContrastToggle;
     public Toggle cvHighContrastToggle, journalColorblindToggle, cameraFlashToggle,
-    arialDialogueFontToggle, visualIndicatorsToggle;
+    arialDialogueFontToggle, visualIndicatorsToggle, justCruisingModeToggle;
 
     private bool isUsingHighContrastMode = false, isUsingCvHighContrastMode, isUsingJournalCb, isCameraFlashDisabled,
-    isUsingArialFont, isUsingVisualIndicators;
+    isUsingArialFont, isUsingVisualIndicators, isUsingJustCruisingMode = false;
 
     private int highContrastInt, cvHighContrastInt, journalCbInt, cameraFlashInt, arialDialogueInt,
-    visualIndicatorsInt;
+    visualIndicatorsInt, justCruisingInt;
 
     private HighContrastManager highContrastManager;
     private JournalColorblind journalColorblind;
     private VisualIndicators visualIndicators;
+    public JustCruisingModeManager justCruisingModeManager;
     public bool isInMainMenu;
 
-    void Awake()
+    public void Awake()
     {
         //Make script an instance
         if (instance == null)
@@ -31,20 +32,45 @@ public class AccessibilityManager : MonoBehaviour
             instance = this;
         }
 
+        highContrastManager = FindAnyObjectByType<HighContrastManager>();
+        journalColorblind = FindAnyObjectByType<JournalColorblind>();
+        visualIndicators = FindAnyObjectByType<VisualIndicators>();
+        justCruisingModeManager = FindAnyObjectByType<JustCruisingModeManager>();
+
         highContrastInt = PlayerPrefs.GetInt("HighContrastState");
         cvHighContrastInt = PlayerPrefs.GetInt("CvHighContrastState");
         journalCbInt = PlayerPrefs.GetInt("JournalCbState");
         cameraFlashInt = PlayerPrefs.GetInt("CameraFlashState");
         arialDialogueInt = PlayerPrefs.GetInt("ArialDialogueState");
         visualIndicatorsInt = PlayerPrefs.GetInt("VisualIndicatorsState");
-
-        highContrastManager = FindAnyObjectByType<HighContrastManager>();
-        journalColorblind = FindAnyObjectByType<JournalColorblind>();
-        visualIndicators = FindAnyObjectByType<VisualIndicators>();
+        justCruisingInt = PlayerPrefs.GetInt("JustCruisingState");
     }
 
-    void Start()
+    public void Start()
     {
+        if (PlayerPrefs.HasKey("JustCruisingState"))
+        {
+            if (justCruisingInt == 1)
+            {
+                justCruisingModeToggle.isOn = true;
+                isUsingJustCruisingMode = true;
+
+                if (justCruisingModeManager != null)
+                {
+                    justCruisingModeManager.ToggleObjects(false);
+                }
+            }
+            else
+            {
+                justCruisingModeToggle.isOn = false;
+
+                if (justCruisingModeManager != null)
+                {
+                    justCruisingModeManager.ToggleObjects(true);
+                }
+            }
+        }
+
         if (PlayerPrefs.HasKey("HighContrastState"))
         {
             if (highContrastInt == 1)
@@ -198,6 +224,11 @@ public class AccessibilityManager : MonoBehaviour
         visualIndicatorsToggle.isOn = isUsingVisualIndicators;
     }
 
+    public void SetJustCruisingMode(bool isUsingJustCruisingMode)
+    {
+        justCruisingModeToggle.isOn = isUsingJustCruisingMode;
+    }
+
     public void ApplySettings()
     {
         if (!highContrastToggle.isOn)
@@ -305,6 +336,28 @@ public class AccessibilityManager : MonoBehaviour
                         VisualIndicators.instance.visualIndicatorsText.text = "Visual Indicators On";
                     }
                 }
+            }
+        }
+
+        if (!justCruisingModeToggle.isOn)
+        {
+            PlayerPrefs.SetInt("JustCruisingState", 0);
+            Debug.Log("Disabling Just Cruising Mode");
+
+            if (justCruisingModeManager != null)
+            {
+                justCruisingModeManager.ToggleObjects(true);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("JustCruisingState", 1);
+            Debug.Log("Enabling Just Cruising Mode");
+            isUsingJustCruisingMode = true;
+
+            if (justCruisingModeManager != null)
+            {
+                justCruisingModeManager.ToggleObjects(false);
             }
         }
     }
