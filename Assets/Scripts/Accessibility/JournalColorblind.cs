@@ -67,7 +67,7 @@ public class JournalColorblind : MonoBehaviour
                 {
                     images[i].color = colorsToSwap[i];
                 }
-                else if (i > 11 && images[i].sprite == null)
+                else if (i >= 11 && images[i].sprite == null)
                 {
                     images[i].color = colorsToSwap[i];
                 }
@@ -86,7 +86,7 @@ public class JournalColorblind : MonoBehaviour
                 {
                     images[i].color = originalColors[i];
                 }
-                else if (i > 11 && images[i].sprite == null)
+                else if (i >= 11 && images[i].sprite == null)
                 {
                     images[i].color = originalColors[i];
                 }

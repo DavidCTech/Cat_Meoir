@@ -22,7 +22,8 @@ public class ButtonEventTriggers : MonoBehaviour
 
     public void OnSelect(BaseEventData baseEventData)
     {
-
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(this.gameObject);
     }
 
     public void OnDeselect(BaseEventData baseEventData)

@@ -351,11 +351,13 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         sliderValue = volumeSlider.value;
         UnmuteAudio();
 
-        if (rebindingMenu.alpha == 1)
+        if (rebindingMenu.alpha == 1 || accessibilityMenu.alpha == 1 || gammaMenu.alpha == 1)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+
+        rebindingMenu.gameObject.SetActive(false);
         DeactivateRebindingMenu();
         DeactivateAccessibilityMenu();
         DeactivateGammaMenu();

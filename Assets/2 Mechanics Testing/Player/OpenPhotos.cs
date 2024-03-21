@@ -9,7 +9,8 @@ public class OpenPhotos : MonoBehaviour
     private PlayerController playerControls;
     public GameObject photoMenu;
     private bool isOn = false;
-    private void OnEnable()
+
+    public void OnEnable()
     {
         if (playerControls == null)
         {
@@ -24,7 +25,7 @@ public class OpenPhotos : MonoBehaviour
         playerControls.Player.OpenPhotos.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         playerControls.Player.OpenPhotos.performed -= OnOpenPhoto;
         playerControls.Player.OpenPhotos.Disable();

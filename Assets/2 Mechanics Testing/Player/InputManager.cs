@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         if (playerControls == null)
         {
@@ -49,7 +49,7 @@ public class InputManager : MonoBehaviour
         playerControls.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         playerControls.Disable();
         //- Im adding the following line to your code to take off the subscription in order to prevent memory leaks as general good practice 

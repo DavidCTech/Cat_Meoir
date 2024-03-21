@@ -44,6 +44,42 @@ public class AccessibilityManager : MonoBehaviour
         arialDialogueInt = PlayerPrefs.GetInt("ArialDialogueState");
         visualIndicatorsInt = PlayerPrefs.GetInt("VisualIndicatorsState");
         justCruisingInt = PlayerPrefs.GetInt("JustCruisingState");
+
+        if (PlayerPrefs.HasKey("VisualIndicatorsState"))
+        {
+            if (visualIndicatorsInt == 1)
+            {
+                visualIndicatorsToggle.isOn = true;
+                isUsingVisualIndicators = true;
+
+                if (visualIndicators != null)
+                {
+                    VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+                }
+            }
+            else
+            {
+                visualIndicatorsToggle.isOn = false;
+
+                if (visualIndicators != null)
+                {
+                    VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
+                }
+            }
+        }
+
+        if (PlayerPrefs.HasKey("CameraFlashState"))
+        {
+            if (cameraFlashInt == 1)
+            {
+                cameraFlashToggle.isOn = true;
+                isCameraFlashDisabled = true;
+            }
+            else
+            {
+                cameraFlashToggle.isOn = false;
+            }
+        }
     }
 
     public void Start()
@@ -132,20 +168,7 @@ public class AccessibilityManager : MonoBehaviour
             }
         }
 
-        if (PlayerPrefs.HasKey("CameraFlashState"))
-        {
-            if (cameraFlashInt == 1)
-            {
-                cameraFlashToggle.isOn = true;
-                isCameraFlashDisabled = true;
-            }
-            else
-            {
-                cameraFlashToggle.isOn = false;
-            }
-        }
-
-        if (PlayerPrefs.HasKey("ArialDialogueState"))
+        /*if (PlayerPrefs.HasKey("ArialDialogueState"))
         {
             if (arialDialogueInt == 1)
             {
@@ -156,30 +179,7 @@ public class AccessibilityManager : MonoBehaviour
             {
                 arialDialogueFontToggle.isOn = false;
             }
-        }
-
-        if (PlayerPrefs.HasKey("VisualIndicatorsState"))
-        {
-            if (visualIndicatorsInt == 1)
-            {
-                visualIndicatorsToggle.isOn = true;
-                isUsingVisualIndicators = true;
-
-                if (visualIndicators != null)
-                {
-                    VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
-                }
-            }
-            else
-            {
-                visualIndicatorsToggle.isOn = false;
-
-                if (visualIndicators != null)
-                {
-                    VisualIndicators.instance.visualIndicatorsBG.SetActive(false);
-                }
-            }
-        }
+        }*/
     }
 
     public void SetHighContrastMode(bool isUsingHighContrastMode)
