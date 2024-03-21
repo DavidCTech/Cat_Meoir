@@ -42,6 +42,11 @@ public class OpenPhotos : MonoBehaviour
         {
             photoMenu.SetActive(true);
             isOn = true;
+
+            if (FindAnyObjectByType<JournalColorblind>() != null)
+            {
+                JournalColorblind.instance.SwapColors();
+            }
         }
     }
 

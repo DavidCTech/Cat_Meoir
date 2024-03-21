@@ -20,6 +20,8 @@ public class JournalColorblind : MonoBehaviour
 
     public bool isSwapped = false;
 
+    public GameObject photoJournal;
+
     void Awake()
     {
         if (instance == null)
@@ -59,42 +61,45 @@ public class JournalColorblind : MonoBehaviour
 
     public void SwapColors()
     {
-        if (isSwapped)
+        if (photoJournal.activeInHierarchy)
         {
-            for (int i = 0; i < images.Length; i++)
+            if (isSwapped)
             {
-                if (i < 11)
+                for (int i = 0; i < images.Length; i++)
                 {
-                    images[i].color = colorsToSwap[i];
+                    if (i < 11)
+                    {
+                        images[i].color = colorsToSwap[i];
+                    }
+                    else if (i >= 11 && images[i].sprite == null)
+                    {
+                        images[i].color = colorsToSwap[i];
+                    }
                 }
-                else if (i >= 11 && images[i].sprite == null)
-                {
-                    images[i].color = colorsToSwap[i];
-                }
-            }
 
-            for (int i = 0; i < textsToSwap.Length; i++)
-            {
-                textsToSwap[i].color = textColorToSwap;
-            }
-        }
-        else if (!isSwapped)
-        {
-            for (int i = 0; i < images.Length; i++)
-            {
-                if (i < 11)
+                for (int i = 0; i < textsToSwap.Length; i++)
                 {
-                    images[i].color = originalColors[i];
-                }
-                else if (i >= 11 && images[i].sprite == null)
-                {
-                    images[i].color = originalColors[i];
+                    textsToSwap[i].color = textColorToSwap;
                 }
             }
+            else if (!isSwapped)
+            {
+                for (int i = 0; i < images.Length; i++)
+                {
+                    if (i < 11)
+                    {
+                        images[i].color = originalColors[i];
+                    }
+                    else if (i >= 11 && images[i].sprite == null)
+                    {
+                        images[i].color = originalColors[i];
+                    }
+                }
 
-            for (int i = 0; i < textsToSwap.Length; i++)
-            {
-                textsToSwap[i].color = originalTextColors[i];
+                for (int i = 0; i < textsToSwap.Length; i++)
+                {
+                    textsToSwap[i].color = originalTextColors[i];
+                }
             }
         }
     }
