@@ -12,7 +12,8 @@ public class AccessibilityManager : MonoBehaviour
     public Toggle cvHighContrastToggle, journalColorblindToggle, cameraFlashToggle,
     arialDialogueFontToggle, visualIndicatorsToggle, justCruisingModeToggle;
 
-    private bool isUsingHighContrastMode = false, isUsingCvHighContrastMode, isUsingJournalCb, isCameraFlashDisabled,
+    [HideInInspector]
+    public bool isUsingHighContrastMode = false, isUsingCvHighContrastMode, isUsingJournalCb, isCameraFlashDisabled,
     isUsingArialFont, isUsingVisualIndicators, isUsingJustCruisingMode = false;
 
     private int highContrastInt, cvHighContrastInt, journalCbInt, cameraFlashInt, arialDialogueInt,
@@ -129,6 +130,7 @@ public class AccessibilityManager : MonoBehaviour
                     JournalColorblind.instance.isSwapped = false;
                     JournalColorblind.instance.SwapColors();
                 }
+                isUsingJournalCb = false;
             }
         }
 
@@ -273,6 +275,7 @@ public class AccessibilityManager : MonoBehaviour
                 JournalColorblind.instance.isSwapped = false;
                 JournalColorblind.instance.SwapColors();
             }
+            isUsingJournalCb = false;
         }
         else
         {

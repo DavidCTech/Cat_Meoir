@@ -16,7 +16,7 @@ public class JournalColorblind : MonoBehaviour
     public Color[] originalTextColors;
     public Color textColorToSwap;
 
-    public Color defaultImageColor;
+    public Color defaultImageColor, blueImageColor;
 
     public bool isSwapped = false;
 
@@ -53,9 +53,13 @@ public class JournalColorblind : MonoBehaviour
 
     public void TurnToOriginal(Image image)
     {
-        if (!AccessibilityManager.instance.journalColorblindToggle.isOn)
+        if (AccessibilityManager.instance.isUsingJournalCb == false)
         {
             image.color = defaultImageColor;
+        }
+        else if (AccessibilityManager.instance.isUsingJournalCb == true)
+        {
+            image.color = blueImageColor;
         }
     }
 
