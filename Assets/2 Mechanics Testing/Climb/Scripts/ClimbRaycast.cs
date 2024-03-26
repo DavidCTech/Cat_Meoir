@@ -40,10 +40,16 @@ public class ClimbRaycast : MonoBehaviour
         
         
         float distance = Vector3.Distance(transform.position, targetUpperPoint);
+        //get the y value of how high the object is 
+        float heightDistance = 0; 
+        if ( this.gameObject.transform.position.y < targetUpperPoint.y)
+        {
+            heightDistance = targetUpperPoint.y - this.gameObject.transform.position.y; 
+        }
         
 
         //using the distance control if you should jump or not 
-        if (distance <= maxDistance)
+        if (heightDistance <= maxDistance)
         {
             Vector3 jumpDirection = (targetUpperPoint - transform.position).normalized;
             

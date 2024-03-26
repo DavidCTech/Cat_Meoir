@@ -10,6 +10,7 @@ public class PlayerClimb : MonoBehaviour
     public AnimationCurve timeCurve; 
     [Header("The duration is how long the climb takes.")]
     public float duration;
+    public float delay = 0.3f; 
     //anim
     public Animator anim; 
 
@@ -41,18 +42,24 @@ public class PlayerClimb : MonoBehaviour
     {
         if (!isClimbing)
         {
-            startingVector = this.gameObject.transform.position;
-            //middleVector = middleTransform.position;
-            //endVector = endTransform.position;
-            middleVector = middleTransform;
-            endVector = endTransform;
 
-            isClimbing = true;
-            this.gameObject.GetComponent<PlayerMovement>().isFrozen = true;
+            anim.SetBool("Jumping", true);
             //set motion to false 
+            StartCoroutine(ClimbOn(middleTransform,endTransform, distance));
         }
-        
+    }
 
+    private IEnumerator ClimbOn(Vector3 middleTransform, Vector3 endTransform, float distance)
+    {
+        yield return new WaitForSeconds(delay);
+        startingVector = this.gameObject.transform.position;
+        //middleVector = middleTransform.position;
+        //endVector = endTransform.position;
+        middleVector = middleTransform;
+        endVector = endTransform;
+
+        isClimbing = true;
+        this.gameObject.GetComponent<PlayerMovement>().isFrozen = true;
 
     }
     private float ClampValue(float inputValue, float minValue, float maxValue)
@@ -97,12 +104,14 @@ public class PlayerClimb : MonoBehaviour
         }
         if (!isClimbing)
         {
+            
             anim.SetFloat("AnimSpeed", 1f);
         }
-        anim.SetBool("Jumping", isClimbing);
+       // anim.SetBool("Jumping", isClimbing);
         
         if(elaspedTime >= duration)
         {
+            //anim.SetBool("Jumping", false);
             Restart(); 
         }
     }
