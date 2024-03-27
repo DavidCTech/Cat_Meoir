@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using Cinemachine;
+using System;
 
 public class GameManager : MonoBehaviour, ISelectHandler
 {
@@ -150,7 +151,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
         resolutionDropdown.RefreshShownValue();
         UpdateResolutionDropdownOptions();
-
+        LoadSavedResolution();
     }
 
 
@@ -200,6 +201,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         optionsPanel.SetActive(true);
         UpdateResolutionDropdownOptions();
+        UpdateDropdownLabelText();
         audioPanel.SetActive(false);
         TurnControlsCanvasOff();
         creditsPanel.SetActive(false);
@@ -212,30 +214,19 @@ public class GameManager : MonoBehaviour, ISelectHandler
         Debug.Log("Close Options Menu pressed");
 
         // Save changes if "Apply Changes" was pressed
-        if (shouldApplyChanges)
+        if (!shouldApplyChanges)
         {
-            // Save the selected resolution index
-            int selectedResolutionIndex = resolutionDropdown.value;
-            PlayerPrefs.SetInt(resName, selectedResolutionIndex);
-            PlayerPrefs.Save();
-            Debug.Log("Changes saved");
-
-            // Reset the flag
-            shouldApplyChanges = false;
-        }
-        else
-        {
-            // Revert to the previous resolution if "Apply Changes" was not pressed
             RevertToPreviousResolution();
         }
 
         optionsPanel.SetActive(false);
         TurnControlsCanvasOff();
         mainMenuPanel.SetActive(true);
+        UpdateResolutionDropdownOptions();
+        UpdateDropdownLabelText();
 
-        int savedResolutionIndex = PlayerPrefs.GetInt(resName, currentResolutionIndex);
-        resolutionDropdown.value = savedResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+
+
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
@@ -280,44 +271,60 @@ public class GameManager : MonoBehaviour, ISelectHandler
         controlsPanel.blocksRaycasts = false;
     }
 
+
+    private void LoadSavedResolution()
+    {
+        int savedResolutionIndex = PlayerPrefs.GetInt(resName, -1);
+        if (savedResolutionIndex >= 0 && savedResolutionIndex < resolutions.Length)
+        {
+            resolutionDropdown.value = savedResolutionIndex;
+            resolutionDropdown.RefreshShownValue();
+            previousResolution = resolutions[savedResolutionIndex];
+            UpdateDropdownLabelText();
+        }
+    }
+
+    private int GetSavedResolutionIndex()
+    {
+        Resolution currentResolution = Screen.currentResolution;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (IsResolutionEqual(resolutions[i], previousResolution))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void ApplyResolutionChanges()
     {
         int selectedResolutionIndex = resolutionDropdown.value;
         previousResolution = resolutions[selectedResolutionIndex];
 
+        // Set and apply the selected resolution
         SetResolution(selectedResolutionIndex);
 
-        UpdateResolutionDropdownOptions();
+        
         shouldApplyChanges = true;
 
+        // Save the selected resolution index
+        PlayerPrefs.SetInt(resName, selectedResolutionIndex);
+        PlayerPrefs.Save();
+
         Debug.Log("Apply Changes pressed");
-
-
-
-        // Save the selected resolution index only if shouldApplyChanges is true
-        if (shouldApplyChanges)
-        {
-            PlayerPrefs.SetInt(resName, selectedResolutionIndex);
-            PlayerPrefs.Save();
-        }
-
-       
     }
 
     private void SetResolution(int resolutionIndex)
     {
-        Debug.Log("Setting resolution to index: " + resolutionIndex);
+        Resolution resolution = resolutions[resolutionIndex];
 
-        // Save the selected resolution index
-        PlayerPrefs.SetInt(resName, resolutionIndex);
-        PlayerPrefs.Save();
+        Debug.Log("Setting resolution: " + resolution.width + "x" + resolution.height + " " + resolution.refreshRate + "Hz");
 
-        // Debug logs to check PlayerPrefs values
-        Debug.Log("PlayerPrefs " + resName + " after save: " + PlayerPrefs.GetInt(resName));
+        // Update the previousResolution variable
+        previousResolution = resolution;
 
         // Apply the resolution
-        Resolution resolution = resolutions[resolutionIndex];
-        Debug.Log("Applying resolution: " + resolution.width + "x" + resolution.height + " " + resolution.refreshRate + "Hz");
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
@@ -329,28 +336,20 @@ public class GameManager : MonoBehaviour, ISelectHandler
     }
 
 
-    public void RevertToPreviousResolution()
+    private void RevertToPreviousResolution()
     {
-        Resolution currentResolution = Screen.currentResolution;
-
-        Screen.SetResolution(previousResolution.width, previousResolution.height, Screen.fullScreen);
-
-        Debug.Log("Reverting to previous resolution");
-
-        // Log additional information if needed
-        Debug.Log("Previous resolution: " + previousResolution);
-
-        // Check if resolution changed before updating dropdown
-        if (!IsResolutionEqual(currentResolution, previousResolution))
-        {
-            UpdateResolutionDropdownOptions();
-
-        }
-
+        int currentResolutionIndex = GetSavedResolutionIndex();
+        SetResolution(GetSavedResolutionIndex());
+        UpdateDropdownLabelText();
     }
+
     private void UpdateResolutionDropdownOptions()
     {
         Debug.Log("Updating dropdown options");
+
+        // Obtain available resolutions
+        resolutions = Screen.resolutions;
+
         // Your code to update resolution options in the dropdown goes here
         List<string> options = new List<string>();
         for (int i = 0; i < resolutions.Length; i++)
@@ -362,32 +361,59 @@ public class GameManager : MonoBehaviour, ISelectHandler
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
 
-        int selectedResolutionIndex = Mathf.Clamp(PlayerPrefs.GetInt(resName, 0), 0, resolutions.Length - 1);
+        // Find the index of the current resolution in the list of available resolutions
+        int currentResolutionIndex = -1;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (IsResolutionEqual(resolutions[i], Screen.currentResolution))
+            {
+                currentResolutionIndex = i;
+                break;
+            }
+        }
 
-        resolutionDropdown.value = selectedResolutionIndex;
+        // If the current resolution is not found, use the last known index or the default index (0)
+        if (currentResolutionIndex == -1)
+        {
+            currentResolutionIndex = PlayerPrefs.GetInt(resName, 0);
+        }
 
+        // Ensure that the selected resolution index is within the bounds
+        currentResolutionIndex = Mathf.Clamp(currentResolutionIndex, 0, resolutions.Length - 1);
+
+        // Set the dropdown value to the selected resolution index
+        resolutionDropdown.value = currentResolutionIndex;
+
+        // Refresh the shown value
         resolutionDropdown.RefreshShownValue();
+    }
 
-
-        string selectedResolutionText = options[selectedResolutionIndex];
-
+    private void UpdateDropdownLabelText()
+    {
+        int selectedResolutionIndex = resolutionDropdown.value;
+        string selectedResolutionText = $"{resolutions[selectedResolutionIndex].width}x{resolutions[selectedResolutionIndex].height} {resolutions[selectedResolutionIndex].refreshRate}Hz";
         TextMeshProUGUI dropdownLabel = resolutionDropdown.GetComponentInChildren<TextMeshProUGUI>();
         if (dropdownLabel != null)
         {
-            
             dropdownLabel.text = selectedResolutionText;
-            Debug.Log("Current Label Text: " + dropdownLabel.text);
-
-            // Update the label text
-            dropdownLabel.text = selectedResolutionText;
-
-            // Log the updated text
             Debug.Log("Updated Label Text: " + dropdownLabel.text);
-
         }
         else
         {
             Debug.LogError("TextMeshProUGUI component not found in the TMPro dropdown.");
+        }
+    }
+
+    private string GetResolutionLabel(int resolutionIndex)
+    {
+        if (resolutionIndex >= 0 && resolutionIndex < resolutions.Length)
+        {
+            Resolution resolution = resolutions[resolutionIndex];
+            return resolution.width + "x" + resolution.height + " " + resolution.refreshRate + "Hz";
+        }
+        else
+        {
+            return "Unknown Resolution";
         }
     }
 
