@@ -65,14 +65,19 @@ public class PlayerInteractionCheck : MonoBehaviour
 
                 Transform target = rangeChecks[i].transform;
                 closestPoint = rangeChecks[i].ClosestPoint(this.gameObject.transform.position);
+               
+               
+
                 //distance to target can be addedinto an array same with the game object to determine which object is closest within given parameters
                 Vector3 directionToTarget = (closestPoint - this.gameObject.transform.position).normalized;
                 if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2)
                 {
+
                     //Debug.Log("Angle: " + Vector3.Angle(transform.forward, directionToTarget));
                     //Debug.Log("fovAngle / 2: " + fovAngle / 2);
                     float distanceToTarget = Vector3.Distance(this.gameObject.transform.position, closestPoint);
-                    
+                    Debug.Log("closest point " + closestPoint);
+                    Debug.Log("closest point tag " + target.gameObject.tag);
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
                         if (targetObject == null)
