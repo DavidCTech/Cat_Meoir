@@ -300,6 +300,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
             PlayerPrefs.SetInt(resName, selectedResolutionIndex);
             PlayerPrefs.Save();
         }
+
+       
     }
 
     private void SetResolution(int resolutionIndex)
@@ -363,6 +365,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         int selectedResolutionIndex = Mathf.Clamp(PlayerPrefs.GetInt(resName, 0), 0, resolutions.Length - 1);
 
         resolutionDropdown.value = selectedResolutionIndex;
+
         resolutionDropdown.RefreshShownValue();
 
 
@@ -371,6 +374,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         TextMeshProUGUI dropdownLabel = resolutionDropdown.GetComponentInChildren<TextMeshProUGUI>();
         if (dropdownLabel != null)
         {
+            
             dropdownLabel.text = selectedResolutionText;
             Debug.Log("Current Label Text: " + dropdownLabel.text);
 
