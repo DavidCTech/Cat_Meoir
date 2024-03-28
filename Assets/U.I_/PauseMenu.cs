@@ -89,10 +89,12 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         {
             isFullScreen = true;
             fullScreenToggle.isOn = true;
+            SetFullscreen(true);
         }
         else
         {
             fullScreenToggle.isOn = false;
+            SetFullscreen(false);
         }
 
         resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>
@@ -275,17 +277,38 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
-        ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
+        if (PlayerPrefs.HasKey("Sensitivity"))
+            sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
+        else
+            sensitivitySlider.value = 0.5f;
 
-        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
+        if (PlayerPrefs.HasKey("ySensitivity"))
+            ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
+        else
+            ySensitivitySlider.value = 1.0f;
 
-        volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
+        // Set volume sliders
+        if (PlayerPrefs.HasKey("MVolume"))
+            volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
+        else
+            volumeSlider.value = 1.0f;
 
-        sfxSlider.value = PlayerPrefs.GetFloat("MSfx");
+        // Set music slider
+        if (PlayerPrefs.HasKey("MMusic"))
+            musicSlider.value = PlayerPrefs.GetFloat("MMusic");
+        else
+            musicSlider.value = 1.0f;
 
-        dialogueSlider.value = PlayerPrefs.GetFloat("MDialogue");
 
-        musicSlider.value = PlayerPrefs.GetFloat("MMusic");
+        if (PlayerPrefs.HasKey("MSfx"))
+            sfxSlider.value = PlayerPrefs.GetFloat("MSfx");
+        else
+            sfxSlider.value = 1.0f;
+
+        if (PlayerPrefs.HasKey("MDialogue"))
+            dialogueSlider.value = PlayerPrefs.GetFloat("MDialogue");
+        else
+            dialogueSlider.value = 1.0f;
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 

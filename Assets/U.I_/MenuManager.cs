@@ -48,10 +48,6 @@ public class GameManager : MonoBehaviour, ISelectHandler
     private int currentResolutionIndex = 0;
     private float currentRefreshRate;
 
-    public GameObject confirmationPopupPanel;
-
-    public ConfirmationPopup confirmationPopup;
-
     public Slider volumeSlider;
     public Slider sfxSlider;
     public Slider dialogueSlider;
@@ -79,10 +75,12 @@ public class GameManager : MonoBehaviour, ISelectHandler
         {
             isFullScreen = true;
             fullScreenToggle.isOn = true;
+            SetFullscreen(true);
         }
         else
         {
             fullScreenToggle.isOn = false;
+            SetFullscreen(false);
         }
 
         resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>
