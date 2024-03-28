@@ -105,17 +105,38 @@ public class GameManager : MonoBehaviour, ISelectHandler
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
-        volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
-        ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
+        if (PlayerPrefs.HasKey("Sensitivity"))
+            sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
+        else
+            sensitivitySlider.value = 0.5f; 
 
-        musicSlider.value = PlayerPrefs.GetFloat("MMusic");
+        if (PlayerPrefs.HasKey("ySensitivity"))
+            ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
+        else
+            ySensitivitySlider.value = 1.0f; 
 
-        volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
+        // Set volume sliders
+        if (PlayerPrefs.HasKey("MVolume"))
+            volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
+        else
+            volumeSlider.value = 1.0f; 
 
-        sfxSlider.value = PlayerPrefs.GetFloat("MSfx");
+        // Set music slider
+        if (PlayerPrefs.HasKey("MMusic"))
+            musicSlider.value = PlayerPrefs.GetFloat("MMusic");
+        else
+            musicSlider.value = 1.0f;
 
-        dialogueSlider.value = PlayerPrefs.GetFloat("MDialogue");
+
+        if (PlayerPrefs.HasKey("MSfx"))
+            sfxSlider.value = PlayerPrefs.GetFloat("MSfx");
+        else
+            sfxSlider.value = 1.0f; 
+
+        if (PlayerPrefs.HasKey("MDialogue"))
+            dialogueSlider.value = PlayerPrefs.GetFloat("MDialogue");
+        else
+            dialogueSlider.value = 1.0f;
 
         dropdown.value = PlayerPrefs.GetInt(prefName, 3);
 
