@@ -144,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
         // Perform the ground check
         CheckGrounded();
         //move player relative to slopes 
+        
         RaycastHit hit;
         float raycastDistance = 2f;
         float smoothness = 10f; 
@@ -154,6 +155,8 @@ public class PlayerMovement : MonoBehaviour
         }
         Vector3 newUp = Vector3.Slerp(transform.up, hit.normal, Time.deltaTime * smoothness);
         transform.rotation = Quaternion.FromToRotation(transform.up, newUp) * transform.rotation;
+        
+      
 
         //anim work 
         if (anim != null)

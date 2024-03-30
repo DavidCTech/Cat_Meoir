@@ -80,6 +80,7 @@ public class PlayerInteractionCheck : MonoBehaviour
                     Debug.Log("closest point tag " + target.gameObject.tag);
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
+                        
                         if (targetObject == null)
                         {
                             targetObject = target.gameObject;
