@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4884645050587867747}
   - component: {fileID: 8731504803729172880}
   - component: {fileID: 901954977086074510}
-  - component: {fileID: 3678620122817112844}
+  - component: {fileID: 6276859831253520625}
   m_Layer: 0
   m_Name: lampPost
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3678620122817112844
-MeshCollider:
+--- !u!136 &6276859831253520625
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,10 +102,11 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1903212201390650066, guid: 93690275cdffdcd40b97d0f188f17974, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.19911575
+  m_Height: 3.2776535
+  m_Direction: 1
+  m_Center: {x: 0.002658844, y: 1.5043834, z: 0.0006313324}
 --- !u!1 &3680424481840652561
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +314,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 5.7e-44, z: 1.1003e-41, w: 6.805814e-37}
+  m_BoundingSphereOverride: {x: 0, y: 57.333332, z: 12.666666, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

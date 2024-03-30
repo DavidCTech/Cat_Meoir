@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8766547982573330557}
   - component: {fileID: 1530214332735325600}
   - component: {fileID: 5509053843738008472}
-  - component: {fileID: 2602202511418784262}
+  - component: {fileID: 1282156841918820808}
   m_Layer: 0
   m_Name: AW_BusStopSign
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1530214332735325600
 MeshFilter:
@@ -88,14 +88,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2602202511418784262
-MeshCollider:
+--- !u!136 &1282156841918820808
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7942900539195849862}
-  m_Material: {fileID: 13400000, guid: ff80d24aad326d54ebff69a6be325bb1, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -106,7 +106,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2846890895366376684, guid: 0141e6d5fed6e6549bfa705e4102b470, type: 3}
+  serializedVersion: 2
+  m_Radius: 35.77558
+  m_Height: 264.59222
+  m_Direction: 1
+  m_Center: {x: 0, y: -17.805004, z: 0}
