@@ -94,7 +94,7 @@ public class VisualIndicators : MonoBehaviour
 
     public void VisualIndicatorCatVision(string visualText)
     {
-        if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
+        if (AccessibilityManager.instance.isUsingVisualIndicators)
         {
             if (isInCatVision)
             {
@@ -110,7 +110,7 @@ public class VisualIndicators : MonoBehaviour
 
     public void VisualIndicatorSprinting(string visualText)
     {
-        if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
+        if (AccessibilityManager.instance.isUsingVisualIndicators)
         {
             if (isSprinting)
             {
@@ -126,7 +126,7 @@ public class VisualIndicators : MonoBehaviour
 
     public void VisualIndicatorStealth(string visualText)
     {
-        if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
+        if (AccessibilityManager.instance.isUsingVisualIndicators)
         {
             if (isInStealth)
             {
@@ -142,7 +142,7 @@ public class VisualIndicators : MonoBehaviour
 
     public void VisualIndicatorCatMemory(string visualText)
     {
-        if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
+        if (AccessibilityManager.instance.isUsingVisualIndicators)
         {
             if (isInCatMemory)
             {
@@ -158,7 +158,7 @@ public class VisualIndicators : MonoBehaviour
 
     public void VisualIndicatorHiding(string visualText)
     {
-        if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
+        if (AccessibilityManager.instance.isUsingVisualIndicators)
         {
             if (isHiding)
             {
@@ -174,7 +174,7 @@ public class VisualIndicators : MonoBehaviour
 
     public void VisualIndicatorPushing(string visualText)
     {
-        if (AccessibilityManager.instance.visualIndicatorsToggle.isOn)
+        if (AccessibilityManager.instance.isUsingVisualIndicators)
         {
             if (isPushing)
             {

@@ -64,6 +64,7 @@ public class AccessibilityManager : MonoBehaviour
             else
             {
                 justCruisingModeToggle.isOn = false;
+                isUsingJustCruisingMode = false;
 
                 if (justCruisingModeManager != null)
                 {
@@ -87,6 +88,7 @@ public class AccessibilityManager : MonoBehaviour
             else
             {
                 highContrastToggle.isOn = false;
+                isUsingHighContrastMode = false;
 
                 if (highContrastManager != null)
                 {
@@ -105,6 +107,7 @@ public class AccessibilityManager : MonoBehaviour
             else
             {
                 cvHighContrastToggle.isOn = false;
+                isUsingCvHighContrastMode = false;
             }
         }
 
@@ -149,6 +152,7 @@ public class AccessibilityManager : MonoBehaviour
             else
             {
                 visualIndicatorsToggle.isOn = false;
+                isUsingVisualIndicators = false;
 
                 if (visualIndicators != null)
                 {
@@ -167,6 +171,7 @@ public class AccessibilityManager : MonoBehaviour
             else
             {
                 cameraFlashToggle.isOn = false;
+                isCameraFlashDisabled = false;
             }
         }
     }
@@ -223,6 +228,7 @@ public class AccessibilityManager : MonoBehaviour
         if (!highContrastToggle.isOn)
         {
             PlayerPrefs.SetInt("HighContrastState", 0);
+            isUsingHighContrastMode = false;
 
             if (highContrastManager != null)
             {
@@ -243,6 +249,7 @@ public class AccessibilityManager : MonoBehaviour
         if (!cvHighContrastToggle.isOn)
         {
             PlayerPrefs.SetInt("CvHighContrastState", 0);
+            isUsingHighContrastMode = false;
 
             if (highContrastManager != null)
             {
@@ -292,6 +299,7 @@ public class AccessibilityManager : MonoBehaviour
         if (!cameraFlashToggle.isOn)
         {
             PlayerPrefs.SetInt("CameraFlashState", 0);
+            isCameraFlashDisabled = false;
         }
         else
         {
@@ -302,6 +310,7 @@ public class AccessibilityManager : MonoBehaviour
         if (!visualIndicatorsToggle.isOn)
         {
             PlayerPrefs.SetInt("VisualIndicatorsState", 0);
+            isUsingVisualIndicators = false;
 
             if (!isInMainMenu)
             {
@@ -333,6 +342,7 @@ public class AccessibilityManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("JustCruisingState", 0);
             Debug.Log("Disabling Just Cruising Mode");
+            isUsingJustCruisingMode = false;
 
             if (justCruisingModeManager != null)
             {
