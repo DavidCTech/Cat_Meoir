@@ -41,7 +41,8 @@ public class SafeInteraction : MonoBehaviour
     private bool isInteracting = false; // Track if the player is currently interacting with the safe
 
     public TMP_Text instructionsText; // Reference to the TextMeshProUGUI component for instructions
-    
+    public TMP_Text rotationText; // Reference to the TextMeshProUGUI component for displaying rotation
+
     private void Start()
     {
         // Convert integer unlock positions to floats
@@ -90,6 +91,9 @@ public class SafeInteraction : MonoBehaviour
         {
             RotateDial();
 
+            // Update rotation text
+            UpdateRotationText();
+
             // Check if the dial rotation matches the current unlock position and direction
             if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - unlockPositionsFloat[currentExpectedTurnIndex]) < 1f &&
                 lastTurnDirection == expectedTurnSequence[currentExpectedTurnIndex])
@@ -110,6 +114,13 @@ public class SafeInteraction : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UpdateRotationText()
+    {
+        // Get the current rotation of the dial and convert it to an integer for display
+        int currentRotation = Mathf.RoundToInt(dialTransform.localRotation.eulerAngles.z);
+        rotationText.text = "Rotation: " + currentRotation.ToString();
     }
 
     // Method to play the unlock sound
