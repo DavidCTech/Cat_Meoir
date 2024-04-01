@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 6573231941536610842}
   - component: {fileID: 3151265781209443948}
   - component: {fileID: -6439292419125921786}
+  - component: {fileID: 5585746662828734989}
   m_Layer: 5
-  m_Name: InteractUI
+  m_Name: ClimbUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +89,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6573231941536610842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +114,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5070549904915669764}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59294b687f5151d44af254ed2640f24e, type: 3}
   m_Name: 
@@ -132,6 +133,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &5585746662828734989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5070549904915669764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04859bd4c82b554c8f904b1a9bb5dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  climbRaycast: {fileID: 0}
 --- !u!1 &5310687721151287919
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press E
+  m_text: Press E to Climb
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb61785ab1b712e42bcbfc2805e1fe99, type: 2}
   m_sharedMaterial: {fileID: -5633585517486326904, guid: bb61785ab1b712e42bcbfc2805e1fe99, type: 2}

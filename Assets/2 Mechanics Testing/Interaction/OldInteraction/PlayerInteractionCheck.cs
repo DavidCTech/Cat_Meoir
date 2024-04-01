@@ -104,11 +104,11 @@ public class PlayerInteractionCheck : MonoBehaviour
                     passString = "";
                 }
             }
-            //Debug.Log(targetObject);
+            Debug.Log(targetObject);
             if(targetObject != null)
             {
                 passString = targetObject.tag;
-                //Debug.Log(passString);
+                Debug.Log(passString);
 
                 if (targetObject.tag != "Untagged")
                 {
