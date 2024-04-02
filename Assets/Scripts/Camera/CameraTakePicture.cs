@@ -207,7 +207,7 @@ public class CameraTakePicture : MonoBehaviour
         // put the render texture in a coroutine or something 
         if (accessibilityManager != null)
         {
-            if (!AccessibilityManager.instance.cameraFlashToggle.isOn)
+            if (!AccessibilityManager.instance.isCameraFlashDisabled)
             {
                 if (light != null)
                 {
