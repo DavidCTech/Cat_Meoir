@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     private void Awake()
     {
-        screenInt = PlayerPrefs.GetInt("togglestate");
+        screenInt = PlayerPrefs.GetInt("togglestate", 1);
         if (screenInt == 1)
         {
             isFullScreen = true;
