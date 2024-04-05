@@ -13,7 +13,7 @@ public class TBone : MonoBehaviour
     }
     private AIState _AIState;
 
-    //private Animator anim;
+    private Animator anim;
 
     public GameObject Player;
 
@@ -83,7 +83,7 @@ public class TBone : MonoBehaviour
         StartCoroutine(Relentless());
 
         _enemyColor = GetComponent<Renderer>();
-        //anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -91,15 +91,18 @@ public class TBone : MonoBehaviour
 
     private IEnumerator Relentless()
     {
-        //yield return new WaitForSeconds(5f);
-        canSeePlayer = true;
+        while (true)
+        {
+            yield return new WaitForSeconds(15f);
+            canSeePlayer = true;
+            yield return new WaitForSeconds(10f);
+            tired = true;
+            yield return new WaitForSeconds(10f);
+            tired = false;
+            yield return new WaitForSeconds(15f);
+        }
+        
 
-        yield return new WaitForSeconds(20f);
-        tired = true;
-
-        yield return new WaitForSeconds(15f);
-        tired = false;
-        yield return new WaitForSeconds(30f);
     }
 
     public void CheckNearPlayer()
@@ -358,21 +361,21 @@ public class TBone : MonoBehaviour
     private void Update()
     {
 
-        /*if (IAmWaiting == true)
+        if (IAmWaiting == true)
         {
             anim.SetBool("Waiting", true);
         }
         else
         {
             anim.SetBool("Waiting", false);
-        }*/
+        }
         CheckNearPlayer();
 
         switch (_AIState)
         {
             case AIState.Passive:
-                //anim.SetBool("Patrol", true);
-                //anim.SetBool("Chase", false);
+                anim.SetBool("Patrol", true);
+                anim.SetBool("Chase", false);
                 _enemyColor.material.color = Color.yellow;
                 if (randomWander == true)
                 {
@@ -399,8 +402,8 @@ public class TBone : MonoBehaviour
                 }
                 break;
             case AIState.Hostile:
-                //anim.SetBool("Patrol", false);
-                //anim.SetBool("Chase", true);
+                anim.SetBool("Patrol", false);
+                anim.SetBool("Chase", true);
                 if (fleeFromPlayer == true)
                 {
                     FleeFromPlayer();
