@@ -118,9 +118,14 @@ public class SafeInteraction : MonoBehaviour
 
     private void UpdateRotationText()
     {
-        // Get the current rotation of the dial and convert it to an integer for display
-        int currentRotation = Mathf.RoundToInt(dialTransform.localRotation.eulerAngles.z);
-        rotationText.text = "Rotation: " + currentRotation.ToString();
+        // Get the current rotation of the dial as a percentage of the full rotation
+        float normalizedRotation = dialTransform.localRotation.eulerAngles.z / 360f; // Normalize rotation to range [0, 1]
+
+        // Map the normalized rotation to the range of 0 to 100
+        int currentRotationPercentage = Mathf.RoundToInt(normalizedRotation * 100);
+
+        // Update the text to display the current rotation percentage
+        rotationText.text = "Rotation: " + currentRotationPercentage.ToString();
     }
 
     // Method to play the unlock sound
