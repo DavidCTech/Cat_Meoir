@@ -43,6 +43,8 @@ public class SafeInteraction : MonoBehaviour
     public TMP_Text instructionsText; // Reference to the TextMeshProUGUI component for instructions
     public TMP_Text rotationText; // Reference to the TextMeshProUGUI component for displaying rotation
 
+    private float lastRotationZ = 0f; // Track the previous rotation value
+
     private void Start()
     {
         // Convert integer unlock positions to floats
@@ -113,6 +115,12 @@ public class SafeInteraction : MonoBehaviour
                     Debug.Log("Correct turn. Next expected turn: " + expectedTurnSequence[currentExpectedTurnIndex]);
                 }
             }
+
+            // Check for fail state after reaching the first unlock position
+            if (currentExpectedTurnIndex == 1)
+            {
+                CheckFailState();
+            }
         }
     }
 
@@ -156,8 +164,24 @@ public class SafeInteraction : MonoBehaviour
 
         float rotationAmount = input * rotationSpeed * Time.deltaTime;
         dialTransform.Rotate(Vector3.forward, rotationAmount);
+
+        // Update last rotation value
+        lastRotationZ = dialTransform.localRotation.eulerAngles.z;
     }
 
+    private void CheckFailState()
+    {
+        // Calculate the difference in rotation from the last frame
+        float rotationDifference = Mathf.Abs(dialTransform.localRotation.eulerAngles.z - lastRotationZ);
+
+        // Check if the player has rotated the dial in the wrong direction by more than 20 units
+        if (lastTurnDirection != expectedTurnSequence[currentExpectedTurnIndex - 1] && rotationDifference > 5f)
+        {
+            // Player fails the minigame
+            Debug.Log("Fail state reached. Player failed the minigame.");
+            ExitMinigame();
+        }
+    }
     private void SafeUnlocked()
     {
         Debug.Log("Safe unlocked!");
@@ -282,6 +306,15 @@ public class SafeInteraction : MonoBehaviour
             {
                 Debug.LogWarning("Instructions Text reference not set.");
             }
+            // Activate the rotation text
+            if (rotationText != null)
+            {
+                rotationText.gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("Rotation Text reference not set.");
+            }
         }
     }
 
@@ -340,6 +373,15 @@ public class SafeInteraction : MonoBehaviour
         else
         {
             Debug.LogWarning("Instructions Text reference not set.");
+        }
+        // Deactivate the rotation text
+        if (rotationText != null)
+        {
+            rotationText.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Rotation Text reference not set.");
         }
     }
 
