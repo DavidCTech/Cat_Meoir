@@ -93,7 +93,6 @@ public class ClueSaves : MonoBehaviour
 
                 // Add the new PhotoScriptable to the snapshots list
                 photoManager.snapshots.Add(newPhoto);
-                Debug.Log("photo name: " + data.isClueArray[i]);
             }
             photoManager.PictureChecking();
         }

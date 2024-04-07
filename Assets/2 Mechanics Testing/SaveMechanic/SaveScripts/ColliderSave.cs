@@ -9,6 +9,7 @@ public class ColliderSave : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         onTriggerEnterEvent.Invoke();
+       
 
     }
 }
