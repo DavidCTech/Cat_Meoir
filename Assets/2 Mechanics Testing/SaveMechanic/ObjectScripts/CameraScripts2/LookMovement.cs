@@ -11,16 +11,18 @@ public class LookMovement : MonoBehaviour
     private float rotationX;
     private bool isController;
     public float controllerSpeedY;
-    public InputManager inputManager; 
+    public InputManager inputManager;
  
-
     void Update()
     {
 
         //this part is for no controller - or basically just mouse based on comp-3 interactiv first person controller tutorial
+        
+      
+        
         if (!isController)
         {
-            rotationX -= Input.GetAxis("Mouse Y") * mouseSpeedY ;
+            rotationX -= Input.GetAxis("Mouse Y") * mouseSpeedY;
             rotationX = Mathf.Clamp(rotationX, -clampAngle2, clampAngle);
             this.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         }
@@ -31,6 +33,9 @@ public class LookMovement : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -clampAngle2, clampAngle);
             this.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         }
+        
+        
+      
         
        
 

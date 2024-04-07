@@ -17220,6 +17220,7 @@ GameObject:
   - component: {fileID: 2448439856312883554}
   - component: {fileID: 6127556226161472997}
   - component: {fileID: 9010000813101525090}
+  - component: {fileID: 4192406932751988128}
   m_Layer: 0
   m_Name: CutScenes
   m_TagString: Untagged
@@ -17284,6 +17285,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4bbf7750ec33b44bcae942a4719573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  journalMenu: {fileID: 8165344845902880082}
+--- !u!114 &4192406932751988128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5812206166818136927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd00d4079364cb46954196e633d3b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  journalMenu: {fileID: 8165344845902880082}
 --- !u!1 &5840499765766066401
 GameObject:
   m_ObjectHideFlags: 0
@@ -28870,9 +28885,6 @@ PrefabInstance:
       addedObject: {fileID: 7787967868494236252}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2840443779501606434}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4480646115911556564}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -28896,18 +28908,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2840443779501606434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3059254070191372268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4480646115911556564
@@ -28949,12 +28949,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: On
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9010000813101525090}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: Off
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29957,9 +29981,6 @@ PrefabInstance:
       addedObject: {fileID: 3654792886776178655}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7891900435285044481}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1032998282078906812}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -30053,18 +30074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7891900435285044481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4541255472034874726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1032998282078906812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30104,12 +30113,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: On
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9010000813101525090}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: Off
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -36712,9 +36745,6 @@ PrefabInstance:
       addedObject: {fileID: 4659906578488304867}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6211487750276339966}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7735775732861805759}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -36808,18 +36838,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6211487750276339966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1784217367680161508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7735775732861805759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36859,12 +36877,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: On
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9010000813101525090}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: Off
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -37563,9 +37605,6 @@ PrefabInstance:
       addedObject: {fileID: 28291514117826651}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3447815998850021212}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7173321905231765617}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -37596,18 +37635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3447815998850021212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8063939392138063023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7173321905231765617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37623,6 +37650,18 @@ MonoBehaviour:
   onEnableEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 5825324633835587311}
+        m_TargetAssemblyTypeName: UnityEngine.EventSystems.EventSystem, UnityEngine.UI
+        m_MethodName: SetSelectedGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7678575389798502962}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 5825324633835587311}
         m_TargetAssemblyTypeName: UnityEngine.EventSystems.EventSystem, UnityEngine.UI
         m_MethodName: SetSelectedGameObject
@@ -45926,9 +45965,6 @@ PrefabInstance:
       addedObject: {fileID: 3667700213354471260}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5674578559799386766}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 299538405843137535}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -45957,18 +45993,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5674578559799386766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4706201191604267230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &299538405843137535
@@ -47218,9 +47242,6 @@ PrefabInstance:
       addedObject: {fileID: 6891684563083851852}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1024796157476094411}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 838339187401203116}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -47319,18 +47340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1024796157476094411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6689720076292490283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &838339187401203116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47370,12 +47379,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: On
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9010000813101525090}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: Off
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -47950,9 +47983,6 @@ PrefabInstance:
       addedObject: {fileID: 3195422980748187108}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6169210687679902913}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5791995491825078379}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -48051,18 +48081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6169210687679902913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6538376664137729995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5791995491825078379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48102,12 +48120,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: On
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9010000813101525090}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: Off
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -49674,7 +49716,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 823505743313112774, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6356385577349130069}
+      addedObject: {fileID: 3693399320129386831}
+    - targetCorrespondingSourceObject: {fileID: 823505743313112774, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4527620316275617662}
     - targetCorrespondingSourceObject: {fileID: 7179616558930270456, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8382759210698661135}
@@ -50244,7 +50289,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 823505743313112774, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
   m_PrefabInstance: {fileID: 8808073285405741972}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6356385577349130069
+--- !u!114 &3693399320129386831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50253,9 +50298,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 8165344845902880082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c79490872d547418050f61c52c3434, type: 3}
+  m_Script: {fileID: 11500000, guid: a60d548c89d513348bedce3f25b8f4dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEnableEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4527620316275617662}
+        m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDisableEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4527620316275617662}
+        m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
+        m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4527620316275617662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165344845902880082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4bbf7750ec33b44bcae942a4719573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  journalMenu: {fileID: 0}
 --- !u!1 &8190099053500166623 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 834745166162321995, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
@@ -50679,9 +50767,6 @@ PrefabInstance:
       addedObject: {fileID: 6076024786345549234}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 313564038196274941}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1157782362004319889}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -50780,18 +50865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &313564038196274941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6015521833329662829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1157782362004319889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50831,12 +50904,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: On
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9010000813101525090}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: Off
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -51227,9 +51324,6 @@ PrefabInstance:
       addedObject: {fileID: 5741600910261035812}
     - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4739004755519976719}
-    - targetCorrespondingSourceObject: {fileID: 3279595019346423673, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4334868828250548889}
     - targetCorrespondingSourceObject: {fileID: 4044302967259779011, guid: 03b2f3c854558af4e952872c45b02676, type: 3}
       insertIndex: -1
@@ -51328,18 +51422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb9d7b3305b8d4698749c77dc67a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4739004755519976719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5926411441271298413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4334868828250548889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51379,12 +51461,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: On
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDisableEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9010000813101525090}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4192406932751988128}
+        m_TargetAssemblyTypeName: CutSceneCursor, Assembly-CSharp
+        m_MethodName: Off
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -11,6 +11,7 @@ public class FreezeUnfreeze : MonoBehaviour
     }
     void OnDisable()
     {
+        Debug.Log(this.gameObject + " unfreezed");
         Time.timeScale = 1f;
 
     }

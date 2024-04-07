@@ -5,16 +5,25 @@ using UnityEngine;
 public class SetInactiveTimer : MonoBehaviour
 {
     public float timeUntilInactive;
+    private float startTime;
 
-    // Start is called before the first frame update
     private void OnEnable()
     {
-        Time.timeScale = 1f;
-        Invoke("Inactive", timeUntilInactive);
+        startTime = Time.unscaledTime;
+    }
+
+    private void Update()
+    {
+        if (Time.unscaledTime - startTime >= timeUntilInactive)
+        {
+            Inactive();
+        }
     }
 
     private void Inactive()
     {
         this.gameObject.SetActive(false);
+      
     }
+
 }
