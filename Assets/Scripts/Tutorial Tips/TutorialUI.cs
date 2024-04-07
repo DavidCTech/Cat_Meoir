@@ -17,9 +17,9 @@ public class TutorialUI : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) // Assuming the object exiting the trigger is tagged as "Player"
+        if (other.CompareTag("Player")) 
         {
-            //tipBox.SetActive(false); // Deactivate the UI element
+            //tipBox.SetActive(false);
             StartCoroutine(DelayedDeactivate());
 
         }
@@ -27,8 +27,8 @@ public class TutorialUI : MonoBehaviour
 
     private IEnumerator DelayedDeactivate()
     {
-        yield return new WaitForSeconds(2f); // Wait for 2 seconds
-        tipBox.SetActive(false); // Deactivate the UI element
+        yield return new WaitForSeconds(2f);
+        tipBox.SetActive(false);
     }
 
 }
