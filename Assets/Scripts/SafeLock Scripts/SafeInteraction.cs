@@ -16,8 +16,13 @@ public class SafeInteraction : MonoBehaviour
 
     [SerializeField]
     private int[] unlockPositions = new int[3]; // Array to hold the unlock positions as integers
+    [SerializeField]
+    private int[] failPositions = new int[3]; // Array to hold the fail positions as integers
+
+    public Image[] correctPositionImages; // Array to hold the UI images for correct positions
 
     private float[] unlockPositionsFloat; // Array to hold the unlock positions as floats
+    private float[] failPositionsFloat; // Array to hold the fail positions as floats
     private bool minigameActive = false;
     private bool safeUnlocked = false; // Track if the safe is unlocked
     private bool safeAlreadyUnlocked = false; // Track if the safe has already been unlocked
@@ -25,6 +30,7 @@ public class SafeInteraction : MonoBehaviour
 
     public AudioSource audioSource; // Reference to the AudioSource component
     public AudioClip unlockSound; // Audio clip to play when reaching a position
+    public AudioClip failSound; // Audio clip to play when the player hits a fail state
 
     private enum TurnDirection { None, Left, Right }
 
@@ -52,6 +58,13 @@ public class SafeInteraction : MonoBehaviour
         for (int i = 0; i < unlockPositions.Length; i++)
         {
             unlockPositionsFloat[i] = (float)unlockPositions[i];
+        }
+
+        // Convert integer fail positions to floats
+        failPositionsFloat = new float[failPositions.Length];
+        for (int i = 0; i < failPositions.Length; i++)
+        {
+            failPositionsFloat[i] = (float)failPositions[i];
         }
 
         if (playerMovementScript == null)
@@ -85,6 +98,12 @@ public class SafeInteraction : MonoBehaviour
         {
             Debug.LogError("Unlock Sound reference not set.");
         }
+
+        // Hide all correct position UI images at start
+        foreach (Image image in correctPositionImages)
+        {
+            image.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -92,19 +111,16 @@ public class SafeInteraction : MonoBehaviour
         if (minigameActive && !safeUnlocked)
         {
             RotateDial();
-
-            // Update rotation text
             UpdateRotationText();
 
             // Check if the dial rotation matches the current unlock position and direction
             if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - unlockPositionsFloat[currentExpectedTurnIndex]) < 1f &&
                 lastTurnDirection == expectedTurnSequence[currentExpectedTurnIndex])
             {
-                // Play unlock sound
+                // Player reached an unlock position
                 PlayUnlockSound();
-
                 currentExpectedTurnIndex++;
-                lastTurnDirection = TurnDirection.None; // Reset last turn direction
+                lastTurnDirection = TurnDirection.None;
 
                 if (currentExpectedTurnIndex >= expectedTurnSequence.Length)
                 {
@@ -114,10 +130,12 @@ public class SafeInteraction : MonoBehaviour
                 {
                     Debug.Log("Correct turn. Next expected turn: " + expectedTurnSequence[currentExpectedTurnIndex]);
                 }
+                // Enable UI image for correct position
+                correctPositionImages[currentExpectedTurnIndex].gameObject.SetActive(true);
             }
 
-            // Check for fail state after reaching the first unlock position
-            if (currentExpectedTurnIndex == 1)
+            // Check for fail state after reaching the first and second unlock positions
+            if (currentExpectedTurnIndex == 0 || currentExpectedTurnIndex == 1 || currentExpectedTurnIndex == 2)
             {
                 CheckFailState();
             }
@@ -171,15 +189,29 @@ public class SafeInteraction : MonoBehaviour
 
     private void CheckFailState()
     {
-        // Calculate the difference in rotation from the last frame
-        float rotationDifference = Mathf.Abs(dialTransform.localRotation.eulerAngles.z - lastRotationZ);
-
-        // Check if the player has rotated the dial in the wrong direction by more than 20 units
-        if (lastTurnDirection != expectedTurnSequence[currentExpectedTurnIndex - 1] && rotationDifference > 5f)
+        // Check if the current dial rotation is within any of the fail positions
+        foreach (float failPos in failPositionsFloat)
         {
-            // Player fails the minigame
-            Debug.Log("Fail state reached. Player failed the minigame.");
-            ExitMinigame();
+            if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - failPos) < 1f)
+            {
+                // Player hits a fail state
+                Debug.Log("Fail state reached. Player failed the minigame.");
+
+                // Play the fail sound
+                if (audioSource != null && failSound != null)
+                {
+                    audioSource.PlayOneShot(failSound);
+                }
+
+                // Reset UI images for correct positions
+                foreach (Image image in correctPositionImages)
+                {
+                    image.gameObject.SetActive(false);
+                }
+
+                ResetMinigame(); // Restart the minigame
+                return;
+            }
         }
     }
     private void SafeUnlocked()
@@ -250,6 +282,19 @@ public class SafeInteraction : MonoBehaviour
         else
         {
             Debug.LogWarning("Instructions Text reference not set.");
+        }
+        // Deactivate the rotation text
+        if (rotationText != null)
+        {
+            rotationText.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Rotation Text reference not set.");
+        }
+        foreach (Image image in correctPositionImages)
+        {
+            image.gameObject.SetActive(false);
         }
     }
 
@@ -383,8 +428,24 @@ public class SafeInteraction : MonoBehaviour
         {
             Debug.LogWarning("Rotation Text reference not set.");
         }
+        foreach (Image image in correctPositionImages)
+        {
+            image.gameObject.SetActive(false);
+        }
     }
 
+    private void ResetMinigame()
+    {
+        // Reset all necessary variables and states to their initial values
+        currentExpectedTurnIndex = 0;
+        lastTurnDirection = TurnDirection.None;
+
+        // Hide all correct position UI images
+        foreach (Image image in correctPositionImages)
+        {
+            image.gameObject.SetActive(false);
+        }
+    }
     public bool IsSafeUnlocked()
     {
         return safeAlreadyUnlocked;
