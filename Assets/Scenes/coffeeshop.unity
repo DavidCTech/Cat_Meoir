@@ -12580,10 +12580,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1643600123}
     m_Modifications:
-    - target: {fileID: 5898855749840620490, guid: 0147b26296240d447865cf464b9be4ed, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.086
-      objectReference: {fileID: 0}
     - target: {fileID: 5315255301612040605, guid: b0cf8f0fe711af443b7728dcc0b2f7cb, type: 3}
       propertyPath: m_Name
       value: CS_Table 01
@@ -12655,6 +12651,10 @@ PrefabInstance:
     - target: {fileID: 7457717117036166543, guid: b0cf8f0fe711af443b7728dcc0b2f7cb, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898855749840620490, guid: 0147b26296240d447865cf464b9be4ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.086
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23098,8 +23098,11 @@ GameObject:
   - component: {fileID: 989584842}
   - component: {fileID: 989584841}
   - component: {fileID: 989584840}
-  m_Layer: 0
-  m_Name: 'Optional Clue #14: Barista Conversation'
+  - component: {fileID: 989584845}
+  - component: {fileID: 989584844}
+  - component: {fileID: 989584843}
+  m_Layer: 8
+  m_Name: Barista's Talking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
@@ -23139,8 +23142,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.9239233, y: 7.1015053, z: 9.717674}
+  m_Center: {x: 15.392835, y: -3.0507522, z: -5.9836035}
 --- !u!23 &989584841
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23191,6 +23194,46 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989584835}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &989584843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989584835}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca60954d478aaa4408035fe598d64d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionColor: {r: 0.028574357, g: 0.015686274, b: 1, a: 1}
+--- !u!114 &989584844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989584835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd385733ca0048c4ca5d0af279609dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: "One of the Baristas was talking about how Spence didn\u2019t show
+    up when they usually do\u2026strange how they show up when I was killed\u2026"
+--- !u!114 &989584845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989584835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85a9ae49b3a48544aed49065d20348f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMainClue: 0
 --- !u!1 &992535913
 GameObject:
   m_ObjectHideFlags: 0
@@ -35063,7 +35106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd385733ca0048c4ca5d0af279609dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Bloody Napkins
+  description: "Bloody napkins I found in the coffee shop, why is there blood in
+    a coffee shop? And\u2026is this my blood??"
 --- !u!114 &1477704710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45793,27 +45837,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00000025331977
+      value: 0.00000017881396
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.052000046
+      value: -0.060000002
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.18699993
+      value: -0.6900001
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99072486
+      value: 0.9978541
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.13588342
+      value: -0.06547726
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 3986409521932631640, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.z
@@ -46085,7 +46129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7701999867838834851, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0000009536743
+      value: -0.000005722046
       objectReference: {fileID: 0}
     - target: {fileID: 7701999867838834851, guid: 8662f09bc6f8b534aa34f3e5335960f3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51876,8 +51920,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd385733ca0048c4ca5d0af279609dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: In the future, excellent knowledge will be here! See if you can find
-    the intersting knife collection at the Record Store!
+  description: "Detective Roberson was talking to Blake and she said she knows nothing
+    of a weapon, this is a bit odd, Marke did say she would know something about
+    it. Blake did say that Lee might know about it due to being a weapon collector
+    enthusiast, looks like I am going to head to the Record store next\u2026"
 --- !u!4 &1261602078823802173
 Transform:
   m_ObjectHideFlags: 0
