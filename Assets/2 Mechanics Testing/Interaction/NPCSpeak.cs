@@ -36,7 +36,7 @@ public class NPCSpeak : MonoBehaviour
     private bool currentlySpeaking = false;
     private float skipTime; 
     //this is for hold down skipping
-    public bool megaSkip; 
+    public bool megaSkip;
 
 
     //delegate for the clicking skip
@@ -79,6 +79,8 @@ public class NPCSpeak : MonoBehaviour
     //currently it will always loop through the dialog beginning at start object. 
     public void Interact()
     {
+        
+        Debug.Log("interacting on speak" + this.gameObject);
         megaSkip = false;  
         //freeze the player 
 
@@ -119,6 +121,8 @@ public class NPCSpeak : MonoBehaviour
             StartCoroutine(LoadAndProceed());
         }
         
+
+
     }
 
 

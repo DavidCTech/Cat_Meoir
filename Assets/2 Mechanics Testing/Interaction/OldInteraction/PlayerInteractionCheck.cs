@@ -157,6 +157,9 @@ public class PlayerInteractionCheck : MonoBehaviour
                     //targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
                     //targetObject.GetComponent<NPCTalk>().Interact();
                     targetObject.GetComponent<NPCSpeak>().Interact();
+                    //Make it delay so player can't spam E
+
+
                     //reference the interaction code
                 }
                 if (objectName == "Hide")
@@ -217,4 +220,5 @@ public class PlayerInteractionCheck : MonoBehaviour
             this.gameObject.GetComponent<PlayerStealth>().UnHide(this);
         }  
     }
+   
 }
