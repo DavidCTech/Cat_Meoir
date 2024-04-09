@@ -11,34 +11,46 @@ public class LookMovement : MonoBehaviour
     private float rotationX;
     private bool isController;
     public float controllerSpeedY;
+    private bool isFrozen = false; 
     public InputManager inputManager;
  
     void Update()
     {
 
         //this part is for no controller - or basically just mouse based on comp-3 interactiv first person controller tutorial
-        
-      
-        
-        if (!isController)
+
+
+        if (!isFrozen)
         {
-            rotationX -= Input.GetAxis("Mouse Y") * mouseSpeedY;
-            rotationX = Mathf.Clamp(rotationX, -clampAngle2, clampAngle);
-            this.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            if (!isController)
+            {
+                rotationX -= Input.GetAxis("Mouse Y") * mouseSpeedY;
+                rotationX = Mathf.Clamp(rotationX, -clampAngle2, clampAngle);
+                this.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            }
+            else
+            {
+                //do the controller part 
+                rotationX -= inputManager.GetMouseDelta().y * controllerSpeedY;
+                rotationX = Mathf.Clamp(rotationX, -clampAngle2, clampAngle);
+                this.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            }
         }
-        else
-        {
-            //do the controller part 
-            rotationX -= inputManager.GetMouseDelta().y * controllerSpeedY;
-            rotationX = Mathf.Clamp(rotationX, -clampAngle2, clampAngle);
-            this.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        }
+        
         
         
       
         
        
 
+    }
+    public void FreezeCamera()
+    {
+        isFrozen = true; 
+    }
+    public void UnfreezeCamera()
+    {
+        isFrozen = false; 
     }
     private void OnEnable()
     {

@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     private float velocitySpeed;
     private float velocityUp;
 
+    private bool isCamFrozen = false; 
+
     ObjectGrabber objectGrabber;
 
     private void Awake()
@@ -382,21 +384,33 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isFirst)
             {
-                if (camTransform != null)
+                if (!isCamFrozen)
                 {
-                    //this part is for no controller - or basically just mouse based on comp-3 interactiv first person controller tutorial
-
-                    if (!isController)
+                    if (camTransform != null)
                     {
+                        //this part is for no controller - or basically just mouse based on comp-3 interactiv first person controller tutorial
 
-                        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSpeedX, 0);
-                    }
-                    else
-                    {
-                        transform.rotation *= Quaternion.Euler(0, inputManager.GetMouseDelta().x * controllerSpeedX, 0);
+                        if (!isController)
+                        {
+
+                            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSpeedX, 0);
+                        }
+                        else
+                        {
+                            transform.rotation *= Quaternion.Euler(0, inputManager.GetMouseDelta().x * controllerSpeedX, 0);
+                        }
                     }
                 }
+                
             }
         }
+    }
+    public void CameraFreeze()
+    {
+        isCamFrozen = true; 
+    }
+    public void CameraUnFreeze()
+    {
+        isCamFrozen = false; 
     }
 }

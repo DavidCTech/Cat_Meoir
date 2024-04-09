@@ -53368,10 +53368,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 823505743313112774, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3693399320129386831}
+      addedObject: {fileID: 4527620316275617662}
     - targetCorrespondingSourceObject: {fileID: 823505743313112774, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4527620316275617662}
+      addedObject: {fileID: 4682522364448720904}
+    - targetCorrespondingSourceObject: {fileID: 823505743313112774, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2822627719838978617}
     - targetCorrespondingSourceObject: {fileID: 7179616558930270456, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8382759210698661135}
@@ -53946,7 +53949,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 823505743313112774, guid: 9d54e116a99ec3347b55c45f8ad2ff21, type: 3}
   m_PrefabInstance: {fileID: 8808073285405741972}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3693399320129386831
+--- !u!114 &4527620316275617662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165344845902880082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4bbf7750ec33b44bcae942a4719573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  journalMenu: {fileID: 0}
+--- !u!114 &4682522364448720904
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53961,9 +53977,33 @@ MonoBehaviour:
   onEnableEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4527620316275617662}
+      - m_Target: {fileID: 2822627719838978617}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1624645861206021408}
+        m_TargetAssemblyTypeName: LookMovement, Assembly-CSharp
+        m_MethodName: FreezeCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2183878056601969262}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: CameraFreeze
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -53976,7 +54016,7 @@ MonoBehaviour:
   onDisableEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4527620316275617662}
+      - m_Target: {fileID: 2822627719838978617}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Go
         m_Mode: 1
@@ -53988,7 +54028,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4527620316275617662
+      - m_Target: {fileID: 1624645861206021408}
+        m_TargetAssemblyTypeName: LookMovement, Assembly-CSharp
+        m_MethodName: UnfreezeCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2183878056601969262}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: CameraUnFreeze
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2822627719838978617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
