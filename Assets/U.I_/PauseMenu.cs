@@ -205,7 +205,6 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ActivateControlsMenu()
     {
         ActivateRebindingMenu();
-        pauseMenuUI.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         EventSystem.current.SetSelectedGameObject(null);
