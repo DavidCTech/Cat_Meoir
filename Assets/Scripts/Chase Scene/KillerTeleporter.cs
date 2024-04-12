@@ -9,16 +9,27 @@ public class KillerTeleporter : MonoBehaviour
     public Transform thePlayer;
     public Transform theKiller;
     public Transform teleportPoint;
+    public float distanceToTeleport;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
             if (hasCollided == false)
             {
-                theKiller.position = teleportPoint.position;
-                Debug.Log("Teleporting Killer");
-                hasCollided = true;
+                if (Vector3.Distance(thePlayer.transform.position, theKiller.transform.position) > distanceToTeleport)
+                {
+                    this.gameObject.SetActive(false);
+                    theKiller.position = teleportPoint.position;
+                    Debug.Log("Teleporting Killer");
+                    hasCollided = true;
+                }
+                else
+                {
+                    this.gameObject.SetActive(false);
+                    Debug.Log("Turning off Collider");
+                    hasCollided = true;
+                }
             }
         }
     }
