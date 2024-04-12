@@ -85,7 +85,7 @@ public class NPCSpeak : MonoBehaviour
     public void Interact()
     {
 
-
+        
         megaSkip = false;  
         //freeze the player 
 
