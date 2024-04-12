@@ -9,15 +9,21 @@ public class OnColliderEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        onTriggerEnterEvent.Invoke();
+        if (other.CompareTag("Player"))
+        {
+            onTriggerEnterEvent.Invoke();
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+        private void OnTriggerExit(Collider other)
     {
-        onTriggerExitEvent.Invoke();
+        if (other.CompareTag("Player"))
+        {
+            onTriggerExitEvent.Invoke();
+        }
     }
 
-  
 
-   
-}
+
+
+    }

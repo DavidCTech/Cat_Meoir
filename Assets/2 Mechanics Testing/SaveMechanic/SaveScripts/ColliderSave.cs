@@ -8,7 +8,11 @@ public class ColliderSave : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        onTriggerEnterEvent.Invoke();
+        if (other.CompareTag("Player"))
+        {
+            onTriggerEnterEvent.Invoke();
+        }
+       
        
 
     }
