@@ -148,6 +148,7 @@ public class PlayerInteractionCheck : MonoBehaviour
             Debug.Log(objectName);
             if (!isInteracting)
             {
+                isInteracting = true; 
                 Debug.Log("Object name "+ objectName);
                 if (objectName == "Interact")
                 {
@@ -213,6 +214,7 @@ public class PlayerInteractionCheck : MonoBehaviour
                     swipeScript.Swiping();
                     //reference the meow code
                 }
+                isInteracting = false;
             }
         }
         else

@@ -38,6 +38,11 @@ public class NPCSpeak : MonoBehaviour
     //this is for hold down skipping
     public bool megaSkip;
 
+    //have a bool which controls if you are interacting or not 
+    // if you are interacting, do not allow the player to press e and have anything happen 
+    // this will prevent the player from spamming interact while interacting with the npc. 
+    // This could be done for if you have a player reference or not in here
+
 
     //delegate for the clicking skip
     void OnEnable()
@@ -79,8 +84,8 @@ public class NPCSpeak : MonoBehaviour
     //currently it will always loop through the dialog beginning at start object. 
     public void Interact()
     {
-        
-        Debug.Log("interacting on speak" + this.gameObject);
+
+
         megaSkip = false;  
         //freeze the player 
 

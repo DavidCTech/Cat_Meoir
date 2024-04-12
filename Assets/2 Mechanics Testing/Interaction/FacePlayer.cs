@@ -6,12 +6,24 @@ public class FacePlayer : MonoBehaviour
 {
 
     public GameObject player;
+    public bool faceCam; 
     private void OnEnable()
     {
-        if(player == null)
+        if (!faceCam)
         {
-            player = GameObject.FindWithTag("Player");
+            if(player == null)
+            {
+                player = GameObject.FindWithTag("Player");
+            }
         }
+        else
+        {
+            if (player == null)
+            {
+                player = GameObject.FindWithTag("MainCamera");
+            }
+        }
+       
     }
     void Update()
     {
