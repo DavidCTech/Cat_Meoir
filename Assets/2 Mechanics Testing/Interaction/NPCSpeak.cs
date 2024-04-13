@@ -17,6 +17,7 @@ public class NPCSpeak : MonoBehaviour
     public Transform dialogOptionsParent;
     public GameObject dialogOptionsPrefab;
     public GameObject dialogOptionsContainer;
+    public Image imagePlacement;
     [Header("Parent of your dialog GameObjects- used for saving and loading.")]
     public GameObject dialogParent;
 
@@ -37,6 +38,11 @@ public class NPCSpeak : MonoBehaviour
     private float skipTime; 
     //this is for hold down skipping
     public bool megaSkip;
+
+
+    // references for things to change when a choice is present 
+    
+
 
     //have a bool which controls if you are interacting or not 
     // if you are interacting, do not allow the player to press e and have anything happen 
@@ -307,6 +313,16 @@ public class NPCSpeak : MonoBehaviour
                 }
 
             }
+            if(imagePlacement != null)
+            {
+                if(dialog.characterSprite != null)
+                {
+                    imagePlacement.color = new Color(1, 1, 1, 1); 
+                    imagePlacement.sprite = dialog.characterSprite; 
+                }
+            }
+
+
             if (dialog.dialogChoices.Count == 0)
             {
                 // if there is no choices - just make the text show up for the display time. 
@@ -335,6 +351,9 @@ public class NPCSpeak : MonoBehaviour
             else
             {
                 //if there are choices - open the options container
+
+
+
                 dialogOptionsContainer.SetActive(true);
                 //open options panel 
                 foreach (var option in dialog.dialogChoices)

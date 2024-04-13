@@ -16,18 +16,22 @@ public class DialogData : MonoBehaviour
     [Header("This bool should be checked if it's a checkpoint of saving.")]
     public bool isSaved;
     [Header("This bool should be checked if the next dialog is a next segment dialog instead.")]
-    public bool nextSegment; 
+    public bool nextSegment;
+    
 
 
     [System.Serializable]
     public struct DialogSegments
     {
+        [Header("This is the sprite data.")]
+        public Sprite characterSprite;
         [TextArea] public string dialogText;
         public float dialogDisplayTime;
         [Header("This is the audio clip you will want. Optional")]
         public AudioClip audio;
         public List<DialogChoices> dialogChoices;
         
+
 
     }
     [System.Serializable]
