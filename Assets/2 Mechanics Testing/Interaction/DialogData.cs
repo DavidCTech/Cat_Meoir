@@ -25,6 +25,8 @@ public class DialogData : MonoBehaviour
     {
         [Header("This is the sprite data.")]
         public Sprite characterSprite;
+        [Header("This is Name Data.")]
+        public string nameText;
         [TextArea] public string dialogText;
         public float dialogDisplayTime;
         [Header("This is the audio clip you will want. Optional")]

@@ -18,6 +18,7 @@ public class NPCSpeak : MonoBehaviour
     public GameObject dialogOptionsPrefab;
     public GameObject dialogOptionsContainer;
     public Image imagePlacement;
+    public Text nameText; 
     [Header("Parent of your dialog GameObjects- used for saving and loading.")]
     public GameObject dialogParent;
 
@@ -321,7 +322,14 @@ public class NPCSpeak : MonoBehaviour
                     imagePlacement.sprite = dialog.characterSprite; 
                 }
             }
+            if (nameText != null)
+            {
+                if (dialog.nameText != null)
+                {
 
+                    nameText.text = dialog.nameText;
+                }
+            }
 
             if (dialog.dialogChoices.Count == 0)
             {
@@ -350,10 +358,12 @@ public class NPCSpeak : MonoBehaviour
             }
             else
             {
+                //dialog ui changing 1 - make the text on name go to different area. 
+
+
+
+
                 //if there are choices - open the options container
-
-
-
                 dialogOptionsContainer.SetActive(true);
                 //open options panel 
                 foreach (var option in dialog.dialogChoices)
