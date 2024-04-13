@@ -148,18 +148,18 @@ public class PlayerInteractionCheck : MonoBehaviour
             Debug.Log(objectName);
             if (!isInteracting)
             {
-                isInteracting = true; 
+                
                 Debug.Log("Object name "+ objectName);
                 if (objectName == "Interact")
                 {
                     Debug.Log("Interact");
-
+                    isInteracting = true;
                     //should turn the player here    
                     //targetObject.GetComponent<NPCInteraction>().Interact(this.gameObject);
                     //targetObject.GetComponent<NPCTalk>().Interact();
                     targetObject.GetComponent<NPCSpeak>().Interact();
                     //Make it delay so player can't spam E
-
+                    Invoke("InteractOn", 0.5f);
 
                     //reference the interaction code
                 }
@@ -214,13 +214,17 @@ public class PlayerInteractionCheck : MonoBehaviour
                     swipeScript.Swiping();
                     //reference the meow code
                 }
-                isInteracting = false;
+                //isInteracting = false;
             }
         }
         else
         {
             this.gameObject.GetComponent<PlayerStealth>().UnHide(this);
         }  
+    }
+    void InteractionOn()
+    {
+        isInteracting = false; 
     }
    
 }
