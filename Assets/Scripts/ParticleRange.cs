@@ -46,7 +46,6 @@ public class ParticleRange : MonoBehaviour
             if (particleSystemInstance.isPlaying)
             {
                 particleSystemInstance.Stop();
-                Debug.Log("Particle System stopped.");
             }
         }
     }

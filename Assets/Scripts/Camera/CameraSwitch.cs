@@ -81,7 +81,7 @@ public class CameraSwitch : MonoBehaviour
     }
 
 
-    void EnableThirdPersonCamera()
+    public void EnableThirdPersonCamera()
     {
         if (playerMovement != null)
         {
@@ -128,7 +128,7 @@ public class CameraSwitch : MonoBehaviour
         Camera mainCamera = GetComponent<Camera>();
         mainCamera.cullingMask &= ~(1 << 8);
     }
-    void EnableFirstPersonCamera()
+    public void EnableFirstPersonCamera()
     {
         if (cinemachinePOXExtension != null)
         {
