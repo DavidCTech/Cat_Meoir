@@ -13,6 +13,7 @@ public class ClimbUIManager : MonoBehaviour
     {
         if (other.CompareTag("Climb"))
         {
+            Debug.Log("climb object: " + other.gameObject + "object name: " + other.gameObject.name);
             // closest point 
             Vector3 closestPoint = other.ClosestPoint(player.transform.position);
             Vector3 highestPoint = other.bounds.center + Vector3.up * other.bounds.extents.y;
