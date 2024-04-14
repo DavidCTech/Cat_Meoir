@@ -20,6 +20,47 @@ public class CutScenePlayer : MonoBehaviour
     }
 
     // Enable objects and start playing videos
+    public void TruePlayVideos()
+    {
+        // Enable objects
+        foreach (GameObject obj in enableVideo)
+        {
+            obj.SetActive(true);
+        }
+
+        // Start playing the first video
+        TruePlayNextVideo();
+    }
+
+    // Play the next video in the array
+    void TruePlayNextVideo()
+    {
+        foreach (GameObject obj in enableVideo)
+        {
+            obj.SetActive(true);
+        }
+
+        if (currentVideoIndex < videoClips.Length)
+        {
+            videoPlayer.clip = videoClips[currentVideoIndex];
+            videoPlayer.Play();
+            currentVideoIndex++;
+        }
+        else
+        {
+            Debug.Log("All videos played.");
+            SceneManager.LoadScene("FinalChase");
+
+        }
+    }
+
+    /*void OnVideoFinished(VideoPlayer vp)
+    {
+        // Play the next video
+        PlayNextVideo();
+    }*/
+
+    // Enable objects and start playing videos
     public void PlayVideos()
     {
         // Enable objects
