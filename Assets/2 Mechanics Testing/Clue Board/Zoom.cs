@@ -35,7 +35,9 @@ public class Zoom : MonoBehaviour
 
             // Set the position of the object to the center position
             transform.position = centerPosition;
-            transform.localScale *= 7f;
+            //transform.localScale *= 7f;
+            transform.localScale = new Vector3(7f, 7f, 7f);
+
 
             isCentered = true;
 

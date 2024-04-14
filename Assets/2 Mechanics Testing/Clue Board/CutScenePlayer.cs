@@ -12,6 +12,7 @@ public class CutScenePlayer : MonoBehaviour
     public VideoClip[] videoClips; // Array of video clips to play
     public VideoPlayer videoPlayer; // VideoPlayer component to play the clips on
     private int currentVideoIndex = 0; // Index of the current video being played
+    public bool goodEnd;
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class CutScenePlayer : MonoBehaviour
     }
 
     // Enable objects and start playing videos
-    public void TruePlayVideos()
+    /*public void TruePlayVideos()
     {
         // Enable objects
         foreach (GameObject obj in enableVideo)
@@ -50,11 +51,11 @@ public class CutScenePlayer : MonoBehaviour
         {
             Debug.Log("All videos played.");
             SceneManager.LoadScene("FinalChase");
-
+            return; // Return to avoid executing the code below if all videos are played
         }
     }
 
-    /*void OnVideoFinished(VideoPlayer vp)
+    void OnVideoFinished(VideoPlayer vp)
     {
         // Play the next video
         PlayNextVideo();
@@ -89,9 +90,15 @@ public class CutScenePlayer : MonoBehaviour
         }
         else
         {
-            Debug.Log("All videos played.");
-            SceneManager.LoadScene("Menu");
-
+            if(goodEnd)
+            {
+                SceneManager.LoadScene("FinalChase");
+            }
+            else
+            {
+                Debug.Log("All videos played.");
+                SceneManager.LoadScene("Menu");
+            } 
         }
     }
 
