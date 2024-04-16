@@ -226,7 +226,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7087254592721290880}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4393185057701696748, guid: bcec112021282a349929c0ae36a525ed, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bcec112021282a349929c0ae36a525ed, type: 3}
       propertyPath: m_Name
       value: T-Bone
@@ -529,10 +533,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4460637679961592412, guid: bcec112021282a349929c0ae36a525ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9133972648375744175}
   m_SourcePrefab: {fileID: 100100000, guid: bcec112021282a349929c0ae36a525ed, type: 3}
 --- !u!4 &5118497382853366171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bcec112021282a349929c0ae36a525ed, type: 3}
   m_PrefabInstance: {fileID: 4648338501840975472}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9035744137547473964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4460637679961592412, guid: bcec112021282a349929c0ae36a525ed, type: 3}
+  m_PrefabInstance: {fileID: 4648338501840975472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9133972648375744175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9035744137547473964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c94977dfa275e94b8dc3ddc0cf5d3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMaterial: {fileID: 2100000, guid: e0123fd8c2c4f9d40b1eca65292e0f72, type: 2}
+  originalMaterials: []
+  layerToSwitchName: Clue
