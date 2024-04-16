@@ -51,7 +51,7 @@ public class QuickFind : MonoBehaviour
         string layerName = searchTag;
         int layerIndex = LayerMask.NameToLayer(layerName);
 
-        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(true);
         foreach (GameObject obj in allObjects)
         {
             if (obj.layer == layerIndex)
