@@ -51,10 +51,6 @@ public class SafeInteraction : MonoBehaviour
 
     private float lastRotationZ = 0f; // Track the previous rotation value
 
-    private List<float> remainingFailPositions = new List<float>(); // List to hold remaining fail positions
-
-    private Dictionary<float, bool> failPositionAudioPlayed = new Dictionary<float, bool>(); // Track if fail sound has been played for each fail position
-
     private void Start()
     {
         // Convert integer unlock positions to floats
@@ -69,18 +65,6 @@ public class SafeInteraction : MonoBehaviour
         for (int i = 0; i < failPositions.Length; i++)
         {
             failPositionsFloat[i] = (float)failPositions[i];
-        }
-
-        // Initialize remaining fail positions with all fail positions
-        foreach (float failPos in failPositionsFloat)
-        {
-            remainingFailPositions.Add(failPos);
-        }
-
-        // Initialize failPositionAudioPlayed dictionary with all fail positions
-        foreach (float failPos in failPositionsFloat)
-        {
-            failPositionAudioPlayed.Add(failPos, false);
         }
 
         if (playerMovementScript == null)
@@ -146,8 +130,11 @@ public class SafeInteraction : MonoBehaviour
                 {
                     Debug.Log("Correct turn. Next expected turn: " + expectedTurnSequence[currentExpectedTurnIndex]);
                 }
-                // Enable UI image for correct position
-                correctPositionImages[currentExpectedTurnIndex].gameObject.SetActive(true);
+                // Enable UI image for correct position if the index is within bounds
+                if (currentExpectedTurnIndex >= 0 && currentExpectedTurnIndex < correctPositionImages.Length)
+                {
+                    correctPositionImages[currentExpectedTurnIndex].gameObject.SetActive(true);
+                }
             }
 
             // Check for fail state after reaching the first and second unlock positions
@@ -205,30 +192,19 @@ public class SafeInteraction : MonoBehaviour
 
     private void CheckFailState()
     {
-        // Check if the current dial rotation is within any of the remaining fail positions
-        for (int i = 0; i < remainingFailPositions.Count; i++)
+        // Check if the current dial rotation is within the fail position corresponding to the current expected turn index
+        if (currentExpectedTurnIndex >= 0 && currentExpectedTurnIndex < failPositionsFloat.Length)
         {
-            float failPos = remainingFailPositions[i];
-            if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - failPos) < 1f)
+            if (Mathf.Abs(dialTransform.localRotation.eulerAngles.z - failPositionsFloat[currentExpectedTurnIndex]) < 1f)
             {
-                // Check if fail sound has already been played for this fail position
-                if (!failPositionAudioPlayed[failPos])
+                // Player hits a fail state
+                Debug.Log("Fail state reached. Player failed the minigame.");
+
+                // Play the fail sound
+                if (audioSource != null && failSound != null)
                 {
-                    // Player hits a fail state
-                    Debug.Log("Fail state reached. Player failed the minigame.");
-
-                    // Play the fail sound
-                    if (audioSource != null && failSound != null)
-                    {
-                        audioSource.PlayOneShot(failSound);
-                    }
-
-                    // Mark this fail position as having played fail sound
-                    failPositionAudioPlayed[failPos] = true;
+                    audioSource.PlayOneShot(failSound);
                 }
-
-                // Remove this fail position from remaining fail positions
-                remainingFailPositions.RemoveAt(i);
 
                 // Reset UI images for correct positions
                 foreach (Image image in correctPositionImages)
@@ -238,11 +214,6 @@ public class SafeInteraction : MonoBehaviour
 
                 ResetMinigame(); // Restart the minigame
                 return;
-            }
-            else
-            {
-                // If player moves away from fail position, reset flag for this fail position
-                failPositionAudioPlayed[failPos] = false;
             }
         }
     }
@@ -471,19 +442,6 @@ public class SafeInteraction : MonoBehaviour
         // Reset all necessary variables and states to their initial values
         currentExpectedTurnIndex = 0;
         lastTurnDirection = TurnDirection.None;
-
-        // Reinitialize remaining fail positions with all fail positions
-        remainingFailPositions.Clear();
-        foreach (float failPos in failPositionsFloat)
-        {
-            remainingFailPositions.Add(failPos);
-        }
-
-        // Reset failPositionAudioPlayed dictionary
-        foreach (var kvp in failPositionAudioPlayed)
-        {
-            failPositionAudioPlayed[kvp.Key] = false;
-        }
 
         // Hide all correct position UI images
         foreach (Image image in correctPositionImages)
