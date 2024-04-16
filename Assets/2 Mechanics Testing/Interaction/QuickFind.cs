@@ -5,7 +5,8 @@ using UnityEngine;
 public class QuickFind : MonoBehaviour
 {
     public List<GameObject> objects;
-    public string searchTag; 
+    public string searchTag;
+    public bool searchColor; 
     // Start is called before the first frame update
     void Start()
     {
@@ -48,18 +49,39 @@ public class QuickFind : MonoBehaviour
             Debug.Log("Found object with AudioListener: " + description.gameObject.name);
         }
         */
-        string layerName = searchTag;
-        int layerIndex = LayerMask.NameToLayer(layerName);
-
-        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(true);
-        foreach (GameObject obj in allObjects)
+        if (!searchColor)
         {
-            if (obj.layer == layerIndex)
+            string layerName = searchTag;
+            int layerIndex = LayerMask.NameToLayer(layerName);
+
+            GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(true);
+            foreach (GameObject obj in allObjects)
             {
-                objects.Add(obj);
+                if (obj.layer == layerIndex)
+                {
+                    objects.Add(obj);
+                    // Found object with the desired layer
+                    Debug.Log("Found object with layer " + layerName + ": " + obj.name);
+                }
+            }
+
+        }
+        else
+        {
+            string layerName = searchTag;
+            int layerIndex = LayerMask.NameToLayer(layerName);
+
+            ClueObjectColor[] allObjects = GameObject.FindObjectsOfType<ClueObjectColor>(true);
+            foreach (ClueObjectColor obj in allObjects)
+            {
+                
+                objects.Add(obj.gameObject);
                 // Found object with the desired layer
                 Debug.Log("Found object with layer " + layerName + ": " + obj.name);
+                
             }
+
+
         }
 
     }
