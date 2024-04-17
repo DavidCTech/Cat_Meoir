@@ -74,6 +74,8 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     const string resName = "resolutionoption";
 
     private float sliderValue;
+    [Header("Bool for npc dialog to ignore taking off cursor")]
+    public bool ignore; 
 
     [Header("Peyton's Stuff")]
     public CanvasGroup accessibilityMenu;
@@ -369,8 +371,10 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         if (rebindingMenu.alpha == 1 || accessibilityMenu.alpha == 1 || gammaMenu.alpha == 1)
         {
+            
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            
         }
 
         rebindingMenu.gameObject.SetActive(false);

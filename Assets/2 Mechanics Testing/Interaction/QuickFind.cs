@@ -6,7 +6,8 @@ public class QuickFind : MonoBehaviour
 {
     public List<GameObject> objects;
     public string searchTag;
-    public bool searchColor; 
+    public bool searchColor;
+    public bool searchCursor; 
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +50,7 @@ public class QuickFind : MonoBehaviour
             Debug.Log("Found object with AudioListener: " + description.gameObject.name);
         }
         */
-        if (!searchColor)
+        if (searchColor)
         {
             string layerName = searchTag;
             int layerIndex = LayerMask.NameToLayer(layerName);
@@ -66,7 +67,7 @@ public class QuickFind : MonoBehaviour
             }
 
         }
-        else
+        if(!searchColor && !searchCursor)
         {
             string layerName = searchTag;
             int layerIndex = LayerMask.NameToLayer(layerName);
@@ -82,6 +83,21 @@ public class QuickFind : MonoBehaviour
             }
 
 
+        }
+        if (searchCursor)
+        {
+            string layerName = searchTag;
+            int layerIndex = LayerMask.NameToLayer(layerName);
+
+            UICursor[] allObjects = GameObject.FindObjectsOfType<UICursor>(true);
+            foreach (UICursor obj in allObjects)
+            {
+
+                objects.Add(obj.gameObject);
+                // Found object with the desired layer
+                Debug.Log("Found object with layer " + layerName + ": " + obj.name);
+
+            }
         }
 
     }

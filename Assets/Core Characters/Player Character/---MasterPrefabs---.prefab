@@ -4530,10 +4530,10 @@ RectTransform:
   m_Father: {fileID: 9171049427932452425}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00003054994, y: -0.0000104904175}
-  m_SizeDelta: {x: 2171.8, y: 1002.7263}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7822138275734129420
 CanvasRenderer:
@@ -7325,6 +7325,30 @@ MonoBehaviour:
   onEnableEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 8065678383425845056}
+        m_TargetAssemblyTypeName: SetTabInactive, Assembly-CSharp
+        m_MethodName: SetInactive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8065678383425845056}
+        m_TargetAssemblyTypeName: SetTabInactive, Assembly-CSharp
+        m_MethodName: Deactivate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2822627719838978617}
         m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
         m_MethodName: Stop
@@ -7352,30 +7376,6 @@ MonoBehaviour:
       - m_Target: {fileID: 2183878056601969262}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: CameraFreeze
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8065678383425845056}
-        m_TargetAssemblyTypeName: SetTabInactive, Assembly-CSharp
-        m_MethodName: SetInactive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8065678383425845056}
-        m_TargetAssemblyTypeName: SetTabInactive, Assembly-CSharp
-        m_MethodName: Deactivate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14005,7 +14005,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &4056362525315607102
 MonoBehaviour:
@@ -17570,6 +17570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5235710800641629172}
   - component: {fileID: 4906447566433861146}
+  - component: {fileID: 3086479182292343044}
   m_Layer: 0
   m_Name: LoadingScreen
   m_TagString: Untagged
@@ -17608,9 +17609,9 @@ MonoBehaviour:
   onEnableEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3211103196015202952}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: Resume
+      - m_Target: {fileID: 3086479182292343044}
+        m_TargetAssemblyTypeName: TimeStopper, Assembly-CSharp
+        m_MethodName: Go
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17623,6 +17624,19 @@ MonoBehaviour:
   onDisableEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3086479182292343044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392032607097687252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4bbf7750ec33b44bcae942a4719573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  journalMenu: {fileID: 0}
 --- !u!1 &5397026951320143985
 GameObject:
   m_ObjectHideFlags: 0
@@ -38173,6 +38187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isNpcDialog: 0
+  ignore: 0
 --- !u!114 &8759542298472095610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44624,6 +44639,10 @@ PrefabInstance:
       propertyPath: m_PixelPerfect
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2623554325475698763, guid: c90022dce8fccc443985dd539311b075, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2727148742496329229, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_SizeDelta.x
       value: 205.5774
@@ -44822,27 +44841,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 2171.8342
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 986
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_LocalPosition.z
@@ -44850,7 +44869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.0379
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229740156561191531, guid: c90022dce8fccc443985dd539311b075, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -46938,9 +46957,6 @@ PrefabInstance:
       insertIndex: 5
       addedObject: {fileID: 60519972961405586}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8852156423183883869, guid: c90022dce8fccc443985dd539311b075, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 5873741341276873319}
     - targetCorrespondingSourceObject: {fileID: 261580449879664445, guid: c90022dce8fccc443985dd539311b075, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7210533450312131320}
@@ -47092,24 +47108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2976147145683581567 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8852156423183883869, guid: c90022dce8fccc443985dd539311b075, type: 3}
-  m_PrefabInstance: {fileID: 6022521418163577890}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5873741341276873319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2976147145683581567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caf76edfddeea34c883c96bea01fa45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isNpcDialog: 0
 --- !u!114 &3202365635109961664 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9215875318482983906, guid: c90022dce8fccc443985dd539311b075, type: 3}
@@ -47137,7 +47135,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9152556915690698410, guid: c90022dce8fccc443985dd539311b075, type: 3}
   m_PrefabInstance: {fileID: 6022521418163577890}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2976147145683581567}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2443a00a630b0d84a8b31b90aaf6e22b, type: 3}

@@ -4,28 +4,39 @@ using UnityEngine;
 
 public class UICursor : MonoBehaviour
 {
-    public bool isNpcDialog; 
+    public bool isNpcDialog;
+    public bool ignore; 
     // OnEnable turns on when the script enables itself 
     private void OnEnable()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        
+        if (!ignore)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            this.gameObject.SetActive(false); 
+        }
         
     }
 
     //OnDisable turns on when the script disables itself 
     private void OnDisable()
     {
-        if (!isNpcDialog)
+        if (!ignore)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            if (!isNpcDialog)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Invoke("KeepOnCheck", 0.1f);
+            }
         }
-        else
-        {
-            Invoke("KeepOnCheck", 0.1f);
-        }
+        
     }
     private void KeepOnCheck()
     {
@@ -35,4 +46,5 @@ public class UICursor : MonoBehaviour
             Cursor.visible = false;
         }
     }
+   
 }
