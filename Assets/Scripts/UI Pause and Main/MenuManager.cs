@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public GameObject audioPanel;
 
+    public GameObject defaultControlsPanel;
+
     public Slider sensitivitySlider;
     public CinemachineFreeLook cineCam;
     private CinemachineComposer composerX;
@@ -61,7 +63,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public Toggle vSyncToggle;
 
-    public GameObject controlsButton, controlsBackButton, optionsFirstButton, optionsClosedButton, creditsFirstButton, audioFirstButton, audioClosedButton;
+    public GameObject controlsButton, controlsBackButton, optionsFirstButton, optionsClosedButton, creditsFirstButton, audioFirstButton, audioClosedButton, defaultControlsFirstButton, defaultControlsClosedButton;
 
     const string prefName = "optionsvalue";
     const string resName = "resolutionoption";
@@ -260,6 +262,25 @@ public class GameManager : MonoBehaviour, ISelectHandler
         TurnControlsCanvasOff();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(creditsFirstButton);
+    }
+
+    public void ActivateDefaultControlsPanel()
+    {
+        defaultControlsPanel.SetActive(true);
+        optionsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
+        audioPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(defaultControlsFirstButton);
+    }
+
+    public void DeactivateDefaultControlsPanel()
+    {
+        defaultControlsPanel.SetActive(false);
+        optionsPanel.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(defaultControlsClosedButton);
     }
 
     public void ActivateMenu()
