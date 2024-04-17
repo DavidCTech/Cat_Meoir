@@ -50,7 +50,7 @@ public class QuickFind : MonoBehaviour
             Debug.Log("Found object with AudioListener: " + description.gameObject.name);
         }
         */
-        if (searchColor)
+        if (!searchColor && !searchCursor)
         {
             string layerName = searchTag;
             int layerIndex = LayerMask.NameToLayer(layerName);
@@ -67,7 +67,7 @@ public class QuickFind : MonoBehaviour
             }
 
         }
-        if(!searchColor && !searchCursor)
+        if(searchColor && !searchCursor)
         {
             string layerName = searchTag;
             int layerIndex = LayerMask.NameToLayer(layerName);
