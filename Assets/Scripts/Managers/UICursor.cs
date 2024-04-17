@@ -5,7 +5,8 @@ using UnityEngine;
 public class UICursor : MonoBehaviour
 {
     public bool isNpcDialog;
-    public bool ignore; 
+    public bool ignore;
+    public bool isSettings; 
     // OnEnable turns on when the script enables itself 
     private void OnEnable()
     {
@@ -14,7 +15,8 @@ public class UICursor : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        else
+
+        else if(!isSettings)
         {
             this.gameObject.SetActive(false); 
         }
