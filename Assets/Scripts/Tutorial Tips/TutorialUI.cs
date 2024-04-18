@@ -6,18 +6,19 @@ public class TutorialUI : MonoBehaviour
 {
 
     public GameObject tipBox;
+    public float timer;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            tipBox.SetActive(true); 
+            tipBox.SetActive(true);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player"))
         {
             //tipBox.SetActive(false);
             StartCoroutine(DelayedDeactivate());
@@ -27,7 +28,7 @@ public class TutorialUI : MonoBehaviour
 
     private IEnumerator DelayedDeactivate()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(timer);
         tipBox.SetActive(false);
     }
 
