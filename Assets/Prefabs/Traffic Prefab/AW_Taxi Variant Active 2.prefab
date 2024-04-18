@@ -760,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2273016224538616779
 Transform:
   m_ObjectHideFlags: 0
@@ -769,7 +769,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2485040122549167341}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.3171273, y: 0, z: 2.2820053}
+  m_LocalPosition: {x: -1.3171273, y: -0.164, z: 2.2820053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1175,7 +1175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7942499905322278207}
   - component: {fileID: 4771570649071293944}
-  - component: {fileID: 2630876247353894648}
+  - component: {fileID: 3881676106315467641}
   m_Layer: 18
   m_Name: AW_Taxi Variant Active 2
   m_TagString: Car
@@ -1230,7 +1230,7 @@ Transform:
   - {fileID: 3520066306195976218}
   - {fileID: 6089528765154555132}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!195 &4771570649071293944
 NavMeshAgent:
@@ -1240,7 +1240,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4405788623079289241}
   m_Enabled: 1
-  m_AgentTypeID: -1923039037
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -1254,33 +1254,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 64
   m_ObstacleAvoidanceType: 4
---- !u!54 &2630876247353894648
-Rigidbody:
+--- !u!65 &3881676106315467641
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4405788623079289241}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 1
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.1432831, y: 1.992049, z: 1.764375}
+  m_Center: {x: 0.57164156, y: 0.49602446, z: 3.526903}
 --- !u!1 &4807937928916943995
 GameObject:
   m_ObjectHideFlags: 0
