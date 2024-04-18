@@ -249,7 +249,7 @@ public class AccessibilityManager : MonoBehaviour
         if (!cvHighContrastToggle.isOn)
         {
             PlayerPrefs.SetInt("CvHighContrastState", 0);
-            isUsingHighContrastMode = false;
+            isUsingCvHighContrastMode = false;
 
             if (highContrastManager != null)
             {
@@ -270,7 +270,7 @@ public class AccessibilityManager : MonoBehaviour
                     HighContrastManager.instance.SwapMaterialsInCatVision();
                 }
             }
-            isUsingHighContrastMode = true;
+            isUsingCvHighContrastMode = true;
         }
 
         if (!journalColorblindToggle.isOn)
