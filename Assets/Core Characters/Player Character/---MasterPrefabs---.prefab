@@ -24273,6 +24273,7 @@ GameObject:
   - component: {fileID: 3981672212014327670}
   - component: {fileID: 1471106858408428119}
   - component: {fileID: 5256987174508363275}
+  - component: {fileID: 2576743733697570705}
   - component: {fileID: 82106882233589887}
   - component: {fileID: 8234872661567910400}
   - component: {fileID: 2475215023629480785}
@@ -24370,6 +24371,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2576743733697570705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650872330996964843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a0f39078d93204db3e617fdd2f25eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialBoxToggle: {fileID: 1524851463166613005}
+  isTutorialBoxesDisabled: 0
+  tutorialBoxes: []
 --- !u!114 &82106882233589887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34314,20 +34330,32 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 6484510782625936164}
+    - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 2754764590030950065}
+    - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 82106882233589887}
+      objectReference: {fileID: 2576743733697570705}
     - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetArialDialogueMode
+      value: SetTutorialBoxMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TutorialBoxManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1033706843467072727, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_Name
-      value: Arial Dialogue Font Toggle
+      value: Disable Hints Toggle
       objectReference: {fileID: 0}
     - target: {fileID: 1033706843467072727, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1069360223714409341, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -34339,7 +34367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1300943090712845820, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_text
-      value: Arial Dialogue Font
+      value: Disable Hints
       objectReference: {fileID: 0}
     - target: {fileID: 5369959375960129315, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: accessibilityTipText
@@ -34347,8 +34375,8 @@ PrefabInstance:
       objectReference: {fileID: 5630238079694365588}
     - target: {fileID: 5369959375960129315, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: accessibilityTipString
-      value: '*This Feature Swaps the Custom Text in the Game used for Dialogue to
-        Arial Font'
+      value: '*This Feature Disables Hints that are spread out throughout the Level
+        to help Guide the Player'
       objectReference: {fileID: 0}
     - target: {fileID: 5754959853636670753, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_Pivot.x
@@ -37467,7 +37495,7 @@ PrefabInstance:
     - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
-      objectReference: {fileID: 6484510782625936164}
+      objectReference: {fileID: 1524851463166613005}
     - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
@@ -37502,8 +37530,8 @@ PrefabInstance:
       objectReference: {fileID: 5630238079694365588}
     - target: {fileID: 5369959375960129315, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: accessibilityTipString
-      value: '*This Feature Disables Police Officers and Baristas in Levels that
-        Chase You for a Just Cruising Experience (Does not Disable T-Bone)'
+      value: '*This Feature Disables Enemies like Police Officers in Levels for a
+        Just Cruising Experience (Does not Disable T-Bone)'
       objectReference: {fileID: 0}
     - target: {fileID: 5754959853636670753, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_Pivot.x
@@ -49758,7 +49786,7 @@ PrefabInstance:
     - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 2754764590030950065}
+      objectReference: {fileID: 1524851463166613005}
     - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -55392,7 +55420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8694247757758963472, guid: 3ac7152e45c896a48a7fcea524d6f7b7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8694247757758963472, guid: 3ac7152e45c896a48a7fcea524d6f7b7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -55407,6 +55435,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 82106882233589887}
     - target: {fileID: 8694247757758963472, guid: 3ac7152e45c896a48a7fcea524d6f7b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2576743733697570705}
+    - target: {fileID: 8694247757758963472, guid: 3ac7152e45c896a48a7fcea524d6f7b7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -55420,7 +55452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8694247757758963472, guid: 3ac7152e45c896a48a7fcea524d6f7b7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ApplyFilmGrainSettings
+      value: ApplyTutorialBoxSettings
       objectReference: {fileID: 0}
     - target: {fileID: 8694247757758963472, guid: 3ac7152e45c896a48a7fcea524d6f7b7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -55432,7 +55464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8694247757758963472, guid: 3ac7152e45c896a48a7fcea524d6f7b7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PostProcessingToggles, Assembly-CSharp
+      value: TutorialBoxManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8694247757758963472, guid: 3ac7152e45c896a48a7fcea524d6f7b7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
