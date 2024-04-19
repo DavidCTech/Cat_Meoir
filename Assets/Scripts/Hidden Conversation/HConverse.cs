@@ -12,6 +12,7 @@ public class HConverse : MonoBehaviour
     public bool near;
     public float nearDistance = 5f;
 
+    private AudioSource audioSource;
     public List<AudioClip> audioClips = new List<AudioClip>();
     public List<GameObject> uiElements = new List<GameObject>();
     private int currentIndex = 0;
@@ -22,6 +23,7 @@ public class HConverse : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         playerInteractionCheck = Player.GetComponent<PlayerInteractionCheck>();
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -75,7 +77,9 @@ public class HConverse : MonoBehaviour
                 break;
             }
 
-            AudioSource.PlayClipAtPoint(clip, transform.position); // Play audio clip at the position of the AI
+            // Assign the audio clip to the AudioSource component and play it
+            audioSource.clip = clip;
+            audioSource.Play();
 
             // Show UI element associated with the currently playing audio clip
             uiElement.SetActive(true);
