@@ -14,6 +14,8 @@ public class HighContrastManager : MonoBehaviour
 
     private SwappableObjects swappableObjects;
 
+    public Material[] materialColors;
+
     void Awake()
     {
         //Make script an instance
@@ -69,6 +71,14 @@ public class HighContrastManager : MonoBehaviour
         foreach (HighContrastMode script in highContrastScripts)
         {
             script.SwapMaterialsInCatVision();
+        }
+    }
+
+    public void SwapColorMaterial()
+    {
+        foreach (HighContrastMode script in highContrastScripts)
+        {
+            script.SwapColorMaterial();
         }
     }
 }

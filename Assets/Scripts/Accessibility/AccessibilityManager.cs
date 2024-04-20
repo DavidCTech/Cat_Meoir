@@ -360,5 +360,7 @@ public class AccessibilityManager : MonoBehaviour
                 justCruisingModeManager.ToggleObjects(false);
             }
         }
+
+        HighContrastManager.instance.SwapColorMaterial();
     }
 }

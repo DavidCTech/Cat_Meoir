@@ -11,8 +11,25 @@ public class HighContrastMode : MonoBehaviour
     public string layerToSwitchName = "Clue";
     private string defaultLayerName;
 
+    public bool isShadow, isNpc, isEnemy;
+
     void Awake()
     {
+        if (isShadow)
+        {
+            targetMaterial = HighContrastManager.instance.materialColors[PlayerPrefs.GetInt("ShadowColor")];
+        }
+
+        if (isEnemy)
+        {
+            targetMaterial = HighContrastManager.instance.materialColors[PlayerPrefs.GetInt("EnemyColor")];
+        }
+
+        if (isNpc)
+        {
+            targetMaterial = HighContrastManager.instance.materialColors[PlayerPrefs.GetInt("NpcColor")];
+        }
+
         rendererComponent = GetComponent<SkinnedMeshRenderer>();
 
         if (rendererComponent != null)
@@ -73,7 +90,30 @@ public class HighContrastMode : MonoBehaviour
                 SwapMaterials();
                 Debug.Log("Swapping Out Materials to Normal If");
             }
+        }
+    }
 
+    public void SwapColorMaterial()
+    {
+        if (isShadow)
+        {
+            targetMaterial = HighContrastManager.instance.materialColors[PlayerPrefs.GetInt("ShadowColor")];
+            SwapMaterials();
+            SwapMaterialsInCatVision();
+        }
+
+        if (isNpc)
+        {
+            targetMaterial = HighContrastManager.instance.materialColors[PlayerPrefs.GetInt("NpcColor")];
+            SwapMaterials();
+            SwapMaterialsInCatVision();
+        }
+
+        if (isEnemy)
+        {
+            targetMaterial = HighContrastManager.instance.materialColors[PlayerPrefs.GetInt("EnemyColor")];
+            SwapMaterials();
+            SwapMaterialsInCatVision();
         }
     }
 }
