@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour, ISelectHandler
 
     public PlayerController playerControls;
 
+    public Toggle fpsToggle;
+    public GameObject fpsDisplay;
+
     public Toggle vSyncToggle;
 
     public GameObject controlsButton, controlsBackButton, optionsFirstButton, optionsClosedButton, creditsFirstButton, audioFirstButton, audioClosedButton, defaultControlsFirstButton, defaultControlsClosedButton;
@@ -104,6 +107,29 @@ public class GameManager : MonoBehaviour, ISelectHandler
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        if (PlayerPrefs.GetInt("FPSToggleState", 0) == 1)
+        {
+            fpsToggle.isOn = true;
+            ApplyFPS(true);
+        }
+        else
+        {
+            fpsToggle.isOn = false;
+            ApplyFPS(false);
+        }
+
+
+        if (PlayerPrefs.GetInt("VSyncToggleState", 0) == 1)
+        {
+            vSyncToggle.isOn = true;
+            ApplyVSync(true);
+        }
+        else
+        {
+            vSyncToggle.isOn = false;
+            ApplyVSync(false);
+        }
 
         if (PlayerPrefs.HasKey("Sensitivity"))
             sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
@@ -526,17 +552,23 @@ public class GameManager : MonoBehaviour, ISelectHandler
     }
 
 
-    public void ApplyVSync()
+    public void ApplyVSync(bool isVSyncOn)
     {
-        if (vSyncToggle.isOn)
-        {
-            QualitySettings.vSyncCount = 1;
-        }
-        else
-        {
-            QualitySettings.vSyncCount = 0;
-        }
+        QualitySettings.vSyncCount = isVSyncOn ? 1 : 0;
+ 
+        PlayerPrefs.SetInt("VSyncToggleState", isVSyncOn ? 1 : 0);
+        PlayerPrefs.Save(); 
     }
+
+    public void ApplyFPS(bool isFPSEnabled)
+    {
+        fpsDisplay.SetActive(isFPSEnabled); // Activate or deactivate the FPS display GameObject
+
+        // Save the toggle state to PlayerPrefs
+        PlayerPrefs.SetInt("FPSToggleState", isFPSEnabled ? 1 : 0);
+        PlayerPrefs.Save(); // Save PlayerPrefs immediately
+    }
+
 
     public void QuitGame()
     {

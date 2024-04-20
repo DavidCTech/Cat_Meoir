@@ -10,8 +10,6 @@ public class FPS_Updater : MonoBehaviour
 
     float updateTimer = 0.2f;
 
-    public Toggle fpsToggle;
-
     [SerializeField] TextMeshProUGUI fpsTitle;
 
     public void UpdateFPSDisplay()

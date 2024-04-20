@@ -67,6 +67,9 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     public PlayerController playerControls;
 
+    public Toggle fpsToggle;
+    public GameObject fpsDisplay;
+
     public Toggle vSyncToggle;
 
     public GameObject pauseFirstButton, optionsFirstButton, optionsClosedButton, audioFirstButton, audioClosedButton, defaultControlsFirstButton, defaultControlsClosedButton;
@@ -298,6 +301,30 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("FPSToggleState", 0) == 1)
+        {
+            fpsToggle.isOn = true;
+            ApplyFPS(true);
+        }
+        else
+        {
+            fpsToggle.isOn = false;
+            ApplyFPS(false);
+        }
+    
+
+
+        if (PlayerPrefs.GetInt("VSyncToggleState", 0) == 1)
+        {
+            vSyncToggle.isOn = true;
+            ApplyVSync(true);
+        }
+        else
+        {
+            vSyncToggle.isOn = false;
+            ApplyVSync(false);
+        }
+
         if (PlayerPrefs.HasKey("Sensitivity"))
             sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         else
@@ -647,11 +674,13 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         if (isFullscreen == false)
         {
             PlayerPrefs.SetInt("togglestate", 0);
+            PlayerPrefs.Save();
         }
         else
         {
             isFullscreen = true;
             PlayerPrefs.SetInt("togglestate", 1);
+            PlayerPrefs.Save();
         }
     }
 
@@ -667,16 +696,20 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         Application.Quit();
     }
 
-    public void ApplyVSync()
+    public void ApplyVSync(bool isVSyncOn)
     {
-        if (vSyncToggle.isOn)
-        {
-            QualitySettings.vSyncCount = 1;
-        }
-        else
-        {
-            QualitySettings.vSyncCount = 0;
-        }
+        QualitySettings.vSyncCount = isVSyncOn ? 1 : 0;
+        
+        PlayerPrefs.SetInt("VSyncToggleState", isVSyncOn ? 1 : 0);
+        PlayerPrefs.Save(); 
+    }
+
+    public void ApplyFPS(bool isFPSEnabled)
+    {
+        fpsDisplay.SetActive(isFPSEnabled); 
+
+        PlayerPrefs.SetInt("FPSToggleState", isFPSEnabled ? 1 : 0);
+        PlayerPrefs.Save(); 
     }
 }
 
