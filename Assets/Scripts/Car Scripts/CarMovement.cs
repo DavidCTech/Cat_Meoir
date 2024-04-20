@@ -8,11 +8,17 @@ public class CarMovement : MonoBehaviour
     private int currentWaypointIndex = 0;
     private NavMeshAgent navMeshAgent;
     private bool isStopped = false; // Flag to track if the car movement is stopped
+    private bool isInsideStopBox = false; // Flag to track if the trigger box is inside a stop box
+
+    private GameObject triggerBox; // Reference to the trigger box object
 
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         SetDestination();
+
+        // Find the trigger box by searching in children
+        triggerBox = FindTriggerBox();
     }
 
     private void SetDestination()
@@ -40,6 +46,15 @@ public class CarMovement : MonoBehaviour
                 }
             }
         }
+
+        if (isInsideStopBox && !isStopped)
+        {
+            StopMovement();
+        }
+        else if (!isInsideStopBox && isStopped)
+        {
+            ResumeMovement();
+        }
     }
 
     public void StopMovement()
@@ -47,9 +62,6 @@ public class CarMovement : MonoBehaviour
         isStopped = true;
         navMeshAgent.isStopped = true; // Stop the NavMeshAgent
         Debug.Log("Car stopped.");
-
-        // Start coroutine to periodically check if the car is still in the stop box
-        StartCoroutine(CheckIfInsideStopBox());
     }
 
     public void ResumeMovement()
@@ -58,37 +70,34 @@ public class CarMovement : MonoBehaviour
         navMeshAgent.isStopped = false; // Resume the NavMeshAgent
         SetDestination(); // Set new destination to continue movement
         Debug.Log("Car resumed movement.");
-
-        // Stop coroutine if the car resumes movement
-        StopCoroutine(CheckIfInsideStopBox());
     }
 
-    private IEnumerator CheckIfInsideStopBox()
+    private void OnTriggerEnter(Collider other)
     {
-        // Check if the car is still inside the stop box every second
-        while (isStopped)
+        if (other.CompareTag("StopBox"))
         {
-            yield return new WaitForSeconds(1f);
-
-            if (!IsInsideStopBox())
-            {
-                ResumeMovement();
-                yield break; // Exit coroutine if the car is no longer inside the stop box
-            }
+            isInsideStopBox = true;
         }
     }
 
-    private bool IsInsideStopBox()
+    private void OnTriggerExit(Collider other)
     {
-        // Check if the car is inside the stop box by checking objects with the "StopBox" tag
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
-        foreach (Collider collider in colliders)
+        if (other.CompareTag("StopBox"))
         {
-            if (collider.CompareTag("StopBox"))
+            isInsideStopBox = false;
+        }
+    }
+
+    private GameObject FindTriggerBox()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("TriggerBox"))
             {
-                return true;
+                return child.gameObject;
             }
         }
-        return false;
+        Debug.LogWarning("Trigger box not found!");
+        return null;
     }
 }
