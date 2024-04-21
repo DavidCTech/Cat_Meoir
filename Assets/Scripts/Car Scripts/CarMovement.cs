@@ -29,7 +29,7 @@ public class CarMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void Update()
     {
         if (!isStopped)
         {
