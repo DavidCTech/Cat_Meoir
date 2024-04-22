@@ -55,6 +55,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""ClueBoard"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c40625f-d169-4744-a7d8-7b11aa6eb22b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Stealth"",
                     ""type"": ""Button"",
                     ""id"": ""3b6aa205-711e-4edd-b70b-984173fbba5a"",
@@ -530,6 +539,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Test Path"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e77a993-4e07-472a-a519-1f06b8ab940f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ClueBoard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bc98ce4-4856-42e9-a2b6-bfaee464b305"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ClueBoard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -569,6 +600,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
+        m_Player_ClueBoard = m_Player.FindAction("ClueBoard", throwIfNotFound: true);
         m_Player_Stealth = m_Player.FindAction("Stealth", throwIfNotFound: true);
         m_Player_MenuOpenClose = m_Player.FindAction("MenuOpenClose", throwIfNotFound: true);
         m_Player_MapOpenClose = m_Player.FindAction("MapOpenClose", throwIfNotFound: true);
@@ -643,6 +675,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Interaction;
+    private readonly InputAction m_Player_ClueBoard;
     private readonly InputAction m_Player_Stealth;
     private readonly InputAction m_Player_MenuOpenClose;
     private readonly InputAction m_Player_MapOpenClose;
@@ -660,6 +693,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
+        public InputAction @ClueBoard => m_Wrapper.m_Player_ClueBoard;
         public InputAction @Stealth => m_Wrapper.m_Player_Stealth;
         public InputAction @MenuOpenClose => m_Wrapper.m_Player_MenuOpenClose;
         public InputAction @MapOpenClose => m_Wrapper.m_Player_MapOpenClose;
@@ -688,6 +722,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
+            @ClueBoard.started += instance.OnClueBoard;
+            @ClueBoard.performed += instance.OnClueBoard;
+            @ClueBoard.canceled += instance.OnClueBoard;
             @Stealth.started += instance.OnStealth;
             @Stealth.performed += instance.OnStealth;
             @Stealth.canceled += instance.OnStealth;
@@ -731,6 +768,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
+            @ClueBoard.started -= instance.OnClueBoard;
+            @ClueBoard.performed -= instance.OnClueBoard;
+            @ClueBoard.canceled -= instance.OnClueBoard;
             @Stealth.started -= instance.OnStealth;
             @Stealth.performed -= instance.OnStealth;
             @Stealth.canceled -= instance.OnStealth;
@@ -801,6 +841,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
+        void OnClueBoard(InputAction.CallbackContext context);
         void OnStealth(InputAction.CallbackContext context);
         void OnMenuOpenClose(InputAction.CallbackContext context);
         void OnMapOpenClose(InputAction.CallbackContext context);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ClueBoardOpener : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class ClueBoardOpener : MonoBehaviour
     public bool isInClueBoard = false;
 
     private Coroutine clueBoardUp;
+    public InputActionReference northButtonAction; // Reference to the North button action
+
 
     public void EnterOrExitClueBoard()
     {
@@ -15,10 +18,11 @@ public class ClueBoardOpener : MonoBehaviour
         {
             EnterClueBoard();
         }
-        else
+        /*else
         {
             ExitClueBoard();
-        }
+            //ClueBoardExit();
+        }*/
     }
 
     public void EnterClueBoard()
@@ -30,6 +34,25 @@ public class ClueBoardOpener : MonoBehaviour
         isInClueBoard = true;
         clueBoardUp = StartCoroutine(ClueBoardUp());
     }
+
+    /*public void ExitClueBoard()
+    {
+        if (enableBoard != null)
+        {
+            enableBoard.SetActive(false);
+        }
+        isInClueBoard = false;
+
+        if (clueBoardUp != null)
+        {
+            StopCoroutine(clueBoardUp);
+        }
+
+        // Reset time scale and lock cursor
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }*/
 
     public void ExitClueBoard()
     {
@@ -50,6 +73,14 @@ public class ClueBoardOpener : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public void ExitClueBoard(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            ExitClueBoard();
+        }
+    }
+
     public IEnumerator ClueBoardUp()
     {
         // Keep the time scale 0 and unlock the cursor while the screen is up
@@ -60,5 +91,21 @@ public class ClueBoardOpener : MonoBehaviour
             Cursor.visible = true;
             yield return null;
         }
+    }
+
+    private void OnEnable()
+    {
+        // Enable the input action callback when the script is enabled
+        northButtonAction.action.Enable();
+        // Add ExitClueBoard as a callback to the North button action
+        northButtonAction.action.performed += ExitClueBoard;
+    }
+
+    private void OnDisable()
+    {
+        // Disable the input action callback when the script is disabled
+        northButtonAction.action.Disable();
+        // Remove ExitClueBoard as a callback from the North button action
+        northButtonAction.action.performed -= ExitClueBoard;
     }
 }
