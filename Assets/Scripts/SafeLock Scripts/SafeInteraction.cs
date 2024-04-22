@@ -49,6 +49,9 @@ public class SafeInteraction : MonoBehaviour
     public TMP_Text instructionsText; // Reference to the TextMeshProUGUI component for instructions
     public TMP_Text rotationText; // Reference to the TextMeshProUGUI component for displaying rotation
 
+    public GameObject backgroundTip; // Reference to the background object for the tip
+    public GameObject backgroundCount; // Reference to the background object for the count
+
     private float lastRotationZ = 0f; // Track the previous rotation value
 
     private void Start()
@@ -104,6 +107,16 @@ public class SafeInteraction : MonoBehaviour
         {
             image.gameObject.SetActive(false);
         }
+
+        if (backgroundTip == null)
+        {
+            Debug.LogWarning("Background Tip reference not set.");
+        }
+
+        if (backgroundCount == null)
+        {
+            Debug.LogWarning("Background Count reference not set.");
+        }
     }
 
     private void Update()
@@ -154,7 +167,7 @@ public class SafeInteraction : MonoBehaviour
         int currentRotationPercentage = Mathf.RoundToInt(normalizedRotation * 100);
 
         // Update the text to display the current rotation percentage
-        rotationText.text = "Rotation: " + currentRotationPercentage.ToString();
+        rotationText.text = currentRotationPercentage.ToString();
     }
 
     // Method to play the unlock sound
@@ -295,10 +308,38 @@ public class SafeInteraction : MonoBehaviour
         {
             Debug.LogWarning("Rotation Text reference not set.");
         }
+        // Deactivate the background for tip and its children
+        if (backgroundTip != null)
+        {
+            backgroundTip.SetActive(false);
+            foreach (Transform child in backgroundTip.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Background Tip reference not set.");
+        }
+
+        // Deactivate the background for count and its children
+        if (backgroundCount != null)
+        {
+            backgroundCount.SetActive(false);
+            foreach (Transform child in backgroundCount.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Background Count reference not set.");
+        }
         foreach (Image image in correctPositionImages)
         {
             image.gameObject.SetActive(false);
         }
+
     }
 
     // Method to start the safe interaction
@@ -362,6 +403,43 @@ public class SafeInteraction : MonoBehaviour
             else
             {
                 Debug.LogWarning("Rotation Text reference not set.");
+            }
+            // Display instructions text
+            if (instructionsText != null)
+            {
+                instructionsText.gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("Instructions Text reference not set.");
+            }
+
+            // Activate the background for tip and its children
+            if (backgroundTip != null)
+            {
+                backgroundTip.SetActive(true);
+                foreach (Transform child in backgroundTip.transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Background Tip reference not set.");
+            }
+
+            // Activate the background for count and its children
+            if (backgroundCount != null)
+            {
+                backgroundCount.SetActive(true);
+                foreach (Transform child in backgroundCount.transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Background Count reference not set.");
             }
         }
     }
@@ -434,6 +512,33 @@ public class SafeInteraction : MonoBehaviour
         foreach (Image image in correctPositionImages)
         {
             image.gameObject.SetActive(false);
+        }
+        // Deactivate the background for tip and its children
+        if (backgroundTip != null)
+        {
+            backgroundTip.SetActive(false);
+            foreach (Transform child in backgroundTip.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Background Tip reference not set.");
+        }
+
+        // Deactivate the background for count and its children
+        if (backgroundCount != null)
+        {
+            backgroundCount.SetActive(false);
+            foreach (Transform child in backgroundCount.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Background Count reference not set.");
         }
     }
 
