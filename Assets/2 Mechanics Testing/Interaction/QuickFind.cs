@@ -7,7 +7,8 @@ public class QuickFind : MonoBehaviour
     public List<GameObject> objects;
     public string searchTag;
     public bool searchColor;
-    public bool searchCursor; 
+    public bool searchCursor;
+    public bool searchObject; 
     // Start is called before the first frame update
     void Start()
     {
@@ -50,24 +51,8 @@ public class QuickFind : MonoBehaviour
             Debug.Log("Found object with AudioListener: " + description.gameObject.name);
         }
         */
-        if (!searchColor && !searchCursor)
-        {
-            string layerName = searchTag;
-            int layerIndex = LayerMask.NameToLayer(layerName);
-
-            GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(true);
-            foreach (GameObject obj in allObjects)
-            {
-                if (obj.layer == layerIndex)
-                {
-                    objects.Add(obj);
-                    // Found object with the desired layer
-                    Debug.Log("Found object with layer " + layerName + ": " + obj.name);
-                }
-            }
-
-        }
-        if(searchColor && !searchCursor)
+        
+        if(searchColor)
         {
             string layerName = searchTag;
             int layerIndex = LayerMask.NameToLayer(layerName);
@@ -84,7 +69,7 @@ public class QuickFind : MonoBehaviour
 
 
         }
-        if (searchCursor)
+        else if (searchCursor)
         {
             string layerName = searchTag;
             int layerIndex = LayerMask.NameToLayer(layerName);
@@ -98,6 +83,24 @@ public class QuickFind : MonoBehaviour
                 Debug.Log("Found object with layer " + layerName + ": " + obj.name);
 
             }
+        }
+     
+        else 
+        {
+            string layerName = searchTag;
+            int layerIndex = LayerMask.NameToLayer(layerName);
+
+            GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(true);
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.layer == layerIndex)
+                {
+                    objects.Add(obj);
+                    // Found object with the desired layer
+                    Debug.Log("Found object with layer " + layerName + ": " + obj.name);
+                }
+            }
+
         }
 
     }
