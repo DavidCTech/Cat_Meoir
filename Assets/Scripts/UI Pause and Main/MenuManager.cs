@@ -134,18 +134,18 @@ public class GameManager : MonoBehaviour, ISelectHandler
         if (PlayerPrefs.HasKey("Sensitivity"))
             sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         else
-            sensitivitySlider.value = 0.5f; 
+            sensitivitySlider.value = 0.5f;
 
         if (PlayerPrefs.HasKey("ySensitivity"))
             ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
         else
-            ySensitivitySlider.value = 1.0f; 
+            ySensitivitySlider.value = 1.0f;
 
         // Set volume sliders
         if (PlayerPrefs.HasKey("MVolume"))
             volumeSlider.value = PlayerPrefs.GetFloat("MVolume");
         else
-            volumeSlider.value = 1.0f; 
+            volumeSlider.value = 1.0f;
 
         // Set music slider
         if (PlayerPrefs.HasKey("MMusic"))
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         if (PlayerPrefs.HasKey("MSfx"))
             sfxSlider.value = PlayerPrefs.GetFloat("MSfx");
         else
-            sfxSlider.value = 1.0f; 
+            sfxSlider.value = 1.0f;
 
         if (PlayerPrefs.HasKey("MDialogue"))
             dialogueSlider.value = PlayerPrefs.GetFloat("MDialogue");
@@ -338,6 +338,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
     }
 
 
+
     private void LoadSavedResolution()
     {
         int savedResolutionIndex = PlayerPrefs.GetInt(resName, -1);
@@ -371,7 +372,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         // Set and apply the selected resolution
         SetResolution(selectedResolutionIndex);
 
-        
+
         shouldApplyChanges = true;
 
         // Save the selected resolution index
@@ -555,9 +556,9 @@ public class GameManager : MonoBehaviour, ISelectHandler
     public void ApplyVSync(bool isVSyncOn)
     {
         QualitySettings.vSyncCount = isVSyncOn ? 1 : 0;
- 
+
         PlayerPrefs.SetInt("VSyncToggleState", isVSyncOn ? 1 : 0);
-        PlayerPrefs.Save(); 
+        PlayerPrefs.Save();
     }
 
     public void ApplyFPS(bool isFPSEnabled)

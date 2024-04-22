@@ -10,10 +10,10 @@ public class VisualIndicators : MonoBehaviour
     public static VisualIndicators instance;
 
     public InputActionAsset playerInputs, cameraInputs;
-    private InputAction catVision, sprinting, stealth, catMemory;
+    private InputAction catVision, sprinting, stealth;
     public TMP_Text visualIndicatorsText;
     public GameObject visualIndicatorsBG, visualIndicatorsTextObject;
-    public bool isInCatVision, isSprinting, isInStealth, isPushing, isHiding, isInCatMemory;
+    public bool isInCatVision, isSprinting, isInStealth, isPushing, isHiding;
 
     void Awake()
     {
@@ -32,11 +32,9 @@ public class VisualIndicators : MonoBehaviour
         catVision = playerInputs.FindAction("CatVision");
         sprinting = playerInputs.FindAction("Sprint");
         stealth = playerInputs.FindAction("Stealth");
-        catMemory = cameraInputs.FindAction("CatMemoryZoom");
         catVision.performed += CatVisionMode;
         sprinting.performed += SprintingMode;
         stealth.performed += StealthMode;
-        catMemory.performed += CatMemoryMode;
     }
 
     public void OnDisable()
@@ -47,7 +45,6 @@ public class VisualIndicators : MonoBehaviour
         catVision.performed -= CatVisionMode;
         sprinting.performed -= SprintingMode;
         stealth.performed -= StealthMode;
-        catMemory.performed -= CatMemoryMode;
     }
 
     public void CatVisionMode(InputAction.CallbackContext context)
@@ -69,13 +66,6 @@ public class VisualIndicators : MonoBehaviour
         Debug.Log("Stealth Mode Visual Indicator");
         isInStealth = !isInStealth;
         VisualIndicatorStealth("Stealth On");
-    }
-
-    public void CatMemoryMode(InputAction.CallbackContext context)
-    {
-        Debug.Log("Cat Memory Mode Visual Indicator");
-        isInCatMemory = !isInCatMemory;
-        VisualIndicatorCatMemory("Cat Memory On");
     }
 
     public void HidingMode()
@@ -129,22 +119,6 @@ public class VisualIndicators : MonoBehaviour
         if (AccessibilityManager.instance.isUsingVisualIndicators)
         {
             if (isInStealth)
-            {
-                visualIndicatorsBG.SetActive(true);
-                visualIndicatorsText.text = visualText.ToString();
-            }
-            else
-            {
-                visualIndicatorsBG.SetActive(false);
-            }
-        }
-    }
-
-    public void VisualIndicatorCatMemory(string visualText)
-    {
-        if (AccessibilityManager.instance.isUsingVisualIndicators)
-        {
-            if (isInCatMemory)
             {
                 visualIndicatorsBG.SetActive(true);
                 visualIndicatorsText.text = visualText.ToString();
