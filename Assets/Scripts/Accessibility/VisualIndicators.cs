@@ -39,6 +39,7 @@ public class VisualIndicators : MonoBehaviour
 
     public void OnDisable()
     {
+
         playerInputs.Disable();
         cameraInputs.Disable();
 

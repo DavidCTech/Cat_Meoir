@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 ////TODO: localization support
 
@@ -315,6 +316,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                         action.Enable();
                     });
 
+            StartCoroutine(CancelAfterTimeout(5f, CleanUp));
+
             // If it's a part binding, show the name of the part in the UI.
             var partName = default(string);
             if (action.bindings[bindingIndex].isPartOfComposite)
@@ -339,6 +342,30 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
             m_RebindOperation.Start();
+        }
+
+        private IEnumerator CancelAfterTimeout(float duration, Action cleanupAction)
+        {
+            yield return new WaitForSecondsRealtime(duration);
+
+            // Cancel the rebind operation if it's still active after the timeout
+            if (m_RebindOperation != null)
+            {
+                m_RebindOperation.Cancel();
+                cleanupAction?.Invoke(); // Clean up resources
+            }
+        }
+
+        private IEnumerator CancelGamepad(float duration, Action cleanupAction)
+        {
+            yield return new WaitForSecondsRealtime(duration);
+
+            // Cancel the rebind operation if it's still active after the timeout
+            if (m_RebindOperation != null)
+            {
+                m_RebindOperation.Cancel();
+                cleanupAction?.Invoke(); // Clean up resources
+            }
         }
 
         private void CheckAndSwapDuplicates(InputAction action, int bindingIndex, string pathBeforeRebind)
