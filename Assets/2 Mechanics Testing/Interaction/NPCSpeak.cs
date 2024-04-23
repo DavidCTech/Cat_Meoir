@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.Events; 
+using UnityEngine.Events;
 
 public class NPCSpeak : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class NPCSpeak : MonoBehaviour
     public GameObject dialogOptionsPrefab;
     public GameObject dialogOptionsContainer;
     public Image imagePlacement;
-    public Text nameText; 
+    public Text nameText;
     [Header("Parent of your dialog GameObjects- used for saving and loading.")]
     public GameObject dialogParent;
 
@@ -36,13 +36,13 @@ public class NPCSpeak : MonoBehaviour
     private AudioSource audioSource;
     //this is for click skipping 
     private bool currentlySpeaking = false;
-    private float skipTime; 
+    private float skipTime;
     //this is for hold down skipping
     public bool megaSkip;
 
 
     // references for things to change when a choice is present 
-    
+
 
 
     //have a bool which controls if you are interacting or not 
@@ -72,19 +72,41 @@ public class NPCSpeak : MonoBehaviour
 
     void SkipDialog()
     {
-        if(currentlySpeaking == true)
+        if (currentlySpeaking == true)
         {
-            skipTime = 0f; 
+            skipTime = 0f;
         }
     }
+
+    public void Awake()
+    {
+
+    }
+
+
     private void Start()
     {
 
         // first it will get the npcVariable checker to see if you did the right combination first. 
         npcChecker = this.gameObject.GetComponent<NPCVariableChecker>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
+    }
 
-
+    public void SwapText()
+    {
+        if (ArialJournalManager.instance != null)
+        {
+            if (PlayerPrefs.GetInt("ArialDialogueState") == 1)
+            {
+                dialogText.font = ArialJournalManager.instance.arialFont;
+                nameText.font = ArialJournalManager.instance.arialFont;
+            }
+            else
+            {
+                dialogText.font = ArialJournalManager.instance.typeWriterFont;
+                nameText.font = ArialJournalManager.instance.typeWriterFont;
+            }
+        }
     }
 
     //this is the general interact method that will be brought up,
@@ -92,8 +114,8 @@ public class NPCSpeak : MonoBehaviour
     public void Interact()
     {
 
-        
-        megaSkip = false;  
+
+        megaSkip = false;
         //freeze the player 
 
         // if the selected object about to be diaplayed is noted to be saved
@@ -132,7 +154,7 @@ public class NPCSpeak : MonoBehaviour
         {
             StartCoroutine(LoadAndProceed());
         }
-        
+
 
 
     }
@@ -171,7 +193,7 @@ public class NPCSpeak : MonoBehaviour
             // dialog children is the list of objects we loop through to figure out which to load. 
             //It is cleared then remade based on what has dialogdata component. 
             dialogChildren.Clear();
-            
+
             // Call the function with the parent transform
             if (dialogParent != null)
             {
@@ -180,7 +202,7 @@ public class NPCSpeak : MonoBehaviour
             //iterate through the bool list from the NPCData 
             for (int i = 0; i < data.dialogCheck.Length; i++)
             {
-               
+
                 if (data.dialogCheck[i])
                 {
                     //if it is true, set that location of the dialog children list to the start object
@@ -190,7 +212,7 @@ public class NPCSpeak : MonoBehaviour
                 }
 
             }
-            
+
             //this true bool ends the load and progress coroutine while loop
             npcDataLoaded = true;
         }
@@ -201,7 +223,7 @@ public class NPCSpeak : MonoBehaviour
             Debug.Log("No Npc Dialog info found");
             npcDataLoaded = true;
         }
-       
+
 
     }
 
@@ -224,7 +246,7 @@ public class NPCSpeak : MonoBehaviour
         }
     }
 
-   
+
 
 
 
@@ -250,7 +272,7 @@ public class NPCSpeak : MonoBehaviour
     {
 
 
-        if(selectedOption.nextDialog != null)
+        if (selectedOption.nextDialog != null)
         {
             startDialogObject = selectedOption.nextDialog;
         }
@@ -275,11 +297,11 @@ public class NPCSpeak : MonoBehaviour
     // info 
     public void OptionSelected(DialogData selectedOption)
     {
-        
+
         optionSelected = true;
         startDialogObject = selectedOption;
         //this is the dialog action associated with the selected option 
-     
+
         DialogAction dialogAction = startDialogObject.gameObject.GetComponent<DialogAction>();
 
         if (dialogAction != null)
@@ -289,7 +311,7 @@ public class NPCSpeak : MonoBehaviour
 
         NextDialogCheck(selectedOption);
 
-        
+
     }
 
     //Display dialog handles the actual displaying of the dialog, 
@@ -318,12 +340,12 @@ public class NPCSpeak : MonoBehaviour
                 }
 
             }
-            if(imagePlacement != null)
+            if (imagePlacement != null)
             {
-                if(dialog.characterSprite != null)
+                if (dialog.characterSprite != null)
                 {
-                    imagePlacement.color = new Color(1, 1, 1, 1); 
-                    imagePlacement.sprite = dialog.characterSprite; 
+                    imagePlacement.color = new Color(1, 1, 1, 1);
+                    imagePlacement.sprite = dialog.characterSprite;
                 }
             }
             if (nameText != null)
@@ -342,22 +364,22 @@ public class NPCSpeak : MonoBehaviour
                 float startTime = Time.time;
                 float elapsedTime = 0f;
 
-                if(megaSkip == false)
+                if (megaSkip == false)
                 {
                     skipTime = dialog.dialogDisplayTime;
                 }
                 else
                 {
-                    skipTime = 0f; 
+                    skipTime = 0f;
                 }
 
 
                 while (elapsedTime < skipTime)
                 {
-                    
+
                     elapsedTime = Time.time - startTime;
 
-                    yield return null; 
+                    yield return null;
                 }
             }
             else
@@ -374,22 +396,26 @@ public class NPCSpeak : MonoBehaviour
                 {
                     //for each option, set the dialog test and make new buttons 
                     // new buttons are added to the button game object list to delete later
+
                     dialogText.text = dialog.dialogText;
+
+
+
                     GameObject newButton = Instantiate(dialogOptionsPrefab, dialogOptionsParent);
                     spawnedButtons.Add(newButton);
 
                     // new buttons are then set up to have the option press ability
-                    Debug.Log("New Button made " + dialog.dialogText); 
+                    Debug.Log("New Button made " + dialog.dialogText);
                     newButton.GetComponent<UIDialogOption>().SetUp(this, option.followingDialog, option.choiceText);
                     //make a list of these button objects and feed it into UIDialogOption
-                 
+
                 }
                 //for controller support 
 
                 for (int i = 0; i < spawnedButtons.Count; i++)
                 {
                     //choose the first to set the event system to it 
-                    if(i == 0)
+                    if (i == 0)
                     {
                         EventSystem.current.SetSelectedGameObject(spawnedButtons[i]);
                     }
@@ -423,7 +449,7 @@ public class NPCSpeak : MonoBehaviour
                         currentButton.navigation = nav;
                     }
                 }
-                
+
 
 
 

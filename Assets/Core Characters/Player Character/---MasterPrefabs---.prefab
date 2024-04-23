@@ -28650,6 +28650,10 @@ MonoBehaviour:
   menuArialToggle: {fileID: 5436502178110147546}
   menuArial: []
   isUsingArialInMenus: 0
+  dialogueArialToggle: {fileID: 7707744992703155739}
+  isUsingArialInDialogue: 0
+  arialFont: {fileID: 12800000, guid: 130290520d86ee843b966e18f390e5e7, type: 3}
+  typeWriterFont: {fileID: 12800000, guid: 58fcf6a928729a248886b7b16f059fc0, type: 3}
 --- !u!1 &6650872330996964843
 GameObject:
   m_ObjectHideFlags: 0
@@ -68316,7 +68320,15 @@ PrefabInstance:
     - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 82106882233589887}
+      objectReference: {fileID: 8575703805396866676}
+    - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetDialogueArialMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 341754098585763031, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ArialJournalManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1033706843467072727, guid: b52e7ccb494166746b156d17fedaea12, type: 3}
       propertyPath: m_Name
       value: Dialogue Arial Toggle
