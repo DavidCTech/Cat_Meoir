@@ -35,6 +35,10 @@ public class UIDialogOption : MonoBehaviour
                 Debug.Log("Making Text Typwriter");
             }
         }
+        else
+        {
+            dialogText.text = _dialogText;
+        }
 
         // Get the Button component
         Button button = this.gameObject.GetComponent<Button>();
