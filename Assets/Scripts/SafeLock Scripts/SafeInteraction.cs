@@ -54,6 +54,8 @@ public class SafeInteraction : MonoBehaviour
 
     private float lastRotationZ = 0f; // Track the previous rotation value
 
+    public GameObject safeCanvas;
+
     private void Start()
     {
         // Convert integer unlock positions to floats
@@ -123,6 +125,14 @@ public class SafeInteraction : MonoBehaviour
     {
         if (minigameActive && !safeUnlocked)
         {
+            if (safeCanvas != null)
+            {
+                if (!safeCanvas.activeInHierarchy)
+                {
+                    safeCanvas.SetActive(true);
+                }
+            }
+
             RotateDial();
             UpdateRotationText();
 
@@ -233,6 +243,11 @@ public class SafeInteraction : MonoBehaviour
     private void SafeUnlocked()
     {
         Debug.Log("Safe unlocked!");
+
+        if (safeCanvas.activeInHierarchy)
+        {
+            safeCanvas.SetActive(false);
+        }
 
         // Deactivate the closed safe model
         closedSafeModel.SetActive(false);
@@ -452,6 +467,14 @@ public class SafeInteraction : MonoBehaviour
         {
             isInteracting = false; // Reset the flag to indicate that the player has stopped interacting with the safe
             return; // Skip further processing to maintain the interaction state
+        }
+
+        if (safeCanvas != null)
+        {
+            if (safeCanvas.activeInHierarchy)
+            {
+                safeCanvas.SetActive(false);
+            }
         }
 
         // Reset any necessary variables or states
