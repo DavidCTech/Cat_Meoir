@@ -7,7 +7,7 @@ public class FirstButton : MonoBehaviour
 {
     Button button;
 
-    public void Start()
+    public void OnEnable()
     {
         button = GetComponent<Button>();
         button.Select();
