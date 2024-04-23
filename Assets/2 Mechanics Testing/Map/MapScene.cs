@@ -51,5 +51,10 @@ public class MapScene : MonoBehaviour
             GameObject firstObject = sceneMaps[6];
             firstObject.SetActive(true);
         }
+        /*if (currentScene.name == "Recordstore")
+        {
+            GameObject firstObject = sceneMaps[7];
+            firstObject.SetActive(true);
+        }*/
     }
 }
