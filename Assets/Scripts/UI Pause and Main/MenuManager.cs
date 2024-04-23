@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         if (PlayerPrefs.HasKey("Sensitivity"))
             sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         else
-            sensitivitySlider.value = 0.5f;
+            sensitivitySlider.value = 300f;
 
         if (PlayerPrefs.HasKey("ySensitivity"))
             ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
@@ -201,6 +201,11 @@ public class GameManager : MonoBehaviour, ISelectHandler
         LoadSavedResolution();
     }
 
+    public void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     public void ActivateAudioMenu()
     {

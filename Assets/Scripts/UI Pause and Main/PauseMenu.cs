@@ -79,7 +79,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
     private float sliderValue;
     [Header("Bool for npc dialog to ignore taking off cursor")]
-    public bool ignore; 
+    public bool ignore;
 
     [Header("Peyton's Stuff")]
     public CanvasGroup accessibilityMenu;
@@ -311,7 +311,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
             fpsToggle.isOn = false;
             ApplyFPS(false);
         }
-    
+
 
 
         if (PlayerPrefs.GetInt("VSyncToggleState", 0) == 1)
@@ -328,7 +328,7 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
         if (PlayerPrefs.HasKey("Sensitivity"))
             sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         else
-            sensitivitySlider.value = 0.5f;
+            sensitivitySlider.value = 300f;
 
         if (PlayerPrefs.HasKey("ySensitivity"))
             ySensitivitySlider.value = PlayerPrefs.GetFloat("ySensitivity");
@@ -418,10 +418,10 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
 
         if (rebindingMenu.alpha == 1 || accessibilityMenu.alpha == 1 || gammaMenu.alpha == 1)
         {
-            
+
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            
+
         }
 
         rebindingMenu.gameObject.SetActive(false);
@@ -699,17 +699,17 @@ public class PauseMenu : MonoBehaviour, ISelectHandler
     public void ApplyVSync(bool isVSyncOn)
     {
         QualitySettings.vSyncCount = isVSyncOn ? 1 : 0;
-        
+
         PlayerPrefs.SetInt("VSyncToggleState", isVSyncOn ? 1 : 0);
-        PlayerPrefs.Save(); 
+        PlayerPrefs.Save();
     }
 
     public void ApplyFPS(bool isFPSEnabled)
     {
-        fpsDisplay.SetActive(isFPSEnabled); 
+        fpsDisplay.SetActive(isFPSEnabled);
 
         PlayerPrefs.SetInt("FPSToggleState", isFPSEnabled ? 1 : 0);
-        PlayerPrefs.Save(); 
+        PlayerPrefs.Save();
     }
 }
 
