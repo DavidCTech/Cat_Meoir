@@ -152,7 +152,9 @@ public class NPCSpeak : MonoBehaviour
         }
         // when it is loaded - now one can put in the starting dialog object 
         // that got loaded into the next dialog check 
+        Debug.Log("before npc dialog input");
         NextDialogCheck(startDialogObject);
+        Debug.Log("next dialog");
     }
 
     //this coroutine handles loading - loading is in this script as it is 
@@ -162,9 +164,10 @@ public class NPCSpeak : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //this data is mainly a bool system for what is loaded and what isn't 
         NPCData data = SaveSystem.LoadNPC(npcName);
-
+        Debug.Log("loading npc dialog");
         if (data != null)
         {
+            Debug.Log("npc dialog found");
             // dialog children is the list of objects we loop through to figure out which to load. 
             //It is cleared then remade based on what has dialogdata component. 
             dialogChildren.Clear();
@@ -195,6 +198,7 @@ public class NPCSpeak : MonoBehaviour
         else
         {
             //this true bool ends the load and progress coroutine while loop
+            Debug.Log("No Npc Dialog info found");
             npcDataLoaded = true;
         }
        
