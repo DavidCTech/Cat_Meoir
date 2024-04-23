@@ -9,7 +9,7 @@ public class ClueBoardOpener : MonoBehaviour
     public bool isInClueBoard = false;
 
     private Coroutine clueBoardUp;
-    public InputActionReference northButtonAction; // Reference to the North button action
+    public InputActionReference exitButtonRY; // Reference to the North button action
 
 
     public void EnterOrExitClueBoard()
@@ -96,16 +96,16 @@ public class ClueBoardOpener : MonoBehaviour
     private void OnEnable()
     {
         // Enable the input action callback when the script is enabled
-        northButtonAction.action.Enable();
+        exitButtonRY.action.Enable();
         // Add ExitClueBoard as a callback to the North button action
-        northButtonAction.action.performed += ExitClueBoard;
+        exitButtonRY.action.performed += ExitClueBoard;
     }
 
     private void OnDisable()
     {
         // Disable the input action callback when the script is disabled
-        northButtonAction.action.Disable();
+        exitButtonRY.action.Disable();
         // Remove ExitClueBoard as a callback from the North button action
-        northButtonAction.action.performed -= ExitClueBoard;
+        exitButtonRY.action.performed -= ExitClueBoard;
     }
 }
