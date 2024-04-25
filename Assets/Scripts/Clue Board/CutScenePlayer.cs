@@ -97,7 +97,7 @@ public class CutScenePlayer : MonoBehaviour
             else
             {
                 Debug.Log("All videos played.");
-                SceneManager.LoadScene("Menu");
+                SceneManager.LoadScene("Cutscene3");
             } 
         }
     }
