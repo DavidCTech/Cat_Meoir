@@ -71,7 +71,7 @@ public class TutorialBoxManager : MonoBehaviour
         for (int i = 0; i < tutorialBoxes.Length; i++)
         {
             if (!tutorialBoxes[i].gameObject.activeInHierarchy)
-                tutorialBoxes[i].gameObject.SetActive(true);
+                tutorialBoxes[i].gameObject.transform.parent.gameObject.SetActive(true);
         }
     }
 
@@ -80,7 +80,7 @@ public class TutorialBoxManager : MonoBehaviour
         for (int i = 0; i < tutorialBoxes.Length; i++)
         {
             if (tutorialBoxes[i].gameObject.activeInHierarchy)
-                tutorialBoxes[i].gameObject.SetActive(false);
+                tutorialBoxes[i].gameObject.transform.parent.gameObject.SetActive(false);
         }
     }
 }

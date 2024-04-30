@@ -24,8 +24,14 @@ public class HighContrastManager : MonoBehaviour
             instance = this;
         }
 
-        highContrastScripts = FindObjectsOfType<HighContrastMode>();
+        FillArray();
+
         swappableObjects = FindFirstObjectByType<SwappableObjects>();
+    }
+
+    public void FillArray()
+    {
+        highContrastScripts = FindObjectsOfType<HighContrastMode>();
     }
 
     public void OnEnable()

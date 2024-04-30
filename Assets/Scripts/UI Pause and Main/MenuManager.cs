@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour, ISelectHandler
         else
             dialogueSlider.value = 1.0f;
 
-        dropdown.value = PlayerPrefs.GetInt(prefName, 3);
+        dropdown.value = PlayerPrefs.GetInt(prefName, 0);
 
         previousResolution = Screen.currentResolution;
 
